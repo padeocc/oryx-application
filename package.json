@@ -9,18 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^7.6.1",
-    "next": "14.1.2",
-    "next-intl": "^3.9.2",
+    "@mantine/core": "^7.6.2",
+    "@mantine/form": "^7.6.2",
+    "@phosphor-icons/react": "^2.0.15",
+    "next": "14.1.4",
+    "next-intl": "^3.9.5",
+    "nextjs-cors": "^2.2.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "supertokens-auth-react": "^0.39.0",
+    "supertokens-node": "^17.0.2",
+    "supertokens-web-js": "^0.10.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.1.2",
+    "eslint-config-next": "14.1.4",
     "typescript": "^5"
   }
 }

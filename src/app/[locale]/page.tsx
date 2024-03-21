@@ -1,3 +1,9 @@
+import CatalogPage from '../components/pages/CatalogPage';
+
 export default function Home() {
-  return <main>Padeo</main>;
+  return (
+    <main>
+      <CatalogPage />
+    </main>
+  );
 }

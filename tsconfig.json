@@ -23,6 +23,7 @@
       "@/app/*": ["./src/app/*"],
       "@/locale/*": ["./src/[locale]/*"],
       "@/components/*": ["./src/app/components/*"],
+      "@/pages/*": ["./src/app/components/pages/*"],
       "@/server/*": ["./src/server/*"],
       "@/types/*": ["./types/*"]
     }
