@@ -77,10 +77,10 @@ const ServiceCard = ({ service }: { service: Service }) => {
         </CardSection>
         <Stack pt="md">
           <Grid>
-            <GridCol span={{ base: 12, sm: 10 }}>
+            <GridCol span={{ base: 10, sm: 10 }}>
               <Title order={3}>{service.title}</Title>
             </GridCol>
-            <GridCol span={{ base: 12, sm: 2 }} ta={'right'} pt="md">
+            <GridCol span={{ base: 2, sm: 2 }} ta={'right'} pt="md">
               <BookmarkSimple size={'16px'} />
             </GridCol>
           </Grid>
