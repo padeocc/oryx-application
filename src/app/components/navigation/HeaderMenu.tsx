@@ -1,11 +1,13 @@
-import { Button, Container, Group, Title } from '@mantine/core';
+import { Container, Group, Title } from '@mantine/core';
 import { Horse } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
+import HeaderMenuDesktop from './HeaderMenuDesktop';
+import HeaderMenuMobile from './HeaderMenuMobile';
 import styles from './header-menu.module.css';
 
 const HeaderMenu = () => {
   return (
-    <Container className={styles.container} fluid>
+    <Container className={styles.container} fluid h={{ base: 120, sm: 120 }}>
       <Group justify="space-between" h="100%">
         <Link href="/" style={{ textDecoration: 'none' }}>
           <Group gap={0}>
@@ -15,15 +17,11 @@ const HeaderMenu = () => {
             </Title>
           </Group>
         </Link>
-        <Group justify="space-between">
-          <Button>Voir les services</Button>
-          <Button>Qui sommes-nous ?</Button>
+        <Group hiddenFrom="sm">
+          <HeaderMenuMobile />
         </Group>
-        <Group justify="space-between">
-          <Button>Faire un don</Button>
-          <Button component={Link} href="/fr/signup">
-            Se connecter
-          </Button>
+        <Group gap={'xl'} visibleFrom="sm">
+          <HeaderMenuDesktop />
         </Group>
       </Group>
     </Container>

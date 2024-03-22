@@ -1,87 +1,115 @@
-import { Badge, Card, Grid, GridCol, Stack, Title } from '@mantine/core';
+import { Badge, Card, CardSection, Grid, GridCol, Group, Image, Stack, Title } from '@mantine/core';
+import { BookmarkSimple } from '@phosphor-icons/react/dist/ssr';
+import Filters from './components/Filters';
 
-const demoServices: { tags: string[]; title: string; shortDescription: string; imagePath: string }[] = [
+type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
+
+const demoServices: Service[] = [
   {
-    tags: ['Renewable Energy'],
-    title: 'Solar Power Installation',
-    shortDescription: 'Harnessing the power of the sun to generate clean electricity.',
-    imagePath: 'path/to/image1.jpg'
+    tags: ['Renouvelable', 'Énergie', 'Environnement'],
+    title: 'Installation de Panneaux Solaires',
+    shortDescription: "Exploiter la puissance du soleil pour générer de l'électricité propre.",
+    imagePath: 'chemin/vers/image1.jpg'
   },
   {
-    tags: ['Eco-Friendly Transportation'],
-    title: 'Electric Vehicle Sharing Program',
-    shortDescription: 'Promoting green transportation options to reduce emissions.',
-    imagePath: 'path/to/image2.jpg'
+    tags: ['Transport', 'Véhicules', 'Écologie'],
+    title: 'Programme de Partage de Véhicules Électriques',
+    shortDescription: 'Promouvoir des options de transport écologiques pour réduire les émissions.',
+    imagePath: 'chemin/vers/image2.jpg'
   },
   {
-    tags: ['Organic Farming'],
-    title: 'Community Supported Agriculture',
-    shortDescription: 'Connecting local farmers with consumers to support sustainable agriculture.',
-    imagePath: 'path/to/image3.jpg'
+    tags: ['Agriculture', 'Biologique', 'Alimentation'],
+    title: 'Agriculture Soutenue par la Communauté',
+    shortDescription:
+      'Mettre en relation les agriculteurs locaux avec les consommateurs pour soutenir une agriculture durable.',
+    imagePath: 'chemin/vers/image3.jpg'
   },
   {
-    tags: ['Water Conservation'],
-    title: 'Rainwater Harvesting System',
-    shortDescription: 'Capturing rainwater for irrigation and non-potable uses.',
-    imagePath: 'path/to/image4.jpg'
+    tags: ['Conservation', 'Eau', 'Environnement'],
+    title: 'Système de Récupération des Eaux de Pluie',
+    shortDescription: "Capturer les eaux de pluie pour l'irrigation et les usages non potables.",
+    imagePath: 'chemin/vers/image4.jpg'
   },
   {
-    tags: ['Waste Recycling'],
-    title: 'Plastic Recycling Initiative',
-    shortDescription: 'Reducing plastic waste through recycling efforts.',
-    imagePath: 'path/to/image5.jpg'
+    tags: ['Recyclage', 'Déchets', 'Environnement'],
+    title: 'Initiative de Recyclage du Plastique',
+    shortDescription: 'Réduire les déchets plastiques grâce à des efforts de recyclage.',
+    imagePath: 'chemin/vers/image5.jpg'
   },
   {
-    tags: ['Sustainable Forestry'],
-    title: 'Forest Stewardship Program',
-    shortDescription: 'Protecting and managing forests for future generations.',
-    imagePath: 'path/to/image6.jpg'
+    tags: ['Forêt', 'Gestion', 'Environnement'],
+    title: 'Programme de Gestion Forestière',
+    shortDescription: 'Protéger et gérer les forêts pour les générations futures.',
+    imagePath: 'chemin/vers/image6.jpg'
   },
   {
-    tags: ['Green Construction'],
-    title: 'Energy-Efficient Building Design',
-    shortDescription: 'Constructing buildings with minimal environmental impact.',
-    imagePath: 'path/to/image7.jpg'
+    tags: ['Construction', 'Écologie', 'Environnement'],
+    title: 'Conception de Bâtiments Économes en Énergie',
+    shortDescription: 'Construire des bâtiments avec un impact environnemental minimal.',
+    imagePath: 'chemin/vers/image7.jpg'
   },
   {
-    tags: ['Eco-Tourism'],
-    title: 'Nature Trail Development',
-    shortDescription: 'Creating trails to explore and appreciate nature.',
-    imagePath: 'path/to/image8.jpg'
+    tags: ['Nature', 'Exploration', 'Environnement'],
+    title: 'Aménagement de Sentiers Naturels',
+    shortDescription: 'Créer des sentiers pour explorer et apprécier la nature.',
+    imagePath: 'chemin/vers/image8.jpg'
   },
   {
-    tags: ['Pollution Control'],
-    title: 'Air Quality Monitoring Network',
-    shortDescription: 'Monitoring air quality to safeguard public health.',
-    imagePath: 'path/to/image9.jpg'
+    tags: ['Pollution', 'Contrôle', 'Environnement'],
+    title: "Réseau de Surveillance de la Qualité de l'Air",
+    shortDescription: "Surveiller la qualité de l'air pour protéger la santé publique.",
+    imagePath: 'chemin/vers/image9.jpg'
   },
   {
-    tags: ['Biodiversity Conservation'],
-    title: 'Wildlife Habitat Restoration Project',
-    shortDescription: 'Restoring natural habitats.',
-    imagePath: 'path/to/image10.jpg'
+    tags: ['Biodiversité', 'Conservation', 'Environnement'],
+    title: "Restauration de l'Habitat de la Faune Sauvage",
+    shortDescription: 'Restaurer les habitats naturels.',
+    imagePath: 'chemin/vers/image10.jpg'
   }
 ];
+
+const ServiceCard = ({ service }: { service: Service }) => {
+  return (
+    <GridCol span={{ base: 12, sm: 4 }}>
+      <Card h={'100%'}>
+        <CardSection>
+          <Image src="/service-image.jpg" alt="" height={100} />
+        </CardSection>
+        <Stack pt="md">
+          <Grid>
+            <GridCol span={{ base: 12, sm: 10 }}>
+              <Title order={3}>{service.title}</Title>
+            </GridCol>
+            <GridCol span={{ base: 12, sm: 2 }} ta={'right'} pt="md">
+              <BookmarkSimple size={'16px'} />
+            </GridCol>
+          </Grid>
+          <Group gap={'xs'}>
+            {service.tags.map(tag => (
+              <Badge key={`tag-${tag}`}>{tag}</Badge>
+            ))}
+          </Group>
+          <div>{service.shortDescription}</div>
+        </Stack>
+      </Card>
+    </GridCol>
+  );
+};
 
 const CatalogPage = ({}: {}) => {
   return (
     <Stack>
-      <Title order={2}>Quelques inspirations pour vous aujourd&apos;hui !</Title>
+      <Grid>
+        <GridCol span={{ base: 12, sm: 8 }}>
+          <Title order={2}>Quelques inspirations pour vous aujourd&apos;hui !</Title>
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 4 }} ta={'right'}>
+          <Filters />
+        </GridCol>
+      </Grid>
       <Grid bg={'gray'} justify="left" align="stretch">
         {demoServices.map(service => (
-          <GridCol key={`service-${service.title}`} span={{ base: 12, sm: 4 }}>
-            <Card h={'100%'}>
-              <Stack>
-                <div>
-                  <Title order={3}>{service.title}</Title>
-                  {service.tags.map(tag => (
-                    <Badge key={`tag-${tag}`}>{tag}</Badge>
-                  ))}
-                </div>
-                <div>{service.shortDescription}</div>
-              </Stack>
-            </Card>
-          </GridCol>
+          <ServiceCard service={service} key={`service-${service.title}`} />
         ))}
       </Grid>
     </Stack>

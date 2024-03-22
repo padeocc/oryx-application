@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Checkbox, Group, TextInput } from '@mantine/core';
+import { Button, Checkbox, Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 // import SuperTokens from 'supertokens-web-js';
 // import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
@@ -29,20 +29,18 @@ const SignupFormPage = ({ handleSubmit }: { handleSubmit: () => {} }) => {
   });
 
   return (
-    <Box maw={340} mx="auto">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <TextInput withAsterisk label="Email" placeholder="your@email.com" {...form.getInputProps('email')} />
-        <TextInput withAsterisk label="Password" type="password" {...form.getInputProps('password')} />
-        <Checkbox
-          mt="md"
-          label="I agree to sell my privacy"
-          {...form.getInputProps('termsOfService', { type: 'checkbox' })}
-        />
-        <Group justify="flex-end" mt="md">
-          <Button type="submit">Submit</Button>
-        </Group>
-      </form>
-    </Box>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
+      <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
+      <Checkbox
+        mt="md"
+        label="Je suis d'accord avec les conditions d'inscription"
+        {...form.getInputProps('termsOfService', { type: 'checkbox' })}
+      />
+      <Group justify="flex-end" mt="md">
+        <Button type="submit">S&lsquo;inscrire</Button>
+      </Group>
+    </form>
   );
 };
 

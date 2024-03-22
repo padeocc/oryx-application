@@ -1,4 +1,4 @@
-import { Box, Button, Group, TextInput } from '@mantine/core';
+import { Button, Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
 const LoginFormPage = ({ handleSubmit }: { handleSubmit: () => {} }) => {
@@ -15,16 +15,13 @@ const LoginFormPage = ({ handleSubmit }: { handleSubmit: () => {} }) => {
   });
 
   return (
-    <Box maw={340} mx="auto">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <TextInput withAsterisk label="Email" placeholder="your@email.com" {...form.getInputProps('email')} />
-        <TextInput withAsterisk label="Password" type="password" {...form.getInputProps('password')} />
-
-        <Group justify="flex-end" mt="md">
-          <Button type="submit">Submit</Button>
-        </Group>
-      </form>
-    </Box>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
+      <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
+      <Group justify="flex-end" mt="md">
+        <Button type="submit">Se connecter</Button>
+      </Group>
+    </form>
   );
 };
 

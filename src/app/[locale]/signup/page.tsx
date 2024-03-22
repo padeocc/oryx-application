@@ -1,4 +1,5 @@
 import SignupFormPage from '@/pages/SignupFormPage';
+import { Card } from '@mantine/core';
 
 const handleSignup = async () => {
   'use server';
@@ -8,7 +9,9 @@ const handleSignup = async () => {
 export default function Signup() {
   return (
     <main>
-      <SignupFormPage handleSubmit={handleSignup} />
+      <Card color={'white'} maw={680} mx="auto">
+        <SignupFormPage handleSubmit={handleSignup} />
+      </Card>
     </main>
   );
 }
