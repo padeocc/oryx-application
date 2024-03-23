@@ -4,7 +4,7 @@ import Filters from './components/Filters';
 
 type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
 
-const demoServices: Service[] = [
+export const demoServices: Service[] = [
   {
     tags: ['Renouvelable', 'Énergie', 'Environnement'],
     title: 'Installation de Panneaux Solaires',
@@ -70,29 +70,27 @@ const demoServices: Service[] = [
 
 const ServiceCard = ({ service }: { service: Service }) => {
   return (
-    <GridCol span={{ base: 12, sm: 4 }}>
-      <Card h={'100%'}>
-        <CardSection>
-          <Image src="/service-image.jpg" alt="" height={100} />
-        </CardSection>
-        <Stack pt="md">
-          <Grid>
-            <GridCol span={{ base: 10, sm: 10 }}>
-              <Title order={3}>{service.title}</Title>
-            </GridCol>
-            <GridCol span={{ base: 2, sm: 2 }} ta={'right'} pt="md">
-              <BookmarkSimple size={'16px'} />
-            </GridCol>
-          </Grid>
-          <Group gap={'xs'}>
-            {service.tags.map(tag => (
-              <Badge key={`tag-${tag}`}>{tag}</Badge>
-            ))}
-          </Group>
-          <div>{service.shortDescription}</div>
-        </Stack>
-      </Card>
-    </GridCol>
+    <Card h={'100%'}>
+      <CardSection>
+        <Image src="/service-image.jpg" alt="" height={100} />
+      </CardSection>
+      <Stack pt="md">
+        <Grid>
+          <GridCol span={{ base: 10, sm: 10 }}>
+            <Title order={3}>{service.title}</Title>
+          </GridCol>
+          <GridCol span={{ base: 2, sm: 2 }} ta={'right'} pt="md">
+            <BookmarkSimple size={'16px'} />
+          </GridCol>
+        </Grid>
+        <Group gap={'xs'}>
+          {service.tags.map(tag => (
+            <Badge key={`tag-${tag}`}>{tag}</Badge>
+          ))}
+        </Group>
+        <div>{service.shortDescription}</div>
+      </Stack>
+    </Card>
   );
 };
 
@@ -109,7 +107,9 @@ const CatalogPage = ({}: {}) => {
       </Grid>
       <Grid bg={'gray'} justify="left" align="stretch">
         {demoServices.map(service => (
-          <ServiceCard service={service} key={`service-${service.title}`} />
+          <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}`}>
+            <ServiceCard service={service} />
+          </GridCol>
         ))}
       </Grid>
     </Stack>

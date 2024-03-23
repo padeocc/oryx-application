@@ -115,7 +115,7 @@ export default async function RootLayout({
                   <HeaderMenu />
                 </AppShellHeader>
                 <AppShellMain pt={{ base: 120, sm: 120 }}>
-                  <Container maw={'1024px'} p="xl">
+                  <Container maw={'1280px'} p="xl">
                     {children}
                   </Container>
                 </AppShellMain>

@@ -27,7 +27,7 @@ const HeaderMenuMobile = () => {
                 </MenuItem>
               );
             })}
-            {itemgroupindex < itemsGroup.length - 1 ? <MenuDivider /> : null}
+            {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
           </>
         ))}
       </MenuDropdown>
