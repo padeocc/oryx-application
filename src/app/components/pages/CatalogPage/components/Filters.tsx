@@ -1,29 +1,34 @@
 'use client';
 
-import { Button, Card, Checkbox, Drawer, Grid, GridCol, Space, Stack, Title } from '@mantine/core';
-import { useState } from 'react';
+import { Button, Card, Drawer, Grid, GridCol, MultiSelect, Space, Stack, Title } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { Filters } from './Content';
 
-const Filters = () => {
+const Filters = ({ filters, setFilters }: { filters: Filters; setFilters: Dispatch<SetStateAction<Filters>> }) => {
   const [opened, setOpened] = useState<boolean>(false);
+
+  const form = useForm({
+    initialValues: filters
+  });
 
   const content = (
     <Grid>
       <GridCol span={{ base: 12 }}>
         <Card bg="gray">
-          <Stack>
-            <Title order={4}>Choisissez vos sujets</Title>
-            <Checkbox defaultChecked label="Véhicules" />
-            <Checkbox defaultChecked label="Panneaux solaires" />
-            <Checkbox defaultChecked label="Recyclage" />
-            <Checkbox defaultChecked label="Construction" />
-            <Space />
-            <Button
-              onClick={() => {
-                setOpened(false);
-              }}>
-              Valider
-            </Button>
-          </Stack>
+          <form
+            onSubmit={form.onSubmit(values => {
+              console.log({ values });
+              setFilters(values);
+              setOpened(false);
+            })}>
+            <Stack>
+              <Title order={4}>Choisissez vos sujets</Title>
+              <MultiSelect label="" data={filters.tags} name="tags" {...form.getInputProps('tags')} />
+              <Space />
+              <Button type="submit">Valider</Button>
+            </Stack>
+          </form>
         </Card>
       </GridCol>
     </Grid>
@@ -43,7 +48,7 @@ const Filters = () => {
         onClick={() => {
           setOpened(true);
         }}>
-        Filtrer
+        Rechercher
       </Button>
     </>
   );

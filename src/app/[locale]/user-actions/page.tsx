@@ -1,5 +1,8 @@
-import { demoServices } from '@/app/components/pages/CatalogPage';
+import { Service } from '@/app/components/pages/CatalogPage';
+import demoServices from '@/app/demo.json';
 import { Input, Stack, Switch, Table, TableTd, TableTr, Text, Title } from '@mantine/core';
+
+const data = demoServices as unknown as Service[];
 
 const UserServices = () => {
   return (
@@ -15,8 +18,8 @@ const UserServices = () => {
         <Input readOnly value={'https://oryx.com/aos23934Ddk323/'}></Input>
 
         <Table>
-          {demoServices.map(service => (
-            <TableTr key={`service-${service.title}`}>
+          {data.map((service, index) => (
+            <TableTr key={`action-${service.title}-${index}`}>
               <TableTd>{service.title}</TableTd>
               <TableTd>
                 <Switch label="Afficher" />
