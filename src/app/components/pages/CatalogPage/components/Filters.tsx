@@ -3,9 +3,9 @@
 import { Button, Card, ComboboxData, Drawer, Grid, GridCol, MultiSelect, Space, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Filters } from './Content';
+import { Filters } from '..';
 
-const Filters = ({
+const FiltersComponent = ({
   filters,
   setFilters,
   allTags
@@ -61,4 +61,4 @@ const Filters = ({
   );
 };
 
-export default Filters;
+export default FiltersComponent;
