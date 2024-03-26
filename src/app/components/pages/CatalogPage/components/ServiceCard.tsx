@@ -1,4 +1,5 @@
 import { Badge, Button, Card, CardSection, Grid, GridCol, Group, Image, Stack, Title } from '@mantine/core';
+import Link from 'next/link';
 import { Service } from '..';
 import Bookmark from '../components/Bookmark';
 
@@ -26,7 +27,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
           <div>{service.shortDescription}</div>
         </Stack>
         <CardSection>
-          <Button variant="transparent" style={{ bottom: '0px' }} w={'100%'}>
+          <Button variant="transparent" style={{ bottom: '0px' }} w={'100%'} component={Link} href="/fr/action">
             Voir plus
           </Button>
         </CardSection>

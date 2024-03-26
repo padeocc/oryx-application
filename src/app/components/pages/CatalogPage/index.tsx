@@ -1,9 +1,12 @@
 import demoServices from '@/app/demo.json';
 import { ComboboxData, Stack } from '@mantine/core';
+import intersection from 'lodash/intersection';
+import uniq from 'lodash/uniq';
 import Content from './components/Content';
 
-export type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
 export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service[]>;
+export type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
+export type Filters = { vertical: string; tags: string[] };
 
 const verticalsOptions: ComboboxData = [
   { label: 'Transport', value: 'transport' },
@@ -11,17 +14,32 @@ const verticalsOptions: ComboboxData = [
   { label: 'Immobilier', value: 'realestate', disabled: true }
 ];
 
-const fetchActions = async ({ vertical }: { vertical: string }) => {
+const fetchActions = async ({ filters }: { filters: Filters }) => {
   'use server';
-  const data = demoServices as unknown as Service[];
-  return data;
+  const actions = demoServices as unknown as Service[];
+  if (filters.tags.length) {
+    return actions.filter(action => !!intersection(action.tags, filters.tags).length);
+  }
+  return actions;
 };
 
+export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
+
 const CatalogPage = async ({}: {}) => {
-  const data = await fetchActions({ vertical: 'transport' });
+  const actions = await fetchActions({
+    filters: {
+      vertical: 'transport',
+      tags: []
+    }
+  });
   return (
     <Stack>
-      <Content verticalsOptions={verticalsOptions} fetchActions={fetchActions} data={data} />
+      <Content
+        verticalsOptions={verticalsOptions}
+        fetchActions={fetchActions}
+        data={actions}
+        allTags={getTagsfromActions(actions)}
+      />
     </Stack>
   );
 };

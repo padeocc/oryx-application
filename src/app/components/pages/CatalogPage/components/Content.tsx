@@ -1,38 +1,37 @@
 'use client';
 
-import { ComboboxData, Grid, GridCol, Group, Select, Title } from '@mantine/core';
-import uniq from 'lodash/uniq';
+import { ComboboxData, Grid, GridCol, Group, Loader, Select, Title } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
+import { Filters, Service } from '..';
 import FiltersComponent from './Filters';
 import ServiceCard from './ServiceCard';
-
-export type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
-export type Filters = { vertical: string; tags: string[] };
-
-const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
 
 const Content = ({
   verticalsOptions,
   fetchActions,
-  data: initialData
+  data: initialData,
+  allTags
 }: {
   verticalsOptions: ComboboxData;
-  fetchActions: ({ vertical }: { vertical: string }) => Promise<Service[]>;
+  fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
+  allTags: string[];
 }) => {
   const [data, setData] = useState<Service[]>(initialData);
-  const [filters, setFilters] = useState<Filters>({ vertical: 'transport', tags: getTagsfromActions(data) });
+  const [filters, setFilters] = useState<Filters>({ vertical: 'transport', tags: allTags });
+  const [loading, setLoading] = useState<boolean>(false);
   const firstFetch = useRef(true);
 
   /* Only when filters change*/
   useEffect(() => {
     if (!firstFetch.current) {
-      // const fetchData = async () => {
-      //   const data = await fetchActions({ vertical: 'transport' });
-      //   // setFilters({ ...filters, tags: getTagsfromActions(data) });
-      //   setData(data);
-      // };
-      // fetchData();
+      const fetchData = async () => {
+        setLoading(true);
+        const data = await fetchActions({ filters });
+        setData(data);
+        setLoading(false);
+      };
+      fetchData();
     } else {
       firstFetch.current = false;
     }
@@ -48,16 +47,20 @@ const Content = ({
         <GridCol span={{ base: 12, sm: 4 }} ta={'right'}>
           <Group align="flex-end" justify="flex-end">
             <Select data={verticalsOptions} value={'transport'} />
-            <FiltersComponent filters={filters} setFilters={setFilters} />
+            <FiltersComponent filters={filters} setFilters={setFilters} allTags={allTags} />
           </Group>
         </GridCol>
       </Grid>
       <Grid bg={'gray'} justify="left" align="stretch">
-        {data.map((service, index) => (
-          <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>
-            <ServiceCard service={service} />
-          </GridCol>
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          data.map((service, index) => (
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>
+              <ServiceCard service={service} />
+            </GridCol>
+          ))
+        )}
       </Grid>
     </>
   );

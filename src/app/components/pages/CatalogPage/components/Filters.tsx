@@ -1,11 +1,19 @@
 'use client';
 
-import { Button, Card, Drawer, Grid, GridCol, MultiSelect, Space, Stack, Title } from '@mantine/core';
+import { Button, Card, ComboboxData, Drawer, Grid, GridCol, MultiSelect, Space, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Filters } from './Content';
 
-const Filters = ({ filters, setFilters }: { filters: Filters; setFilters: Dispatch<SetStateAction<Filters>> }) => {
+const Filters = ({
+  filters,
+  setFilters,
+  allTags
+}: {
+  filters: Filters;
+  setFilters: Dispatch<SetStateAction<Filters>>;
+  allTags: ComboboxData;
+}) => {
   const [opened, setOpened] = useState<boolean>(false);
 
   const form = useForm({
@@ -18,13 +26,12 @@ const Filters = ({ filters, setFilters }: { filters: Filters; setFilters: Dispat
         <Card bg="gray">
           <form
             onSubmit={form.onSubmit(values => {
-              console.log({ values });
               setFilters(values);
               setOpened(false);
             })}>
             <Stack>
               <Title order={4}>Choisissez vos sujets</Title>
-              <MultiSelect label="" data={filters.tags} name="tags" {...form.getInputProps('tags')} />
+              <MultiSelect label="" value={filters.tags} data={allTags} name="tags" {...form.getInputProps('tags')} />
               <Space />
               <Button type="submit">Valider</Button>
             </Stack>
