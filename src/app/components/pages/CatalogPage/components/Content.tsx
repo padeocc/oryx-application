@@ -43,6 +43,7 @@ const Content = ({
       <Grid>
         <GridCol span={{ base: 12, sm: 8 }}>
           <Title order={2}>Quelques inspirations pour vous aujourd&apos;hui !</Title>
+          <Title order={3}>{loading ? '' : `${data.length} services trouvés`}</Title>
         </GridCol>
         <GridCol span={{ base: 12, sm: 4 }} ta={'right'}>
           <Group align="flex-end" justify="flex-end">
