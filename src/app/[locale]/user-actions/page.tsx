@@ -1,6 +1,6 @@
 import { Service } from '@/app/components/pages/CatalogPage';
-import demoServices from '@/app/demo.json';
 import UserActionsPage from '@/components/pages/UserActionsPage';
+import demoServices from '@/data/actions.json';
 
 const data = demoServices as unknown as Service[];
 

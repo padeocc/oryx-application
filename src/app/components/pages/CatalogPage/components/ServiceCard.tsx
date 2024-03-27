@@ -2,6 +2,7 @@ import { Badge, Button, Card, CardSection, Grid, GridCol, Group, Image, Stack, T
 import Link from 'next/link';
 import { Service } from '..';
 import Bookmark from '../components/Bookmark';
+import { getCategoryLabel } from './Content';
 
 const ServiceCard = ({ service }: { service: Service }) => {
   return (
@@ -21,7 +22,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
           </Grid>
           <Group gap={'xs'}>
             {service.tags.map(tag => (
-              <Badge key={`tag-${tag}`}>{tag}</Badge>
+              <Badge key={`tag-${tag}`}>{getCategoryLabel(tag)}</Badge>
             ))}
           </Group>
           <div>{service.shortDescription}</div>

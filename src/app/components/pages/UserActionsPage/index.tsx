@@ -1,5 +1,5 @@
 import { Service } from '@/app/components/pages/CatalogPage';
-import demoServices from '@/app/demo.json';
+import demoServices from '@/data/actions.json';
 import { Alert, Input, Stack, Switch, Table, TableTd, TableTr, Text, Title } from '@mantine/core';
 
 const data = demoServices as unknown as Service[];
