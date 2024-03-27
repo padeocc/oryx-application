@@ -17,7 +17,7 @@ import {
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import { Filters } from '../CatalogPage';
-import { getCategoryLabel, getSubjetLabel } from '../CatalogPage/components/Content';
+import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/components/Content';
 
 const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
   const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
@@ -28,8 +28,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
 
   useEffect(() => {
     setLoading(true);
-    const subjectItems = subjects.filter(subject => form.values.subjects?.includes(subject.code));
-    setCategories(subjectItems.flatMap(({ categories }) => categories));
+    setCategories(getCategoriesFromSubjects(form.values.subjects));
     setLoading(false);
   }, [form.values.subjects]);
 

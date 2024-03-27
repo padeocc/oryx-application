@@ -6,6 +6,7 @@ import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useEffect, useRef, useState } from 'react';
 import { Filters, Service } from '..';
 import FinderPage from '../../FinderPage';
+import FiltersComponent from './Filters';
 import ServiceCard from './ServiceCard';
 
 export const getSubjetLabel = (code: string) => {
@@ -16,6 +17,11 @@ export const getSubjetLabel = (code: string) => {
 export const getCategoryLabel = (code: string) => {
   const found = subjects.flatMap(({ categories }) => categories).find(category => category.code === code);
   return found?.title || '';
+};
+
+export const getCategoriesFromSubjects = (codes: string[]) => {
+  const subjectItems = subjects.filter(subject => codes?.includes(subject.code));
+  return subjectItems.flatMap(({ categories }) => categories);
 };
 
 const Content = ({
@@ -53,19 +59,24 @@ const Content = ({
       <Grid>
         <GridCol span={{ base: 12, sm: 6 }}>
           <Title order={2}>Quelques inspirations pour vous aujourd&apos;hui !</Title>
-          <Title order={3}>{loading ? '' : `${data.length} actions trouvées`}</Title>
         </GridCol>
-        <GridCol span={{ base: 12, sm: 6 }} ta={'right'}>
-          <Group align="center" justify="flex-end">
+        <GridCol span={{ base: 12, sm: 6 }} pt="0">
+          <Group align="top" justify="flex-end">
             <Button
-              size="xl"
+              size="md"
+              color="orange"
+              variant="transparent"
+              m="0"
+              p="0"
               onClick={e => {
                 e.preventDefault();
                 setOpened(!opened);
               }}>
-              Rechercher !
+              Rechercher
             </Button>
             <Button
+              m="0"
+              p="0"
               size="md"
               variant="transparent"
               onClick={_e => {
@@ -75,16 +86,20 @@ const Content = ({
             </Button>
           </Group>
         </GridCol>
-        {/* <GridCol span={{ base: 12, sm: 6 }}>
-          <MultiSelect
-            placeholder="Thèmes"
-            value={filters.subjects}
-            data={subjects.map(s => ({ value: s.code, label: s.title }))}
-          />
-          <MultiSelect placeholder="Sujets" value={filters.categories} />
-        </GridCol> */}
       </Grid>
-      <Grid bg={'gray'} justify="left" align="stretch">
+      <Grid bg={'gray'} justify="left" align="top">
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Title order={3}>{loading ? '' : `${data.length} actions trouvées`}</Title>
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 8 }}>
+          <FiltersComponent
+            filters={filters}
+            handleSubmit={values => {
+              setFilters(values);
+            }}
+          />
+        </GridCol>
+
         {loading ? (
           <Loader />
         ) : (
@@ -110,7 +125,6 @@ const Content = ({
         opened={opened}
         title={<Title order={2}>Choisissez un ou plusieurs thèmes !</Title>}
         size={'xl'}
-        style={{ width: '100%' }}
         onClose={() => {
           setOpened(false);
         }}>

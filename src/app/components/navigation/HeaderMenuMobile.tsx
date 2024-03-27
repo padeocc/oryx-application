@@ -22,7 +22,7 @@ const HeaderMenuMobile = () => {
                   component={Link}
                   href={href}
                   {...others}
-                  fz={'xl'}>
+                  fz={'lg'}>
                   {name}
                 </MenuItem>
               );
