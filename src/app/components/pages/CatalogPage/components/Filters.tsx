@@ -16,6 +16,11 @@ const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (v
     setCategories(getCategoriesFromSubjects(form.values.subjects));
   }, [form.values.subjects]);
 
+  useEffect(() => {
+    form.setValues(filters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]);
+
   return (
     <form
       onSubmit={form.onSubmit(values => {
@@ -43,7 +48,7 @@ const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (v
           />
         </GridCol>
         <GridCol span={{ base: 12, sm: 2 }} ta="right">
-          <Button type="submit" w="100%">
+          <Button type="submit" w="100%" disabled={!form.isDirty() || !categories.length}>
             <Funnel size="20" />
           </Button>
         </GridCol>

@@ -52,7 +52,7 @@ const Content = ({
       firstFetch.current = false;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [filters.categories]);
 
   return (
     <>
