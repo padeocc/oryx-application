@@ -2,7 +2,7 @@
 
 import subjects from '@/data/subjects.json';
 import { Alert, Button, Grid, GridCol, Group, Loader, Modal, Text, Title } from '@mantine/core';
-import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
+import { MagicWand, SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useEffect, useRef, useState } from 'react';
 import { Filters, Service } from '..';
 import FinderPage from '../../FinderPage';
@@ -71,7 +71,8 @@ const Content = ({
               onClick={e => {
                 e.preventDefault();
                 setOpened(!opened);
-              }}>
+              }}
+              leftSection={<MagicWand size="16" />}>
               Rechercher
             </Button>
             <Button
@@ -93,6 +94,7 @@ const Content = ({
         </GridCol>
         <GridCol span={{ base: 12, sm: 8 }}>
           <FiltersComponent
+            loading={loading}
             filters={filters}
             handleSubmit={values => {
               setFilters(values);
@@ -109,7 +111,7 @@ const Content = ({
             </GridCol>
           ))
         )}
-        {data.length === 0 ? (
+        {!loading && data.length === 0 ? (
           <GridCol span={{ base: 12 }} key={`action-empty`}>
             <Alert
               variant="outline"

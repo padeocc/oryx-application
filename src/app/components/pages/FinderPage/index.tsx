@@ -1,36 +1,17 @@
 'use client';
 
 import subjects from '@/data/subjects.json';
-import {
-  Badge,
-  Button,
-  Card,
-  Checkbox,
-  CheckboxGroup,
-  Grid,
-  GridCol,
-  Group,
-  Loader,
-  Stack,
-  Title
-} from '@mantine/core';
+import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Filters } from '../CatalogPage';
 import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/components/Content';
 
 const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
   const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const form = useForm({
     initialValues: filters
   });
-
-  useEffect(() => {
-    setLoading(true);
-    setCategories(getCategoriesFromSubjects(form.values.subjects));
-    setLoading(false);
-  }, [form.values.subjects]);
 
   const selectedSubjects = form.values.subjects;
   const selectedCategories = form.values.categories;
@@ -44,7 +25,16 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
         <GridCol span={{ base: 12, sm: 6 }}>
           <Stack>
             <Card>
-              <CheckboxGroup onChange={subjects => form.setFieldValue('subjects', subjects)} value={selectedSubjects}>
+              <CheckboxGroup
+                value={selectedSubjects}
+                onChange={subjects => {
+                  const possibleCategories = getCategoriesFromSubjects(subjects);
+                  setCategories(possibleCategories);
+                  const categories = form.values.categories.filter(fc =>
+                    possibleCategories.map(c => c.code).includes(fc)
+                  );
+                  form.setValues({ subjects, categories });
+                }}>
                 <Stack gap="xs" pt="xs">
                   {subjects.map(subject => (
                     <Checkbox
@@ -52,14 +42,12 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                       key={subject.code}
                       label={subject.title}
                       value={subject.code}
-                      name={`subjects[${subject.code}]`}
                       checked={selectedSubjects?.includes(subject.code)}
                     />
                   ))}
                 </Stack>
               </CheckboxGroup>
             </Card>
-            {loading ? <Loader /> : null}
             {selectedSubjects?.length ? (
               <Card>
                 <Title order={2}>Quels sont les sujets qui vous intéressent&nbsp;?</Title>
@@ -73,7 +61,6 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                         key={category.code}
                         label={category.title}
                         value={category.code}
-                        name={`categories[${category.code}]`}
                         checked={selectedCategories?.includes(category.code)}
                       />
                     ))}

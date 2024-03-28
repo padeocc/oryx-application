@@ -6,15 +6,22 @@ import { useEffect, useState } from 'react';
 import { Filters } from '..';
 import { getCategoriesFromSubjects } from './Content';
 
-const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
+const Filters = ({
+  filters,
+  loading,
+  handleSubmit
+}: {
+  filters: Filters;
+  loading: boolean;
+  handleSubmit: (values: Filters) => void;
+}) => {
+  const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
+
   const form = useForm({
     initialValues: filters
   });
-  const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
 
-  useEffect(() => {
-    setCategories(getCategoriesFromSubjects(form.values.subjects));
-  }, [form.values.subjects]);
+  const selectedSubjects = form.values.subjects;
 
   useEffect(() => {
     form.setValues(filters);
@@ -22,10 +29,7 @@ const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (v
   }, [filters]);
 
   return (
-    <form
-      onSubmit={form.onSubmit(values => {
-        return handleSubmit(values);
-      })}>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
       <Grid>
         <GridCol span={{ base: 12, sm: 5 }}>
           <MultiSelect
@@ -33,7 +37,10 @@ const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (v
             placeholder="Thèmes"
             data={subjects.map(s => ({ value: s.code, label: s.title }))}
             onChange={subjects => {
-              form.setFieldValue('subjects', subjects);
+              const possibleCategories = getCategoriesFromSubjects(subjects);
+              setCategories(possibleCategories);
+              const categories = form.values.categories.filter(fc => possibleCategories.map(c => c.code).includes(fc));
+              form.setValues({ subjects, categories });
             }}
           />
         </GridCol>
@@ -45,10 +52,11 @@ const Filters = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (v
             onChange={categories => {
               form.setFieldValue('categories', categories);
             }}
+            disabled={selectedSubjects?.length === 0}
           />
         </GridCol>
         <GridCol span={{ base: 12, sm: 2 }} ta="right">
-          <Button type="submit" w="100%" disabled={!form.isDirty() || !categories.length}>
+          <Button type="submit" w="100%" loading={loading} disabled={!form.isDirty() || !categories.length}>
             <Funnel size="20" />
           </Button>
         </GridCol>
