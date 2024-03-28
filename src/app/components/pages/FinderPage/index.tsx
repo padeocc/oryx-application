@@ -3,7 +3,7 @@
 import subjects from '@/data/subjects.json';
 import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Filters } from '../CatalogPage';
 import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/components/Content';
 
@@ -15,6 +15,12 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
 
   const selectedSubjects = form.values.subjects;
   const selectedCategories = form.values.categories;
+
+  useEffect(() => {
+    const newCategories = getCategoriesFromSubjects(selectedSubjects);
+    setCategories(newCategories);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <form
@@ -61,6 +67,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                         key={category.code}
                         label={category.title}
                         value={category.code}
+                        name={`categories[${category.code}]`}
                         checked={selectedCategories?.includes(category.code)}
                       />
                     ))}

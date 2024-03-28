@@ -5,7 +5,7 @@ import uniq from 'lodash/uniq';
 import Content from './components/Content';
 
 export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service[]>;
-export type Service = { tags: string[]; title: string; shortDescription: string; imagePath: string };
+export type Service = { tags: string[]; title: string; shortDescription: string; logo?: string };
 export type Filters = { subjects: string[]; categories: string[] };
 
 const fetchActions = async ({ filters }: { filters: Filters }) => {

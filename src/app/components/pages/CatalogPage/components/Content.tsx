@@ -106,7 +106,7 @@ const Content = ({
           <Loader />
         ) : (
           data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>
+            <GridCol span={{ base: 12, sm: 6, md: 4, xl: 3 }} key={`action-${service.title}-${index}`}>
               <ServiceCard service={service} />
             </GridCol>
           ))

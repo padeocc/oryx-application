@@ -9,7 +9,8 @@
     "title": "2P2R",
     "shortDescription": "L’association 2 Pieds 2 Roues est une association indépendante sur Toulouse et son agglomération pour le développement du vélo au quotidien et de la marche en ville",
     "sites": "https://2p2r.org/",
-    "tags": ["softmobility"]
+    "tags": ["softmobility"],
+    "logo": "https://2p2r.org/local/cache-vignettes/L261xH202/logo-2p2r-3-ff3a1.png"
   },
   {
     "title": "AF3V",
@@ -105,7 +106,7 @@
     "title": "Citroen ami",
     "shortDescription": "Découvrez Citroën Ami qui facilite votre mobilité urbaine. 100% électrique, Citroën Ami est rechargeable sur prise standard, 70 km d'autonomie et sans …",
     "sites": "https://www.citroen.fr/ami",
-    "tags": ["buylowcarboncar", "Voiture sans permis"]
+    "tags": ["buylowcarboncar"]
   },
   {
     "title": "Citroen e-Berliingo",
@@ -375,7 +376,7 @@
     "title": "Pedibus",
     "shortDescription": "Passez à l'action ! Vous êtes ici. accueilPassez à l'action !Créer son projetMettre en place un Pédibus ... http://www.areneidf.org/fr/ ...",
     "sites": "https://www.colibris-lemouvement.org/passer-a-laction/creer-son-projet/mettre-en-place-un-pedibus",
-    "tags": ["softmobility", "Marche"]
+    "tags": ["softmobility"]
   },
   {
     "title": "Peugeot e-2008",

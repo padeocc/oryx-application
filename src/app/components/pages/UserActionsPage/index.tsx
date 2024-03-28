@@ -13,8 +13,8 @@ const UserActions = () => {
       <br />
       <Stack>
         <Text>
-          A partir d&lsquo;ici, vous pouvez créer votre page publique regroupant l&lsquo;ensensemble des services que
-          vous utilisez au qotidien
+          A partir d&lsquo;ici, vous pouvez créer votre page publique regroupant l&lsquo;ensemble des services que vous
+          utilisez au qotidien
         </Text>
 
         <Switch label="Publier ma page" />

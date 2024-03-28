@@ -5,10 +5,15 @@ import { items } from './items';
 const HeaderMenuDesktop = () =>
   items.map((itemsGroup, itemgroupindex) => (
     <Group key={`group-${itemgroupindex}`} justify="space-between">
-      {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
+      {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
         const others = isExternal ? { target: '_blank' } : {};
         return (
-          <Button key={`item-${itemgroupindex}-${itemindex}`} component={Link} href={href} {...others}>
+          <Button
+            key={`item-${itemgroupindex}-${itemindex}`}
+            component={Link}
+            href={href}
+            {...others}
+            color={priority ? 'orange' : 'green'}>
             {name}
           </Button>
         );

@@ -1,9 +1,10 @@
-export const items: { href: string; name: string; isExternal: boolean }[][] = [
+export const items: { href: string; name: string; isExternal: boolean; priority?: number }[][] = [
   [
     {
       name: 'Trouver une action',
       href: '/',
-      isExternal: false
+      isExternal: false,
+      priority: 1
     },
     {
       name: 'Voir mes actions',
