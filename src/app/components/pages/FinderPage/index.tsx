@@ -31,16 +31,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
         <GridCol span={{ base: 12, sm: 6 }}>
           <Stack>
             <Card>
-              <CheckboxGroup
-                value={selectedSubjects}
-                onChange={subjects => {
-                  const possibleCategories = getCategoriesFromSubjects(subjects);
-                  setCategories(possibleCategories);
-                  const categories = form.values.categories.filter(fc =>
-                    possibleCategories.map(c => c.code).includes(fc)
-                  );
-                  form.setValues({ subjects, categories });
-                }}>
+              <CheckboxGroup value={selectedSubjects}>
                 <Stack gap="xs" pt="xs">
                   {subjects.map(subject => (
                     <Checkbox
@@ -49,6 +40,14 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                       label={subject.title}
                       value={subject.code}
                       checked={selectedSubjects?.includes(subject.code)}
+                      onChange={subject => {
+                        const possibleCategories = getCategoriesFromSubjects([subject.target.value]);
+                        setCategories(possibleCategories);
+                        const categories = form.values.categories.filter(fc =>
+                          possibleCategories.map(c => c.code).includes(fc)
+                        );
+                        form.setValues({ subjects: [subject.target.value], categories });
+                      }}
                     />
                   ))}
                 </Stack>

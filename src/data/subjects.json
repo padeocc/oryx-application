@@ -33,8 +33,8 @@
     ]
   },
   {
-    "title": "Bien type de bien (source le bon coin)",
-    "code": "goodstypefromleboncoin",
+    "title": "Biens",
+    "code": "goods",
     "categories": [
       {
         "title": "Faire de l'économie circulaire 2) Acheter/vendre d'occasion ou reconditionné",
@@ -49,7 +49,7 @@
   },
   {
     "title": "Services",
-    "code": "servicesibuy",
+    "code": "services",
     "categories": [
       { "title": "Les sorties - Loisir - vacances", "code": "leisurevacation" },
       { "title": "Services publics et services à la personne", "code": "publicservices" },
@@ -58,7 +58,7 @@
   },
   {
     "title": "Transport",
-    "code": "transportigotransport",
+    "code": "transport",
     "categories": [
       { "title": "Acheter une voiture bas carbone - Electrique", "code": "buylowcarboncar" },
       { "title": "Covoiturer - Auto partage Augmenter le taux de remplissage", "code": "carpoolshare" },
@@ -73,8 +73,8 @@
     ]
   },
   {
-    "title": "Événement, Formation, Influence",
-    "code": "eventformationinfluenceigrow",
+    "title": "Événement",
+    "code": "eventformationinfluence",
     "categories": [
       { "title": "Ateliers intelligence collective", "code": "collectiveintelligenceworkshops" },
       { "title": "Événements éco-responsables", "code": "ecoevent" },
@@ -83,7 +83,7 @@
   },
   {
     "title": "Banque",
-    "code": "mymoney",
+    "code": "finance",
     "categories": [
       { "title": "Banque", "code": "bank" },
       { "title": "Financement", "code": "financing" },

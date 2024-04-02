@@ -1,8 +1,10 @@
 'use client';
 
+import { Theme } from '@/app/[locale]/actions/[theme]/page';
 import subjects from '@/data/subjects.json';
 import { Alert, Button, Grid, GridCol, Group, Loader, Modal, Text, Title } from '@mantine/core';
 import { MagicWand, SmileyMeh } from '@phosphor-icons/react/dist/ssr';
+import { redirect } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Filters, Service } from '..';
 import FinderPage from '../../FinderPage';
@@ -26,13 +28,15 @@ export const getCategoriesFromSubjects = (codes: string[]) => {
 
 const Content = ({
   fetchActions,
-  data: initialData
+  data: initialData,
+  themes
 }: {
   fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
+  themes?: Theme[];
 }) => {
   const [data, setData] = useState<Service[]>(initialData);
-  const [filters, setFilters] = useState<Filters>({ subjects: [], categories: [] });
+  const [filters, setFilters] = useState<Filters>({ subjects: themes ? themes : [], categories: [] });
   const [loading, setLoading] = useState<boolean>(false);
   const [opened, setOpened] = useState<boolean>(false);
 
@@ -57,11 +61,9 @@ const Content = ({
   return (
     <>
       <Grid>
-        <GridCol span={{ base: 12, sm: 6 }}>
-          <Title order={2}>Quelques inspirations pour vous aujourd&apos;hui !</Title>
-        </GridCol>
-        <GridCol span={{ base: 12, sm: 6 }} pt="0">
-          <Group align="top" justify="flex-end">
+        <GridCol span={{ base: 12, sm: 5, md: 4 }}>
+          <Title order={2}>{loading ? <Loader size={'xs'} /> : `${data.length} inspirations trouvées`}</Title>
+          <Group align="top">
             <Button
               size="md"
               color="orange"
@@ -79,29 +81,27 @@ const Content = ({
               m="0"
               p="0"
               size="md"
-              variant="transparent"
+              variant="transparent" /*href="/fr" component={Link}*/
               onClick={_e => {
                 setFilters({ categories: [], subjects: [] });
+                redirect('/fr');
               }}>
               Voir toutes les actions
             </Button>
           </Group>
         </GridCol>
-      </Grid>
-      <Grid bg={'gray'} justify="left" align="top">
-        <GridCol span={{ base: 12, sm: 4 }}>
-          <Title order={3}>{loading ? '' : `${data.length} actions trouvées`}</Title>
-        </GridCol>
-        <GridCol span={{ base: 12, sm: 8 }}>
+        <GridCol span={{ base: 12, sm: 7, md: 8 }} pt="0">
           <FiltersComponent
             loading={loading}
             filters={filters}
             handleSubmit={values => {
               setFilters(values);
             }}
+            themes={themes ? themes : []}
           />
         </GridCol>
-
+      </Grid>
+      <Grid bg={'gray'} justify="space-between" align="top">
         {loading ? (
           <Loader />
         ) : (
@@ -125,7 +125,7 @@ const Content = ({
       </Grid>
       <Modal
         opened={opened}
-        title={<Title order={2}>Choisissez un ou plusieurs thèmes !</Title>}
+        title={<Title order={2}>Choisir un thème !</Title>}
         size={'xl'}
         onClose={() => {
           setOpened(false);
