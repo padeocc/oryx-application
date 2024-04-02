@@ -97,7 +97,6 @@ const Content = ({
             handleSubmit={values => {
               setFilters(values);
             }}
-            themes={themes ? themes : []}
           />
         </GridCol>
       </Grid>

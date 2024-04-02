@@ -38,7 +38,7 @@ const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
   return (
     <Icon
       size={30}
-      color={selected ? 'orange' : 'gray'}
+      color={selected ? 'gray' : 'lightgray'}
       style={{ cursor: 'pointer' }}
       weight={selected ? 'fill' : 'regular'}
     />
@@ -48,13 +48,11 @@ const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
 const Filters = ({
   filters,
   loading,
-  handleSubmit,
-  themes
+  handleSubmit
 }: {
   filters: Filters;
   loading: boolean;
   handleSubmit: (values: Filters) => void;
-  themes: Theme[];
 }) => {
   const form = useForm({
     initialValues: filters
@@ -73,7 +71,10 @@ const Filters = ({
       <Link href={`/fr/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         <Stack align="center">
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
-          <Text fz="xs" ta="center">
+          <Text
+            fz="xs"
+            ta="center"
+            c={selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0 ? '#808080' : 'lightgray'}>
             {getSubjetLabel(item)}
           </Text>
         </Stack>
