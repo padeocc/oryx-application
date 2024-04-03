@@ -1,3 +1,4 @@
+import SupertokensProvider from '@/components/auth/SupertokensProvider';
 import HeaderMenu from '@/components/navigation/HeaderMenu';
 import {
   AppShell,
@@ -15,7 +16,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { SuperTokensInit } from '../components/supertokensProvider';
+
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -105,7 +106,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <SuperTokensInit>
+      <SupertokensProvider>
         <body className={inter.className}>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ColorSchemeScript defaultColorScheme="light" />
@@ -124,7 +125,7 @@ export default async function RootLayout({
             {GTags}
           </NextIntlClientProvider>
         </body>
-      </SuperTokensInit>
+      </SupertokensProvider>
     </html>
   );
 }
