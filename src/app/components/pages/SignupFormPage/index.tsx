@@ -1,28 +1,31 @@
 'use client';
 
-import { Button, Checkbox, Group, TextInput } from '@mantine/core';
+import TermsConditionsButton from '@/components/TermsConditionsButton';
+import { Button, Checkbox, Container, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import Link from 'next/link';
+import { useState } from 'react';
 import { signUp } from 'supertokens-web-js/recipe/emailpassword';
 
-const SignupFormPage = ({ handleSubmit }: { handleSubmit: ({ response }: { response: any }) => Promise<void> }) => {
+const SignupFormPage = () => {
+  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+
   const form = useForm({
     initialValues: {
       email: '',
       password: '',
-      name: '',
       termsOfService: false
     },
-
     validate: {
       email: value => (/^\S+@\S+$/.test(value) ? null : 'Invalid email')
     }
   });
 
-  //fakace@mailinator.com
-
   return (
     <form
       onSubmit={form.onSubmit(async values => {
+        setIsloading(true);
         try {
           const response = await signUp({
             formFields: [
@@ -36,22 +39,37 @@ const SignupFormPage = ({ handleSubmit }: { handleSubmit: ({ response }: { respo
               }
             ]
           });
-          handleSubmit({ response });
+
+          if (response.status === 'OK') {
+            window.location.replace('/');
+          } else {
+            // TODO translate
+            throw { message: response.status };
+          }
         } catch (err: any) {
-          console.error(err.message);
+          setIsloading(false);
+          setError(err?.message || 'Unknown');
         }
       })}>
-      <TextInput withAsterisk label="Prénom et nom" placeholder="" {...form.getInputProps('name')} />
       <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
       <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
       <Checkbox
         mt="md"
-        label="Je suis d'accord avec les conditions d'inscription"
+        label={
+          <Group>
+            Je suis d&lsquo;accord avec les conditions d&lsquo;inscription <TermsConditionsButton label="(Lire)" />
+          </Group>
+        }
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
+      <Container pl="0" pr="0" pt="xl"></Container>
       <Group justify="flex-end" mt="md">
+        <Button variant="outline" loading={isLoading} component={Link} href="/fr/login">
+          Se connecter
+        </Button>
         <Button type="submit">S&lsquo;inscrire</Button>
       </Group>
+      {error ? <Text c="red">{error}</Text> : null}
     </form>
   );
 };

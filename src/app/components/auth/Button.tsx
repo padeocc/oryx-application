@@ -1,10 +1,12 @@
 'use client';
 
+import { getFrontendAuthConfig } from '@/app/config/frontend';
 import { Button, Loader, Stack, Text } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { User } from 'supertokens-node';
+import SuperTokensWebJs from 'supertokens-web-js';
 import Session, { signOut } from 'supertokens-web-js/recipe/session';
 
 const AuthButton = ({}: {}) => {
@@ -16,6 +18,8 @@ const AuthButton = ({}: {}) => {
     setIsloading(true);
 
     const fetchData = async () => {
+      SuperTokensWebJs.init(getFrontendAuthConfig());
+
       const hasSession = await Session.attemptRefreshingSession();
       if (hasSession) {
         const userInfoResponse = hasSession ? await fetch('http://localhost:3000/api/user') : undefined;

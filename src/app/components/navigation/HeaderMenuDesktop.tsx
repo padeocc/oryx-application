@@ -1,26 +1,7 @@
-import { Button, Group } from '@mantine/core';
+import { Button, Container, Group } from '@mantine/core';
 import Link from 'next/link';
 import AuthButton from '../auth/Button';
 import { items } from './items';
-
-//ensureSuperTokensInit();
-
-// const getSSRSessionHelper = async () => {
-//   'use server';
-//   let session: SessionContainer | undefined;
-//   let hasToken = false;
-//   let hasInvalidClaims = false;
-//   let error: Error | undefined = undefined;
-
-//   try {
-//     ({ session, hasToken, hasInvalidClaims } = await getSSRSession(cookies().getAll(), headers()));
-//   } catch (err: any) {
-//     error = err;
-//   }
-//   return { session, hasToken, hasInvalidClaims, error };
-// };
-
-// const data = await getSSRSessionHelper();
 
 const HeaderMenuDesktop = () => {
   const elements = items.map((itemsGroup, itemgroupindex) => (
@@ -41,7 +22,11 @@ const HeaderMenuDesktop = () => {
     </Group>
   ));
 
-  elements.push(<AuthButton />);
+  elements.push(
+    <Container miw={'10rem'}>
+      <AuthButton />
+    </Container>
+  );
 
   return elements;
 };

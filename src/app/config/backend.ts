@@ -25,3 +25,17 @@ export async function ensureSuperTokensInit() {
     initialized = true;
   }
 }
+
+/*export const getBackendAuthConfig = (): TypeInput => {
+  const { APPINFO_CONNECTIONURL = '', APPINFO_CONNECTIONKEY = '' } = process.env;
+  return {
+    appInfo,
+    recipeList: [EmailPassword.init(), SessionNode.init()],
+    isInServerlessEnv: true,
+    framework: 'custom',
+    supertokens: {
+      connectionURI: APPINFO_CONNECTIONURL,
+      apiKey: APPINFO_CONNECTIONKEY
+    }
+  };
+};*/
