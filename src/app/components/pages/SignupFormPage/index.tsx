@@ -1,7 +1,7 @@
 'use client';
 
 import TermsConditionsButton from '@/components/TermsConditionsButton';
-import { Button, Checkbox, Container, Group, Text, TextInput } from '@mantine/core';
+import { Button, Checkbox, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -62,12 +62,13 @@ const SignupFormPage = () => {
         }
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
-      <Container pl="0" pr="0" pt="xl"></Container>
       <Group justify="flex-end" mt="md">
         <Button variant="outline" loading={isLoading} component={Link} href="/fr/login">
           Se connecter
         </Button>
-        <Button type="submit">S&lsquo;inscrire</Button>
+        <Button type="submit" loading={isLoading}>
+          S&lsquo;inscrire
+        </Button>
       </Group>
       {error ? <Text c="red">{error}</Text> : null}
     </form>

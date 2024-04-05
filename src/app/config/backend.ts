@@ -11,8 +11,8 @@ export const getBackendAuthConfig = (): TypeInput => {
     isInServerlessEnv: true,
     framework: 'custom',
     supertokens: {
-      connectionURI: 'https://st-dev-feaca450-db39-11ee-8a14-9511970816ad.aws.supertokens.io',
-      apiKey: 'RJnxmo--hns46ib9GLSa4a-ZQj'
+      connectionURI: process?.env?.APPINFO_CONNECTIONURL || '',
+      apiKey: process?.env?.APPINFO_CONNECTIONKEY || ''
     }
   };
 };
@@ -25,17 +25,3 @@ export async function ensureSuperTokensInit() {
     initialized = true;
   }
 }
-
-/*export const getBackendAuthConfig = (): TypeInput => {
-  const { APPINFO_CONNECTIONURL = '', APPINFO_CONNECTIONKEY = '' } = process.env;
-  return {
-    appInfo,
-    recipeList: [EmailPassword.init(), SessionNode.init()],
-    isInServerlessEnv: true,
-    framework: 'custom',
-    supertokens: {
-      connectionURI: APPINFO_CONNECTIONURL,
-      apiKey: APPINFO_CONNECTIONKEY
-    }
-  };
-};*/

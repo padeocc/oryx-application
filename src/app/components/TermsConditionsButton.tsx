@@ -49,7 +49,7 @@ const TermsConditionsButton = ({ label }: { label?: string }) => {
           En utilisant notre application web, vous acceptez que nous utilisions des cookies et stockions des sessions
           utilisateur conformément aux conditions énoncées ci-dessus. Si vous avez des questions ou des préoccupations
           concernant notre utilisation des cookies ou le stockage des sessions utilisateur, veuillez nous contacter sur{' '}
-          <a href="mailto:contact@oryxchange.com">contact@oryxchange.com</a>.
+          <a href="mailto:support@oryxchange.com">support@oryxchange.com</a>.
         </p>
       </Modal>
     </>

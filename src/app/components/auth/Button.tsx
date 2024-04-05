@@ -22,7 +22,7 @@ const AuthButton = ({}: {}) => {
 
       const hasSession = await Session.attemptRefreshingSession();
       if (hasSession) {
-        const userInfoResponse = hasSession ? await fetch('http://localhost:3000/api/user') : undefined;
+        const userInfoResponse = hasSession ? await fetch(process?.env?.API_GETUSER_ENDPOINT || '') : undefined;
         const jsonResponse = await userInfoResponse?.json();
         setUser(jsonResponse);
       } else {
@@ -45,8 +45,9 @@ const AuthButton = ({}: {}) => {
         href=""
         style={{ textDecoration: 'none' }}
         onClick={async () => {
+          setIsloading(true);
           await signOut();
-          window.location.replace('/');
+          window.location.reload();
         }}>
         <Text c={'white'} fz={'xs'}>
           Se déconnecter

@@ -1,21 +1,7 @@
-// const {
-//   NEXT_PUBLIC_APPINFO_NAME = '',
-//   NEXT_PUBLIC_APPINFO_APIDOMAIN = '',
-//   NEXT_PUBLIC_APPINFO_WEBSITEDOMAIN = '',
-//   NEXT_PUBLIC_APPINFO_APIBASEPATH = '',
-//   NEXT_PUBLIC_APPINFO_WEBSITEBASEPATH = ''
-// } = process?.env;
-
-const NEXT_PUBLIC_APPINFO_NAME = 'Oryx';
-const NEXT_PUBLIC_APPINFO_APIDOMAIN = 'http://localhost:3000';
-const NEXT_PUBLIC_APPINFO_WEBSITEDOMAIN = 'http://localhost:3000';
-const NEXT_PUBLIC_APPINFO_APIBASEPATH = '/api/auth';
-const NEXT_PUBLIC_APPINFO_WEBSITEBASEPATH = '/fr/signup';
-
 export const appInfo = {
-  appName: NEXT_PUBLIC_APPINFO_NAME,
-  apiDomain: NEXT_PUBLIC_APPINFO_APIDOMAIN,
-  websiteDomain: NEXT_PUBLIC_APPINFO_WEBSITEDOMAIN,
-  apiBasePath: NEXT_PUBLIC_APPINFO_APIBASEPATH,
-  websiteBasePath: NEXT_PUBLIC_APPINFO_WEBSITEBASEPATH
+  appName: process?.env?.NEXT_PUBLIC_APPINFO_NAME || '',
+  apiDomain: process?.env?.NEXT_PUBLIC_APPINFO_APIDOMAIN || '',
+  websiteDomain: process?.env?.NEXT_PUBLIC_APPINFO_WEBSITEDOMAIN || '',
+  apiBasePath: process?.env?.NEXT_PUBLIC_APPINFO_APIBASEPATH || '',
+  websiteBasePath: process?.env?.NEXT_PUBLIC_APPINFO_WEBSITEBASEPATH || ''
 };

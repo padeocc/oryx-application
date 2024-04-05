@@ -2,13 +2,13 @@ import { Theme } from '@/app/[locale]/actions/[theme]/page';
 import { Button, Grid, GridCol, MultiSelect, Stack, Text } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
+  ArrowFatRight,
   Basketball,
   BowlFood,
   Butterfly,
   CalendarDots,
   CallBell,
   CreditCard,
-  Funnel,
   House,
   Pants,
   PottedPlant,
@@ -63,11 +63,12 @@ const Filters = ({
 
   useEffect(() => {
     form.setValues(filters);
+    form.setInitialValues(filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const options = Object.keys(themesIcons).map(item => (
-    <GridCol key={`select-theme-${item}`} span={{ base: 3, sm: 2, lg: 'auto' }}>
+    <GridCol key={`select-theme-${item}`} span={{ base: 1, lg: 'auto' }}>
       <Link href={`/fr/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         <Stack align="center">
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
@@ -83,7 +84,11 @@ const Filters = ({
   ));
 
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form
+      onSubmit={form.onSubmit(values => {
+        handleSubmit(values);
+        form.setInitialValues(values);
+      })}>
       <Grid justify="flex-end">
         <GridCol span={{ base: 12 }}>
           <Grid justify="flex-end">{options}</Grid>
@@ -97,7 +102,7 @@ const Filters = ({
             onChange={categories => {
               form.setFieldValue('categories', categories);
             }}
-            disabled={selectedSubjects?.length === 0 || selectedSubjects?.length === 0}
+            disabled={selectedSubjects?.length === 0}
           />
         </GridCol>
         <GridCol span={{ base: 12, sm: 2 }} ta="right">
@@ -105,8 +110,8 @@ const Filters = ({
             type="submit"
             w="100%"
             loading={loading}
-            disabled={!form.isDirty() || !categories.length || selectedSubjects?.length === 0}>
-            <Funnel size="20" />
+            disabled={loading || !form.isDirty() || categories?.length === 0}>
+            <ArrowFatRight size="20" />
           </Button>
         </GridCol>
       </Grid>
