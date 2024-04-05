@@ -8,7 +8,7 @@ export const items: { href: string; name: string; isExternal: boolean; priority?
     },
     {
       name: 'Voir mes actions',
-      href: '/fr/user-actions',
+      href: '/fr/actions/user',
       isExternal: false
     },
     {

@@ -68,7 +68,7 @@ const Filters = ({
   }, [filters]);
 
   const options = Object.keys(themesIcons).map(item => (
-    <GridCol key={`select-theme-${item}`} span={{ base: 1, lg: 'auto' }}>
+    <GridCol key={`select-theme-${item}`} span={{ base: 2, md: 'auto' }}>
       <Link href={`/fr/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         <Stack align="center">
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}

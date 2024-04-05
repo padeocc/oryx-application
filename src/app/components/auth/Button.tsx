@@ -22,7 +22,9 @@ const AuthButton = ({}: {}) => {
 
       const hasSession = await Session.attemptRefreshingSession();
       if (hasSession) {
-        const userInfoResponse = hasSession ? await fetch(process?.env?.API_GETUSER_ENDPOINT || '') : undefined;
+        const userInfoResponse = hasSession
+          ? await fetch(process?.env?.NEXT_PUBLIC_APPINFO_API_GETUSER_ENDPOINT || '')
+          : undefined;
         const jsonResponse = await userInfoResponse?.json();
         setUser(jsonResponse);
       } else {
@@ -35,7 +37,7 @@ const AuthButton = ({}: {}) => {
   }, [router]);
 
   return isLoading ? (
-    <Loader size={'xs'} />
+    <Loader size={'xs'} color="white" />
   ) : !!user ? (
     <Stack gap={0} ta="right">
       <Text c={'white'} fw={700} fz={'sm'}>

@@ -32,7 +32,6 @@ const HeaderMenuMobile = () => {
             {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
           </>
         ))}
-        <MenuDivider />
         <MenuItem fz={'lg'} color="gray">
           <AuthButton />
         </MenuItem>

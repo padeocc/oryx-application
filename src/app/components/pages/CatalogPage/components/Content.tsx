@@ -81,7 +81,7 @@ const Content = ({
               m="0"
               p="0"
               size="md"
-              variant="transparent" /*href="/fr" component={Link}*/
+              variant="transparent"
               onClick={_e => {
                 setFilters({ categories: [], subjects: [] });
                 redirect('/fr');

@@ -1,6 +1,5 @@
 import { Theme } from '@/app/[locale]/actions/[theme]/page';
 import demoServices from '@/data/actions.json';
-import { Stack } from '@mantine/core';
 import intersection from 'lodash/intersection';
 import uniq from 'lodash/uniq';
 import Content from './components/Content';
@@ -31,11 +30,7 @@ const CatalogPage = async ({ themes }: { themes?: Theme[] }) => {
       subjects: themes ? themes : []
     }
   });
-  return (
-    <Stack>
-      <Content fetchActions={fetchActions} data={actions} themes={themes} />
-    </Stack>
-  );
+  return <Content fetchActions={fetchActions} data={actions} themes={themes} />;
 };
 
 export default CatalogPage;
