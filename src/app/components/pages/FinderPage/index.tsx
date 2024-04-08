@@ -5,7 +5,7 @@ import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Sta
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import { Filters } from '../CatalogPage';
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/components/Content';
+import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/utils';
 
 const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
   const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);

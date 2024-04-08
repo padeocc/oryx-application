@@ -11,7 +11,7 @@ const Bookmark = ({ actionId }: { actionId: string }) => {
       <BookmarkSimple
         style={{ cursor: 'pointer' }}
         size={'16px'}
-        color="orange"
+        color={isActive ? 'orange' : 'darkblue'}
         weight={isActive ? 'fill' : 'regular'}
         onClick={() => {
           setIsActive(!isActive);

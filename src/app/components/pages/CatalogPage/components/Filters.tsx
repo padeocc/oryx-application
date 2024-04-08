@@ -18,7 +18,7 @@ import {
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { Filters } from '..';
-import { getCategoriesFromSubjects, getSubjetLabel } from './Content';
+import { getCategoriesFromSubjects, getSubjetLabel } from '../utils';
 
 const themesIcons = {
   transport: Scooter,
@@ -45,7 +45,7 @@ const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
   );
 };
 
-const Filters = ({
+const FiltersComponent = ({
   filters,
   loading,
   handleSubmit
@@ -119,4 +119,4 @@ const Filters = ({
   );
 };
 
-export default Filters;
+export default FiltersComponent;

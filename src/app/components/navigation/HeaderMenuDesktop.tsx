@@ -10,11 +10,13 @@ const HeaderMenuDesktop = () => {
         const others = isExternal ? { target: '_blank' } : {};
         return (
           <Button
+            p={'xs'}
+            variant="transparent"
             key={`item-${itemgroupindex}-${itemindex}`}
             component={Link}
             href={href}
             {...others}
-            color={priority ? 'orange' : 'green'}>
+            color={priority ? 'orange' : 'darkblue'}>
             {name}
           </Button>
         );
@@ -23,7 +25,7 @@ const HeaderMenuDesktop = () => {
   ));
 
   elements.push(
-    <Container miw={'10rem'}>
+    <Container>
       <AuthButton />
     </Container>
   );

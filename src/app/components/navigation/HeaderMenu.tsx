@@ -11,8 +11,8 @@ const HeaderMenu = () => {
       <Group justify="space-between" h="100%">
         <Link href="/" style={{ textDecoration: 'none' }}>
           <Group gap={0}>
-            <Horse size="2rem" color="white" weight="fill" />
-            <Title c="white" order={1}>
+            <Horse size="2rem" style={{ color: 'var(--mantine-color-green-text)' }} weight="fill" />
+            <Title c="green" order={1}>
               Oryx
             </Title>
           </Group>

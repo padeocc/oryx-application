@@ -1,7 +1,7 @@
 'use client';
 
 import { getFrontendAuthConfig } from '@/app/config/frontend';
-import { Button, Loader, Stack, Text } from '@mantine/core';
+import { Button, Stack, Text } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -37,10 +37,12 @@ const AuthButton = ({}: {}) => {
   }, [router]);
 
   return isLoading ? (
-    <Loader size={'xs'} color="white" />
+    <Button loading color={'darkblue'}>
+      Se connecter
+    </Button>
   ) : !!user ? (
     <Stack gap={0} ta="right">
-      <Text c={'white'} fw={700} fz={'sm'}>
+      <Text c={'darkblue'} fw={700} fz={'sm'}>
         {user.emails[0]}
       </Text>
       <Link
@@ -51,13 +53,13 @@ const AuthButton = ({}: {}) => {
           await signOut();
           window.location.reload();
         }}>
-        <Text c={'white'} fz={'xs'}>
+        <Text c={'darkblue'} fz={'xs'}>
           Se déconnecter
         </Text>
       </Link>
     </Stack>
   ) : (
-    <Button component={Link} href="/fr/login">
+    <Button component={Link} href="/fr/login" color={'darkblue'}>
       Se connecter
     </Button>
   );

@@ -8,7 +8,7 @@ export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Servic
 export type Service = { tags: string[]; title: string; shortDescription: string; logo?: string; verticals: string[] };
 export type Filters = { subjects: string[]; categories: string[] };
 
-const fetchActions = async ({ filters }: { filters: Filters }) => {
+export const fetchActions = async ({ filters }: { filters: Filters }) => {
   'use server';
   const actions = demoServices as unknown as Service[];
   if (filters.categories.length) {
@@ -23,14 +23,14 @@ const fetchActions = async ({ filters }: { filters: Filters }) => {
 
 export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
 
-const CatalogPage = async ({ themes }: { themes?: Theme[] }) => {
+const CatalogPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAssistant?: boolean }) => {
   const actions = await fetchActions({
     filters: {
       categories: [],
       subjects: themes ? themes : []
     }
   });
-  return <Content fetchActions={fetchActions} data={actions} themes={themes} />;
+  return <Content fetchActions={fetchActions} data={actions} themes={themes} showAssistant={showAssistant} />;
 };
 
 export default CatalogPage;

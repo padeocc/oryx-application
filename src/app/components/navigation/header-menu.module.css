@@ -1,5 +1,6 @@
 .container {
-  background-image: url('/header-background5.svg');
+  background-image: url('/header-background6.svg');
   background-size: cover;
-  background-position: center;
+  background-position-y: center;
+  background-color: var(--mantine-color-verylightgreen-text);
 }

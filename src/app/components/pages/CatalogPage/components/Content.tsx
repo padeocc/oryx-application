@@ -1,44 +1,29 @@
 'use client';
 
 import { Theme } from '@/app/[locale]/actions/[theme]/page';
-import subjects from '@/data/subjects.json';
-import { Alert, Button, Grid, GridCol, Group, Loader, Modal, Text, Title } from '@mantine/core';
-import { MagicWand, SmileyMeh } from '@phosphor-icons/react/dist/ssr';
-import { redirect } from 'next/navigation';
+import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
+import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useEffect, useRef, useState } from 'react';
 import { Filters, Service } from '..';
 import FinderPage from '../../FinderPage';
 import FiltersComponent from './Filters';
 import ServiceCard from './ServiceCard';
 
-export const getSubjetLabel = (code: string) => {
-  const found = subjects.find(subject => subject.code === code);
-  return found?.title || '';
-};
-
-export const getCategoryLabel = (code: string) => {
-  const found = subjects.flatMap(({ categories }) => categories).find(category => category.code === code);
-  return found?.title || '';
-};
-
-export const getCategoriesFromSubjects = (codes: string[]) => {
-  const subjectItems = subjects.filter(subject => codes?.includes(subject.code));
-  return subjectItems.flatMap(({ categories }) => categories);
-};
-
 const Content = ({
   fetchActions,
   data: initialData,
-  themes
+  themes,
+  showAssistant = false
 }: {
   fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
   themes?: Theme[];
+  showAssistant?: boolean;
 }) => {
   const [data, setData] = useState<Service[]>(initialData);
   const [filters, setFilters] = useState<Filters>({ subjects: themes ? themes : [], categories: [] });
   const [loading, setLoading] = useState<boolean>(false);
-  const [opened, setOpened] = useState<boolean>(false);
+  const [opened, setOpened] = useState<boolean>(showAssistant);
 
   const firstFetch = useRef(true);
 
@@ -63,7 +48,7 @@ const Content = ({
       <Grid>
         <GridCol span={{ base: 12, sm: 5, md: 4 }}>
           <Title order={2}>{loading ? <Loader size={'xs'} /> : `${data.length} inspirations trouvées`}</Title>
-          <Group align="top">
+          {/* <Group align="top">
             <Button
               size="md"
               color="orange"
@@ -88,7 +73,7 @@ const Content = ({
               }}>
               Voir toutes les actions
             </Button>
-          </Group>
+          </Group> */}
         </GridCol>
         <GridCol span={{ base: 12, sm: 7, md: 8 }} pt="0">
           <FiltersComponent
@@ -100,13 +85,13 @@ const Content = ({
           />
         </GridCol>
       </Grid>
-      <Grid bg={'gray'} justify="space-between" align="top">
+      <Grid justify="space-between" align="top" mt="lg">
         {loading ? (
           <Loader />
         ) : (
           data.map((service, index) => (
             <GridCol span={{ base: 12, sm: 6, md: 4, xl: 3 }} key={`action-${service.title}-${index}`}>
-              <ServiceCard service={service} />
+              <ServiceCard service={service} backgroundColor={'lightgreen'} />
             </GridCol>
           ))
         )}

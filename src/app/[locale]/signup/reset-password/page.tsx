@@ -2,8 +2,8 @@ import ResetPasswordFormPage from '@/app/components/pages/ResetPasswordFormPage'
 import ResetPasswordValidationFormPage from '@/app/components/pages/ResetPasswordValidationFormPage';
 import { Card, Stack, Title } from '@mantine/core';
 
-export default function PasswordReminder({ searchParams }: { searchParams: any }) {
-  const { token, rid } = searchParams;
+export default function PasswordReminder({ searchParams }: { searchParams: { token: string } }) {
+  const { token } = searchParams;
 
   return (
     <main>
