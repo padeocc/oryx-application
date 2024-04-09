@@ -40,7 +40,12 @@ const ServiceCard = ({
         <Stack>
           <Group gap={'xs'}>
             {service.tags.map(tag => (
-              <Badge key={`tag-${tag}`} size="sm" variant="outline" color="darkblue" bg="white">
+              <Badge
+                key={`tag-${tag}`}
+                size="sm"
+                variant="outline"
+                color="var(--mantine-color-dark-outline)"
+                bg="white">
                 {getCategoryLabel(tag)}
               </Badge>
             ))}
@@ -62,7 +67,7 @@ const ServiceCard = ({
         </Stack>
         <CardSection>
           <Button
-            color="darkblue"
+            color="var(--mantine-color-dark-outline)"
             variant="transparent"
             style={{ bottom: '0px' }}
             w={'100%'}

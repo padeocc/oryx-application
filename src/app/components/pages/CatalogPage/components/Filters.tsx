@@ -1,8 +1,7 @@
 import { Theme } from '@/app/[locale]/actions/[theme]/page';
-import { Button, Grid, GridCol, MultiSelect, Stack, Text } from '@mantine/core';
+import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
-  ArrowFatRight,
   Basketball,
   BowlFood,
   Butterfly,
@@ -48,16 +47,17 @@ const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
 const FiltersComponent = ({
   filters,
   loading,
-  handleSubmit
+  handleSubmit,
+  itemsCount
 }: {
   filters: Filters;
   loading: boolean;
   handleSubmit: (values: Filters) => void;
+  itemsCount: number;
 }) => {
   const form = useForm({
     initialValues: filters
   });
-
   const selectedSubjects = (filters.subjects.length && filters.subjects) || [];
   const categories = getCategoriesFromSubjects(selectedSubjects);
 
@@ -89,31 +89,44 @@ const FiltersComponent = ({
         handleSubmit(values);
         form.setInitialValues(values);
       })}>
-      <Grid justify="flex-end">
+      <Grid gutter={'xl'}>
         <GridCol span={{ base: 12 }}>
-          <Grid justify="flex-end">{options}</Grid>
+          <Grid justify="flex-start">{options}</Grid>
         </GridCol>
-
-        <GridCol span={{ base: 12, sm: 10 }}>
-          <MultiSelect
-            {...form.getInputProps('categories')}
-            placeholder="Sujets"
-            data={categories.map(c => ({ value: c.code, label: c.title }))}
-            onChange={categories => {
-              form.setFieldValue('categories', categories);
-            }}
-            disabled={selectedSubjects?.length === 0}
-          />
+        <GridCol span={{ base: 12 }}>
+          <Grid justify="flex-start">
+            <Title order={2}>{loading ? <Loader size={'xs'} /> : `${itemsCount} inspirations trouvées`}</Title>
+          </Grid>
         </GridCol>
-        <GridCol span={{ base: 12, sm: 2 }} ta="right">
-          <Button
-            type="submit"
-            w="100%"
-            loading={loading}
-            disabled={loading || !form.isDirty() || categories?.length === 0}>
-            <ArrowFatRight size="20" />
-          </Button>
-        </GridCol>
+        {categories.length > 0 ? (
+          <GridCol span={{ base: 12 }}>
+            <Group gap={'xs'}>
+              {categories.map((category, index) => (
+                <Chip
+                  key={`cat-${index}`}
+                  checked={form.values.categories.includes(category.code)}
+                  onClick={() => {
+                    const currentCategories = form.values.categories;
+                    let values = form.values.categories;
+                    if (currentCategories.includes(category.code)) {
+                      values = values.filter(c => c !== category.code);
+                    } else {
+                      values = [...values, category.code];
+                    }
+                    const allValues = {
+                      ...form.values,
+                      categories: values
+                    };
+                    form.setValues(allValues);
+                    handleSubmit(allValues);
+                    form.setInitialValues(allValues);
+                  }}>
+                  {category.title}
+                </Chip>
+              ))}
+            </Group>
+          </GridCol>
+        ) : null}
       </Grid>
     </form>
   );

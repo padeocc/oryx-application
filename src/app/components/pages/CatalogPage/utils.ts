@@ -1,5 +1,10 @@
 import subjects from '@/data/subjects.json';
 
+export type Category = {
+  title: string;
+  code: string;
+};
+
 export const getSubjetLabel = (code: string) => {
   const found = subjects.find(subject => subject.code === code);
   return found?.title || '';

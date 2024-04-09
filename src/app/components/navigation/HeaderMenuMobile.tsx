@@ -9,10 +9,10 @@ const HeaderMenuMobile = () => {
     <Menu shadow="md">
       <MenuTarget>
         <Container pr="xl" style={{ cursor: 'pointer' }}>
-          <DotsThreeOutlineVertical size={24} color="darkblue" />
+          <DotsThreeOutlineVertical size={24} color="var(--mantine-color-dark-outline)" />
         </Container>
       </MenuTarget>
-      <MenuDropdown bg={'var(--mantine-color-green-text)'}>
+      <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
         {items.map((itemsGroup, itemgroupindex) => (
           <>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
@@ -33,7 +33,7 @@ const HeaderMenuMobile = () => {
           </>
         ))}
         <MenuItem fz={'lg'} color="gray">
-          <AuthButton />
+          <AuthButton type={'link'} />
         </MenuItem>
       </MenuDropdown>
     </Menu>

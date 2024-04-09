@@ -16,7 +16,7 @@ const HeaderMenuDesktop = () => {
             component={Link}
             href={href}
             {...others}
-            color={priority ? 'orange' : 'darkblue'}>
+            color={priority ? 'orange' : 'var(--mantine-color-dark-outline)'}>
             {name}
           </Button>
         );

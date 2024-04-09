@@ -9,7 +9,7 @@ import { User } from 'supertokens-node';
 import SuperTokensWebJs from 'supertokens-web-js';
 import Session, { signOut } from 'supertokens-web-js/recipe/session';
 
-const AuthButton = ({}: {}) => {
+const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
   const router = useRouter();
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isLoading, setIsloading] = useState<boolean>(true);
@@ -37,12 +37,15 @@ const AuthButton = ({}: {}) => {
   }, [router]);
 
   return isLoading ? (
-    <Button loading color={'darkblue'}>
+    <Button loading color={'var(--mantine-color-dark-outline)'}>
       Se connecter
     </Button>
   ) : !!user ? (
     <Stack gap={0} ta="right">
-      <Text c={'darkblue'} fw={700} fz={'sm'}>
+      <Text
+        c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'}
+        fw={700}
+        fz={'sm'}>
         {user.emails[0]}
       </Text>
       <Link
@@ -53,15 +56,22 @@ const AuthButton = ({}: {}) => {
           await signOut();
           window.location.reload();
         }}>
-        <Text c={'darkblue'} fz={'xs'}>
+        <Text c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'} fz={'xs'}>
           Se déconnecter
         </Text>
       </Link>
     </Stack>
-  ) : (
-    <Button component={Link} href="/fr/login" color={'darkblue'}>
+  ) : type === 'button' ? (
+    <Button component={Link} href="/fr/login" color={'var(--mantine-color-dark-outline)'}>
       Se connecter
     </Button>
+  ) : (
+    <Link
+      href="/fr/login"
+      color={'var(--mantine-color-dark-outline)'}
+      style={{ color: 'inherit', textDecoration: 'none' }}>
+      Se connecter
+    </Link>
   );
 };
 

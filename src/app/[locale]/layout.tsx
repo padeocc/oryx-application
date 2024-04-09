@@ -27,16 +27,16 @@ export const metadata: Metadata = {
 };
 
 const green: MantineColorsTuple = [
-  '#f6faef',
-  '#ecf3df',
-  '#d7e8b9',
-  '#c0db90',
-  '#add16d',
-  '#a1ca57',
-  '#9ac74b',
-  '#85af3c',
-  '#769b33',
-  '#648727'
+  '#f1f9f8',
+  '#e4efee',
+  '#c4dfda',
+  '#a0cdc6',
+  '#83bfb6',
+  '#70b6ab',
+  '#65b3a5',
+  '#549c90',
+  '#478c80',
+  '#34796e'
 ];
 
 const gray: MantineColorsTuple = [
@@ -52,45 +52,6 @@ const gray: MantineColorsTuple = [
   '#f9f9f9',
   '#fcfcfc',
   '#ffffff'
-];
-
-const darkblue: MantineColorsTuple = [
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536',
-  '#101536'
-];
-
-const lightgreen: MantineColorsTuple = [
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1',
-  '#dcebc1'
-];
-
-const verylightgreen: MantineColorsTuple = [
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD',
-  '#FDFDFD'
 ];
 
 export const theme: MantineThemeOverride = {
@@ -111,10 +72,7 @@ export const theme: MantineThemeOverride = {
   },
   colors: {
     green,
-    gray,
-    darkblue,
-    lightgreen,
-    verylightgreen
+    gray
   },
   primaryColor: 'green'
 };
@@ -153,7 +111,7 @@ export default async function RootLayout({
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ColorSchemeScript defaultColorScheme="light" />
             <MantineProvider defaultColorScheme="light" theme={theme}>
-              <AppShell bg="verylightgreen">
+              <AppShell bg="var(--mantine-primary-color-1)">
                 <AppShellHeader bg="transparent" withBorder={false}>
                   <HeaderMenu />
                 </AppShellHeader>

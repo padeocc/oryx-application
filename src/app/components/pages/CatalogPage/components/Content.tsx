@@ -6,25 +6,30 @@ import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useEffect, useRef, useState } from 'react';
 import { Filters, Service } from '..';
 import FinderPage from '../../FinderPage';
+import { Category } from '../utils';
 import FiltersComponent from './Filters';
 import ServiceCard from './ServiceCard';
 
 const Content = ({
   fetchActions,
   data: initialData,
-  themes,
-  showAssistant = false
+  subjects = [],
+  showAssistant = false,
+  categories = []
 }: {
   fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
-  themes?: Theme[];
+  subjects?: Theme[];
   showAssistant?: boolean;
+  categories: Category[];
 }) => {
   const [data, setData] = useState<Service[]>(initialData);
-  const [filters, setFilters] = useState<Filters>({ subjects: themes ? themes : [], categories: [] });
+  const [filters, setFilters] = useState<Filters>({
+    subjects,
+    categories: categories.map(c => c.code)
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [opened, setOpened] = useState<boolean>(showAssistant);
-
   const firstFetch = useRef(true);
 
   /* Only when filters change*/
@@ -45,53 +50,21 @@ const Content = ({
 
   return (
     <>
-      <Grid>
-        <GridCol span={{ base: 12, sm: 5, md: 4 }}>
-          <Title order={2}>{loading ? <Loader size={'xs'} /> : `${data.length} inspirations trouvées`}</Title>
-          {/* <Group align="top">
-            <Button
-              size="md"
-              color="orange"
-              variant="transparent"
-              m="0"
-              p="0"
-              onClick={e => {
-                e.preventDefault();
-                setOpened(!opened);
-              }}
-              leftSection={<MagicWand size="16" />}>
-              Rechercher
-            </Button>
-            <Button
-              m="0"
-              p="0"
-              size="md"
-              variant="transparent"
-              onClick={_e => {
-                setFilters({ categories: [], subjects: [] });
-                redirect('/fr');
-              }}>
-              Voir toutes les actions
-            </Button>
-          </Group> */}
-        </GridCol>
-        <GridCol span={{ base: 12, sm: 7, md: 8 }} pt="0">
-          <FiltersComponent
-            loading={loading}
-            filters={filters}
-            handleSubmit={values => {
-              setFilters(values);
-            }}
-          />
-        </GridCol>
-      </Grid>
+      <FiltersComponent
+        itemsCount={data.length}
+        loading={loading}
+        filters={filters}
+        handleSubmit={values => {
+          setFilters(values);
+        }}
+      />
       <Grid justify="space-between" align="top" mt="lg">
         {loading ? (
           <Loader />
         ) : (
           data.map((service, index) => (
             <GridCol span={{ base: 12, sm: 6, md: 4, xl: 3 }} key={`action-${service.title}-${index}`}>
-              <ServiceCard service={service} backgroundColor={'lightgreen'} />
+              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} />
             </GridCol>
           ))
         )}

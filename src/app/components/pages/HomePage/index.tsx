@@ -13,16 +13,16 @@ const HomePage = async ({}: {}) => {
   });
 
   return (
-    <Stack gap={'xl'} align="center" pl="xl" pr="xl">
+    <Stack gap={'xl'} align="center">
       <Grid justify="center" w="100%" align="center">
-        <GridCol span={{ base: 0, sm: 2 }} ta="center" visibleFrom="sm">
+        <GridCol span={{ base: 0, md: 2 }} ta="center" visibleFrom="md">
           <Stack gap={'xl'}>
             <PottedPlant size={80} style={{ color: 'var(--mantine-color-green-text)' }} />
             <Carrot size={80} style={{ color: 'var(--mantine-color-orange-text)' }} weight="fill" />
           </Stack>
         </GridCol>
-        <GridCol span={{ base: 12, sm: 10 }}>
-          <Card c="darkblue" bg={'lightgreen'}>
+        <GridCol span={{ base: 12, md: 10 }}>
+          <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
             <Stack gap={'lg'}>
               <Title order={1}>
                 <Text fz={'inherit'}>Bienvenue sur le compagnon des initiatives écoresponsables&nbsp;!</Text>
@@ -35,7 +35,11 @@ const HomePage = async ({}: {}) => {
                 Vous pourrez les sauvegarder (<BookmarkSimple />) sur votre compte afin d&lsquo;être tenu-e informé-e
                 des nouveautés, et faire des retours au sein des communautés.
               </Text>
-              <Button color="darkblue" w="100%" component={Link} href="/fr/actions?assistant=true">
+              <Button
+                color="var(--mantine-color-dark-outline)"
+                w="100%"
+                component={Link}
+                href="/fr/actions?assistant=true">
                 Trouver l&lsquo;inspiration
               </Button>
             </Stack>
@@ -54,19 +58,19 @@ const HomePage = async ({}: {}) => {
                 <Stack>
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[0]}
                     link="/fr/actions/transport"
                   />
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[1]}
                     link="/fr/actions/transport"
                   />
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[2]}
                     link="/fr/actions/transport"
                   />
@@ -76,19 +80,19 @@ const HomePage = async ({}: {}) => {
                 <Stack>
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[3]}
                     link="/fr/actions/transport"
                   />
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[4]}
                     link="/fr/actions/transport"
                   />
                   <ServiceCard
                     noImage
-                    backgroundColor={'lightgreen'}
+                    backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[5]}
                     link="/fr/actions/transport"
                   />

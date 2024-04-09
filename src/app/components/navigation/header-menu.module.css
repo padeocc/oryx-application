@@ -2,5 +2,5 @@
   background-image: url('/header-background6.svg');
   background-size: cover;
   background-position-y: center;
-  background-color: var(--mantine-color-verylightgreen-text);
+  background-color: var(--mantine-primary-color-1);
 }
