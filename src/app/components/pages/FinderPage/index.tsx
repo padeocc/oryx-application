@@ -1,13 +1,13 @@
-'use client';
-
 import { Filters } from '@/components/pages/CatalogPage';
 import subjects from '@/data/subjects.json';
 import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/pages/CatalogPage/utils';
 import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
+  const t = useTranslations('finder_page');
   const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
   const form = useForm({
     initialValues: filters
@@ -55,7 +55,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
             </Card>
             {selectedSubjects?.length ? (
               <Card>
-                <Title order={2}>Quels sont les sujets qui vous intéressent&nbsp;?</Title>
+                <Title order={2}>{t('interested_subjects')}</Title>
                 <CheckboxGroup
                   onChange={categories => form.setFieldValue('categories', categories)}
                   value={selectedCategories}>
@@ -79,10 +79,10 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
         {selectedSubjects?.length || selectedCategories?.length ? (
           <GridCol span={{ base: 12, sm: 6 }}>
             <Card>
-              <Title order={2}>Récapitulatif</Title>
+              <Title order={2}>{t('summary')}</Title>
               <Stack gap="xl" pt="xl">
                 <Stack gap="xs">
-                  {selectedSubjects?.length ? <Title order={3}>Thèmes</Title> : null}
+                  {selectedSubjects?.length ? <Title order={3}>{t('themes')}</Title> : null}
                   <Group gap="xs">
                     {selectedSubjects?.map(subject => (
                       <Badge key={`tag-${subject}`}>{getSubjetLabel(subject)}</Badge>
@@ -90,7 +90,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                   </Group>
                 </Stack>
                 <Stack gap="xs">
-                  {selectedCategories?.length ? <Title order={3}>Sujets</Title> : null}
+                  {selectedCategories?.length ? <Title order={3}>{t('subjects')}</Title> : null}
                   <Group gap="xs">
                     {selectedCategories?.map(category => (
                       <Badge key={`tag-${category}`}>{getCategoryLabel(category)}</Badge>
@@ -98,7 +98,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                   </Group>
                 </Stack>
                 <Button size="xl" type="submit" disabled={!selectedCategories?.length}>
-                  Valider les choix
+                  {t('validate')}
                 </Button>
               </Stack>
             </Card>

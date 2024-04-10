@@ -1,10 +1,14 @@
+'use client';
+
 import AuthButton from '@/components/auth/Button';
-import { items } from '@/components/navigation/items';
 import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { getNavigationItems } from './items';
 
 const HeaderMenuMobile = () => {
+  const t = useTranslations('navigation_items');
   return (
     <Menu shadow="md">
       <MenuTarget>
@@ -13,7 +17,7 @@ const HeaderMenuMobile = () => {
         </Container>
       </MenuTarget>
       <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
-        {items.map((itemsGroup, itemgroupindex) => (
+        {getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
           <>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
               const others = isExternal ? { target: '_blank' } : {};

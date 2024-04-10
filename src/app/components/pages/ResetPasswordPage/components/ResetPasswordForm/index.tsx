@@ -2,13 +2,15 @@
 
 import { Button, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import { sendPasswordResetEmail } from 'supertokens-web-js/recipe/emailpassword';
 
 const PasswordReminderFormPage = () => {
-  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const t = useTranslations('password_reminder_page');
 
   const form = useForm({
     initialValues: {
@@ -22,7 +24,7 @@ const PasswordReminderFormPage = () => {
   return (
     <form
       onSubmit={form.onSubmit(async values => {
-        setIsloading(true);
+        setIsLoading(true);
         try {
           let response = await sendPasswordResetEmail({
             formFields: [
@@ -40,21 +42,26 @@ const PasswordReminderFormPage = () => {
             throw { message: response.status };
           }
         } catch (err: any) {
-          setIsloading(false);
+          setIsLoading(false);
           setError(err?.message || 'Unknown');
         }
       })}>
-      <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
+      <TextInput
+        withAsterisk
+        label={t('email_address')}
+        placeholder={t('email_placeholder')}
+        {...form.getInputProps('email')}
+      />
 
       <Group justify="flex-end" mt="md">
         <Button variant="outline" loading={isLoading} component={Link} href="/fr/login">
-          Se connecter
+          {t('login')}
         </Button>
         <Button variant="outline" loading={isLoading}>
-          S&lsquo;inscrire
+          {t('signup')}
         </Button>
         <Button type="submit" loading={isLoading}>
-          Rappeler son mot de passe
+          {t('reset_password')}
         </Button>
       </Group>
       {error ? <Text c="red">{error}</Text> : null}

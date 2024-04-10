@@ -4,6 +4,7 @@ import { getCategoriesFromSubjects, getSubjetLabel } from '@/pages/CatalogPage/u
 import { Chip, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { PottedPlant } from '@phosphor-icons/react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
@@ -30,6 +31,7 @@ const FiltersComponent = ({
   handleSubmit: (values: Filters) => void;
   itemsCount: number;
 }) => {
+  const t = useTranslations('filters_component');
   const form = useForm({
     initialValues: filters
   });
@@ -74,7 +76,7 @@ const FiltersComponent = ({
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <Grid justify="flex-start">
-            <Title order={2}>{loading ? '' : `${itemsCount} inspirations trouvées`}</Title>
+            <Title order={2}>{loading ? '' : `${itemsCount} ${t('inspirations_found')}`}</Title>
           </Grid>
         </GridCol>
         {categories.length > 0 ? (

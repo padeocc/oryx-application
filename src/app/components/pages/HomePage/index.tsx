@@ -2,12 +2,15 @@ import { fetchActions } from '@/pages/CatalogPage';
 import ServiceCard from '@/pages/CatalogPage/components/ServiceCard';
 import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
 import { BookmarkSimple, PottedPlant } from '@phosphor-icons/react/dist/ssr';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
 const HomePage = async ({}: {}) => {
+  const t = await getTranslations('home_page');
+
   const actions = await fetchActions({
     filters: {
-      subjects: ['transport'],
+      subjects: [],
       categories: []
     }
   });
@@ -15,34 +18,25 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'} align="center">
       <Grid justify="center" w="100%" align="center">
-        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md">
-          {/* <Stack gap={'xl'}>
-            <PottedPlant size={80} style={{ color: 'var(--mantine-color-green-text)' }} />
-            <Carrot size={80} style={{ color: 'var(--mantine-color-orange-text)' }} weight="fill" />
-          </Stack> */}
-        </GridCol>
+        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
         <GridCol span={{ base: 12, md: 10 }}>
           <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
             <Stack gap={'lg'}>
               <Title order={1}>
                 <Text fz={'inherit'}>
-                  Bienvenue sur le compagnon des initiatives écoresponsables&nbsp;! <PottedPlant size={40} />
+                  {t('welcome')} <PottedPlant size={40} />
                 </Text>
               </Title>
+              <Text>{t('guide')}</Text>
               <Text>
-                Vous serez guidé-e selon vos centres d&lsquo;intérêts vers des services et des actions que vous pourrez
-                vous approprier.
-              </Text>
-              <Text>
-                Vous pourrez les sauvegarder (<BookmarkSimple />) sur votre compte afin d&lsquo;être tenu-e informé-e
-                des nouveautés, et faire des retours au sein des communautés.
+                {t('save_actions')} (<BookmarkSimple />) {t('account')} {t('be_informed')}
               </Text>
               <Button
                 color="var(--mantine-color-dark-outline)"
                 w="100%"
                 component={Link}
                 href="/fr/actions?assistant=true">
-                Trouver l&lsquo;inspiration
+                {t('find_inspiration')}
               </Button>
             </Stack>
           </Card>
@@ -54,7 +48,7 @@ const HomePage = async ({}: {}) => {
         <GridCol span={{ base: 12 }}>
           <Stack gap={'lg'}>
             <Title order={2} ta="center" size={'3em'}>
-              Découvrez les actions qui vous conviennent&nbsp;!
+              {t('discover_actions')}
             </Title>
             <Grid>
               <GridCol span={{ base: 12, md: 6 }}>
@@ -101,15 +95,6 @@ const HomePage = async ({}: {}) => {
                   />
                 </Stack>
               </GridCol>
-              {/* <GridCol span={{ base: 12, md: 2 }} ta={'center'} visibleFrom="md">
-                <Flex align={'center'} h={'100%'} justify="center">
-                  <Stack gap={'lg'}>
-                    <Plant size={120} style={{ color: 'var(--mantine-color-green-text)' }} />
-                    <FlowerLotus size={120} style={{ color: 'var(--mantine-color-green-text)' }} />
-                    <Tree size={120} style={{ color: 'var(--mantine-color-green-text)' }} />
-                  </Stack>
-                </Flex>
-              </GridCol> */}
             </Grid>
           </Stack>
         </GridCol>

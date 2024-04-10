@@ -2,6 +2,7 @@
 
 import { Button, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signIn } from 'supertokens-web-js/recipe/emailpassword';
@@ -19,7 +20,7 @@ const LoginFormPage = () => {
     }
   });
 
-  //fakace@mailinator.com
+  const t = useTranslations('login_form_page');
 
   return (
     <form
@@ -41,25 +42,29 @@ const LoginFormPage = () => {
           if (response.status === 'OK') {
             window.location.replace('/');
           } else {
-            // TODO translate
             throw { message: response.status };
           }
         } catch (err: any) {
           setIsloading(false);
-          setError(err?.message || 'Unknown');
+          setError(err?.message || t('unknown_error')); // Use translated error message
         }
       })}>
-      <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
-      <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
+      <TextInput
+        withAsterisk
+        label={t('email_address')}
+        placeholder="your@email.com"
+        {...form.getInputProps('email')}
+      />
+      <TextInput withAsterisk label={t('password')} type="password" {...form.getInputProps('password')} />
       <Group justify="flex-end" mt="md">
         <Button variant="outline" loading={isLoading} component={Link} href="/fr/signup/reset-password">
-          Rappeler son mot de passe
+          {t('forgot_password')}
         </Button>
         <Button variant="outline" loading={isLoading} component={Link} href="/fr/signup">
-          S&lsquo;inscrire
+          {t('signup')}
         </Button>
         <Button type="submit" loading={isLoading}>
-          Se connecter
+          {t('login')}
         </Button>
       </Group>
       {error ? <Text c="red">{error}</Text> : null}

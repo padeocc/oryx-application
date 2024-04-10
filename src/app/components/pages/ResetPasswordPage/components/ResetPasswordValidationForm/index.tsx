@@ -2,12 +2,14 @@
 
 import { Button, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { submitNewPassword } from 'supertokens-web-js/recipe/emailpassword';
 
 const PasswordReminderValidationFormPage = () => {
-  const [isLoading, setIsloading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const t = useTranslations('password_reminder_validation_page');
 
   const form = useForm({
     initialValues: {
@@ -19,7 +21,7 @@ const PasswordReminderValidationFormPage = () => {
   return (
     <form
       onSubmit={form.onSubmit(async values => {
-        setIsloading(true);
+        setIsLoading(true);
         try {
           let response = await submitNewPassword({
             formFields: [
@@ -37,15 +39,15 @@ const PasswordReminderValidationFormPage = () => {
             throw { message: response.status };
           }
         } catch (err: any) {
-          setIsloading(false);
+          setIsLoading(false);
           setError(err?.message || 'Unknown');
         }
       })}>
-      <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
+      <TextInput withAsterisk label={t('password')} type="password" {...form.getInputProps('password')} />
 
       <Group justify="flex-end" mt="md">
         <Button type="submit" loading={isLoading}>
-          Réinitialiser
+          {t('reset')}
         </Button>
       </Group>
       {error ? <Text c="red">{error}</Text> : null}

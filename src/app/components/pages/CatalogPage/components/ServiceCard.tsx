@@ -16,6 +16,7 @@ import {
   Text,
   Title
 } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 const ServiceCard = ({
@@ -29,6 +30,8 @@ const ServiceCard = ({
   backgroundColor?: StyleProp<DefaultMantineColor>;
   link?: string;
 }) => {
+  const t = useTranslations('service_card');
+
   return (
     <Card h={'100%'} bg={backgroundColor}>
       {!noImage ? (
@@ -75,7 +78,7 @@ const ServiceCard = ({
             w={'100%'}
             component={Link}
             href={link ? link : '/fr/action'}>
-            Voir plus
+            {t('see_more')}
           </Button>
         </CardSection>
       </Stack>

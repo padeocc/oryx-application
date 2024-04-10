@@ -1,10 +1,14 @@
+'use client';
+
 import AuthButton from '@/components/auth/Button';
-import { items } from '@/components/navigation/items';
 import { Button, Container, Group } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { getNavigationItems } from './items';
 
 const HeaderMenuDesktop = () => {
-  const elements = items.map((itemsGroup, itemgroupindex) => (
+  const t = useTranslations('navigation_items');
+  const elements = getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
     <Group key={`group-${itemgroupindex}`} justify="space-between">
       {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
         const others = isExternal ? { target: '_blank' } : {};
@@ -30,7 +34,7 @@ const HeaderMenuDesktop = () => {
     </Container>
   );
 
-  return elements;
+  return <Group>{elements}</Group>;
 };
 
 export default HeaderMenuDesktop;

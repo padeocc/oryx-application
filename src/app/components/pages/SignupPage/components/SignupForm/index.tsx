@@ -3,6 +3,7 @@
 import TermsConditionsButton from '@/components/TermsConditionsButton';
 import { Button, Checkbox, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signUp } from 'supertokens-web-js/recipe/emailpassword';
@@ -10,7 +11,6 @@ import { signUp } from 'supertokens-web-js/recipe/emailpassword';
 const SignupFormPage = () => {
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-
   const form = useForm({
     initialValues: {
       email: '',
@@ -21,6 +21,8 @@ const SignupFormPage = () => {
       email: value => (/^\S+@\S+$/.test(value) ? null : 'Invalid email')
     }
   });
+
+  const t = useTranslations('signup_form_page');
 
   return (
     <form
@@ -51,23 +53,23 @@ const SignupFormPage = () => {
           setError(err?.message || 'Unknown');
         }
       })}>
-      <TextInput withAsterisk label="Adresse email" placeholder="your@email.com" {...form.getInputProps('email')} />
-      <TextInput withAsterisk label="Mot de passe" type="password" {...form.getInputProps('password')} />
+      <TextInput withAsterisk label={t('email_label')} placeholder="your@email.com" {...form.getInputProps('email')} />
+      <TextInput withAsterisk label={t('password_label')} type="password" {...form.getInputProps('password')} />
       <Checkbox
         mt="md"
         label={
           <Group>
-            Je suis d&lsquo;accord avec les conditions d&lsquo;inscription <TermsConditionsButton label="(Lire)" />
+            {t('terms_of_service_text')} <TermsConditionsButton label={t('terms_conditions_button_label')} />
           </Group>
         }
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
       <Group justify="flex-end" mt="md">
         <Button variant="outline" loading={isLoading} component={Link} href="/fr/login">
-          Se connecter
+          {t('login_button_label')}
         </Button>
         <Button type="submit" loading={isLoading}>
-          S&lsquo;inscrire
+          {t('signup_button_label')}
         </Button>
       </Group>
       {error ? <Text c="red">{error}</Text> : null}

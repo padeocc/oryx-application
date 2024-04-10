@@ -1,12 +1,16 @@
 import { Alert } from '@mantine/core';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
 const ActionPage = async ({}: {}) => {
+  const t = await getTranslations('action_page');
+
   return (
     <Alert color="orange">
-      Bientôt disponible !<br />
+      {t('coming_soon')}
       <br />
-      <Link href="/fr/">Retour</Link>
+      <br />
+      <Link href="/fr/">{t('back')}</Link>
     </Alert>
   );
 };

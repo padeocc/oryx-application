@@ -8,6 +8,7 @@ import { Category } from '@/pages/CatalogPage/utils';
 import FinderPage from '@/pages/FinderPage';
 import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 const Content = ({
@@ -23,6 +24,7 @@ const Content = ({
   showAssistant?: boolean;
   categories: Category[];
 }) => {
+  const t = useTranslations('content');
   const [data, setData] = useState<Service[]>(initialData);
   const [filters, setFilters] = useState<Filters>({
     subjects,
@@ -70,19 +72,15 @@ const Content = ({
         )}
         {!loading && data.length === 0 ? (
           <GridCol span={{ base: 12 }} key={`action-empty`}>
-            <Alert
-              variant="outline"
-              color="orange"
-              title="Pas de résultat pour cette recherche !"
-              icon={<SmileyMeh size={30} />}>
-              <Text>Vous voulez ajouter une initiative ? Contactez-nous !</Text>
+            <Alert variant="outline" color="orange" title={t('no_results')} icon={<SmileyMeh size={30} />}>
+              <Text>{t('contact_us')}</Text>
             </Alert>
           </GridCol>
         ) : null}
       </Grid>
       <Modal
         opened={opened}
-        title={<Title order={2}>Choisir un thème !</Title>}
+        title={<Title order={2}>{t('choose_theme')}</Title>}
         size={'xl'}
         onClose={() => {
           setOpened(false);
