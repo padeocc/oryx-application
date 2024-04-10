@@ -1,4 +1,4 @@
-import { Theme } from '@/app/[locale]/actions/[theme]/page';
+import { Theme } from '@/config';
 import demoServices from '@/data/actions.json';
 import intersection from 'lodash/intersection';
 import uniq from 'lodash/uniq';

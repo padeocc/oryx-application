@@ -1,11 +1,11 @@
 'use client';
 
+import { Filters } from '@/components/pages/CatalogPage';
 import subjects from '@/data/subjects.json';
+import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/pages/CatalogPage/utils';
 import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
-import { Filters } from '../CatalogPage';
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '../CatalogPage/utils';
 
 const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit: (values: Filters) => void }) => {
   const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);

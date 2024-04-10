@@ -1,15 +1,9 @@
-import LoginFormPage from '@/pages/LoginFormPage';
-import { Card, Stack, Title } from '@mantine/core';
+import LoginPage from '@/app/components/pages/LoginPage';
 
-export default function Home() {
+export default function Login() {
   return (
     <main>
-      <Card color={'white'} maw={840} mx="auto">
-        <Stack gap={'lg'}>
-          <Title order={2}>Se connecter</Title>
-          <LoginFormPage />
-        </Stack>
-      </Card>
+      <LoginPage />
     </main>
   );
 }

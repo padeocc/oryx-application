@@ -1,8 +1,8 @@
-import { Button, Card, Flex, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
-import { BookmarkSimple, Carrot, FlowerLotus, Plant, PottedPlant, Tree } from '@phosphor-icons/react/dist/ssr';
+import { fetchActions } from '@/pages/CatalogPage';
+import ServiceCard from '@/pages/CatalogPage/components/ServiceCard';
+import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
+import { BookmarkSimple, PottedPlant } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
-import { fetchActions } from '../CatalogPage';
-import ServiceCard from '../CatalogPage/components/ServiceCard';
 
 const HomePage = async ({}: {}) => {
   const actions = await fetchActions({
@@ -15,17 +15,19 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'} align="center">
       <Grid justify="center" w="100%" align="center">
-        <GridCol span={{ base: 0, md: 2 }} ta="center" visibleFrom="md">
-          <Stack gap={'xl'}>
+        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md">
+          {/* <Stack gap={'xl'}>
             <PottedPlant size={80} style={{ color: 'var(--mantine-color-green-text)' }} />
             <Carrot size={80} style={{ color: 'var(--mantine-color-orange-text)' }} weight="fill" />
-          </Stack>
+          </Stack> */}
         </GridCol>
         <GridCol span={{ base: 12, md: 10 }}>
           <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
             <Stack gap={'lg'}>
               <Title order={1}>
-                <Text fz={'inherit'}>Bienvenue sur le compagnon des initiatives écoresponsables&nbsp;!</Text>
+                <Text fz={'inherit'}>
+                  Bienvenue sur le compagnon des initiatives écoresponsables&nbsp;! <PottedPlant size={40} />
+                </Text>
               </Title>
               <Text>
                 Vous serez guidé-e selon vos centres d&lsquo;intérêts vers des services et des actions que vous pourrez
@@ -45,6 +47,7 @@ const HomePage = async ({}: {}) => {
             </Stack>
           </Card>
         </GridCol>
+        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
       </Grid>
       <Space />
       <Grid justify="center" w="100%">
@@ -54,7 +57,7 @@ const HomePage = async ({}: {}) => {
               Découvrez les actions qui vous conviennent&nbsp;!
             </Title>
             <Grid>
-              <GridCol span={{ base: 12, md: 5 }}>
+              <GridCol span={{ base: 12, md: 6 }}>
                 <Stack>
                   <ServiceCard
                     noImage
@@ -76,7 +79,7 @@ const HomePage = async ({}: {}) => {
                   />
                 </Stack>
               </GridCol>
-              <GridCol span={{ base: 12, md: 5 }}>
+              <GridCol span={{ base: 12, md: 6 }}>
                 <Stack>
                   <ServiceCard
                     noImage
@@ -98,7 +101,7 @@ const HomePage = async ({}: {}) => {
                   />
                 </Stack>
               </GridCol>
-              <GridCol span={{ base: 12, md: 2 }} ta={'center'} visibleFrom="md">
+              {/* <GridCol span={{ base: 12, md: 2 }} ta={'center'} visibleFrom="md">
                 <Flex align={'center'} h={'100%'} justify="center">
                   <Stack gap={'lg'}>
                     <Plant size={120} style={{ color: 'var(--mantine-color-green-text)' }} />
@@ -106,7 +109,7 @@ const HomePage = async ({}: {}) => {
                     <Tree size={120} style={{ color: 'var(--mantine-color-green-text)' }} />
                   </Stack>
                 </Flex>
-              </GridCol>
+              </GridCol> */}
             </Grid>
           </Stack>
         </GridCol>

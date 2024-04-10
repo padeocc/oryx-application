@@ -1,14 +1,14 @@
 'use client';
 
-import { Theme } from '@/app/[locale]/actions/[theme]/page';
+import { Theme } from '@/config';
+import { Filters, Service } from '@/pages/CatalogPage';
+import FiltersComponent from '@/pages/CatalogPage/components/Filters';
+import ServiceCard from '@/pages/CatalogPage/components/ServiceCard';
+import { Category } from '@/pages/CatalogPage/utils';
+import FinderPage from '@/pages/FinderPage';
 import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useEffect, useRef, useState } from 'react';
-import { Filters, Service } from '..';
-import FinderPage from '../../FinderPage';
-import { Category } from '../utils';
-import FiltersComponent from './Filters';
-import ServiceCard from './ServiceCard';
 
 const Content = ({
   fetchActions,
@@ -63,7 +63,7 @@ const Content = ({
           <Loader />
         ) : (
           data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4, xl: 3 }} key={`action-${service.title}-${index}`}>
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>
               <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} />
             </GridCol>
           ))

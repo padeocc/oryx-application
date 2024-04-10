@@ -1,43 +1,18 @@
-import { Theme } from '@/app/[locale]/actions/[theme]/page';
-import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
+import { Theme, themesIcons } from '@/config';
+import { Filters } from '@/pages/CatalogPage';
+import { getCategoriesFromSubjects, getSubjetLabel } from '@/pages/CatalogPage/utils';
+import { Chip, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import {
-  Basketball,
-  BowlFood,
-  Butterfly,
-  CalendarDots,
-  CallBell,
-  CreditCard,
-  House,
-  Pants,
-  PottedPlant,
-  Recycle,
-  Scooter
-} from '@phosphor-icons/react/dist/ssr';
+import { PottedPlant } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { Filters } from '..';
-import { getCategoriesFromSubjects, getSubjetLabel } from '../utils';
-
-const themesIcons = {
-  transport: Scooter,
-  eating: BowlFood,
-  housing: House,
-  goods: Basketball,
-  services: CallBell,
-  eventformationinfluence: CalendarDots,
-  finance: CreditCard,
-  lifestyle: Pants,
-  pollution: Recycle,
-  biodiversity: Butterfly
-};
 
 const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
   const Icon = themesIcons?.[theme] || PottedPlant;
   return (
     <Icon
       size={30}
-      color={selected ? 'gray' : 'lightgray'}
+      color={selected ? 'var(--mantine-primary-color-8)' : 'lightgray'}
       style={{ cursor: 'pointer' }}
       weight={selected ? 'fill' : 'regular'}
     />
@@ -70,12 +45,16 @@ const FiltersComponent = ({
   const options = Object.keys(themesIcons).map(item => (
     <GridCol key={`select-theme-${item}`} span={{ base: 2, md: 'auto' }}>
       <Link href={`/fr/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-        <Stack align="center">
+        <Stack align="center" gap={'xs'}>
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
           <Text
             fz="xs"
             ta="center"
-            c={selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0 ? '#808080' : 'lightgray'}>
+            c={
+              selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0
+                ? 'var(--mantine-primary-color-8)'
+                : 'lightgray'
+            }>
             {getSubjetLabel(item)}
           </Text>
         </Stack>
@@ -95,7 +74,7 @@ const FiltersComponent = ({
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <Grid justify="flex-start">
-            <Title order={2}>{loading ? <Loader size={'xs'} /> : `${itemsCount} inspirations trouvées`}</Title>
+            <Title order={2}>{loading ? '' : `${itemsCount} inspirations trouvées`}</Title>
           </Grid>
         </GridCol>
         {categories.length > 0 ? (

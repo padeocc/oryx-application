@@ -1,18 +1,14 @@
-import ResetPasswordFormPage from '@/app/components/pages/ResetPasswordFormPage';
-import ResetPasswordValidationFormPage from '@/app/components/pages/ResetPasswordValidationFormPage';
-import { Card, Stack, Title } from '@mantine/core';
+import ResetPasswordPage from '@/app/components/pages/ResetPasswordPage';
 
-export default function PasswordReminder({ searchParams }: { searchParams: { token: string } }) {
+export default function ResetPassword({ searchParams }: { searchParams: { token: string } }) {
   const { token } = searchParams;
-
   return (
     <main>
-      <Card color={'white'} maw={840} mx="auto">
-        <Stack gap={'lg'}>
-          <Title order={2}>Réinitialiser son mot de passe</Title>
-          {token ? <ResetPasswordValidationFormPage /> : <ResetPasswordFormPage />}
-        </Stack>
-      </Card>
+      <ResetPasswordPage
+        searchParams={{
+          token
+        }}
+      />
     </main>
   );
 }

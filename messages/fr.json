@@ -1,1 +1,27 @@
-{}
+{
+  "auth_button": {
+    "login": {
+      "connect": "Se connecter",
+      "disconnect": "Se déconnecter"
+    }
+  },
+
+  "navigation_items": {
+    "actions": [
+      {
+        "name": "Trouver une action",
+        "href": "/fr/actions"
+      },
+      {
+        "name": "Voir mes actions",
+        "href": "/fr/actions/user"
+      }
+    ],
+    "donate": [
+      {
+        "name": "Faire un don",
+        "href": "https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie"
+      }
+    ]
+  }
+}

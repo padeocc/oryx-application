@@ -2,6 +2,7 @@
 
 import { getFrontendAuthConfig } from '@/app/config/frontend';
 import { Button, Stack, Text } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
   const router = useRouter();
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isLoading, setIsloading] = useState<boolean>(true);
+  const t = useTranslations('auth_button');
 
   useEffect(() => {
     setIsloading(true);
@@ -38,7 +40,7 @@ const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
 
   return isLoading ? (
     <Button loading color={'var(--mantine-color-dark-outline)'}>
-      Se connecter
+      {t('login.connect')}
     </Button>
   ) : !!user ? (
     <Stack gap={0} ta="right">
@@ -57,20 +59,20 @@ const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
           window.location.reload();
         }}>
         <Text c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'} fz={'xs'}>
-          Se déconnecter
+          {t('login.disconnect')}
         </Text>
       </Link>
     </Stack>
   ) : type === 'button' ? (
     <Button component={Link} href="/fr/login" color={'var(--mantine-color-dark-outline)'}>
-      Se connecter
+      {t('login.connect')}
     </Button>
   ) : (
     <Link
       href="/fr/login"
       color={'var(--mantine-color-dark-outline)'}
       style={{ color: 'inherit', textDecoration: 'none' }}>
-      Se connecter
+      {t('login.connect')}
     </Link>
   );
 };

@@ -1,7 +1,7 @@
+import AuthButton from '@/components/auth/Button';
+import { items } from '@/components/navigation/items';
 import { Button, Container, Group } from '@mantine/core';
 import Link from 'next/link';
-import AuthButton from '../auth/Button';
-import { items } from './items';
 
 const HeaderMenuDesktop = () => {
   const elements = items.map((itemsGroup, itemgroupindex) => (

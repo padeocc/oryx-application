@@ -1,8 +1,8 @@
+import AuthButton from '@/components/auth/Button';
+import { items } from '@/components/navigation/items';
 import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
-import AuthButton from '../auth/Button';
-import { items } from './items';
 
 const HeaderMenuMobile = () => {
   return (

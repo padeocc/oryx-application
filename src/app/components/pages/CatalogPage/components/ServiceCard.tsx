@@ -1,3 +1,6 @@
+import Bookmark from '@/components/pages/CatalogPage/components/Bookmark';
+import { Service } from '@/pages/CatalogPage';
+import { getCategoryLabel } from '@/pages/CatalogPage/utils';
 import {
   Badge,
   Button,
@@ -14,9 +17,6 @@ import {
   Title
 } from '@mantine/core';
 import Link from 'next/link';
-import { Service } from '..';
-import Bookmark from '../components/Bookmark';
-import { getCategoryLabel } from '../utils';
 
 const ServiceCard = ({
   service,
@@ -33,31 +33,33 @@ const ServiceCard = ({
     <Card h={'100%'} bg={backgroundColor}>
       {!noImage ? (
         <CardSection>
-          <Image src={service?.logo || `/service-image.jpg`} alt={service.title} height={100} />
+          <Image src={service?.logo || `/default-service-image.jpg`} alt={service.title} height={100} />
         </CardSection>
       ) : null}
       <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
         <Stack>
-          <Group gap={'xs'}>
-            {service.tags.map(tag => (
-              <Badge
-                key={`tag-${tag}`}
-                size="sm"
-                variant="outline"
-                color="var(--mantine-color-dark-outline)"
-                bg="white">
-                {getCategoryLabel(tag)}
-              </Badge>
-            ))}
-          </Group>
           <Grid>
-            <GridCol span={{ base: 10, sm: 10 }}>
+            <GridCol span={{ base: 10 }} ta={'right'} pt={'sm'}>
+              <Group gap={'xs'}>
+                {service.tags.map(tag => (
+                  <Badge
+                    key={`tag-${tag}`}
+                    size="sm"
+                    variant="outline"
+                    color="var(--mantine-color-dark-outline)"
+                    bg="white">
+                    {getCategoryLabel(tag)}
+                  </Badge>
+                ))}
+              </Group>
+            </GridCol>
+            <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
+              <Bookmark actionId={service.title} />
+            </GridCol>
+            <GridCol span={{ base: 12 }}>
               <Title order={3} c="orange">
                 {service.title}
               </Title>
-            </GridCol>
-            <GridCol span={{ base: 2, sm: 2 }} ta={'right'} pt={'sm'}>
-              <Bookmark actionId={service.title} />
             </GridCol>
           </Grid>
 
