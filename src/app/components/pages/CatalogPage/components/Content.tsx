@@ -62,7 +62,9 @@ const Content = ({
       />
       <Grid justify="space-between" align="top" mt="lg">
         {loading ? (
-          <Loader />
+          <GridCol span={{ base: 12 }} ta="center" p="xl">
+            <Loader />
+          </GridCol>
         ) : (
           data.map((service, index) => (
             <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>

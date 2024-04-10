@@ -64,14 +64,11 @@ const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
       </Link>
     </Stack>
   ) : type === 'button' ? (
-    <Button component={Link} href="/fr/login" color={'var(--mantine-color-dark-outline)'}>
+    <Button component={Link} href="login" color={'var(--mantine-color-dark-outline)'}>
       {t('login.connect')}
     </Button>
   ) : (
-    <Link
-      href="/fr/login"
-      color={'var(--mantine-color-dark-outline)'}
-      style={{ color: 'inherit', textDecoration: 'none' }}>
+    <Link href="login" color={'var(--mantine-color-dark-outline)'} style={{ color: 'inherit', textDecoration: 'none' }}>
       {t('login.connect')}
     </Link>
   );

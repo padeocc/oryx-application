@@ -29,6 +29,10 @@ const SignupFormPage = () => {
       onSubmit={form.onSubmit(async values => {
         setIsloading(true);
         try {
+          if (values.termsOfService !== true) {
+            throw { message: 'termsOfServicesNotChecked' };
+          }
+
           const response = await signUp({
             formFields: [
               {
@@ -65,7 +69,7 @@ const SignupFormPage = () => {
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" loading={isLoading} component={Link} href="/fr/login">
+        <Button variant="outline" loading={isLoading} component={Link} href="login">
           {t('login_button_label')}
         </Button>
         <Button type="submit" loading={isLoading}>

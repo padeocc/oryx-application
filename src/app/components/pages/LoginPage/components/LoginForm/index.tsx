@@ -57,10 +57,10 @@ const LoginFormPage = () => {
       />
       <TextInput withAsterisk label={t('password')} type="password" {...form.getInputProps('password')} />
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" loading={isLoading} component={Link} href="/fr/signup/reset-password">
+        <Button variant="outline" loading={isLoading} component={Link} href="signup/reset-password">
           {t('forgot_password')}
         </Button>
-        <Button variant="outline" loading={isLoading} component={Link} href="/fr/signup">
+        <Button variant="outline" loading={isLoading} component={Link} href="signup">
           {t('signup')}
         </Button>
         <Button type="submit" loading={isLoading}>

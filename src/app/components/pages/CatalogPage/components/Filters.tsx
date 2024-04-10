@@ -1,7 +1,7 @@
 import { Theme, themesIcons } from '@/config';
 import { Filters } from '@/pages/CatalogPage';
 import { getCategoriesFromSubjects, getSubjetLabel } from '@/pages/CatalogPage/utils';
-import { Chip, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
+import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { PottedPlant } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
@@ -46,7 +46,7 @@ const FiltersComponent = ({
 
   const options = Object.keys(themesIcons).map(item => (
     <GridCol key={`select-theme-${item}`} span={{ base: 2, md: 'auto' }}>
-      <Link href={`/fr/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+      <Link href={`actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         <Stack align="center" gap={'xs'}>
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
           <Text
@@ -74,10 +74,12 @@ const FiltersComponent = ({
         <GridCol span={{ base: 12 }}>
           <Grid justify="flex-start">{options}</Grid>
         </GridCol>
-        <GridCol span={{ base: 12 }}>
-          <Grid justify="flex-start">
-            <Title order={2}>{loading ? '' : `${itemsCount} ${t('inspirations_found')}`}</Title>
-          </Grid>
+        <GridCol span={{ base: 12 }} mih="4em">
+          {loading ? (
+            <Loader type="dots" color="black" size={'sm'} />
+          ) : (
+            <Title order={2}>{t('inspirations_found', { count: itemsCount })} </Title>
+          )}
         </GridCol>
         {categories.length > 0 ? (
           <GridCol span={{ base: 12 }}>

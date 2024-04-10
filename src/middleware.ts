@@ -2,10 +2,9 @@ import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
   locales: ['en', 'fr'],
-  defaultLocale: 'fr',
-  localeDetection: false
+  defaultLocale: 'fr'
 });
 
 export const config = {
-  matcher: ['/', '/(fr|en)/:path*']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images).*)']
 };

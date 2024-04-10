@@ -38,7 +38,7 @@
   {
     "title": "AXALKO",
     "shortDescription": "Grâce à la R&D et à de multiples tests, Axalko a mis au point une technologie exclusive pour construire des vélos avec des fibres naturelles et du bois.",
-    "sites": "https://axalko.com/fr/",
+    "sites": "https://axalko.com",
     "tags": ["softmobility", "bikestravels"],
     "verticals": ["transport"]
   },
@@ -248,7 +248,7 @@
   {
     "title": "GEOVELO",
     "shortDescription": "L'application gratuite de guidage pour les cyclistes. Calculez des itinéraires vélo adaptés à votre profil (sécurisés, rapides ou touristiques).",
-    "sites": "https://geovelo.app/fr/",
+    "sites": "https://geovelo.app",
     "tags": ["softmobility"],
     "verticals": ["transport"]
   },
@@ -304,7 +304,7 @@
   {
     "title": "Interrail",
     "shortDescription": "Voyages à travers l'Europe — L'Europe en train – 1 billet, 33 pays – Sans itinéraire fixe - Date de départ flexible. Découvrez l'Europe en train avec le Pass qui permet de tout explorer! Achetez maintenant. Voyagez confortablement. Pass ferroviaire rentable. Voyage multi-destinations. Voyages tout confort.",
-    "sites": "https://www.interrail.eu/fr/interrail-passes",
+    "sites": "https://www.interrail.euinterrail-passes",
     "tags": ["traintravels"],
     "verticals": ["transport"]
   },
@@ -395,7 +395,7 @@
   {
     "title": "Moustache Bike",
     "shortDescription": "Moustache is the strong belief that the electric bicycle represents an incredible opportunity for the development of bicycle use!",
-    "sites": "https://moustachebikes.com/fr/velos-electriques/",
+    "sites": "https://moustachebikes.comvelos-electriques/",
     "tags": ["softmobility", "bikestravels"],
     "verticals": ["transport"]
   },
@@ -436,7 +436,7 @@
   },
   {
     "title": "Pedibus",
-    "shortDescription": "Passez à l'action ! Vous êtes ici. accueilPassez à l'action !Créer son projetMettre en place un Pédibus ... http://www.areneidf.org/fr/ ...",
+    "shortDescription": "Passez à l'action ! Vous êtes ici. accueilPassez à l'action !Créer son projetMettre en place un Pédibus ... http://www.areneidf.org ...",
     "sites": "https://www.colibris-lemouvement.org/passer-a-laction/creer-son-projet/mettre-en-place-un-pedibus",
     "tags": ["softmobility"],
     "verticals": ["transport"]
@@ -535,7 +535,7 @@
   {
     "title": "RIESE & MULLER",
     "shortDescription": "E-Bikes, vélos Cargo et vélos pliants d'une qualité exceptionnelle, où tout est pensé dans les moindres détails, offrant des technologies novatrices et un …",
-    "sites": "https://www.r-m.de/fr/",
+    "sites": "https://www.r-m.de",
     "tags": ["softmobility", "bikestravels"],
     "verticals": ["transport"]
   },
@@ -619,7 +619,7 @@
   {
     "title": "Tribugo",
     "shortDescription": "Covoiturage, navettes, vélo… Tribulive est une solution numérique, partenaire des organisateurs de festivals, pour décarboner la mobilité des spectateurs.",
-    "sites": "https://www.tribugo.mobi/fr/",
+    "sites": "https://www.tribugo.mobi",
     "tags": ["carpoolshare"],
     "verticals": ["transport"]
   },
@@ -647,7 +647,7 @@
   {
     "title": "Urban Arrow",
     "shortDescription": "Utilisé par Hubspot pour le suivi des sessions. Renommé pour sa qualité et son expérience de conduite, le vélo cargo électrique Urban Arrow promet des trajets incomparables.",
-    "sites": "https://urbanarrow.com/fr/",
+    "sites": "https://urbanarrow.com",
     "tags": ["softmobility", "bikestravels"],
     "verticals": ["transport"]
   },
@@ -682,7 +682,7 @@
   {
     "title": "Volkswagen e-up",
     "shortDescription": "Modèles et configurateur · Configurer un véhicule · Comparer nos modèles · Acheter ... Les offres du moment, découvrez tous nos modèles au meilleur prix, 2 de 3.",
-    "sites": "https://www.volkswagen.fr/fr/modeles-et-configurateur/e-up.html",
+    "sites": "https://www.volkswagen.frmodeles-et-configurateur/e-up.html",
     "tags": ["buylowcarboncar"],
     "verticals": ["transport"]
   },

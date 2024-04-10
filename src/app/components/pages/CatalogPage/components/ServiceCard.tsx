@@ -36,7 +36,7 @@ const ServiceCard = ({
     <Card h={'100%'} bg={backgroundColor}>
       {!noImage ? (
         <CardSection>
-          <Image src={service?.logo || `/default-service-image.jpg`} alt={service.title} height={100} />
+          <Image src={service?.logo || `/images/default-service-image.jpg`} alt={service.title} height={100} />
         </CardSection>
       ) : null}
       <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
@@ -77,7 +77,7 @@ const ServiceCard = ({
             style={{ bottom: '0px' }}
             w={'100%'}
             component={Link}
-            href={link ? link : '/fr/action'}>
+            href={link ? link : 'action'}>
             {t('see_more')}
           </Button>
         </CardSection>

@@ -18,7 +18,7 @@
     "no_results": "Pas de résultat pour cette recherche !"
   },
   "filters_component": {
-    "inspirations_found": "inspirations trouvées"
+    "inspirations_found": "{count, plural, =0 {Aucune action trouvée avec ces filtres} =1 {Une action trouvée !} other {# inspirations trouvées}}"
   },
   "finder_page": {
     "interested_subjects": "Quels sont les sujets qui vous intéressent ?",

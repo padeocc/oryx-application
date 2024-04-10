@@ -10,7 +10,7 @@ const ActionPage = async ({}: {}) => {
       {t('coming_soon')}
       <br />
       <br />
-      <Link href="/fr/">{t('back')}</Link>
+      <Link href="">{t('back')}</Link>
     </Alert>
   );
 };
