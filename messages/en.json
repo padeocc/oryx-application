@@ -1,0 +1,107 @@
+{
+  "action_page": {
+    "back": "Back",
+    "coming_soon": "Coming soon!"
+  },
+  "auth_button": {
+    "login": {
+      "connect": "Log in",
+      "disconnect": "Log out"
+    }
+  },
+  "bookmark": {
+    "tooltip_label": "Bookmark this action as a favorite!"
+  },
+  "content": {
+    "choose_theme": "Choose a theme!",
+    "contact_us": "Want to add an initiative? Contact us!",
+    "no_results": "No results for this search!"
+  },
+  "filters_component": {
+    "inspirations_found": "{count, plural, =0 {No results} =1 {One action found!} other {# actions found}}"
+  },
+  "finder_page": {
+    "interested_subjects": "What subjects are you interested in?",
+    "subjects": "Subjects",
+    "summary": "Summary",
+    "themes": "Themes",
+    "validate": "Validate choices"
+  },
+  "home_page": {
+    "account": "to your account to stay informed of updates and provide feedback within communities.",
+    "be_informed": "to your account to stay informed of updates and provide feedback within communities.",
+    "discover_actions": "Discover actions that suit you!",
+    "find_inspiration": "Find inspiration",
+    "guide": "You will be guided according to your interests to services and actions that you can adopt.",
+    "save_actions": "You will be able to save them",
+    "welcome": "Welcome to the eco-responsible initiatives companion!"
+  },
+  "login_form_page": {
+    "email_address": "Email Address",
+    "forgot_password": "Forgot Password",
+    "login": "Log in",
+    "password": "Password",
+    "signup": "Sign Up",
+    "unknown_error": "An unknown error occurred."
+  },
+  "login_page": {
+    "login": "Log in"
+  },
+  "navigation_items": {
+    "action_label": "Find an action",
+    "actions_label": "View my actions",
+    "donate_label": "Donate"
+  },
+  "password_reminder_page": {
+    "email_address": "Email Address",
+    "email_placeholder": "your@email.com",
+    "login": "Log in",
+    "reset_password": "Forgot Password",
+    "signup": "Sign Up"
+  },
+  "password_reminder_validation_page": {
+    "password": "Password",
+    "reset": "Reset"
+  },
+  "reset_password_page": {
+    "reset_password_title": "Reset Password"
+  },
+  "service_card": {
+    "see_more": "See more"
+  },
+  "signup_form_page": {
+    "email_label": "Email Address",
+    "login_button_label": "Log in",
+    "password_label": "Password",
+    "signup_button_label": "Sign Up",
+    "terms_conditions_button_label": "(Read)",
+    "terms_of_service_text": "I agree with the terms of service"
+  },
+  "signup_page": {
+    "signup_title": "Sign Up"
+  },
+  "terms_conditions": {
+    "contact_support": "If you have any questions or concerns about our use of cookies or user session storage, please contact us at",
+    "cookie_usage": "Acceptance Terms for Cookie Usage and User Session Storage",
+    "cookie_usage_description": "By using our web application, you agree to the following terms regarding the use of cookies and user session storage:",
+    "explicit_consent": "Explicit consent:",
+    "explicit_consent_description": "By accessing our web application, you explicitly consent to the use of cookies and user session storage in accordance with this policy.",
+    "opt_in_cookies": "Opt-in for third-party cookies:",
+    "opt_in_cookies_description": "You have the option to specifically consent to the use of third-party cookies for activity analysis or other purposes. This consent can be given or withdrawn at any time in your account settings.",
+    "privacy_policy": "Privacy Policy:",
+    "privacy_policy_description": "You acknowledge that you have read, understood, and agreed to our privacy policy, which details what data is collected, how it is used, shared, and stored.",
+    "read_conditions": "Read terms of use",
+    "session_expiration": "Session expiration:",
+    "session_expiration_description": "Please note that user sessions may expire after a defined period of inactivity or in accordance with our internal session management policies.",
+    "withdraw_consent": "Right to withdraw consent:",
+    "withdraw_consent_description": "You have the right to withdraw your consent at any time. Consent withdrawal can be done by modifying your account settings or by following the instructions provided in our privacy policy."
+  },
+  "user_actions": {
+    "coming_soon": "Coming soon!",
+    "create_page_text": "From here, you can create your public page listing all the services you use daily",
+    "display_label": "Display",
+    "publish_page_label": "Publish my page",
+    "share_page_label": "Link to my page",
+    "user_actions_title": "My actions"
+  }
+}
