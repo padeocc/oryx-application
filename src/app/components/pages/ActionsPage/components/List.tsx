@@ -1,10 +1,10 @@
 'use client';
 
+import { Filters, Service } from '@/app/components/pages/ActionsPage';
+import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
+import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
+import { Category } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
-import { Filters, Service } from '@/pages/CatalogPage';
-import FiltersComponent from '@/pages/CatalogPage/components/Filters';
-import ServiceCard from '@/pages/CatalogPage/components/ServiceCard';
-import { Category } from '@/pages/CatalogPage/utils';
 import FinderPage from '@/pages/FinderPage';
 import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
@@ -60,7 +60,7 @@ const Content = ({
           setFilters(values);
         }}
       />
-      <Grid justify="space-between" align="top" mt="lg">
+      <Grid justify="flex-start" align="top" mt="lg">
         {loading ? (
           <GridCol span={{ base: 12 }} ta="center" p="xl">
             <Loader />

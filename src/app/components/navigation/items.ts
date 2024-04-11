@@ -12,7 +12,7 @@ export const getNavigationItems = ({
       },
       {
         name: t('actions_label'),
-        href: 'actions/user',
+        href: '/actions/user',
         isExternal: false
       }
     ],

@@ -1,5 +1,5 @@
-import { fetchActions } from '@/pages/CatalogPage';
-import ServiceCard from '@/pages/CatalogPage/components/ServiceCard';
+import { fetchActions } from '@/app/components/pages/ActionsPage';
+import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
 import { BookmarkSimple, PottedPlant } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
@@ -31,7 +31,11 @@ const HomePage = async ({}: {}) => {
               <Text>
                 {t('save_actions')} (<BookmarkSimple />) {t('account')} {t('be_informed')}
               </Text>
-              <Button color="var(--mantine-color-dark-outline)" w="100%" component={Link} href="actions?assistant=true">
+              <Button
+                color="var(--mantine-color-dark-outline)"
+                w="100%"
+                component={Link}
+                href="/actions?assistant=true">
                 {t('find_inspiration')}
               </Button>
             </Stack>
@@ -53,19 +57,19 @@ const HomePage = async ({}: {}) => {
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[0]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[1]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[2]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                 </Stack>
               </GridCol>
@@ -75,19 +79,19 @@ const HomePage = async ({}: {}) => {
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[3]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[4]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[5]}
-                    link="actions/transport"
+                    link="/actions/transport"
                   />
                 </Stack>
               </GridCol>

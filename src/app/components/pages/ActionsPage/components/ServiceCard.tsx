@@ -1,6 +1,6 @@
-import Bookmark from '@/components/pages/CatalogPage/components/Bookmark';
-import { Service } from '@/pages/CatalogPage';
-import { getCategoryLabel } from '@/pages/CatalogPage/utils';
+import { Service } from '@/app/components/pages/ActionsPage';
+import Bookmark from '@/app/components/pages/ActionsPage/components/Bookmark';
+import { getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
 import {
   Badge,
   Button,
@@ -77,7 +77,7 @@ const ServiceCard = ({
             style={{ bottom: '0px' }}
             w={'100%'}
             component={Link}
-            href={link ? link : 'action'}>
+            href={link ? link : '/action'}>
             {t('see_more')}
           </Button>
         </CardSection>

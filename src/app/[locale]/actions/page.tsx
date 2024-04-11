@@ -1,4 +1,4 @@
-import CatalogPage from '@/components/pages/CatalogPage';
+import CatalogPage from '@/app/components/pages/ActionsPage';
 
 export default function Catalog({ searchParams }: { searchParams: { assistant: string } }) {
   const assistant = searchParams.assistant === 'true';

@@ -1,6 +1,6 @@
+import { Filters } from '@/app/components/pages/ActionsPage';
+import { getCategoriesFromSubjects, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesIcons } from '@/config';
-import { Filters } from '@/pages/CatalogPage';
-import { getCategoriesFromSubjects, getSubjetLabel } from '@/pages/CatalogPage/utils';
 import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { PottedPlant } from '@phosphor-icons/react';
@@ -46,7 +46,7 @@ const FiltersComponent = ({
 
   const options = Object.keys(themesIcons).map(item => (
     <GridCol key={`select-theme-${item}`} span={{ base: 2, md: 'auto' }}>
-      <Link href={`actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+      <Link href={`/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         <Stack align="center" gap={'xs'}>
           {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
           <Text

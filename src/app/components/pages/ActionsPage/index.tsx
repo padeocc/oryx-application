@@ -2,7 +2,7 @@ import { Theme } from '@/config';
 import demoServices from '@/data/actions.json';
 import intersection from 'lodash/intersection';
 import uniq from 'lodash/uniq';
-import Content from './components/Content';
+import List from './components/List';
 import { getCategoriesFromSubjects } from './utils';
 
 export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service[]>;
@@ -34,7 +34,7 @@ const CatalogPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
     }
   });
   return (
-    <Content
+    <List
       fetchActions={fetchActions}
       data={actions}
       subjects={subjects}

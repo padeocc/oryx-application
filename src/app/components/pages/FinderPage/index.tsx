@@ -1,6 +1,6 @@
-import { Filters } from '@/components/pages/CatalogPage';
+import { Filters } from '@/app/components/pages/ActionsPage';
+import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
 import subjects from '@/data/subjects.json';
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/pages/CatalogPage/utils';
 import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslations } from 'next-intl';

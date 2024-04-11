@@ -1,4 +1,4 @@
-import { Service } from '@/app/components/pages/CatalogPage';
+import { Service } from '@/app/components/pages/ActionsPage';
 import demoServices from '@/data/actions.json';
 import { Alert, Input, Stack, Switch, Table, TableTd, TableTr, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
