@@ -1,6 +1,5 @@
-import Bookmark from '@/components/pages/CatalogPage/components/Bookmark';
-import { Service } from '@/pages/CatalogPage';
-import { getCategoryLabel } from '@/pages/CatalogPage/utils';
+import Bookmark from '@/app/components/pages/ActionsPage/components/Bookmark';
+import { Service, getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
 import {
   Badge,
   Button,
@@ -57,7 +56,7 @@ const ServiceCard = ({
               </Group>
             </GridCol>
             <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
-              <Bookmark actionId={service.title} />
+              <Bookmark serviceCode={service.code} />
             </GridCol>
             <GridCol span={{ base: 12 }}>
               <Title order={3} c="orange">
@@ -77,7 +76,7 @@ const ServiceCard = ({
             style={{ bottom: '0px' }}
             w={'100%'}
             component={Link}
-            href={link ? link : 'action'}>
+            href={link ? link : `/action/${service.code}`}>
             {t('see_more')}
           </Button>
         </CardSection>

@@ -1,76 +1,61 @@
 'use client';
 
-import { getFrontendAuthConfig } from '@/app/config/frontend';
+import { useLocalState } from '@/state';
 import { Button, Stack, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { User } from 'supertokens-node';
-import SuperTokensWebJs from 'supertokens-web-js';
-import Session, { signOut } from 'supertokens-web-js/recipe/session';
+import { useState } from 'react';
+import { signOut } from 'supertokens-web-js/recipe/session';
 
 const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
-  const router = useRouter();
-  const [user, setUser] = useState<User | undefined>(undefined);
-  const [isLoading, setIsloading] = useState<boolean>(true);
+  const { user, setUser } = useLocalState();
+  const [isLoading, setIsloading] = useState<boolean>(false);
   const t = useTranslations('auth_button');
 
-  useEffect(() => {
-    setIsloading(true);
-
-    const fetchData = async () => {
-      SuperTokensWebJs.init(getFrontendAuthConfig());
-
-      const hasSession = await Session.attemptRefreshingSession();
-      if (hasSession) {
-        const userInfoResponse = hasSession
-          ? await fetch(process?.env?.NEXT_PUBLIC_APPINFO_API_GETUSER_ENDPOINT || '')
-          : undefined;
-        const jsonResponse = await userInfoResponse?.json();
-        setUser(jsonResponse);
-      } else {
-        setUser(undefined);
-      }
-      setIsloading(false);
-    };
-
-    fetchData();
-  }, [router]);
-
-  return isLoading ? (
-    <Button loading color={'var(--mantine-color-dark-outline)'}>
-      {t('login.connect')}
-    </Button>
-  ) : !!user ? (
+  return !user ? (
+    type === 'button' ? (
+      <Button
+        component={Link}
+        href="/login"
+        color={isLoading ? 'var(--mantine-color-green-outline)' : 'var(--mantine-color-dark-outline)'}
+        loading={isLoading}>
+        {t('login.connect')}
+      </Button>
+    ) : (
+      <Button
+        variant="transparent"
+        p="0"
+        m="0"
+        component={Link}
+        href="/login"
+        color={'var(--mantine-color-green-outline)'}
+        fz={'lg'}
+        loading={isLoading}>
+        {t('login.connect')}
+      </Button>
+    )
+  ) : (
     <Stack gap={0} ta="right">
       <Text
         c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'}
         fw={700}
-        fz={'sm'}>
-        {user.emails[0]}
+        fz={'lg'}>
+        {user.email}
       </Text>
       <Link
-        href=""
+        href="#"
         style={{ textDecoration: 'none' }}
         onClick={async () => {
           setIsloading(true);
+          setUser(undefined);
           await signOut();
-          window.location.reload();
+          setIsloading(false);
         }}>
-        <Text c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'} fz={'xs'}>
+        <Text c={type === 'button' ? 'var(--mantine-color-dark-outline)' : 'var(--mantine-primary-color-2)'} fz={'md'}>
           {t('login.disconnect')}
         </Text>
       </Link>
     </Stack>
-  ) : type === 'button' ? (
-    <Button component={Link} href="login" color={'var(--mantine-color-dark-outline)'}>
-      {t('login.connect')}
-    </Button>
-  ) : (
-    <Link href="login" color={'var(--mantine-color-dark-outline)'} style={{ color: 'inherit', textDecoration: 'none' }}>
-      {t('login.connect')}
-    </Link>
   );
 };
 

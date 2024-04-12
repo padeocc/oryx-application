@@ -1,7 +1,24 @@
-import { Filters } from '@/components/pages/CatalogPage';
+import {
+  Filters,
+  getCategoriesFromSubjects,
+  getCategoryLabel,
+  getSubjetLabel
+} from '@/app/components/pages/ActionsPage/utils';
 import subjects from '@/data/subjects.json';
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/pages/CatalogPage/utils';
-import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
+import {
+  Badge,
+  Button,
+  Card,
+  Checkbox,
+  CheckboxGroup,
+  Grid,
+  GridCol,
+  Group,
+  Radio,
+  RadioGroup,
+  Stack,
+  Title
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -31,10 +48,10 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
         <GridCol span={{ base: 12, sm: 6 }}>
           <Stack>
             <Card>
-              <CheckboxGroup value={selectedSubjects}>
+              <RadioGroup value={selectedSubjects[0]}>
                 <Stack gap="xs" pt="xs">
                   {subjects.map(subject => (
-                    <Checkbox
+                    <Radio
                       id={subject.code}
                       key={subject.code}
                       label={subject.title}
@@ -51,7 +68,7 @@ const FinderPage = ({ filters, handleSubmit }: { filters: Filters; handleSubmit:
                     />
                   ))}
                 </Stack>
-              </CheckboxGroup>
+              </RadioGroup>
             </Card>
             {selectedSubjects?.length ? (
               <Card>

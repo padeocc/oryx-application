@@ -69,7 +69,7 @@ const SignupFormPage = () => {
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" loading={isLoading} component={Link} href="login">
+        <Button variant="outline" loading={isLoading} component={Link} href="/login">
           {t('login_button_label')}
         </Button>
         <Button type="submit" loading={isLoading}>

@@ -1,9 +1,12 @@
 import SignupPage from '@/app/components/pages/SignupPage';
+import { Container } from '@mantine/core';
 
 export default function Signup() {
   return (
     <main>
-      <SignupPage />
+      <Container maw={'800px'}>
+        <SignupPage />
+      </Container>
     </main>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { useLocalState } from '@/state';
 import { Button, Group, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslations } from 'next-intl';
@@ -9,6 +10,7 @@ import { signIn } from 'supertokens-web-js/recipe/emailpassword';
 
 const LoginFormPage = () => {
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const { setUser } = useLocalState();
   const [error, setError] = useState<string>('');
   const form = useForm({
     initialValues: {
@@ -40,6 +42,8 @@ const LoginFormPage = () => {
             ]
           });
           if (response.status === 'OK') {
+            const userEmail: string | undefined = response?.user?.emails?.[0];
+            setUser(userEmail ? { email: userEmail, services: [] } : undefined);
             window.location.replace('/');
           } else {
             throw { message: response.status };
@@ -57,10 +61,10 @@ const LoginFormPage = () => {
       />
       <TextInput withAsterisk label={t('password')} type="password" {...form.getInputProps('password')} />
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" loading={isLoading} component={Link} href="signup/reset-password">
+        <Button variant="outline" loading={isLoading} component={Link} href="/signup/reset-password">
           {t('forgot_password')}
         </Button>
-        <Button variant="outline" loading={isLoading} component={Link} href="signup">
+        <Button variant="outline" loading={isLoading} component={Link} href="/signup">
           {t('signup')}
         </Button>
         <Button type="submit" loading={isLoading}>

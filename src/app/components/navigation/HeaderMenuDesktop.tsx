@@ -1,6 +1,7 @@
 'use client';
 
 import AuthButton from '@/components/auth/Button';
+import { useLocalState } from '@/state';
 import { Button, Container, Group } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -8,18 +9,19 @@ import { getNavigationItems } from './items';
 
 const HeaderMenuDesktop = () => {
   const t = useTranslations('navigation_items');
-  const elements = getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
-    <Group key={`group-${itemgroupindex}`} justify="space-between">
+  const { user } = useLocalState();
+  const elements = getNavigationItems({ t, user }).map((itemsGroup, itemgroupindex) => (
+    <Group key={`group-desktop-${itemgroupindex}`} justify="space-between">
       {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
         const others = isExternal ? { target: '_blank' } : {};
         return (
           <Button
+            {...others}
             p={'xs'}
             variant="transparent"
-            key={`item-${itemgroupindex}-${itemindex}`}
+            key={`item-desktop-${itemgroupindex}-${itemindex}-${name}`}
             component={Link}
             href={href}
-            {...others}
             color={priority ? 'orange' : 'var(--mantine-color-dark-outline)'}>
             {name}
           </Button>
@@ -34,7 +36,7 @@ const HeaderMenuDesktop = () => {
     </Container>
   );
 
-  return <Group>{elements}</Group>;
+  return elements;
 };
 
 export default HeaderMenuDesktop;

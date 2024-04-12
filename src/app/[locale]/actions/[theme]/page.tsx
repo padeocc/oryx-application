@@ -1,10 +1,10 @@
-import CatalogPage from '@/app/components/pages/CatalogPage';
+import ActionsPage from '@/app/components/pages/ActionsPage';
 import { Theme } from '@/config';
 
-export default function Actions({ params }: { params: { theme: Theme } }) {
+export default function ActionsTheme({ params }: { params: { theme: Theme } }) {
   return (
     <main>
-      <CatalogPage themes={params.theme ? [params.theme] : []} />
+      <ActionsPage themes={params.theme ? [params.theme] : []} />
     </main>
   );
 }

@@ -54,7 +54,7 @@ const PasswordReminderFormPage = () => {
       />
 
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" loading={isLoading} component={Link} href="login">
+        <Button variant="outline" loading={isLoading} component={Link} href="/login">
           {t('login')}
         </Button>
         <Button variant="outline" loading={isLoading}>
