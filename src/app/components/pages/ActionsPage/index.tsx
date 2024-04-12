@@ -7,7 +7,7 @@ const ActionsPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
   const categories = getCategoriesFromSubjects(subjects);
   const actions = await fetchActions({
     filters: {
-      categories: categories.map(c => c.code),
+      categories: [],
       subjects
     }
   });
@@ -19,7 +19,7 @@ const ActionsPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
       }}
       data={actions}
       subjects={subjects}
-      categories={categories}
+      categories={[]}
       showAssistant={showAssistant}
     />
   );

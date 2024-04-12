@@ -76,7 +76,7 @@ const ServiceCard = ({
             style={{ bottom: '0px' }}
             w={'100%'}
             component={Link}
-            href={link ? link : '/action'}>
+            href={link ? link : `/action/${service.code}`}>
             {t('see_more')}
           </Button>
         </CardSection>

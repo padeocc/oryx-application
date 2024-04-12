@@ -9,7 +9,7 @@ import { signOut } from 'supertokens-web-js/recipe/session';
 
 const AuthButton = ({ type = 'button' }: { type?: 'button' | 'link' }) => {
   const { user, setUser } = useLocalState();
-  const [isLoading, setIsloading] = useState<boolean>(!user?.email);
+  const [isLoading, setIsloading] = useState<boolean>(false);
   const t = useTranslations('auth_button');
 
   return !user ? (

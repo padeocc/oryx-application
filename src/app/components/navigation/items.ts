@@ -1,18 +1,17 @@
+import { StateUser } from '@/state';
+
 export const getNavigationItems = ({
-  t
+  t,
+  user
 }: {
   t: any;
+  user: StateUser | undefined;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
-  return [
+  const menu = [
     [
       {
         name: t('action_label'),
         href: '/actions',
-        isExternal: false
-      },
-      {
-        name: t('actions_label'),
-        href: '/actions/user',
         isExternal: false
       }
     ],
@@ -24,4 +23,13 @@ export const getNavigationItems = ({
       }
     ]
   ];
+
+  if (user?.email) {
+    menu[0].push({
+      name: t('actions_label'),
+      href: '/actions/user',
+      isExternal: false
+    });
+  }
+  return menu;
 };

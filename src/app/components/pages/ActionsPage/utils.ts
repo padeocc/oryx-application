@@ -23,7 +23,7 @@ export const getCategoriesFromSubjects = (codes: string[]) => {
   return subjectItems.flatMap(({ categories }) => categories);
 };
 
-export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service[]>;
+export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service>;
 
 export type Service = {
   tags: string[];
@@ -53,3 +53,8 @@ export const fetchActions = async ({ filters }: { filters: Filters }) => {
 };
 
 export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
+
+export const fetchAction = async ({ code }: { code: string }) => {
+  const actions = demoServices as unknown as Service[];
+  return actions.find(a => code === a.code);
+};
