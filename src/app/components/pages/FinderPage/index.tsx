@@ -1,5 +1,9 @@
-import { Filters } from '@/app/components/pages/ActionsPage';
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
+import {
+  Filters,
+  getCategoriesFromSubjects,
+  getCategoryLabel,
+  getSubjetLabel
+} from '@/app/components/pages/ActionsPage/utils';
 import subjects from '@/data/subjects.json';
 import { Badge, Button, Card, Checkbox, CheckboxGroup, Grid, GridCol, Group, Stack, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';

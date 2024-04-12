@@ -1,30 +1,8 @@
 import { Theme } from '@/config';
-import demoServices from '@/data/actions.json';
-import intersection from 'lodash/intersection';
-import uniq from 'lodash/uniq';
 import List from './components/List';
-import { getCategoriesFromSubjects } from './utils';
+import { Filters, fetchActions, getCategoriesFromSubjects } from './utils';
 
-export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service[]>;
-export type Service = { tags: string[]; title: string; shortDescription: string; logo?: string; verticals: string[] };
-export type Filters = { subjects: string[]; categories: string[] };
-
-export const fetchActions = async ({ filters }: { filters: Filters }) => {
-  'use server';
-  const actions = demoServices as unknown as Service[];
-
-  if (filters.subjects.length === 0) {
-    return actions;
-  }
-  if (filters.categories.length) {
-    return actions.filter(action => !!intersection(action.tags, filters.categories).length);
-  }
-  return actions.filter(action => !!intersection(action.verticals, filters.subjects).length);
-};
-
-export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
-
-const CatalogPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAssistant?: boolean }) => {
+const ActionsPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAssistant?: boolean }) => {
   const subjects = themes ? themes : [];
   const categories = getCategoriesFromSubjects(subjects);
   const actions = await fetchActions({
@@ -35,7 +13,10 @@ const CatalogPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
   });
   return (
     <List
-      fetchActions={fetchActions}
+      fetchActions={async ({ filters }: { filters: Filters }) => {
+        'use server';
+        return fetchActions({ filters });
+      }}
       data={actions}
       subjects={subjects}
       categories={categories}
@@ -44,4 +25,4 @@ const CatalogPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
   );
 };
 
-export default CatalogPage;
+export default ActionsPage;

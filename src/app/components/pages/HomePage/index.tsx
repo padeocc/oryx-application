@@ -1,9 +1,9 @@
-import { fetchActions } from '@/app/components/pages/ActionsPage';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
 import { BookmarkSimple, PottedPlant } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { fetchActions } from '../ActionsPage/utils';
 
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');

@@ -1,5 +1,4 @@
-import { Filters } from '@/app/components/pages/ActionsPage';
-import { getCategoriesFromSubjects, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
+import { Filters, getCategoriesFromSubjects, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesIcons } from '@/config';
 import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';

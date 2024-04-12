@@ -1,9 +1,8 @@
 'use client';
 
-import { Filters, Service } from '@/app/components/pages/ActionsPage';
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { Category } from '@/app/components/pages/ActionsPage/utils';
+import { Category, Filters, Service } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import FinderPage from '@/pages/FinderPage';
 import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
@@ -11,7 +10,7 @@ import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
-const Content = ({
+const List = ({
   fetchActions,
   data: initialData,
   subjects = [],
@@ -99,4 +98,4 @@ const Content = ({
   );
 };
 
-export default Content;
+export default List;

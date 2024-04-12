@@ -11,8 +11,8 @@ export const getBackendAuthConfig = (): TypeInput => {
     isInServerlessEnv: true,
     framework: 'custom',
     supertokens: {
-      connectionURI: process?.env?.APPINFO_CONNECTIONURL || '',
-      apiKey: process?.env?.APPINFO_CONNECTIONKEY || ''
+      connectionURI: process?.env?.AUTH_APPINFO_CONNECTIONURL || '',
+      apiKey: process?.env?.AUTH_APPINFO_CONNECTIONKEY || ''
     }
   };
 };

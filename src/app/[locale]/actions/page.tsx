@@ -1,10 +1,10 @@
-import CatalogPage from '@/app/components/pages/ActionsPage';
+import ActionsPage from '@/app/components/pages/ActionsPage';
 
-export default function Catalog({ searchParams }: { searchParams: { assistant: string } }) {
+export default function Actions({ searchParams }: { searchParams: { assistant: string } }) {
   const assistant = searchParams.assistant === 'true';
   return (
     <main>
-      <CatalogPage showAssistant={assistant} />
+      <ActionsPage showAssistant={assistant} />
     </main>
   );
 }

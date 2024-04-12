@@ -1,6 +1,5 @@
-import { Service } from '@/app/components/pages/ActionsPage';
 import Bookmark from '@/app/components/pages/ActionsPage/components/Bookmark';
-import { getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
+import { Service, getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
 import {
   Badge,
   Button,
@@ -57,7 +56,7 @@ const ServiceCard = ({
               </Group>
             </GridCol>
             <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
-              <Bookmark actionId={service.title} />
+              <Bookmark serviceCode={service.code} />
             </GridCol>
             <GridCol span={{ base: 12 }}>
               <Title order={3} c="orange">

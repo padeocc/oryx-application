@@ -17,10 +17,10 @@ const HeaderMenu = () => {
             </Title>
           </Group>
         </Link>
-        <Group hiddenFrom="md">
+        <Group hiddenFrom="md" key="aaa">
           <HeaderMenuMobile />
         </Group>
-        <Group gap={'xl'} visibleFrom="md">
+        <Group gap={'xl'} visibleFrom="md" key="bbb">
           <HeaderMenuDesktop />
         </Group>
       </Group>

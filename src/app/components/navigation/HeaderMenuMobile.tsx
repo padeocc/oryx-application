@@ -18,12 +18,12 @@ const HeaderMenuMobile = () => {
       </MenuTarget>
       <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
         {getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
-          <>
+          <div key={`group-mobile-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
               const others = isExternal ? { target: '_blank' } : {};
               return (
                 <MenuItem
-                  key={`item-${itemgroupindex}-${itemindex}`}
+                  key={`item-mobile-${itemgroupindex}-${itemindex}`}
                   component={Link}
                   href={href}
                   {...others}
@@ -34,7 +34,7 @@ const HeaderMenuMobile = () => {
               );
             })}
             {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
-          </>
+          </div>
         ))}
         <MenuItem fz={'lg'} color="gray">
           <AuthButton type={'link'} />
