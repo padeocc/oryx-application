@@ -4,8 +4,8 @@ import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filt
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { Category, Filters, Service } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
-import FinderPage from '@/pages/FinderPage';
-import { Alert, Grid, GridCol, Loader, Modal, Text, Title } from '@mantine/core';
+import { useLocalState } from '@/state';
+import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
@@ -14,23 +14,18 @@ const List = ({
   fetchActions,
   data: initialData,
   subjects = [],
-  showAssistant = false,
   categories = []
 }: {
   fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
   subjects?: Theme[];
-  showAssistant?: boolean;
   categories: Category[];
 }) => {
   const t = useTranslations('content');
   const [data, setData] = useState<Service[]>(initialData);
-  const [filters, setFilters] = useState<Filters>({
-    subjects,
-    categories: categories.map(c => c.code)
-  });
   const [loading, setLoading] = useState<boolean>(false);
-  const [opened, setOpened] = useState<boolean>(showAssistant);
+  const { filters, setFilters } = useLocalState();
+
   const firstFetch = useRef(true);
 
   /* Only when filters change*/
@@ -79,21 +74,6 @@ const List = ({
           </GridCol>
         ) : null}
       </Grid>
-      <Modal
-        opened={opened}
-        title={<Title order={2}>{t('choose_theme')}</Title>}
-        size={'xl'}
-        onClose={() => {
-          setOpened(false);
-        }}>
-        <FinderPage
-          filters={filters}
-          handleSubmit={values => {
-            setFilters(values);
-            setOpened(false);
-          }}
-        />
-      </Modal>
     </>
   );
 };

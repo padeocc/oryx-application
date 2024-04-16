@@ -1,10 +1,9 @@
 import { Theme } from '@/config';
 import List from './components/List';
-import { Filters, fetchActions, getCategoriesFromSubjects } from './utils';
+import { Filters, fetchActions } from './utils';
 
-const ActionsPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAssistant?: boolean }) => {
+const ActionsPage = async ({ themes }: { themes?: Theme[] /*showAssistant?: boolean*/ }) => {
   const subjects = themes ? themes : [];
-  const categories = getCategoriesFromSubjects(subjects);
   const actions = await fetchActions({
     filters: {
       categories: [],
@@ -20,7 +19,6 @@ const ActionsPage = async ({ themes, showAssistant }: { themes?: Theme[]; showAs
       data={actions}
       subjects={subjects}
       categories={[]}
-      showAssistant={showAssistant}
     />
   );
 };

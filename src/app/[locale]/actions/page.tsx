@@ -4,7 +4,7 @@ export default function Actions({ searchParams }: { searchParams: { assistant: s
   const assistant = searchParams.assistant === 'true';
   return (
     <main>
-      <ActionsPage showAssistant={assistant} />
+      <ActionsPage /*showAssistant={assistant}*/ />
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { Filters } from '@/app/components/pages/ActionsPage/utils';
 import { xor } from 'lodash';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
@@ -15,6 +16,8 @@ interface LocalState {
   user: StateUser | undefined;
   setUser: (user: StateUser | undefined) => void;
   toggleUserService: (service: StateService) => void;
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
 }
 
 export const useLocalState = create<LocalState>()(
@@ -32,7 +35,12 @@ export const useLocalState = create<LocalState>()(
               return { ...state, user: { ...state.user, services } };
             }
             return state;
-          })
+          }),
+        filters: {
+          subjects: [],
+          categories: []
+        },
+        setFilters: filters => set(state => ({ ...state, filters }))
       }),
       {
         name: 'oryx-local-state'

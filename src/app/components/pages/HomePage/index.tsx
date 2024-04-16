@@ -31,11 +31,7 @@ const HomePage = async ({}: {}) => {
               <Text>
                 {t('save_actions')} (<BookmarkSimple />) {t('account')} {t('be_informed')}
               </Text>
-              <Button
-                color="var(--mantine-color-dark-outline)"
-                w="100%"
-                component={Link}
-                href="/actions?assistant=true">
+              <Button color="var(--mantine-color-dark-outline)" w="100%" component={Link} href="/finder">
                 {t('find_inspiration')}
               </Button>
             </Stack>
