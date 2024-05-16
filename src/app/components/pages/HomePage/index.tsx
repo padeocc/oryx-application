@@ -10,10 +10,12 @@ const HomePage = async ({}: {}) => {
 
   const actions = await fetchActions({
     filters: {
-      subjects: [],
+      subjects: ['transports'],
       categories: []
     }
   });
+
+  console.log({ actions });
 
   return (
     <Stack gap={'xl'} align="center">
@@ -53,19 +55,19 @@ const HomePage = async ({}: {}) => {
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[0]}
-                    link="/actions/transport"
-                  />
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[1]}
-                    link="/actions/transport"
+                    link="/actions/transports"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[2]}
-                    link="/actions/transport"
+                    link="/actions/transports"
+                  />
+                  <ServiceCard
+                    noImage
+                    backgroundColor={'var(--mantine-primary-color-2)'}
+                    service={actions[4]}
+                    link="/actions/transports"
                   />
                 </Stack>
               </GridCol>
@@ -74,20 +76,20 @@ const HomePage = async ({}: {}) => {
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[3]}
-                    link="/actions/transport"
+                    service={actions[1]}
+                    link="/actions/transports"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[4]}
-                    link="/actions/transport"
+                    service={actions[3]}
+                    link="/actions/transports"
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[5]}
-                    link="/actions/transport"
+                    link="/actions/transports"
                   />
                 </Stack>
               </GridCol>

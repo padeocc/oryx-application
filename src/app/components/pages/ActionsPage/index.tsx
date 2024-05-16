@@ -2,7 +2,7 @@ import { Theme } from '@/config';
 import List from './components/List';
 import { Filters, fetchActions } from './utils';
 
-const ActionsPage = async ({ themes }: { themes?: Theme[] /*showAssistant?: boolean*/ }) => {
+const ActionsPage = async ({ themes }: { themes?: Theme[] }) => {
   const subjects = themes ? themes : [];
   const actions = await fetchActions({
     filters: {

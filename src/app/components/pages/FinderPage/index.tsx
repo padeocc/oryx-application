@@ -1,7 +1,7 @@
 'use client';
 
-import { getCategoriesFromSubjects, getCategoryLabel, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
-import subjects from '@/data/subjects.json';
+import { Filters, Service, getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
+import { themes } from '@/config';
 import { useLocalState } from '@/state';
 import {
   Badge,
@@ -18,27 +18,38 @@ import {
   Title
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { uniq } from 'lodash';
 import { useTranslations } from 'next-intl';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const FinderPage = () => {
+const FinderPage = ({ fetchActions }: { fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]> }) => {
   const t = useTranslations('finder_page');
-  const [categories, setCategories] = useState<{ title: string; code: string }[]>([]);
+  const tTheme = useTranslations('themes');
+  const [categories, setCategories] = useState<string[]>([]);
   const { filters, setFilters } = useLocalState();
 
   const form = useForm({
     initialValues: filters
   });
-
   const selectedSubjects = form.values.subjects;
   const selectedCategories = form.values.categories;
 
   useEffect(() => {
-    const newCategories = getCategoriesFromSubjects(selectedSubjects);
-    setCategories(newCategories);
+    const fetchData = async () => {
+      const actions = await fetchActions({
+        filters: {
+          subjects: selectedSubjects,
+          categories: []
+        }
+      });
+      const categories = uniq(actions.flatMap(action => action.tags));
+      setCategories(categories);
+    };
+    fetchData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedSubjects]);
 
   return (
     <Stack>
@@ -54,27 +65,22 @@ const FinderPage = () => {
               <Card>
                 <RadioGroup value={selectedSubjects[0]}>
                   <Stack gap="xs" pt="xs">
-                    {subjects.map(subject => (
+                    {themes.map(theme => (
                       <Radio
-                        id={subject.code}
-                        key={subject.code}
-                        label={subject.title}
-                        value={subject.code}
-                        checked={selectedSubjects?.includes(subject.code)}
+                        id={theme}
+                        key={theme}
+                        label={theme}
+                        value={theme}
+                        checked={selectedSubjects?.includes(theme)}
                         onChange={subject => {
-                          const possibleCategories = getCategoriesFromSubjects([subject.target.value]);
-                          setCategories(possibleCategories);
-                          const categories = form.values.categories.filter(fc =>
-                            possibleCategories.map(c => c.code).includes(fc)
-                          );
-                          form.setValues({ subjects: [subject.target.value], categories });
+                          form.setValues({ subjects: [subject.target.value] });
                         }}
                       />
                     ))}
                   </Stack>
                 </RadioGroup>
               </Card>
-              {selectedSubjects?.length ? (
+              {categories?.length ? (
                 <Card>
                   <Title order={2}>{t('interested_subjects')}</Title>
                   <CheckboxGroup
@@ -83,12 +89,12 @@ const FinderPage = () => {
                     <Stack gap="xs" pt="xs">
                       {categories.map(category => (
                         <Checkbox
-                          id={category.code}
-                          key={category.code}
-                          label={category.title}
-                          value={category.code}
-                          name={`categories[${category.code}]`}
-                          checked={selectedCategories?.includes(category.code)}
+                          id={category}
+                          key={category}
+                          label={category}
+                          value={category}
+                          name={`categories[${category}]`}
+                          checked={selectedCategories?.includes(category)}
                         />
                       ))}
                     </Stack>
@@ -97,7 +103,7 @@ const FinderPage = () => {
               ) : null}
             </Stack>
           </GridCol>
-          {selectedSubjects?.length || selectedCategories?.length ? (
+          {selectedCategories?.length ? (
             <GridCol span={{ base: 12, sm: 6 }}>
               <Card>
                 <Title order={2}>{t('summary')}</Title>
@@ -105,9 +111,8 @@ const FinderPage = () => {
                   <Stack gap="xs">
                     {selectedSubjects?.length ? <Title order={3}>{t('themes')}</Title> : null}
                     <Group gap="xs">
-                      {selectedSubjects?.map(subject => (
-                        <Badge key={`tag-${subject}`}>{getSubjetLabel(subject)}</Badge>
-                      )) || null}
+                      {selectedSubjects?.map(subject => <Badge key={`tag-${subject}`}>{tTheme(subject)}</Badge>) ||
+                        null}
                     </Group>
                   </Stack>
                   <Stack gap="xs">

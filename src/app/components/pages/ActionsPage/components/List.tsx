@@ -8,7 +8,7 @@ import { useLocalState } from '@/state';
 import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const List = ({
   fetchActions,
@@ -28,21 +28,21 @@ const List = ({
 
   const firstFetch = useRef(true);
 
-  /* Only when filters change*/
-  useEffect(() => {
-    if (!firstFetch.current) {
-      const fetchData = async () => {
-        setLoading(true);
-        const data = await fetchActions({ filters });
-        setData(data);
-        setLoading(false);
-      };
-      fetchData();
-    } else {
-      firstFetch.current = false;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.categories]);
+  // /* Only when filters change*/
+  // useEffect(() => {
+  //   if (!firstFetch.current) {
+  //     const fetchData = async () => {
+  //       setLoading(true);
+  //       const data = await fetchActions({ filters });
+  //       setData(data);
+  //       setLoading(false);
+  //     };
+  //     fetchData();
+  //   } else {
+  //     firstFetch.current = false;
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filters.categories]);
 
   return (
     <>
@@ -61,7 +61,7 @@ const List = ({
           </GridCol>
         ) : (
           data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.title}-${index}`}>
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
               <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} />
             </GridCol>
           ))

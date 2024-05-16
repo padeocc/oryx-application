@@ -1,8 +1,7 @@
 'use client';
 
-import AuthButton from '@/components/auth/Button';
 import { useLocalState } from '@/state';
-import { Button, Container, Group } from '@mantine/core';
+import { Button, Group } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { getNavigationItems } from './items';
@@ -30,11 +29,11 @@ const HeaderMenuDesktop = () => {
     </Group>
   ));
 
-  elements.push(
-    <Container>
-      <AuthButton />
-    </Container>
-  );
+  // elements.push(
+  //   <Container>
+  //     <AuthButton />
+  //   </Container>
+  // );
 
   return elements;
 };

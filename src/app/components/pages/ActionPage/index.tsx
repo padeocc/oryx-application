@@ -13,20 +13,22 @@ const ActionPage = async ({ code }: { code: string }) => {
     return <Alert c="orange">Not found</Alert>;
   }
 
+  const { logo, name, tags = [], description } = action;
+
   return (
     <Stack>
       <Link href="/actions">
         <ArrowLeft color="black" />
       </Link>
       <Grid>
-        {action.logo ? (
+        {logo ? (
           <GridCol span={{ base: 12 }} pt={'sm'}>
-            <Image src={action?.logo || `/images/default-service-image.jpg`} alt={action.title} height={100} />
+            <Image src={logo || `/images/default-service-image.jpg`} alt={name} height={100} />
           </GridCol>
         ) : null}
         <GridCol span={{ base: 10 }} ta={'right'} pt={'sm'}>
           <Group gap={'xs'}>
-            {action.tags.map(tag => (
+            {tags.map(tag => (
               <Badge
                 key={`tag-${tag}`}
                 size="sm"
@@ -39,17 +41,17 @@ const ActionPage = async ({ code }: { code: string }) => {
           </Group>
         </GridCol>
         <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
-          <Bookmark serviceCode={action.code} />
+          <Bookmark serviceCode={code} />
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <Title order={3} c="orange">
-            {action.title}
+            {name}
           </Title>
         </GridCol>
       </Grid>
 
       <Text fz="sm" size="sm">
-        {action.shortDescription}
+        {description}
       </Text>
     </Stack>
   );

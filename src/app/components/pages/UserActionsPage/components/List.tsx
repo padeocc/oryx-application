@@ -38,8 +38,8 @@ const List = ({ fetchActions }: { fetchActions: ({ filters }: { filters: Filters
   return (
     <Table>
       {data.map((service, index) => (
-        <TableTr key={`action-${service.title}-${index}`}>
-          <TableTd>{service.title}</TableTd>
+        <TableTr key={`action-${service.name}-${index}`}>
+          <TableTd>{service.name}</TableTd>
           <TableTd>
             <Switch label={t('display_label')} />
           </TableTd>

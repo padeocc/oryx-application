@@ -1,6 +1,5 @@
 'use client';
 
-import AuthButton from '@/components/auth/Button';
 import { useLocalState } from '@/state';
 import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
@@ -39,9 +38,9 @@ const HeaderMenuMobile = () => {
             {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
           </div>
         ))}
-        <MenuItem fz={'lg'} color="gray">
+        {/* <MenuItem fz={'lg'} color="gray">
           <AuthButton type={'link'} />
-        </MenuItem>
+        </MenuItem> */}
       </MenuDropdown>
     </Menu>
   );

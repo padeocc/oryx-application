@@ -1,4 +1,4 @@
-import { Filters, getCategoriesFromSubjects, getSubjetLabel } from '@/app/components/pages/ActionsPage/utils';
+import { Filters } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesIcons } from '@/config';
 import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -31,11 +31,12 @@ const FiltersComponent = ({
   itemsCount: number;
 }) => {
   const t = useTranslations('filters_component');
+  const tTheme = useTranslations('themes');
   const form = useForm({
     initialValues: filters
   });
   const selectedSubjects = (filters.subjects.length && filters.subjects) || [];
-  const categories = getCategoriesFromSubjects(selectedSubjects);
+  const categories: any[] = []; //getCategoriesFromSubjects(selectedSubjects);
 
   useEffect(() => {
     form.setValues(filters);
@@ -56,7 +57,7 @@ const FiltersComponent = ({
                 ? 'var(--mantine-primary-color-8)'
                 : 'lightgray'
             }>
-            {getSubjetLabel(item)}
+            {tTheme(item)}
           </Text>
         </Stack>
       </Link>

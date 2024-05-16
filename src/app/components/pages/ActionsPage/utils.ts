@@ -1,6 +1,3 @@
-import demoServices from '@/data/actions.json';
-import subjects from '@/data/subjects.json';
-import intersection from 'lodash/intersection';
 import uniq from 'lodash/uniq';
 
 export type Category = {
@@ -8,53 +5,54 @@ export type Category = {
   code: string;
 };
 
-export const getSubjetLabel = (code: string) => {
-  const found = subjects.find(subject => subject.code === code);
-  return found?.title || '';
-};
-
-export const getCategoryLabel = (code: string) => {
-  const found = subjects.flatMap(({ categories }) => categories).find(category => category.code === code);
-  return found?.title || '';
-};
-
-export const getCategoriesFromSubjects = (codes: string[]) => {
-  const subjectItems = subjects.filter(subject => codes?.includes(subject.code));
-  return subjectItems.flatMap(({ categories }) => categories);
-};
-
 export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service>;
 
 export type Service = {
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+  description: string;
+  url: string;
   tags: string[];
-  title: string;
-  shortDescription: string;
-  logo?: string;
-  verticals: string[];
+  type: string[];
   code: string;
+  zipCode: string;
+  country: string;
+  logo?: string;
 };
 
 export type Filters = { subjects: string[]; categories: string[]; codes?: (string | undefined)[] };
 
-export const fetchActions = async ({ filters }: { filters: Filters }) => {
-  let actions = demoServices as unknown as Service[];
-
-  if (filters.codes) {
-    actions = actions.filter(a => filters.codes?.includes(a.code));
-  }
-
-  if (filters.subjects.length === 0) {
-    return actions;
-  }
-  if (filters.categories.length) {
-    return actions.filter(action => !!intersection(action.tags, filters.categories).length);
-  }
-  return actions.filter(action => !!intersection(action.verticals, filters.subjects).length);
+export const fetchActions = async ({ filters }: { filters?: any }) => {
+  const url = process?.env?.STRAPI_SOLUTIONS_ENDPOINT || '';
+  const response = await fetch(`${url}/${filters.subjects[0]}`, {
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+  });
+  const solutions = await response.json();
+  const services = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
+  return services;
 };
 
-export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action.tags));
+export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action?.tags || []));
 
 export const fetchAction = async ({ code }: { code: string }) => {
-  const actions = demoServices as unknown as Service[];
-  return actions.find(a => code === a.code);
+  // const actions = demoServices as unknown as Service[];
+  // return actions.find(a => code === a.code);
+  return undefined;
+};
+
+export const getCategoryLabel = (code: string) => {
+  return code;
+};
+
+// export const getCategoriesFromSubjects = (codes: string[]) => {
+//   return codes.map(c => ({ title: c, code: c }));
+// };
+
+export const getCategoriesFromSubjects = (codes: string[]) => {
+  //let solutions: Service[] = await requestActions({});
+  // console.log({ codes });
+  // const subjectItems = subjects.filter(subject => codes?.includes(subject.code));
+  // return subjectItems.flatMap(({ categories }) => categories);
 };

@@ -104,5 +104,17 @@
     "publish_page_label": "Publish my page",
     "share_page_label": "Link to my page",
     "user_actions_title": "My actions"
+  },
+  "themes": {
+    "eating": "Alimentation",
+    "housing": "Bâtiment",
+    "goods": "Biens",
+    "services": "Services",
+    "transport": "Transport",
+    "events": "Evénement",
+    "finance": "Banque",
+    "lifestyle": "Mode de vie",
+    "pollution": "Pollution",
+    "biodiversity": "Biodiversité"
   }
 }

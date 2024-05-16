@@ -31,11 +31,15 @@ const ServiceCard = ({
 }) => {
   const t = useTranslations('service_card');
 
+  if (!service) {
+    return null;
+  }
+
   return (
     <Card h={'100%'} bg={backgroundColor}>
       {!noImage ? (
         <CardSection>
-          <Image src={service?.logo || `/images/default-service-image.jpg`} alt={service.title} height={100} />
+          <Image src={service?.logo || `/images/default-service-image.jpg`} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
@@ -43,7 +47,7 @@ const ServiceCard = ({
           <Grid>
             <GridCol span={{ base: 10 }} ta={'right'} pt={'sm'}>
               <Group gap={'xs'}>
-                {service.tags.map(tag => (
+                {(service?.tags || [])?.map(tag => (
                   <Badge
                     key={`tag-${tag}`}
                     size="sm"
@@ -60,13 +64,13 @@ const ServiceCard = ({
             </GridCol>
             <GridCol span={{ base: 12 }}>
               <Title order={3} c="orange">
-                {service.title}
+                {service.name}
               </Title>
             </GridCol>
           </Grid>
 
           <Text fz="sm" size="sm">
-            {service.shortDescription}
+            {service.description}
           </Text>
         </Stack>
         <CardSection>
