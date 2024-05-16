@@ -1,21 +1,19 @@
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
-import { BookmarkSimple, PottedPlant } from '@phosphor-icons/react/dist/ssr';
+import { BookmarkSimple } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { fetchActions } from '../ActionsPage/utils';
+import { fetchServices } from '../ActionsPage/utils';
 
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
 
-  const actions = await fetchActions({
+  const actions = await fetchServices({
     filters: {
       subjects: ['transports'],
       categories: []
     }
   });
-
-  console.log({ actions });
 
   return (
     <Stack gap={'xl'} align="center">
@@ -25,9 +23,7 @@ const HomePage = async ({}: {}) => {
           <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
             <Stack gap={'lg'}>
               <Title order={1}>
-                <Text fz={'inherit'}>
-                  {t('welcome')} <PottedPlant size={40} />
-                </Text>
+                <Text fz={'inherit'}>{t('welcome')}</Text>
               </Title>
               <Text>{t('guide')}</Text>
               <Text>

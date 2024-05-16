@@ -1,13 +1,13 @@
-import { fetchActions } from '@/app/components/pages/ActionsPage/utils';
+import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
 import FinderPage from '@/components/pages/FinderPage';
 
 export default function Finder() {
   return (
     <main>
       <FinderPage
-        fetchActions={async ({ filters }) => {
+        fetchServices={async ({ filters }) => {
           'use server';
-          return fetchActions({ filters });
+          return fetchServices({ filters });
         }}
       />
     </main>

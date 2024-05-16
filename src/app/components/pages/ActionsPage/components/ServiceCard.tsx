@@ -1,5 +1,5 @@
 import Bookmark from '@/app/components/pages/ActionsPage/components/Bookmark';
-import { Service, getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
+import { Service } from '@/app/components/pages/ActionsPage/utils';
 import {
   Badge,
   Button,
@@ -54,7 +54,7 @@ const ServiceCard = ({
                     variant="outline"
                     color="var(--mantine-color-dark-outline)"
                     bg="white">
-                    {getCategoryLabel(tag)}
+                    {tag}
                   </Badge>
                 ))}
               </Group>

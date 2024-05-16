@@ -3,7 +3,7 @@ import { ArrowLeft } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import Bookmark from '../ActionsPage/components/Bookmark';
-import { Service, fetchAction, getCategoryLabel } from '../ActionsPage/utils';
+import { Service, fetchAction } from '../ActionsPage/utils';
 
 const ActionPage = async ({ code }: { code: string }) => {
   const t = await getTranslations('action_page');
@@ -17,7 +17,7 @@ const ActionPage = async ({ code }: { code: string }) => {
 
   return (
     <Stack>
-      <Link href="/actions">
+      <Link href="/finder">
         <ArrowLeft color="black" />
       </Link>
       <Grid>
@@ -35,7 +35,7 @@ const ActionPage = async ({ code }: { code: string }) => {
                 variant="outline"
                 color="var(--mantine-color-dark-outline)"
                 bg="white">
-                {getCategoryLabel(tag)}
+                {tag}
               </Badge>
             ))}
           </Group>

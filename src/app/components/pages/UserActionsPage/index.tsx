@@ -1,6 +1,6 @@
 import { Input, Stack, Switch, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import { Filters, fetchActions } from '../ActionsPage/utils';
+import { Filters, fetchServices } from '../ActionsPage/utils';
 import List from './components/List';
 
 const UserActions = async () => {
@@ -17,9 +17,9 @@ const UserActions = async () => {
         <Input readOnly value={'https://www.oryx.com/page/XXXXXXXXXXX'} placeholder={t('share_page_label')} />
 
         <List
-          fetchActions={async ({ filters }: { filters: Filters }) => {
+          fetchServices={async ({ filters }: { filters: Filters }) => {
             'use server';
-            return fetchActions({ filters });
+            return fetchServices({ filters });
           }}
         />
       </Stack>

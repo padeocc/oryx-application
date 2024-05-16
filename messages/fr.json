@@ -35,7 +35,7 @@
     "find_inspiration": "Trouver l'inspiration",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "Vous pourrez les sauvegarder",
-    "welcome": "Bienvenue sur le compagnon des initiatives écoresponsables !"
+    "welcome": "Vous êtes sur le compagnon des initiatives écoresponsables"
   },
   "login_form_page": {
     "email_address": "Adresse email",
@@ -106,8 +106,8 @@
     "user_actions_title": "Mes actions"
   },
   "themes": {
-    "eating": "Alimentation",
-    "housing": "Bâtiment",
+    "eatings": "Alimentation",
+    "housings": "Bâtiment",
     "goods": "Biens",
     "services": "Services",
     "transports": "Transport",

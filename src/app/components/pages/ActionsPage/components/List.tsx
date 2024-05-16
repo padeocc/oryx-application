@@ -8,15 +8,15 @@ import { useLocalState } from '@/state';
 import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const List = ({
-  fetchActions,
+  fetchServices,
   data: initialData,
   subjects = [],
   categories = []
 }: {
-  fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]>;
+  fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
   subjects?: Theme[];
   categories: Category[];
@@ -27,22 +27,26 @@ const List = ({
   const { filters, setFilters } = useLocalState();
 
   const firstFetch = useRef(true);
+  /* Only when filters change*/
+  useEffect(() => {
+    if (!firstFetch.current) {
+      const fetchData = async () => {
+        setLoading(true);
+        const data = await fetchServices({ filters: { subjects, categories: filters.categories } });
+        setData(data);
+        setLoading(false);
+      };
+      fetchData();
+    } else {
+      firstFetch.current = false;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.categories]);
 
-  // /* Only when filters change*/
-  // useEffect(() => {
-  //   if (!firstFetch.current) {
-  //     const fetchData = async () => {
-  //       setLoading(true);
-  //       const data = await fetchActions({ filters });
-  //       setData(data);
-  //       setLoading(false);
-  //     };
-  //     fetchData();
-  //   } else {
-  //     firstFetch.current = false;
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [filters.categories]);
+  useEffect(() => {
+    setFilters({ ...filters, subjects });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -50,9 +54,8 @@ const List = ({
         itemsCount={data.length}
         loading={loading}
         filters={filters}
-        handleSubmit={values => {
-          setFilters(values);
-        }}
+        handleSubmit={setFilters}
+        allCategories={categories}
       />
       <Grid justify="flex-start" align="top" mt="lg">
         {loading ? (

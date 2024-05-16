@@ -11,7 +11,7 @@ export const getNavigationItems = ({
     [
       {
         name: t('action_label'),
-        href: '/actions',
+        href: '/finder',
         isExternal: false
       }
     ],

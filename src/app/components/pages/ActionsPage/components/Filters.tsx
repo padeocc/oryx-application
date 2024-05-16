@@ -1,4 +1,4 @@
-import { Filters } from '@/app/components/pages/ActionsPage/utils';
+import { Category, Filters } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesIcons } from '@/config';
 import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -23,12 +23,14 @@ const FiltersComponent = ({
   filters,
   loading,
   handleSubmit,
-  itemsCount
+  itemsCount,
+  allCategories
 }: {
   filters: Filters;
   loading: boolean;
   handleSubmit: (values: Filters) => void;
   itemsCount: number;
+  allCategories: Category[];
 }) => {
   const t = useTranslations('filters_component');
   const tTheme = useTranslations('themes');
@@ -36,7 +38,6 @@ const FiltersComponent = ({
     initialValues: filters
   });
   const selectedSubjects = (filters.subjects.length && filters.subjects) || [];
-  const categories: any[] = []; //getCategoriesFromSubjects(selectedSubjects);
 
   useEffect(() => {
     form.setValues(filters);
@@ -45,23 +46,21 @@ const FiltersComponent = ({
   }, [filters]);
 
   const options = Object.keys(themesIcons).map(item => (
-    <GridCol key={`select-theme-${item}`} span={{ base: 2, md: 'auto' }}>
-      <Link href={`/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-        <Stack align="center" gap={'xs'}>
-          {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
-          <Text
-            fz="xs"
-            ta="center"
-            c={
-              selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0
-                ? 'var(--mantine-primary-color-8)'
-                : 'lightgray'
-            }>
-            {tTheme(item)}
-          </Text>
-        </Stack>
-      </Link>
-    </GridCol>
+    <Link href={`/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }} key={`select-theme-${item}`}>
+      <Stack align="center" gap={'xs'}>
+        {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
+        <Text
+          fz="xs"
+          ta="center"
+          c={
+            selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0
+              ? 'var(--mantine-primary-color-8)'
+              : 'lightgray'
+          }>
+          {tTheme(item)}
+        </Text>
+      </Stack>
+    </Link>
   ));
 
   return (
@@ -72,7 +71,9 @@ const FiltersComponent = ({
       })}>
       <Grid gutter={'xl'}>
         <GridCol span={{ base: 12 }}>
-          <Grid justify="flex-start">{options}</Grid>
+          <Group justify="flex-start" pl="md" pt="md" pb="md" gap={'xl'}>
+            {options}
+          </Group>
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">
           {loading ? (
@@ -81,20 +82,20 @@ const FiltersComponent = ({
             <Title order={2}>{t('inspirations_found', { count: itemsCount })} </Title>
           )}
         </GridCol>
-        {categories.length > 0 ? (
+        {allCategories.length > 0 ? (
           <GridCol span={{ base: 12 }}>
             <Group gap={'xs'}>
-              {categories.map((category, index) => (
+              {allCategories.map((category, index) => (
                 <Chip
                   key={`cat-${index}`}
-                  checked={form.values.categories.includes(category.code)}
+                  checked={form.values?.categories?.includes(category)}
                   onClick={() => {
                     const currentCategories = form.values.categories;
                     let values = form.values.categories;
-                    if (currentCategories.includes(category.code)) {
-                      values = values.filter(c => c !== category.code);
+                    if (currentCategories?.includes(category)) {
+                      values = values.filter(c => c !== category);
                     } else {
-                      values = [...values, category.code];
+                      values = [...values, category];
                     }
                     const allValues = {
                       ...form.values,
@@ -104,7 +105,7 @@ const FiltersComponent = ({
                     handleSubmit(allValues);
                     form.setInitialValues(allValues);
                   }}>
-                  {category.title}
+                  {category}
                 </Chip>
               ))}
             </Group>

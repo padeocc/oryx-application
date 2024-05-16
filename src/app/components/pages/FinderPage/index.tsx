@@ -1,6 +1,6 @@
 'use client';
 
-import { Filters, Service, getCategoryLabel } from '@/app/components/pages/ActionsPage/utils';
+import { Filters, Service } from '@/app/components/pages/ActionsPage/utils';
 import { themes } from '@/config';
 import { useLocalState } from '@/state';
 import {
@@ -23,7 +23,11 @@ import { useTranslations } from 'next-intl';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const FinderPage = ({ fetchActions }: { fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]> }) => {
+const FinderPage = ({
+  fetchServices
+}: {
+  fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]>;
+}) => {
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
   const [categories, setCategories] = useState<string[]>([]);
@@ -37,7 +41,7 @@ const FinderPage = ({ fetchActions }: { fetchActions: ({ filters }: { filters: F
 
   useEffect(() => {
     const fetchData = async () => {
-      const actions = await fetchActions({
+      const actions = await fetchServices({
         filters: {
           subjects: selectedSubjects,
           categories: []
@@ -57,7 +61,7 @@ const FinderPage = ({ fetchActions }: { fetchActions: ({ filters }: { filters: F
       <form
         action={async () => {
           setFilters(form.values);
-          redirect(`/actions`);
+          redirect(`/actions/${selectedSubjects[0]}`);
         }}>
         <Grid>
           <GridCol span={{ base: 12, sm: 6 }}>
@@ -118,9 +122,7 @@ const FinderPage = ({ fetchActions }: { fetchActions: ({ filters }: { filters: F
                   <Stack gap="xs">
                     {selectedCategories?.length ? <Title order={3}>{t('subjects')}</Title> : null}
                     <Group gap="xs">
-                      {selectedCategories?.map(category => (
-                        <Badge key={`tag-${category}`}>{getCategoryLabel(category)}</Badge>
-                      )) || null}
+                      {selectedCategories?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
                     </Group>
                   </Stack>
                   <Button size="xl" type="submit" disabled={!selectedCategories?.length}>

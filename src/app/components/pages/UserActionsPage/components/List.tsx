@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Filters, Service } from '../../ActionsPage/utils';
 
-const List = ({ fetchActions }: { fetchActions: ({ filters }: { filters: Filters }) => Promise<Service[]> }) => {
+const List = ({ fetchServices }: { fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]> }) => {
   const t = useTranslations('user_actions');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<Service[]>([]);
@@ -16,7 +16,7 @@ const List = ({ fetchActions }: { fetchActions: ({ filters }: { filters: Filters
     const fetchData = async () => {
       setIsLoading(true);
       const codes = user?.services?.map(s => s.code) || [];
-      const data = await fetchActions({
+      const data = await fetchServices({
         filters: {
           subjects: [],
           categories: [],
