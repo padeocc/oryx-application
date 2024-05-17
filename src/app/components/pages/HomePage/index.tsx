@@ -11,8 +11,8 @@ const HomePage = async ({}: {}) => {
     filters: {
       subjects: ['transports'],
       categories: [],
-      sortBy: 'createdAt',
-      limit: 10
+      sortBy: 'createdAt:desc',
+      limit: 9
     }
   });
 
@@ -37,61 +37,19 @@ const HomePage = async ({}: {}) => {
         <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
       </Grid>
       <Space />
-      <Grid justify="center" w="100%">
-        <GridCol span={{ base: 12 }}>
-          <Stack gap={'lg'}>
-            <Title order={2} ta="center" size={'3em'}>
-              {t('discover_actions')}
-            </Title>
-            <Grid>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <Stack>
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[0]}
-                    theme={'transports'}
-                  />
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[2]}
-                    theme={'transports'}
-                  />
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[4]}
-                    theme={'transports'}
-                  />
-                </Stack>
-              </GridCol>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <Stack>
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[1]}
-                    theme={'transports'}
-                  />
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[3]}
-                    theme={'transports'}
-                  />
-                  <ServiceCard
-                    noImage
-                    backgroundColor={'var(--mantine-primary-color-2)'}
-                    service={actions[5]}
-                    theme={'transports'}
-                  />
-                </Stack>
-              </GridCol>
-            </Grid>
-          </Stack>
-        </GridCol>
-      </Grid>
+
+      <Stack gap={'lg'}>
+        <Title order={2} ta="center" size={'3em'}>
+          {t('discover_actions')}
+        </Title>
+        <Grid>
+          {actions.map((service, index) => (
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
+              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
+            </GridCol>
+          ))}
+        </Grid>
+      </Stack>
     </Stack>
   );
 };

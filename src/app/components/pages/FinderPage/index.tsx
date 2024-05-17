@@ -73,7 +73,7 @@ const FinderPage = ({
                       <Radio
                         id={theme}
                         key={theme}
-                        label={theme}
+                        label={tTheme(`${theme}`)}
                         value={theme}
                         checked={selectedSubjects?.includes(theme)}
                         onChange={subject => {

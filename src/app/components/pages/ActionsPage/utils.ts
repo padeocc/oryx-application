@@ -80,12 +80,10 @@ export const fetchServices = async ({ filters }: { filters?: Filters }) => {
   // }
 
   const limit = filters?.limit || -1;
-  const sort = filters?.sortBy || 'name';
-  console.log(
-    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort[0]=${sort}&populate=logo`
-  );
+  const sort = filters?.sortBy || 'name:asc';
+
   const response = await fetch(
-    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort[0]=${sort}&populate=logo`,
+    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort=${sort}&populate=logo`,
     {
       headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
     }
