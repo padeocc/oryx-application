@@ -1,4 +1,4 @@
-import { BowlFood, House, Scooter } from '@phosphor-icons/react/dist/ssr';
+import { Basketball, BowlFood, Scooter } from '@phosphor-icons/react/dist/ssr';
 
 export type Theme =
   | 'eatings'
@@ -15,8 +15,8 @@ export type Theme =
 export const themesIcons = {
   transports: Scooter,
   eatings: BowlFood,
-  housings: House
-  // goods: Basketball,
+  //housings: House
+  goods: Basketball
   // services: CallBell,
   // events: CalendarDots,
   // finances: CreditCard,

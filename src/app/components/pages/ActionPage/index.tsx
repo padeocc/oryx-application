@@ -33,7 +33,7 @@ const ActionPage = async ({ code, subject }: { code: string; subject: Theme }) =
       <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
         <Group gap={'xs'}>
           <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
-            {t(`type-${type?.[0]}-label`)}
+            {t(`type-${type?.[0] || 'company'}-label`)}
           </Badge>
           {tags.map(tag => (
             <Badge key={`tag-${tag}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">

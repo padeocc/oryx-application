@@ -10,7 +10,9 @@ const HomePage = async ({}: {}) => {
   const actions = await fetchServices({
     filters: {
       subjects: ['transports'],
-      categories: []
+      categories: [],
+      sortBy: 'createdAt',
+      limit: 10
     }
   });
 

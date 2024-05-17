@@ -62,20 +62,34 @@ export type Service = {
   logo?: { data: ImageData };
 };
 
-export type Filters = { subjects: string[]; categories: string[]; codes?: (string | undefined)[] };
+export type Filters = {
+  sortBy?: string;
+  limit?: number;
+  subjects: string[];
+  categories: string[];
+  codes?: (string | undefined)[];
+};
 
 export const fetchServices = async ({ filters }: { filters?: Filters }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
 
-  let filtersCatgeoriesString = '';
+  //let filtersCatgeoriesString = '';
   // if (filters?.categories?.length) {
   //   // Does not work https://github.com/Zaydme/strapi-plugin-multi-select/issues/27
   //   filtersCatgeoriesString = `${qs.stringify({ filters: { tags: { $in: filters.categories } } })}`;
   // }
 
-  const response = await fetch(`${url}/${filters?.subjects[0]}?populate=logo&${filtersCatgeoriesString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
-  });
+  const limit = filters?.limit || -1;
+  const sort = filters?.sortBy || 'name';
+  console.log(
+    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort[0]=${sort}&populate=logo`
+  );
+  const response = await fetch(
+    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort[0]=${sort}&populate=logo`,
+    {
+      headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    }
+  );
 
   const solutions = await response.json();
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
