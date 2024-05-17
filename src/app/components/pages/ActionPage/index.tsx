@@ -1,58 +1,55 @@
-import { Alert, Badge, Grid, GridCol, Group, Image, Stack, Text, Title } from '@mantine/core';
+import { Theme } from '@/config';
+import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
 import { ArrowLeft } from '@phosphor-icons/react/dist/ssr';
+import { format } from 'date-fns';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import Bookmark from '../ActionsPage/components/Bookmark';
-import { Service, fetchAction } from '../ActionsPage/utils';
+import { getLogoImage } from '../../content/utils';
+import NotFound from '../../navigation/NotFound';
+import { Service, fetchService } from '../ActionsPage/utils';
 
-const ActionPage = async ({ code }: { code: string }) => {
-  const t = await getTranslations('action_page');
-  const action: Service | undefined = await fetchAction({ code });
+const ActionPage = async ({ code, subject }: { code: string; subject: Theme }) => {
+  const t = await getTranslations('services');
+  const tUtils = await getTranslations('utils');
 
-  if (!action) {
-    return <Alert c="orange">Not found</Alert>;
+  const service: Service | undefined = await fetchService({ code, subject });
+
+  if (!service) {
+    return <NotFound message={`${code} - ${subject}`} />;
   }
 
-  const { logo, name, tags = [], description } = action;
+  const { name, tags = [], description, country, publishedAt, updatedAt, url, type, zipCode } = service;
 
   return (
     <Stack>
-      <Link href="/finder">
-        <ArrowLeft color="black" />
-      </Link>
-      <Grid>
-        {logo ? (
-          <GridCol span={{ base: 12 }} pt={'sm'}>
-            <Image src={logo || `/images/default-service-image.jpg`} alt={name} height={100} />
-          </GridCol>
-        ) : null}
-        <GridCol span={{ base: 10 }} ta={'right'} pt={'sm'}>
-          <Group gap={'xs'}>
-            {tags.map(tag => (
-              <Badge
-                key={`tag-${tag}`}
-                size="sm"
-                variant="outline"
-                color="var(--mantine-color-dark-outline)"
-                bg="white">
-                {tag}
-              </Badge>
-            ))}
-          </Group>
-        </GridCol>
-        <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
-          <Bookmark serviceCode={code} />
-        </GridCol>
-        <GridCol span={{ base: 12 }}>
-          <Title order={3} c="orange">
-            {name}
-          </Title>
-        </GridCol>
-      </Grid>
-
-      <Text fz="sm" size="sm">
-        {description}
-      </Text>
+      <Group>
+        <Link href={`/actions/${subject}`}>
+          <ArrowLeft color="black" />
+        </Link>
+        <Title order={3} c="orange">
+          {name}
+        </Title>
+      </Group>
+      <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
+        <Group gap={'xs'}>
+          <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+            {t(`type-${type?.[0]}-label`)}
+          </Badge>
+          {tags.map(tag => (
+            <Badge key={`tag-${tag}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {tag}
+            </Badge>
+          ))}
+        </Group>
+        <Text fz="sm">
+          {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day')) })}
+        </Text>
+        <Image src={getLogoImage({ service })} alt={name} w="auto" fit="contain" mah={'20rem'} />
+        <Alert>{description}</Alert>
+        <Button size="xl" component={Link} href={url} target="_blank">
+          {url}
+        </Button>
+      </Stack>
     </Stack>
   );
 };

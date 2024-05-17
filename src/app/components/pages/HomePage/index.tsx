@@ -1,6 +1,5 @@
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
-import { BookmarkSimple } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { fetchServices } from '../ActionsPage/utils';
@@ -26,9 +25,7 @@ const HomePage = async ({}: {}) => {
                 <Text fz={'inherit'}>{t('welcome')}</Text>
               </Title>
               <Text>{t('guide')}</Text>
-              <Text>
-                {t('save_actions')} (<BookmarkSimple />) {t('account')} {t('be_informed')}
-              </Text>
+              <Text>{t('save_actions')}</Text>
               <Button color="var(--mantine-color-dark-outline)" w="100%" component={Link} href="/finder">
                 {t('find_inspiration')}
               </Button>
@@ -51,19 +48,19 @@ const HomePage = async ({}: {}) => {
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[0]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[2]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[4]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                 </Stack>
               </GridCol>
@@ -73,19 +70,19 @@ const HomePage = async ({}: {}) => {
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[1]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[3]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                   <ServiceCard
                     noImage
                     backgroundColor={'var(--mantine-primary-color-2)'}
                     service={actions[5]}
-                    link="/actions/transports"
+                    theme={'transports'}
                   />
                 </Stack>
               </GridCol>

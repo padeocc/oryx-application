@@ -65,7 +65,11 @@ const List = ({
         ) : (
           data.map((service, index) => (
             <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
-              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} />
+              <ServiceCard
+                service={service}
+                backgroundColor={'var(--mantine-primary-color-2)'}
+                theme={filters.subjects[0] as Theme}
+              />
             </GridCol>
           ))
         )}

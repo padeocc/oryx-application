@@ -52,11 +52,7 @@ const FiltersComponent = ({
         <Text
           fz="xs"
           ta="center"
-          c={
-            selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0
-              ? 'var(--mantine-primary-color-8)'
-              : 'lightgray'
-          }>
+          c={selectedSubjects.includes(item as Theme) ? 'var(--mantine-primary-color-8)' : 'lightgray'}>
           {tTheme(item)}
         </Text>
       </Stack>

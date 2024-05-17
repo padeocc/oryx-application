@@ -29,13 +29,11 @@
     "title": "Trouver l'inspiration !"
   },
   "home_page": {
-    "account": "sur votre compte afin d'être tenu-e informé-e des nouveautés, et faire des retours au sein des communautés.",
-    "be_informed": "sur votre compte afin d'être tenu-e informé-e des nouveautés, et faire des retours au sein des communautés.",
-    "discover_actions": "Découvrez les actions qui vous conviennent !",
+    "discover_actions": "Les derniers services ajoutés",
     "find_inspiration": "Trouver l'inspiration",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
-    "save_actions": "Vous pourrez les sauvegarder",
-    "welcome": "Vous êtes sur le compagnon des initiatives écoresponsables"
+    "save_actions": "",
+    "welcome": "Vous êtes sur Oryx, le compagnon des initiatives écoresponsables !"
   },
   "login_form_page": {
     "email_address": "Adresse email",
@@ -108,13 +106,16 @@
   "themes": {
     "eatings": "Alimentation",
     "housings": "Bâtiment",
-    "goods": "Biens",
-    "services": "Services",
-    "transports": "Transport",
-    "events": "Evénement",
-    "finance": "Banque",
-    "lifestyle": "Mode de vie",
-    "pollution": "Pollution",
-    "biodiversity": "Biodiversité"
+    "transports": "Transport"
+  },
+  "services": {
+    "updatedat_label": "Date de dernière mise à jour : {date}",
+    "type-company-label": "Entreprise",
+    "type-association-label": "Association",
+    "type-public-service-label": "Service Public",
+    "type-school-label": "Ecole"
+  },
+  "utils": {
+    "fulldate-format-day": "EEEE dd MMMM yyyy"
   }
 }

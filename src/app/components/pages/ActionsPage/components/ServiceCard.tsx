@@ -1,5 +1,7 @@
-import Bookmark from '@/app/components/pages/ActionsPage/components/Bookmark';
+import { getLogoImage } from '@/app/components/content/utils';
+import NotFound from '@/app/components/navigation/NotFound';
 import { Service } from '@/app/components/pages/ActionsPage/utils';
+import { Theme } from '@/config';
 import {
   Badge,
   Button,
@@ -22,30 +24,32 @@ const ServiceCard = ({
   service,
   noImage = false,
   backgroundColor,
-  link
+  link,
+  theme
 }: {
   service: Service;
   noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
   link?: string;
+  theme: Theme;
 }) => {
   const t = useTranslations('service_card');
 
   if (!service) {
-    return null;
+    return <NotFound />;
   }
 
   return (
     <Card h={'100%'} bg={backgroundColor}>
       {!noImage ? (
         <CardSection>
-          <Image src={service?.logo || `/images/default-service-image.jpg`} alt={service.name} height={100} />
+          <Image src={getLogoImage({ service })} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
         <Stack>
           <Grid>
-            <GridCol span={{ base: 10 }} ta={'right'} pt={'sm'}>
+            <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
               <Group gap={'xs'}>
                 {(service?.tags || [])?.map(tag => (
                   <Badge
@@ -59,9 +63,9 @@ const ServiceCard = ({
                 ))}
               </Group>
             </GridCol>
-            <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
+            {/* <GridCol span={{ base: 2 }} ta={'right'} pt={'sm'}>
               <Bookmark serviceCode={service.code} />
-            </GridCol>
+            </GridCol> */}
             <GridCol span={{ base: 12 }}>
               <Title order={3} c="orange">
                 {service.name}
@@ -80,7 +84,7 @@ const ServiceCard = ({
             style={{ bottom: '0px' }}
             w={'100%'}
             component={Link}
-            href={link ? link : `/action/${service.code}`}>
+            href={link ? link : `/action/${theme}/${service.code}`}>
             {t('see_more')}
           </Button>
         </CardSection>

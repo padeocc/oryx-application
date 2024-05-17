@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^7.8.0",
-    "@mantine/form": "^7.8.0",
-    "@phosphor-icons/react": "^2.1.4",
+    "@mantine/core": "^7.9.1",
+    "@mantine/form": "^7.9.1",
+    "@phosphor-icons/react": "^2.1.5",
+    "date-fns": "^3.6.0",
     "lodash.uniq": "^4.5.0",
-    "next": "14.2.1",
-    "next-intl": "^3.11.1",
+    "next": "14.2.3",
+    "next-intl": "^3.14.0",
     "nextjs-cors": "^2.2.0",
     "qs": "^6.12.1",
     "react": "^18",
@@ -25,13 +26,13 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.0",
+    "@types/lodash": "^4.17.4",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.1",
+    "eslint-config-next": "14.2.3",
     "typescript": "^5"
   }
 }
