@@ -7,12 +7,30 @@ import { fetchServices } from '../ActionsPage/utils';
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
 
-  const actions = await fetchServices({
+  const transports = await fetchServices({
     filters: {
       subjects: ['transports'],
       categories: [],
       sortBy: 'createdAt:desc',
-      limit: 9
+      limit: 3
+    }
+  });
+
+  const goods = await fetchServices({
+    filters: {
+      subjects: ['transports'],
+      categories: [],
+      sortBy: 'createdAt:desc',
+      limit: 3
+    }
+  });
+
+  const foods = await fetchServices({
+    filters: {
+      subjects: ['transports'],
+      categories: [],
+      sortBy: 'createdAt:desc',
+      limit: 3
     }
   });
 
@@ -43,7 +61,17 @@ const HomePage = async ({}: {}) => {
           {t('discover_actions')}
         </Title>
         <Grid>
-          {actions.map((service, index) => (
+          {transports.map((service, index) => (
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
+              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
+            </GridCol>
+          ))}
+          {foods.map((service, index) => (
+            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
+              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
+            </GridCol>
+          ))}
+          {goods.map((service, index) => (
             <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
               <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
             </GridCol>
