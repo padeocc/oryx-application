@@ -44,7 +44,7 @@ const List = ({
   }, [filters.categories]);
 
   useEffect(() => {
-    setFilters({ ...filters, subjects });
+    setFilters({ subjects, categories: [] });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

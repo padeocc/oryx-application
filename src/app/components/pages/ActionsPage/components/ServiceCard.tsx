@@ -33,7 +33,7 @@ const ServiceCard = ({
   link?: string;
   theme: Theme;
 }) => {
-  const t = useTranslations('service_card');
+  const t = useTranslations('common');
 
   if (!service) {
     return <NotFound />;

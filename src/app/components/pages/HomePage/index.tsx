@@ -1,11 +1,14 @@
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { Button, Card, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
+import { Theme } from '@/config';
+import { Button, Card, Flex, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { fetchServices } from '../ActionsPage/utils';
+import { Service, fetchServices } from '../ActionsPage/utils';
 
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
+  const tTheme = await getTranslations('themes');
+  const tCommon = await getTranslations('common');
 
   const transports = await fetchServices({
     filters: {
@@ -18,7 +21,7 @@ const HomePage = async ({}: {}) => {
 
   const goods = await fetchServices({
     filters: {
-      subjects: ['transports'],
+      subjects: ['goods'],
       categories: [],
       sortBy: 'createdAt:desc',
       limit: 3
@@ -27,12 +30,34 @@ const HomePage = async ({}: {}) => {
 
   const foods = await fetchServices({
     filters: {
-      subjects: ['transports'],
+      subjects: ['foods'],
       categories: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }
   });
+
+  const showThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
+    return (
+      <Grid>
+        <GridCol span={{ base: 12 }}>
+          <Title order={3}>{tTheme(theme)}</Title>
+        </GridCol>
+        {items.map((service, index) => (
+          <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
+            <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={theme} />
+          </GridCol>
+        ))}
+        <GridCol span={{ base: 12 }}>
+          <Flex justify={'center'}>
+            <Button component={Link} href={`/actions/${theme}`} size="lg">
+              {tCommon('see_more')}
+            </Button>
+          </Flex>
+        </GridCol>
+      </Grid>
+    );
+  };
 
   return (
     <Stack gap={'xl'} align="center">
@@ -60,23 +85,9 @@ const HomePage = async ({}: {}) => {
         <Title order={2} ta="center" size={'3em'}>
           {t('discover_actions')}
         </Title>
-        <Grid>
-          {transports.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
-              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
-            </GridCol>
-          ))}
-          {foods.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
-              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
-            </GridCol>
-          ))}
-          {goods.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
-              <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={'transports'} />
-            </GridCol>
-          ))}
-        </Grid>
+        {showThemeSection({ items: transports, theme: 'transports' })}
+        {showThemeSection({ items: goods, theme: 'goods' })}
+        {showThemeSection({ items: foods, theme: 'foods' })}
       </Stack>
     </Stack>
   );

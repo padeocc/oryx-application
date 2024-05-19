@@ -2,8 +2,6 @@ import { Theme } from '@/config';
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import { uniq } from 'lodash';
 import foods from './data/foods.json';
-import goods from './data/goods.json';
-import transports from './data/transports.json';
 
 const createCodeField = (name: string) => {
   return name
@@ -38,7 +36,6 @@ const importData = async () => {
       if (item.region) {
         optionalFields.region = item.region.toString();
       }
-
       if (item.organic !== undefined) {
         optionalFields.organic = Number(item?.organic);
       }
@@ -60,7 +57,6 @@ const importData = async () => {
       if (item.foodwastereducer !== undefined) {
         optionalFields.foodwastereducer = !!item?.foodwastereducer;
       }
-
       if (item.used !== undefined) {
         optionalFields.used = !!item?.used;
       }
@@ -78,12 +74,6 @@ const importData = async () => {
       }
       if (item.ecobuilt !== undefined) {
         optionalFields.ecobuilt = !!item?.ecobuilt;
-      }
-      if (item.local !== undefined) {
-        optionalFields.local = !!item?.local;
-      }
-      if (item.organic !== undefined) {
-        optionalFields.organic = !!item?.organic;
       }
       if (item.lowtech !== undefined) {
         optionalFields.lowtech = !!item?.lowtech;
@@ -122,8 +112,8 @@ const importData = async () => {
     });
   };
 
-  importValues({ items: goods, theme: 'goods' });
-  importValues({ items: transports, theme: 'transports' });
+  // importValues({ items: goods, theme: 'goods' });
+  // importValues({ items: transports, theme: 'transports' });
   importValues({ items: foods, theme: 'foods' });
 
   // const tags = getUniquesTags(goods);
