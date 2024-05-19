@@ -51,7 +51,7 @@ const HomePage = async ({}: {}) => {
         <GridCol span={{ base: 12 }}>
           <Flex justify={'center'}>
             <Button component={Link} href={`/actions/${theme}`} size="lg">
-              {tCommon('see_more')}
+              {tCommon('see_more_theme')}
             </Button>
           </Flex>
         </GridCol>

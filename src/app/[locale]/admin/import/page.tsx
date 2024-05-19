@@ -2,6 +2,8 @@ import { Theme } from '@/config';
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import { uniq } from 'lodash';
 import foods from './data/foods.json';
+import goods from './data/goods.json';
+import transports from './data/transports.json';
 
 const createCodeField = (name: string) => {
   return name
@@ -112,15 +114,14 @@ const importData = async () => {
     });
   };
 
-  // importValues({ items: goods, theme: 'goods' });
-  // importValues({ items: transports, theme: 'transports' });
+  importValues({ items: goods, theme: 'goods' });
+  importValues({ items: transports, theme: 'transports' });
   importValues({ items: foods, theme: 'foods' });
 
-  // const tags = getUniquesTags(goods);
-  // console.log('------------');
-  // tags.map(t => {
-  //   console.log(`${t}\n`);
-  // });
+  const tags = getUniquesTags([...goods, ...transports, ...foods]);
+  tags.map(t => {
+    console.log(`${t}\n`);
+  });
 
   return <CheckCircle fontSize={'10rem'} color="green" />;
 };
