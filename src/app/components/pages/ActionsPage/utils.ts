@@ -65,7 +65,7 @@ export type Service = {
 export type Filters = {
   sortBy?: string;
   limit?: number;
-  subjects: string[];
+  theme: string | undefined;
   categories: string[];
   codes?: (string | undefined)[];
 };
@@ -83,7 +83,7 @@ export const fetchServices = async ({ filters }: { filters?: Filters }) => {
   const sort = filters?.sortBy || 'name:asc';
 
   const response = await fetch(
-    `${url}/${filters?.subjects[0]}?pagination[start]=0&pagination[limit]=${limit}&sort=${sort}&populate=logo`,
+    `${url}/${filters?.theme}?pagination[start]=0&pagination[limit]=${limit}&sort=${sort}&populate=logo`,
     {
       headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
     }
@@ -102,12 +102,12 @@ export const fetchServices = async ({ filters }: { filters?: Filters }) => {
   return services;
 };
 
-export const getTagsfromActions = (actions: Service[]) => uniq(actions.flatMap(action => action?.tags || []));
+export const getTagsfromServices = (services: Service[]) => uniq(services.flatMap(service => service?.tags || []));
 
-export const fetchService = async ({ code, subject }: { code: string; subject: Theme }) => {
+export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
-  const response = await fetch(`${url}/${subject}?${filtersString}`, {
+  const response = await fetch(`${url}/${theme}?${filtersString}`, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
   });
   const solution = await response.json();

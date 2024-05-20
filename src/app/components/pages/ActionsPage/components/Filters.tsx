@@ -37,7 +37,7 @@ const FiltersComponent = ({
   const form = useForm({
     initialValues: filters
   });
-  const selectedSubjects = (filters.subjects.length && filters.subjects) || [];
+  const selectedTheme = filters.theme || [];
 
   useEffect(() => {
     form.setValues(filters);
@@ -48,11 +48,8 @@ const FiltersComponent = ({
   const options = Object.keys(themesIcons).map(item => (
     <Link href={`/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }} key={`select-theme-${item}`}>
       <Stack align="center" gap={'xs'}>
-        {getIconFromTheme(item as Theme, selectedSubjects.includes(item as Theme) || selectedSubjects.length === 0)}
-        <Text
-          fz="xs"
-          ta="center"
-          c={selectedSubjects.includes(item as Theme) ? 'var(--mantine-primary-color-8)' : 'lightgray'}>
+        {getIconFromTheme(item as Theme, selectedTheme === item)}
+        <Text fz="xs" ta="center" c={selectedTheme === item ? 'var(--mantine-primary-color-8)' : 'lightgray'}>
           {tTheme(item)}
         </Text>
       </Stack>

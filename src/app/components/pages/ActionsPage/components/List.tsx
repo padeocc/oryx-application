@@ -13,12 +13,12 @@ import { useEffect, useRef, useState } from 'react';
 const List = ({
   fetchServices,
   data: initialData,
-  subjects = [],
+  theme,
   categories = []
 }: {
   fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]>;
   data: Service[];
-  subjects?: Theme[];
+  theme: Theme;
   categories: Category[];
 }) => {
   const t = useTranslations('content');
@@ -26,27 +26,30 @@ const List = ({
   const [loading, setLoading] = useState<boolean>(false);
   const { filters, setFilters } = useLocalState();
 
-  const firstFetch = useRef(true);
-  /* Only when filters change*/
+  const firstServicesFetch = useRef(true);
+
   useEffect(() => {
-    if (!firstFetch.current) {
+    if (!firstServicesFetch.current) {
+      setLoading(true);
       const fetchData = async () => {
-        setLoading(true);
-        const data = await fetchServices({ filters: { subjects, categories: filters.categories } });
+        const data = await fetchServices({ filters: { theme, categories: filters.categories } });
         setData(data);
         setLoading(false);
       };
       fetchData();
     } else {
-      firstFetch.current = false;
+      firstServicesFetch.current = false;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.categories]);
 
   useEffect(() => {
-    setFilters({ subjects, categories: [] });
+    const hasthemeSwitched = theme !== filters?.theme;
+    if (hasthemeSwitched) {
+      setFilters({ theme, categories: [] });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filters.theme]);
 
   return (
     <>
@@ -68,7 +71,7 @@ const List = ({
               <ServiceCard
                 service={service}
                 backgroundColor={'var(--mantine-primary-color-2)'}
-                theme={filters.subjects[0] as Theme}
+                theme={filters.theme as Theme}
               />
             </GridCol>
           ))

@@ -6,7 +6,7 @@ export default function Action({ params }: { params: { code: string; theme: Them
   const theme = params.theme;
   return (
     <main>
-      <ActionPage code={code} subject={theme} />
+      <ActionPage code={code} theme={theme} />
     </main>
   );
 }

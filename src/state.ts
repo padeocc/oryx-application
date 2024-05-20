@@ -37,7 +37,7 @@ export const useLocalState = create<LocalState>()(
             return state;
           }),
         filters: {
-          subjects: [],
+          theme: undefined,
           categories: []
         },
         setFilters: filters => set(state => ({ ...state, filters }))

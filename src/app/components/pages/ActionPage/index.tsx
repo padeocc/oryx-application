@@ -8,14 +8,14 @@ import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { Service, fetchService } from '../ActionsPage/utils';
 
-const ActionPage = async ({ code, subject }: { code: string; subject: Theme }) => {
+const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');
   const tUtils = await getTranslations('utils');
 
-  const service: Service | undefined = await fetchService({ code, subject });
+  const service: Service | undefined = await fetchService({ code, theme });
 
   if (!service) {
-    return <NotFound message={`${code} - ${subject}`} />;
+    return <NotFound message={`${code} - ${theme}`} />;
   }
 
   const { name, tags = [], description, country, publishedAt, updatedAt, url, type, zipCode } = service;
@@ -23,7 +23,7 @@ const ActionPage = async ({ code, subject }: { code: string; subject: Theme }) =
   return (
     <Stack>
       <Group>
-        <Link href={`/actions/${subject}`}>
+        <Link href={`/actions/${theme}`}>
           <ArrowLeft color="black" />
         </Link>
         <Title order={3} c="orange">

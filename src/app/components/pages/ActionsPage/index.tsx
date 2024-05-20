@@ -1,17 +1,20 @@
 import { Theme } from '@/config';
-import uniq from 'lodash/uniq';
+import NotFound from '../../navigation/NotFound';
 import List from './components/List';
-import { Category, Filters, fetchServices } from './utils';
+import { Category, Filters, fetchServices, getTagsfromServices } from './utils';
 
-const ActionsPage = async ({ themes }: { themes?: Theme[] }) => {
-  const subjects = themes ? themes : [];
+const ActionsPage = async ({ theme }: { theme: Theme }) => {
   const services = await fetchServices({
     filters: {
       categories: [],
-      subjects
+      theme
     }
   });
-  const categories: Category[] = uniq(services.flatMap(service => service.tags));
+  const categories: Category[] = getTagsfromServices(services);
+
+  if (!theme) {
+    return <NotFound />;
+  }
 
   return (
     <List
@@ -20,7 +23,7 @@ const ActionsPage = async ({ themes }: { themes?: Theme[] }) => {
         return fetchServices({ filters });
       }}
       data={services}
-      subjects={subjects}
+      theme={theme}
       categories={categories}
     />
   );

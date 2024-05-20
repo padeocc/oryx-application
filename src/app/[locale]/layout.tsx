@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
+import Footer from '../components/navigation/Footer';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -43,6 +44,7 @@ export default async function RootLayout({
                   </Container>
                 </AppShellMain>
               </AppShell>
+              <Footer />
             </MantineProvider>
             <GoogleAnalytics />
           </NextIntlClientProvider>

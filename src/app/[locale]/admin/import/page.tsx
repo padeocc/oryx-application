@@ -21,6 +21,30 @@ const getUniquesTags = (arr: any[]) => {
   );
 };
 
+const fieldsTypes: { [key: string]: 'string' | 'number' | 'boolean' } = {
+  shortcircuit: 'boolean',
+  wastereducer: 'boolean',
+  cookmore: 'boolean',
+  foodwastereducer: 'boolean',
+  used: 'boolean',
+  reused: 'boolean',
+  rent: 'boolean',
+  mutualise: 'boolean',
+  repair: 'boolean',
+  ecobuilt: 'boolean',
+  lowtech: 'boolean',
+  recycled: 'boolean',
+  diy: 'boolean',
+  comparer: 'boolean',
+  relocating: 'boolean',
+  moralscore: 'string',
+  weight: 'string',
+  region: 'string',
+  organic: 'number',
+  local: 'number',
+  season: 'number'
+};
+
 const importData = async () => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const importValues = ({ items, theme }: { items: any[]; theme: Theme }) => {
@@ -29,69 +53,26 @@ const importData = async () => {
 
       const optionalFields: any = {};
 
-      if (item.moralscore !== undefined) {
-        optionalFields.moralscore = item.moralscore.toString();
-      }
-      if (item.weight !== undefined) {
-        optionalFields.weight = item.weight.toString();
-      }
-      if (item.region) {
-        optionalFields.region = item.region.toString();
-      }
-      if (item.organic !== undefined) {
-        optionalFields.organic = Number(item?.organic);
-      }
-      if (item.local !== undefined) {
-        optionalFields.local = Number(item?.local);
-      }
-      if (item.season !== undefined) {
-        optionalFields.season = Number(item?.season);
-      }
-      if (item.shortcircuit !== undefined) {
-        optionalFields.shortcircuit = !!item?.shortcircuit;
-      }
-      if (item.wastereducer !== undefined) {
-        optionalFields.wastereducer = !!item?.wastereducer;
-      }
-      if (item.cookmore !== undefined) {
-        optionalFields.cookmore = !!item?.cookmore;
-      }
-      if (item.foodwastereducer !== undefined) {
-        optionalFields.foodwastereducer = !!item?.foodwastereducer;
-      }
-      if (item.used !== undefined) {
-        optionalFields.used = !!item?.used;
-      }
-      if (item.reused !== undefined) {
-        optionalFields.reused = !!item?.reused;
-      }
-      if (item.rent !== undefined) {
-        optionalFields.rent = !!item?.rent;
-      }
-      if (item.mutualise !== undefined) {
-        optionalFields.mutualise = !!item?.mutualise;
-      }
-      if (item.repair !== undefined) {
-        optionalFields.repair = !!item?.repair;
-      }
-      if (item.ecobuilt !== undefined) {
-        optionalFields.ecobuilt = !!item?.ecobuilt;
-      }
-      if (item.lowtech !== undefined) {
-        optionalFields.lowtech = !!item?.lowtech;
-      }
-      if (item.recycled !== undefined) {
-        optionalFields.recycled = !!item?.recycled;
-      }
-      if (item.diy !== undefined) {
-        optionalFields.diy = !!item?.diy;
-      }
-      if (item.comparer !== undefined) {
-        optionalFields.comparer = !!item?.comparer;
-      }
-      if (item.relocating !== undefined) {
-        optionalFields.relocating = !!item?.relocating;
-      }
+      Object.keys(fieldsTypes).forEach(field => {
+        if (item[field] === undefined) {
+          return;
+        }
+        const type = fieldsTypes[field];
+
+        switch (type) {
+          case 'boolean':
+            item[field] = !!item[field];
+
+            break;
+          case 'number':
+            optionalFields[field] = Number(item?.local);
+            break;
+
+          default:
+            item[field] = item[field].toString();
+            break;
+        }
+      });
 
       const data = { ...item, code: createCodeField(item.name), tags, ...optionalFields };
 

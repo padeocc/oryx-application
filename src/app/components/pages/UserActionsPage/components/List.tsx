@@ -15,12 +15,12 @@ const List = ({ fetchServices }: { fetchServices: ({ filters }: { filters: Filte
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const codes = user?.services?.map(s => s.code) || [];
+      const codes = user?.services?.map(({ code }) => code) || [];
       const data = await fetchServices({
         filters: {
-          subjects: [],
           categories: [],
-          codes
+          codes,
+          theme: undefined
         }
       });
       setData(data);

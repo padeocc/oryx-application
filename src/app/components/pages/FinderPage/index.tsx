@@ -1,6 +1,6 @@
 'use client';
 
-import { Filters, Service } from '@/app/components/pages/ActionsPage/utils';
+import { Filters, Service, getTagsfromServices } from '@/app/components/pages/ActionsPage/utils';
 import { themes } from '@/config';
 import { useLocalState } from '@/state';
 import {
@@ -18,7 +18,6 @@ import {
   Title
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { uniq } from 'lodash';
 import { useTranslations } from 'next-intl';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -36,24 +35,31 @@ const FinderPage = ({
   const form = useForm({
     initialValues: filters
   });
-  const selectedSubjects = form.values.subjects;
-  const selectedCategories = form.values.categories;
+  const selectedTheme = form.values.theme;
+  const selectedTags = form.values.categories;
 
   useEffect(() => {
     const fetchData = async () => {
-      const actions = await fetchServices({
+      const services = await fetchServices({
         filters: {
-          subjects: selectedSubjects,
+          theme: selectedTheme,
           categories: []
         }
       });
-      const categories = uniq(actions.flatMap(action => action.tags));
+      const categories = getTagsfromServices(services);
       setCategories(categories);
     };
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSubjects]);
+  }, [selectedTheme]);
+
+  useEffect(() => {
+    if (!!selectedTheme) {
+      form.setFieldValue('categories', []);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTheme]);
 
   return (
     <Stack>
@@ -61,13 +67,13 @@ const FinderPage = ({
       <form
         action={async () => {
           setFilters(form.values);
-          redirect(`/actions/${selectedSubjects[0]}`);
+          redirect(`/actions/${selectedTheme}`);
         }}>
         <Grid>
           <GridCol span={{ base: 12, sm: 6 }}>
             <Stack>
               <Card>
-                <RadioGroup value={selectedSubjects[0]}>
+                <RadioGroup value={selectedTheme}>
                   <Stack gap="xs" pt="xs">
                     {themes.map(theme => (
                       <Radio
@@ -75,9 +81,9 @@ const FinderPage = ({
                         key={theme}
                         label={tTheme(`${theme}`)}
                         value={theme}
-                        checked={selectedSubjects?.includes(theme)}
-                        onChange={subject => {
-                          form.setValues({ subjects: [subject.target.value] });
+                        checked={selectedTheme === theme}
+                        onChange={theme => {
+                          form.setValues({ theme: theme.target.value });
                         }}
                       />
                     ))}
@@ -86,10 +92,10 @@ const FinderPage = ({
               </Card>
               {categories?.length ? (
                 <Card>
-                  <Title order={2}>{t('interested_subjects')}</Title>
+                  <Title order={2}>{t('interested_themes')}</Title>
                   <CheckboxGroup
                     onChange={categories => form.setFieldValue('categories', categories)}
-                    value={selectedCategories}>
+                    value={selectedTags}>
                     <Stack gap="xs" pt="xs">
                       {categories.map(category => (
                         <Checkbox
@@ -98,7 +104,7 @@ const FinderPage = ({
                           label={category}
                           value={category}
                           name={`categories[${category}]`}
-                          checked={selectedCategories?.includes(category)}
+                          checked={selectedTags?.includes(category)}
                         />
                       ))}
                     </Stack>
@@ -107,25 +113,24 @@ const FinderPage = ({
               ) : null}
             </Stack>
           </GridCol>
-          {selectedCategories?.length ? (
+          {selectedTags?.length ? (
             <GridCol span={{ base: 12, sm: 6 }}>
               <Card>
                 <Title order={2}>{t('summary')}</Title>
                 <Stack gap="xl" pt="xl">
                   <Stack gap="xs">
-                    {selectedSubjects?.length ? <Title order={3}>{t('themes')}</Title> : null}
+                    {selectedTheme ? <Title order={3}>{t('themes')}</Title> : null}
                     <Group gap="xs">
-                      {selectedSubjects?.map(subject => <Badge key={`tag-${subject}`}>{tTheme(subject)}</Badge>) ||
-                        null}
+                      {selectedTheme ? <Badge key={`tag-${selectedTheme}`}>{tTheme(selectedTheme)}</Badge> : null}
                     </Group>
                   </Stack>
                   <Stack gap="xs">
-                    {selectedCategories?.length ? <Title order={3}>{t('subjects')}</Title> : null}
+                    {selectedTags?.length ? <Title order={3}>{t('themes')}</Title> : null}
                     <Group gap="xs">
-                      {selectedCategories?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
+                      {selectedTags?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
                     </Group>
                   </Stack>
-                  <Button size="xl" type="submit" disabled={!selectedCategories?.length}>
+                  <Button size="xl" type="submit" disabled={!selectedTags?.length}>
                     {t('validate')}
                   </Button>
                 </Stack>

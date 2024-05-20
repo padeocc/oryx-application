@@ -12,7 +12,7 @@ const HomePage = async ({}: {}) => {
 
   const transports = await fetchServices({
     filters: {
-      subjects: ['transports'],
+      theme: 'transports',
       categories: [],
       sortBy: 'createdAt:desc',
       limit: 3
@@ -21,7 +21,7 @@ const HomePage = async ({}: {}) => {
 
   const goods = await fetchServices({
     filters: {
-      subjects: ['goods'],
+      theme: 'goods',
       categories: [],
       sortBy: 'createdAt:desc',
       limit: 3
@@ -30,7 +30,7 @@ const HomePage = async ({}: {}) => {
 
   const foods = await fetchServices({
     filters: {
-      subjects: ['foods'],
+      theme: 'foods',
       categories: [],
       sortBy: 'createdAt:desc',
       limit: 3
@@ -80,7 +80,6 @@ const HomePage = async ({}: {}) => {
         <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
       </Grid>
       <Space />
-
       <Stack gap={'lg'}>
         <Title order={2} ta="center" size={'3em'}>
           {t('discover_actions')}

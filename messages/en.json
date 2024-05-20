@@ -21,8 +21,8 @@
     "inspirations_found": "{count, plural, =0 {Aucune action trouvée avec ces filtres} =1 {Une action trouvée !} other {# inspirations trouvées}}"
   },
   "finder_page": {
-    "interested_subjects": "Quels sont les sujets qui vous intéressent ?",
-    "subjects": "Sujets",
+    "interested_themes": "Quels sont les sujets qui vous intéressent ?",
+    "themes": "Sujets",
     "summary": "Récapitulatif",
     "themes": "Thèmes",
     "validate": "Valider les choix",
@@ -47,7 +47,7 @@
     "login": "Se connecter"
   },
   "navigation_items": {
-    "action_label": "Trouver une action",
+    "actions_label": "Trouver une action",
     "actions_label": "Voir mes actions",
     "donate_label": "Faire un don"
   },
