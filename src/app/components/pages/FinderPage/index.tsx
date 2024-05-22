@@ -1,6 +1,6 @@
 'use client';
 
-import { Filters, Service, getTagsfromServices } from '@/app/components/pages/ActionsPage/utils';
+import { FetchServicesResponse, Filters, getTagsfromServices } from '@/app/components/pages/ActionsPage/utils';
 import { themes } from '@/config';
 import { useLocalState } from '@/state';
 import {
@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react';
 const FinderPage = ({
   fetchServices
 }: {
-  fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]>;
+  fetchServices: ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>;
 }) => {
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
@@ -40,13 +40,13 @@ const FinderPage = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const services = await fetchServices({
+      const data = await fetchServices({
         filters: {
           theme: selectedTheme,
           categories: []
         }
       });
-      const categories = getTagsfromServices(services);
+      const categories = getTagsfromServices(data.services);
       setCategories(categories);
     };
     fetchData();

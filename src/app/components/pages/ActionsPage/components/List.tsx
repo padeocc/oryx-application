@@ -2,44 +2,44 @@
 
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { Category, Filters, Service } from '@/app/components/pages/ActionsPage/utils';
+import { Category, FetchServicesResponse, Filters, Service } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import { useLocalState } from '@/state';
 import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const List = ({
   fetchServices,
   data: initialData,
   theme,
-  categories = []
+  categories = [],
+  total: initialTotal,
+  color
 }: {
-  fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]>;
+  fetchServices: ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>;
   data: Service[];
   theme: Theme;
   categories: Category[];
+  total: number;
+  color: string;
 }) => {
   const t = useTranslations('content');
   const [data, setData] = useState<Service[]>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const { filters, setFilters } = useLocalState();
-
-  const firstServicesFetch = useRef(true);
+  const [total, setTotal] = useState<number>(initialTotal);
 
   useEffect(() => {
-    if (!firstServicesFetch.current) {
-      setLoading(true);
-      const fetchData = async () => {
-        const data = await fetchServices({ filters: { theme, categories: filters.categories } });
-        setData(data);
-        setLoading(false);
-      };
-      fetchData();
-    } else {
-      firstServicesFetch.current = false;
-    }
+    setLoading(true);
+    const fetchData = async () => {
+      const data = await fetchServices({ filters: { theme, categories: filters.categories } });
+      setData(data.services);
+      setTotal(data.meta.pagination.total);
+      setLoading(false);
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.categories]);
 
@@ -54,24 +54,25 @@ const List = ({
   return (
     <>
       <FiltersComponent
-        itemsCount={data.length}
+        itemsCount={total}
         loading={loading}
         filters={filters}
         handleSubmit={setFilters}
         allCategories={categories}
       />
-      <Grid justify="flex-start" align="top" mt="lg">
+      <Grid justify="flex-start" align="top" mt="lg" grow>
         {loading ? (
           <GridCol span={{ base: 12 }} ta="center" p="xl">
             <Loader />
           </GridCol>
         ) : (
           data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
+            <GridCol span={{ base: 12, sm: 6, md: 3 }} key={`action-${service.name}-${index}`}>
               <ServiceCard
                 service={service}
                 backgroundColor={'var(--mantine-primary-color-2)'}
                 theme={filters.theme as Theme}
+                color={color}
               />
             </GridCol>
           ))

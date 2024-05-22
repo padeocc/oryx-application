@@ -70,7 +70,11 @@ export type Filters = {
   codes?: (string | undefined)[];
 };
 
-export const fetchServices = async ({ filters }: { filters?: Filters }) => {
+export type FetchServicesResponse = {
+  services: Service[];
+  meta: { pagination: { start: number; limit: number; total: number } };
+};
+export const fetchServices = async ({ filters }: { filters?: Filters }): Promise<FetchServicesResponse> => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
 
   //let filtersCatgeoriesString = '';
@@ -94,22 +98,35 @@ export const fetchServices = async ({ filters }: { filters?: Filters }) => {
 
   // Workaround
   if (filters?.categories?.length) {
-    return services.filter(service => {
+    const filteredServices = services.filter(service => {
       return intersection(service.tags, filters.categories).length > 0;
     });
+    return {
+      services: filteredServices,
+      meta: {
+        pagination: {
+          limit: solutions.meta.pagination.limit,
+          start: solutions.meta.pagination.start,
+          total: filteredServices.length
+        }
+      }
+    };
   }
 
-  return services;
+  return { services, meta: solutions.meta };
 };
 
-export const getTagsfromServices = (services: Service[]) => uniq(services.flatMap(service => service?.tags || []));
+export const getTagsfromServices = (services: Service[]) =>
+  uniq(services.flatMap(service => service?.tags || [])).sort((a, b) => (a > b ? 1 : -1));
 
 export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    cache: 'no-cache'
   });
   const solution = await response.json();
-  return solution?.data?.[0]?.attributes;
+  const item = solution?.data?.[0];
+  return { ...item?.attributes, id: item?.id };
 };

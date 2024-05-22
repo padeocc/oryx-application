@@ -1,5 +1,5 @@
 import { Category, Filters } from '@/app/components/pages/ActionsPage/utils';
-import { Theme, themesIcons } from '@/config';
+import { Theme, themesColors, themesIcons } from '@/config';
 import { Chip, Grid, GridCol, Group, Loader, Stack, Text, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { PottedPlant } from '@phosphor-icons/react';
@@ -7,12 +7,12 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
+const getIconFromTheme = (theme: Theme, selected: boolean = false, color: string) => {
   const Icon = themesIcons?.[theme] || PottedPlant;
   return (
     <Icon
       size={30}
-      color={selected ? 'var(--mantine-primary-color-8)' : 'lightgray'}
+      color={selected ? color : 'lightgray'}
       style={{ cursor: 'pointer' }}
       weight={selected ? 'fill' : 'regular'}
     />
@@ -45,16 +45,22 @@ const FiltersComponent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
-  const options = Object.keys(themesIcons).map(item => (
-    <Link href={`/actions/${item}`} style={{ color: 'inherit', textDecoration: 'none' }} key={`select-theme-${item}`}>
-      <Stack align="center" gap={'xs'}>
-        {getIconFromTheme(item as Theme, selectedTheme === item)}
-        <Text fz="xs" ta="center" c={selectedTheme === item ? 'var(--mantine-primary-color-8)' : 'lightgray'}>
-          {tTheme(item)}
-        </Text>
-      </Stack>
-    </Link>
-  ));
+  const options = Object.keys(themesIcons).map(theme => {
+    const color = themesColors[theme];
+    return (
+      <Link
+        href={`/actions/${theme}`}
+        style={{ color: 'inherit', textDecoration: 'none' }}
+        key={`select-theme-${theme}`}>
+        <Stack align="center" gap={'xs'}>
+          {getIconFromTheme(theme as Theme, selectedTheme === theme, color)}
+          <Text fz="xs" ta="center" c={selectedTheme === theme ? color : 'lightgray'}>
+            {tTheme(theme)}
+          </Text>
+        </Stack>
+      </Link>
+    );
+  });
 
   return (
     <form

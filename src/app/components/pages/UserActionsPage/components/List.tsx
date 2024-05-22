@@ -4,9 +4,13 @@ import { useLocalState } from '@/state';
 import { Loader, Switch, Table, TableTd, TableTr } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { Filters, Service } from '../../ActionsPage/utils';
+import { FetchServicesResponse, Filters, Service } from '../../ActionsPage/utils';
 
-const List = ({ fetchServices }: { fetchServices: ({ filters }: { filters: Filters }) => Promise<Service[]> }) => {
+const List = ({
+  fetchServices
+}: {
+  fetchServices: ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>;
+}) => {
   const t = useTranslations('user_actions');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<Service[]>([]);
@@ -23,7 +27,7 @@ const List = ({ fetchServices }: { fetchServices: ({ filters }: { filters: Filte
           theme: undefined
         }
       });
-      setData(data);
+      setData(data.services);
       setIsLoading(false);
     };
     user && fetchData();

@@ -1,6 +1,6 @@
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { Theme } from '@/config';
-import { Button, Card, Flex, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
+import { Theme, themesColors, themesIcons } from '@/config';
+import { Button, Card, Container, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { Service, fetchServices } from '../ActionsPage/utils';
@@ -38,55 +38,55 @@ const HomePage = async ({}: {}) => {
   });
 
   const showThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
+    const Icon = themesIcons[theme];
+    const color = themesColors[theme];
     return (
-      <Grid>
-        <GridCol span={{ base: 12 }}>
-          <Title order={3}>{tTheme(theme)}</Title>
-        </GridCol>
+      <Grid grow justify="stretch" c={color}>
         {items.map((service, index) => (
-          <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
-            <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={theme} />
+          <GridCol span={{ base: 12, sm: 6, md: 3 }} key={`action-${service.name}-${index}`}>
+            <ServiceCard
+              service={service}
+              backgroundColor={'var(--mantine-primary-color-2)'}
+              theme={theme}
+              color={color}
+            />
           </GridCol>
         ))}
-        <GridCol span={{ base: 12 }}>
-          <Flex justify={'center'}>
-            <Button component={Link} href={`/actions/${theme}`} size="lg">
-              {tCommon('see_more_theme')}
-            </Button>
-          </Flex>
+        <GridCol span={{ base: 12, sm: 6, md: 1 }} style={{ alignSelf: 'center' }}>
+          <Link
+            href={`/actions/${theme}`}
+            color="green"
+            style={{ cursor: 'pointer', color: 'inherit', textDecoration: 'none' }}>
+            <Stack align="center" ta="center">
+              <Icon size={'4rem'} />
+              <Container> {tCommon('see_more_theme', { theme: tTheme(theme) })}</Container>
+            </Stack>
+          </Link>
         </GridCol>
       </Grid>
     );
   };
 
   return (
-    <Stack gap={'xl'} align="center">
-      <Grid justify="center" w="100%" align="center">
-        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
-        <GridCol span={{ base: 12, md: 10 }}>
-          <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
-            <Stack gap={'lg'}>
-              <Title order={1}>
-                <Text fz={'inherit'}>{t('welcome')}</Text>
-              </Title>
-              <Text>{t('guide')}</Text>
-              <Text>{t('save_actions')}</Text>
-              <Button color="var(--mantine-color-dark-outline)" w="100%" component={Link} href="/finder">
-                {t('find_inspiration')}
-              </Button>
-            </Stack>
-          </Card>
-        </GridCol>
-        <GridCol span={{ base: 0, md: 1 }} ta="center" visibleFrom="md"></GridCol>
-      </Grid>
-      <Space />
+    <Stack gap={'xl'}>
+      <Card c="var(--mantine-color-dark-outline)" bg={'var(--mantine-primary-color-2)'}>
+        <Stack gap={'lg'}>
+          <Title order={1}>
+            <Text fz={'inherit'}>{t('welcome')}</Text>
+          </Title>
+          <Text>{t('guide')}</Text>
+          <Group justify="center">
+            <Button component={Link} href="/finder" size="xl">
+              {t('find_inspiration')}
+            </Button>
+          </Group>
+        </Stack>
+      </Card>
+
       <Stack gap={'lg'}>
-        <Title order={2} ta="center" size={'3em'}>
-          {t('discover_actions')}
-        </Title>
-        {showThemeSection({ items: transports, theme: 'transports' })}
-        {showThemeSection({ items: goods, theme: 'goods' })}
-        {showThemeSection({ items: foods, theme: 'foods' })}
+        {showThemeSection({ items: transports.services, theme: 'transports' })}
+        {showThemeSection({ items: goods.services, theme: 'goods' })}
+        {showThemeSection({ items: foods.services, theme: 'foods' })}
       </Stack>
     </Stack>
   );

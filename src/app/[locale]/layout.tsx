@@ -34,7 +34,7 @@ export default async function RootLayout({
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ColorSchemeScript defaultColorScheme="light" />
             <MantineProvider defaultColorScheme="light" theme={theme}>
-              <AppShell bg="var(--mantine-primary-color-1)">
+              <AppShell bg="var(--mantine-primary-color-1)" header={{ height: '8em' }} pb="xl">
                 <AppShellHeader withBorder={false}>
                   <HeaderMenu />
                 </AppShellHeader>

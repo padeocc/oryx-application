@@ -28,14 +28,14 @@
     "location": "online",
     "region": 31,
     "address": "8 Boulevard de l'Embouchure 31200 Toulouse",
-    "type": ["Une association"],
+    "type": ["association"],
     "price": "Gratuit"
   },
   {
     "name": "AF3V",
     "description": "L’AF3V répertorie, cartographie et qualifie l’ensemble du réseau français des véloroutes et voies vertes.",
     "url": "AF3V | Association française pour le développement des véloroutes et des voies vertes",
-    "tags": "Voyages 2) vélo",
+    "tags": "Voyages 2) Vélos",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -44,14 +44,14 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une association"],
+    "type": ["association"],
     "price": "Gratuit"
   },
   {
     "name": "agencedespyrenees",
     "description": "La publication de ce topoguide, fruit d'un travail intense avec l'ensemble des agences ... global-velo.fr. Scannez le QR code · ou cliquez ici · pour télécharger.",
     "url": "https://www.agencedespyrenees.fr/wp-content/uploads/2022/07/Topoguide-velo.pdf",
-    "tags": "Voyages 2) vélo",
+    "tags": "Voyages 2) Vélos",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -76,7 +76,7 @@
     "location": "store and online",
     "region": "",
     "address": "6 rue Astronome Vidal, 09500 MIREPOIX",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "50€-100€"
   },
   {
@@ -108,7 +108,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": ">1.000€"
   },
   {
@@ -140,7 +140,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Fonction de l'offre choisie"
   },
   {
@@ -156,7 +156,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Fonction de l'offre choisie"
   },
   {
@@ -195,7 +195,7 @@
     "name": "Boulanger",
     "description": "Offrez vous une trottinette électrique : performance, autonomie, et pliage rapide. Découvrez nos trottinettes enfant et adulte !",
     "url": "https://www.boulanger.com/c/trottinette",
-    "tags": "Mobilité douce\n2) Trotinettes",
+    "tags": "Mobilité douce\n2) Trottinettes",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -241,9 +241,9 @@
   },
   {
     "name": "Chronotrains",
-    "description": "Où pouvez-vous aller en train en Europe en 8h ? Cette carte vous montre jusqu'où vous pouvez voyager depuis chaque gare en Europe en moins de 8 heures.",
+    "description": "Où pouvez-vous aller en Train en Europe en 8h ? Cette carte vous montre jusqu'où vous pouvez voyager depuis chaque gare en Europe en moins de 8 heures.",
     "url": "https://www.chronotrains.com/fr",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -268,7 +268,7 @@
     "location": "store and online",
     "region": "National & international",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Fonction de l'offre choisie"
   },
   {
@@ -387,7 +387,7 @@
     "name": "Decathlon",
     "description": "Decathlon spécialiste de la trottinette électrique – Une sélection de trottinettes électriques adulte et enfant d'excellent rapport qualité / prix.",
     "url": "https://www.decathlon.fr/tous-les-sports/trottinette/trottinettes-electriques",
-    "tags": "Mobilité douce\n2) Trotinettes",
+    "tags": "Mobilité douce\n2) Trottinettes",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -417,9 +417,9 @@
   },
   {
     "name": "direkt.bahn.guru",
-    "description": "Find all direct train connections from your city.",
+    "description": "Find all direct Train connections from your city.",
     "url": "https://direkt.bahn.guru/",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -432,10 +432,10 @@
     "price": ""
   },
   {
-    "name": "Discovery trains",
-    "description": "C'est la seule agence française 100% dédiée au voyage en train, que ce soit en trains de luxe ou en trains réguliers. C'est aussi la seule agence en France …",
+    "name": "Discovery Trains",
+    "description": "C'est la seule agence française 100% dédiée au voyage en Train, que ce soit en Trains de luxe ou en Trains réguliers. C'est aussi la seule agence en France …",
     "url": "https://www.discoverytrains.net/qui-sommes-nous",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -444,7 +444,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Fonction de l'offre choisie"
   },
   {
@@ -483,7 +483,7 @@
     "name": "ECO geste université",
     "description": "Adopter les bonnes pratiques qui auront un impact sur la vie de notre université et des répercussions concrètes sur le territoire est essentiel.",
     "url": "https://www.univ-montp3.fr/sites/default/files/eco_geste.pdf",
-    "tags": "Mobilité douce -> Écosystème - \ncovoiturer - \nTélétravailler",
+    "tags": "Mobilité douce -> Écosystème - \nCovoiturer - \nTélétravailler",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -572,7 +572,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Gratuit"
   },
   {
@@ -643,7 +643,7 @@
     "name": "HOURRAIL",
     "description": "Trouve ta prochaine aventure sans avion et sans voiture ! Ville de départ. Ville d'arrivée. Plage. Montagne. Festif. Patrimoine. Campagne. Polaire. Weekend.",
     "url": "https://www.hourrail.voyage/",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -652,7 +652,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une association"],
+    "type": ["association"],
     "price": "Gratuit"
   },
   {
@@ -689,9 +689,9 @@
   },
   {
     "name": "Interrail",
-    "description": "Voyages à travers l'Europe — L'Europe en train – 1 billet, 33 pays – Sans itinéraire fixe - Date de départ flexible. Découvrez l'Europe en train avec le Pass qui permet de tout explorer! Achetez maintenant. Voyagez confortablement. Pass ferroviaire rentable. Voyage multi-destinations. Voyages tout confort.",
+    "description": "Voyages à travers l'Europe — L'Europe en Train – 1 billet, 33 pays – Sans itinéraire fixe - Date de départ flexible. Découvrez l'Europe en Train avec le Pass qui permet de tout explorer! Achetez maintenant. Voyagez confortablement. Pass ferroviaire rentable. Voyage multi-destinations. Voyages tout confort.",
     "url": "https://www.interrail.eu/fr/interrail-passes",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -732,14 +732,14 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": "Fonction de l'offre choisie"
   },
   {
     "name": "La balaguère",
     "description": "La Balaguère propose des circuits de voyage aventure, randonnée et trek dans le monde entier. Découvrez les départs confirmés, en cours de confirmation et à venir, et réservez votre séjour avec accompagnateur.",
     "url": "https://www.labalaguere.com",
-    "tags": "Voyages 2) vélo",
+    "tags": "Voyages 2) Vélos",
     "color": "",
     "moralscore": "",
     "weight": "",
@@ -800,7 +800,7 @@
     "price": ""
   },
   {
-    "name": "Mes aides vélo",
+    "name": "Mes aides Vélos",
     "description": "logo MesAidesVélo · MesAidesVélo. Trouvez les aides à l'achat d'un vélo. Localisation : Pas de résultats. Essayez avec ParisMarseilleLyonToulouseNiceNantes. Une …",
     "url": "https://mesaidesvelo.fr/",
     "tags": "Mobilité douce -> Écosystème",
@@ -851,7 +851,7 @@
     "name": "Mollow",
     "description": "Mollow est une association de citoyens engagés ayant pour objet de promouvoir un mode de voyage durable et diffuser des outils facilitant le passage à l'action.",
     "url": "https://www.mollow.eu/",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -860,7 +860,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une association"],
+    "type": ["association"],
     "price": "Gratuit"
   },
   {
@@ -1059,7 +1059,7 @@
     "name": "Railtrip travel",
     "description": "Le réseau ferroviaire européen offre de très nombreuses opportunités de voyages itinérants pour découvrir des régions plus dépaysantes.",
     "url": "https://railtrip.travel/trip/voyages-en-europe/",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -1068,7 +1068,7 @@
     "location": "online",
     "region": "",
     "address": "",
-    "type": ["Une association"],
+    "type": ["association"],
     "price": "Gratuit"
   },
   {
@@ -1196,14 +1196,14 @@
     "location": "store and online",
     "region": "National & international",
     "address": "",
-    "type": ["Une entreprise"],
+    "type": ["company"],
     "price": ">1.000€"
   },
   {
     "name": "Sailcoop",
     "description": "La coopérative Sailcoop a pour ambition de changer notre rapport au temps et au voyage. Nous souhaitons utiliser le vent, énergie inépuisable et gratuite, pour offrir une alternative",
     "url": "https://www.sailcoop.fr",
-    "tags": "Voyages 2) bateau (cargo - voile - ferry)",
+    "tags": "Voyages 2) Bateau (cargo, voile, ferry)",
     "color": "green",
     "moralscore": "-",
     "weight": "-",
@@ -1267,7 +1267,7 @@
     "name": "SNCF voyageurs activités",
     "description": "Pratiquer une activité · Activités & découvertes · Activités nautiques · Idées d ... Aller à la page Facebook liO Train SNCF TER Occitanie. Nouvelle fenêtre.",
     "url": "https://www.ter.sncf.com/occitanie/decouvrir/pratiquer-une-activite/randonnees",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -1283,7 +1283,7 @@
     "name": "SNCF voyageurs lieux",
     "description": "Visiter un lieu. Retrouvez ici une sélection de lieux incontournables et les Grands Sites Occitanie, dont la plupart sont directement accessibles en liO Train.",
     "url": "https://www.ter.sncf.com/occitanie/decouvrir/visiter-un-lieu",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -1299,7 +1299,7 @@
     "name": "SNCF-TER- Occitanie week-end",
     "description": "Avec la Région Occitanie et SNCF Voyageurs voyagez à 1€ tous les premiers samedis et dimanches de chaque mois.",
     "url": "https://www.ter.sncf.com/occitanie/tarifs-cartes/bons-plans/premier-week-end-un-euro",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -1315,7 +1315,7 @@
     "name": "SNCF-TER- Occitanie",
     "description": "Des billets à 1€ sont valables sur l'ensemble des liO Train pour des voyages dans toute la région Occitanie, en nombre limité. Où acheter mes billets ?",
     "url": "https://www.ter.sncf.com/occitanie/tarifs-cartes/billets-un-euro",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "-",
     "weight": "-",
@@ -1376,10 +1376,10 @@
     "price": ""
   },
   {
-    "name": "trainline",
-    "description": "Réservez vos billets de train pour voyager en Suisse et dans plus de 30 pays européens. Comparez les horaires de train et les prix avec Trainline.",
+    "name": "Trainline",
+    "description": "Réservez vos billets de Train pour voyager en Suisse et dans plus de 30 pays européens. Comparez les horaires de Train et les prix avec Trainline.",
     "url": "https://www.thetrainline.com/fr",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "",
@@ -1395,7 +1395,7 @@
     "name": "Tribugo",
     "description": "Covoiturage, navettes, vélo… Tribulive est une solution numérique, partenaire des organisateurs de festivals, pour décarboner la mobilité des spectateurs.",
     "url": "https://www.tribugo.mobi/fr/",
-    "tags": "Covoiturer - Auto partage\nAugmenter le taux de remplissage",
+    "tags": "Covoiturer - Auto partage - Augmenter le taux de remplissage",
     "color": "",
     "moralscore": "",
     "weight": "-",
@@ -1504,10 +1504,10 @@
     "price": ""
   },
   {
-    "name": "Voyager en train",
-    "description": "Un média pour vous aider à voyager en train. Voyager en train, c'est choisir un moyen de transport bas carbone. Mais, voyager en train, c'est aussi jongler …",
+    "name": "Voyager en Train",
+    "description": "Un média pour vous aider à voyager en Train. Voyager en Train, c'est choisir un moyen de transport bas carbone. Mais, voyager en Train, c'est aussi jongler …",
     "url": "https://www.voyagerentrain.fr/",
-    "tags": "Voyages 2) train",
+    "tags": "Voyages 2) Train",
     "color": "",
     "moralscore": "",
     "weight": "",
@@ -1523,7 +1523,7 @@
     "name": "Wee-bot",
     "description": "Nos produits sont fabriqués avec des composants de grandes marques certifiées norme CE. Commandez vite nos trottinettes électriques Weebot et bénéficiez de 2 ans de garantie. SAV Premium en France. Garantie.",
     "url": "https://www.wee-bot.com/",
-    "tags": "Mobilité douce\n2) Trotinettes",
+    "tags": "Mobilité douce\n2) Trottinettes",
     "color": "",
     "moralscore": "-",
     "weight": "-",

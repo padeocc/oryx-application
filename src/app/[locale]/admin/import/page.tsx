@@ -1,3 +1,4 @@
+import { fetchService } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import { Title } from '@mantine/core';
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
@@ -78,25 +79,44 @@ const importData = async () => {
         }
       });
 
-      const data = { ...item, code: createCodeField(item.name), tags, ...optionalFields };
+      const code = createCodeField(item.name);
 
-      const response = await fetch(`${url}/${theme}`, {
-        headers: {
-          Authorization: `Bearer ${process?.env?.STRAPI_SECRET_ADMIN_TOKEN || ''}`,
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          data
-        })
-      });
-      const resp = await response.json();
+      const data = { ...item, code, tags, ...optionalFields };
+      const read = await fetchService({ code: code, theme });
+      const id = read.id;
 
-      if (resp.error) {
-        //console.info(`NOk: ${resp.data.attributes.name}`);
-        console.error(JSON.stringify({ response: resp, data }, null, 2));
+      if (id) {
+        const update = await fetch(`${url}/${theme}/${id}`, {
+          headers: {
+            Authorization: `Bearer ${process?.env?.STRAPI_SECRET_ADMIN_TOKEN || ''}`,
+            'Content-Type': 'application/json',
+            cache: 'no-cache'
+          },
+          method: 'PUT',
+          body: JSON.stringify({
+            data
+          })
+        });
+        const updateResponse = await update.json();
+        console.info(`Updated: ${data.name}`);
       } else {
-        console.info(`Ok: ${resp.data.attributes.name}`);
+        const response = await fetch(`${url}/${theme}`, {
+          headers: {
+            Authorization: `Bearer ${process?.env?.STRAPI_SECRET_ADMIN_TOKEN || ''}`,
+            'Content-Type': 'application/json',
+            cache: 'no-cache'
+          },
+          method: 'POST',
+          body: JSON.stringify({
+            data
+          })
+        });
+        const addResponse = await response.json();
+        if (addResponse.error) {
+          console.error('Validation error', JSON.stringify({ response: addResponse, data }, null, 2));
+        } else {
+          console.info(`Added: ${addResponse.data.attributes.name}`);
+        }
       }
     });
   };
@@ -116,19 +136,19 @@ const importData = async () => {
       <br />
       <br />
       <Title order={3}>Goods ({goods.length})</Title>
-      {goodsTags.map(t => (
+      {uniq(goodsTags).map(t => (
         <div key={`${t}`}>{t}</div>
       ))}
       <br />
       <br />
       <Title order={3}>Transport ({transports.length})</Title>
-      {transportsTags.map(t => (
+      {uniq(transportsTags).map(t => (
         <div key={`${t}`}>{t}</div>
       ))}
       <br />
       <br />
       <Title order={3}>Food ({foods.length})</Title>
-      {foodsTags.map(t => (
+      {uniq(foodsTags).map(t => (
         <div key={`${t}`}>{t}</div>
       ))}
     </>
