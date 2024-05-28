@@ -1,7 +1,7 @@
 import { Theme, themesColors } from '@/config';
 import NotFound from '../../navigation/NotFound';
 import List from './components/List';
-import { Category, Filters, fetchServices, getTagsfromServices } from './utils';
+import { Category, Filters, Region, fetchServices, getRegionsfromServices, getTagsFromServices } from './utils';
 
 const ActionsPage = async ({ theme }: { theme: Theme }) => {
   const { services, meta } = await fetchServices({
@@ -10,7 +10,8 @@ const ActionsPage = async ({ theme }: { theme: Theme }) => {
       theme
     }
   });
-  const categories: Category[] = getTagsfromServices(services);
+  const categories: Category[] = getTagsFromServices(services);
+  const regions: Region[] = getRegionsfromServices(services);
 
   if (!theme) {
     return <NotFound />;
@@ -28,6 +29,7 @@ const ActionsPage = async ({ theme }: { theme: Theme }) => {
       categories={categories}
       total={meta.pagination.total}
       color={color}
+      regions={regions}
     />
   );
 };

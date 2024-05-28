@@ -18,7 +18,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
     return <NotFound message={`${code} - ${theme}`} />;
   }
 
-  const { name, tags = [], description, country, publishedAt, updatedAt, url, type, zipCode } = service;
+  const { name, tags = [], description, updatedAt, url, type } = service;
 
   return (
     <Stack>

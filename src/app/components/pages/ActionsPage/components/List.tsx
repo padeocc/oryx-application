@@ -2,7 +2,14 @@
 
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { Category, FetchServicesResponse, Filters, Service } from '@/app/components/pages/ActionsPage/utils';
+import {
+  Category,
+  FetchServicesResponse,
+  Filters,
+  Region,
+  Service,
+  getOtherFilters
+} from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import { useLocalState } from '@/state';
 import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
@@ -16,7 +23,8 @@ const List = ({
   theme,
   categories = [],
   total: initialTotal,
-  color
+  color,
+  regions
 }: {
   fetchServices: ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>;
   data: Service[];
@@ -24,6 +32,7 @@ const List = ({
   categories: Category[];
   total: number;
   color: string;
+  regions: Region[];
 }) => {
   const t = useTranslations('content');
   const [data, setData] = useState<Service[]>(initialData);
@@ -34,22 +43,24 @@ const List = ({
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const data = await fetchServices({ filters: { theme, categories: filters.categories } });
+      const data = await fetchServices({ filters });
       setData(data.services);
-      setTotal(data.meta.pagination.total);
+      setTotal(data?.meta?.pagination?.total || 0);
       setLoading(false);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.categories]);
+  }, [filters.categories, filters.others, filters.regions]);
 
   useEffect(() => {
     const hasthemeSwitched = theme !== filters?.theme;
     if (hasthemeSwitched) {
-      setFilters({ theme, categories: [] });
+      setFilters({ theme, categories: [], others: {}, regions: [] });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.theme]);
+
+  const otherFilters = getOtherFilters(theme);
 
   return (
     <>
@@ -59,8 +70,10 @@ const List = ({
         filters={filters}
         handleSubmit={setFilters}
         allCategories={categories}
+        allRegions={regions}
+        otherFilters={otherFilters}
       />
-      <Grid justify="flex-start" align="top" mt="lg" grow>
+      <Grid justify="flex-start" align="top" mt="lg">
         {loading ? (
           <GridCol span={{ base: 12 }} ta="center" p="xl">
             <Loader />

@@ -14,11 +14,12 @@ import {
   Image,
   Stack,
   StyleProp,
-  Text,
-  Title
+  Title,
+  Tooltip
 } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import Description from './components/Description';
 
 const ServiceCard = ({
   service,
@@ -34,6 +35,7 @@ const ServiceCard = ({
   color: string;
 }) => {
   const t = useTranslations('common');
+  const tServices = useTranslations('services');
 
   if (!service) {
     return <NotFound />;
@@ -69,17 +71,35 @@ const ServiceCard = ({
                   </Title>
                 </GridCol>
               </Grid>
-              <Text fz="sm" size="sm">
-                {service.description}
-              </Text>
+              {/* <Tooltip
+                label={<span style={{ width: '20em' }}>{service.description}</span>}
+                color="var(--mantine-color-dark-outline)">
+                <Text
+                  fz="sm"
+                  size="sm"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: '1.5',
+                    maxHeight: 'calc(1.5em * 3)'
+                  }}>
+                  {service.description}
+                </Text>
+              </Tooltip> */}
+              <Description service={service} />
             </Stack>
           </Link>
         </Stack>
         <CardSection c={color}>
           <Group justify="center" p="md">
-            <Link href={service.url} target="_blank" style={{ color: 'inherit', textDecoration: 'none' }}>
-              {service.url}
-            </Link>
+            <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">
+              <Link href={service.url} target="_blank" style={{ color: 'inherit', textDecoration: 'none' }}>
+                {tServices('access-label')}
+              </Link>
+            </Tooltip>
           </Group>
         </CardSection>
       </Flex>

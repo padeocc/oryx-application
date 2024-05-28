@@ -38,7 +38,9 @@ export const useLocalState = create<LocalState>()(
           }),
         filters: {
           theme: undefined,
-          categories: []
+          categories: [],
+          regions: [],
+          others: {}
         },
         setFilters: filters => set(state => ({ ...state, filters }))
       }),

@@ -1,6 +1,6 @@
 'use client';
 
-import { FetchServicesResponse, Filters, getTagsfromServices } from '@/app/components/pages/ActionsPage/utils';
+import { FetchServicesResponse, Filters, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
 import { themes } from '@/config';
 import { useLocalState } from '@/state';
 import {
@@ -46,7 +46,7 @@ const FinderPage = ({
           categories: []
         }
       });
-      const categories = getTagsfromServices(data.services);
+      const categories = getTagsFromServices(data.services);
       setCategories(categories);
     };
     fetchData();

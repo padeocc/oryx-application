@@ -39,12 +39,12 @@ const fieldsTypes: { [key: string]: 'string' | 'number' | 'boolean' } = {
   diy: 'boolean',
   comparer: 'boolean',
   relocating: 'boolean',
-  moralscore: 'string',
-  weight: 'string',
-  region: 'string',
-  organic: 'number',
-  local: 'number',
-  season: 'number'
+  // moralscore: 'string',
+  // weight: 'string',
+  // region: 'string',
+  organic: 'boolean',
+  local: 'boolean',
+  season: 'boolean'
 };
 
 const importData = async () => {
