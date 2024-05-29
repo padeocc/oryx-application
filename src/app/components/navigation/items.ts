@@ -1,12 +1,9 @@
-import { StateUser } from '@/state';
 import { getTranslations } from 'next-intl/server';
 
 export const getNavigationItems = ({
-  t,
-  user
+  t
 }: {
   t: any;
-  user: StateUser | undefined;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
   const menu = [
     [
@@ -25,13 +22,6 @@ export const getNavigationItems = ({
     ]
   ];
 
-  if (user?.email) {
-    menu[0].push({
-      name: t('actions_label'),
-      href: '/actions/user',
-      isExternal: false
-    });
-  }
   return menu;
 };
 

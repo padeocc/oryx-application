@@ -1,5 +1,4 @@
 import GoogleAnalytics from '@/components/GoogleAnalytics';
-import SupertokensProvider from '@/components/auth/SupertokensProvider';
 import HeaderMenu from '@/components/navigation/HeaderMenu';
 import { theme } from '@/theme';
 import { AppShell, AppShellHeader, AppShellMain, ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
@@ -29,27 +28,25 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <SupertokensProvider>
-        <body className={inter.className}>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <ColorSchemeScript defaultColorScheme="light" />
-            <MantineProvider defaultColorScheme="light" theme={theme}>
-              <AppShell bg="var(--mantine-primary-color-1)" header={{ height: '8em' }} pb="xl">
-                <AppShellHeader withBorder={false}>
-                  <HeaderMenu />
-                </AppShellHeader>
-                <AppShellMain pt={{ base: 120, sm: 120 }}>
-                  <Container maw={'1280px'} p="md">
-                    {children}
-                  </Container>
-                </AppShellMain>
-              </AppShell>
-              <Footer />
-            </MantineProvider>
-            <GoogleAnalytics />
-          </NextIntlClientProvider>
-        </body>
-      </SupertokensProvider>
+      <body className={inter.className}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ColorSchemeScript defaultColorScheme="light" />
+          <MantineProvider defaultColorScheme="light" theme={theme}>
+            <AppShell bg="var(--mantine-primary-color-1)" header={{ height: '8em' }} pb="xl">
+              <AppShellHeader withBorder={false}>
+                <HeaderMenu />
+              </AppShellHeader>
+              <AppShellMain pt={{ base: 120, sm: 120 }}>
+                <Container maw={'1280px'} p="md">
+                  {children}
+                </Container>
+              </AppShellMain>
+            </AppShell>
+            <Footer />
+          </MantineProvider>
+          <GoogleAnalytics />
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

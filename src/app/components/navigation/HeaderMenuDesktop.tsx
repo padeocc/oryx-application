@@ -1,15 +1,11 @@
-'use client';
-
-import { useLocalState } from '@/state';
 import { Button, Group } from '@mantine/core';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getNavigationItems } from './items';
 
-const HeaderMenuDesktop = () => {
-  const t = useTranslations('navigation_items');
-  const { user } = useLocalState();
-  const elements = getNavigationItems({ t, user }).map((itemsGroup, itemgroupindex) => (
+const HeaderMenuDesktop = async () => {
+  const t = await getTranslations('navigation_items');
+  const elements = getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
     <Group key={`group-desktop-${itemgroupindex}`} justify="space-between">
       {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
         const others = isExternal ? { target: '_blank' } : {};
@@ -28,12 +24,6 @@ const HeaderMenuDesktop = () => {
       })}
     </Group>
   ));
-
-  // elements.push(
-  //   <Container>
-  //     <AuthButton />
-  //   </Container>
-  // );
 
   return elements;
 };

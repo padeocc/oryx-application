@@ -1,15 +1,11 @@
-'use client';
-
-import { useLocalState } from '@/state';
 import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getNavigationItems } from './items';
 
-const HeaderMenuMobile = () => {
-  const t = useTranslations('navigation_items');
-  const { user } = useLocalState();
+const HeaderMenuMobile = async () => {
+  const t = await getTranslations('navigation_items');
 
   return (
     <Menu shadow="md">
@@ -19,7 +15,7 @@ const HeaderMenuMobile = () => {
         </Container>
       </MenuTarget>
       <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
-        {getNavigationItems({ t, user }).map((itemsGroup, itemgroupindex) => (
+        {getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
           <div key={`group-mobile-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
               const others = isExternal ? { target: '_blank' } : {};
@@ -38,9 +34,6 @@ const HeaderMenuMobile = () => {
             {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
           </div>
         ))}
-        {/* <MenuItem fz={'lg'} color="gray">
-          <AuthButton type={'link'} />
-        </MenuItem> */}
       </MenuDropdown>
     </Menu>
   );
