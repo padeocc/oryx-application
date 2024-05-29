@@ -80,7 +80,7 @@ const List = ({
           </GridCol>
         ) : (
           data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 6, md: 3 }} key={`action-${service.name}-${index}`}>
+            <GridCol span={{ base: 6, sm: 4, md: 3 }} key={`action-${service.name}-${index}`}>
               <ServiceCard
                 service={service}
                 backgroundColor={'var(--mantine-primary-color-2)'}

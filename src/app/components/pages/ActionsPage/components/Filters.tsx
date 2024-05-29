@@ -197,6 +197,8 @@ const FiltersComponent = ({
               data={regionsOptions}
               multiple
               onChange={saveRegionsFilter}
+              clearable
+              onClear={() => saveRegionsFilter(null)}
             />
           </Stack>
         </GridCol>
