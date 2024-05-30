@@ -17,3 +17,17 @@ export const themesColors: { [key: string]: DefaultMantineColor } = {
 };
 
 export const themes: Theme[] = ['foods', 'goods', 'transports'];
+
+export const imagesMapping: { [key: string]: string } = {
+  'mode, bijoux, lunettes': 'fashion',
+  mode: 'fashion',
+  'maison, arts de la table, jardin': 'gardening',
+  'loisirs, sport et culture': 'sports',
+  'loisirs, sport et culture, jeux jouets': 'sports',
+  informatique: 'repaircomputer',
+  'réduire la consommation d’origine animale': 'lesswaste',
+  covoiturer: 'carsharing',
+  'acheter une voiture bas carbone': 'cars',
+  'acheter une voiture': 'cars',
+  vélos: 'bikes'
+};

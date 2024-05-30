@@ -154,11 +154,11 @@
     "summary": "Récapitulatif",
     "themes": "Thèmes",
     "validate": "Valider les choix",
-    "title": "Trouver l'inspiration !"
+    "title": "Trouver un service !"
   },
   "home_page": {
     "discover_actions": "Les derniers services ajoutés",
-    "find_inspiration": "Trouver l'inspiration !",
+    "find_inspiration": "Trouver un service !",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
     "welcome": "Vous êtes sur Oryx, le compagnon des initiatives écoresponsables !"
@@ -242,7 +242,8 @@
     "type-association-label": "Association",
     "type-public-service-label": "Service Public",
     "type-school-label": "Ecole",
-    "access-label": "Accéder au site"
+    "access-label": "Accéder au site",
+    "details-label": "Voir les détails"
   },
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"
