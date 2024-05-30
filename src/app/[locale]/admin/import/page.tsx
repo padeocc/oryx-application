@@ -2,7 +2,7 @@ import { fetchService } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import { Title } from '@mantine/core';
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 import foods from './data/foods.json';
 import goods from './data/goods.json';
 import transports from './data/transports.json';
@@ -39,9 +39,6 @@ const fieldsTypes: { [key: string]: 'string' | 'number' | 'boolean' } = {
   diy: 'boolean',
   comparer: 'boolean',
   relocating: 'boolean',
-  // moralscore: 'string',
-  // weight: 'string',
-  // region: 'string',
   organic: 'boolean',
   local: 'boolean',
   season: 'boolean'
@@ -81,7 +78,12 @@ const importData = async () => {
 
       const code = createCodeField(item.name);
 
-      const data = { ...item, code, tags, ...optionalFields };
+      const data = { ...item, code, tags, ...optionalFields, description: item.description_ai || item.description };
+      delete data.description_ai;
+      delete data.moralscore;
+      delete data.weight;
+      data.region = data.region.toString();
+
       const read = await fetchService({ code: code, theme });
       const id = read.id;
 
@@ -89,8 +91,7 @@ const importData = async () => {
         const update = await fetch(`${url}/${theme}/${id}`, {
           headers: {
             Authorization: `Bearer ${process?.env?.STRAPI_SECRET_ADMIN_TOKEN || ''}`,
-            'Content-Type': 'application/json',
-            cache: 'no-cache'
+            'Content-Type': 'application/json'
           },
           method: 'PUT',
           body: JSON.stringify({
@@ -99,12 +100,15 @@ const importData = async () => {
         });
         const updateResponse = await update.json();
         console.info(`Updated: ${data.name}`);
+
+        if (updateResponse.error) {
+          console.error('Validation error', JSON.stringify({ response: updateResponse, data }, null, 2));
+        }
       } else {
         const response = await fetch(`${url}/${theme}`, {
           headers: {
             Authorization: `Bearer ${process?.env?.STRAPI_SECRET_ADMIN_TOKEN || ''}`,
-            'Content-Type': 'application/json',
-            cache: 'no-cache'
+            'Content-Type': 'application/json'
           },
           method: 'POST',
           body: JSON.stringify({
@@ -122,8 +126,8 @@ const importData = async () => {
   };
 
   importValues({ items: goods, theme: 'goods' });
-  importValues({ items: transports, theme: 'transports' });
-  importValues({ items: foods, theme: 'foods' });
+  transports; //importValues({ items: transports, theme: 'transports' });
+  foods; //importValues({ items: foods, theme: 'foods' });
 
   const goodsTags = getUniquesTags(goods);
   const transportsTags = getUniquesTags(transports);

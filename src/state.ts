@@ -6,11 +6,6 @@ interface StateService {
   code?: string;
 }
 
-export interface StateUser {
-  email: string;
-  services: StateService[];
-}
-
 interface LocalState {
   filters: Filters;
   setFilters: (filters: Filters) => void;
@@ -24,7 +19,8 @@ export const useLocalState = create<LocalState>()(
           theme: undefined,
           categories: [],
           regions: [],
-          others: {}
+          others: {},
+          location: undefined
         },
         setFilters: filters => set(state => ({ ...state, filters }))
       }),

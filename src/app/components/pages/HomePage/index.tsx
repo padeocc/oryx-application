@@ -51,11 +51,10 @@ const HomePage = async ({}: {}) => {
           </Group>
         </Stack>
       </Card>
-
       <Stack gap={'4rem'} pt="2rem">
         <ThemeSection items={transports.services} theme={'transports'} />
-        <ThemeSection items={goods.services} theme={'goods'} />
         <ThemeSection items={foods.services} theme={'foods'} />
+        <ThemeSection items={goods.services} theme={'goods'} />
       </Stack>
     </Stack>
   );

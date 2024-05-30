@@ -50,12 +50,12 @@ const List = ({
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.categories, filters.others, filters.regions]);
+  }, [filters.categories, filters.others, filters.regions, filters.location]);
 
   useEffect(() => {
     const hasthemeSwitched = theme !== filters?.theme;
     if (hasthemeSwitched) {
-      setFilters({ theme, categories: [], others: {}, regions: [] });
+      setFilters({ theme, categories: [], others: {}, regions: [], location: undefined });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.theme]);

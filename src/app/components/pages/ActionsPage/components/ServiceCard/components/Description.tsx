@@ -8,7 +8,7 @@ const Description = ({ service }: { service: Service }) => {
   const [opened, { close, open }] = useDisclosure(false);
 
   return (
-    <Popover width={200} position="bottom" withArrow shadow="md" opened={opened}>
+    <Popover position="bottom" withArrow opened={opened} width="60%">
       <PopoverTarget>
         <Text
           onMouseEnter={open}

@@ -30,13 +30,6 @@ export const getFooterLinks = async () => {
   return [
     [
       {
-        name: t('actions_label'),
-        href: '/finder',
-        isExternal: false
-      }
-    ],
-    [
-      {
         name: t('roadmap_label'),
         href: 'https://github.com/orgs/padeocc/projects/3/views/4',
         isExternal: true
@@ -51,11 +44,6 @@ export const getFooterLinks = async () => {
       {
         name: t('whoarewe_label'),
         href: 'https://www.padeo.fr',
-        isExternal: true
-      },
-      {
-        name: t('donate_label'),
-        href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/1',
         isExternal: true
       }
     ]

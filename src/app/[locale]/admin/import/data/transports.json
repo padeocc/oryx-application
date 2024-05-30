@@ -9,11 +9,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
-    "region": 31,
+    "location": "store-and-online",
+    "region": "31",
     "address": "185 avenue des États Unis, 31200 Toulouse",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "2 Roues Vertes est une entreprise spécialisée dans les véhicules électriques depuis 2008, proposant la vente et la location de vélos électriques, VTT électriques, scooters électriques et motos électriques. Ils offrent un grand showroom à Toulouse et Labège pour essayer les modèles avant achat, ainsi qu'un atelier pour la maintenance de toutes marques électriques et non électriques. Des services supplémentaires incluent la gravure Recobike et des facilités de paiement, y compris un forfait mobilités durables et le paiement en 10 fois. De plus, pour tout achat d'un vélo électrique, une maintenance gratuite est offerte dans les trois premiers mois et une réduction de 10% est accordée sur les réparations pour les clients privilégiés.\n\nCoordonnées :\n- Adresse (Toulouse) : 185 avenue des États Unis, 31200 Toulouse\n- Adresse (Labège) : 2839 Route de Baziège, 31670 Labège\n- Téléphone (Toulouse) : 09 50 21 30 98\n- Téléphone (Labège) : 07 71 92 08 55\n- Email : 2rouesvertes@gmail.com (Toulouse), 2rouesvertes.labege@gmail.com (Labège)\n- Horaires : du mardi au samedi, 10h00-13h00 / 14h00-18h30 ; jeudi : 14h00-20h\n\nSite web : <https://2rouesvertes.com/>"
   },
   {
     "name": "2P2R",
@@ -26,15 +27,16 @@
     "vehicule": "",
     "creationlocation": "-",
     "location": "online",
-    "region": 31,
+    "region": "31",
     "address": "8 Boulevard de l'Embouchure 31200 Toulouse",
     "type": ["association"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "L’association 2 Pieds 2 Roues est une organisation indépendante basée à Toulouse et sa région, qui milite pour la promotion du vélo et de la marche en ville. Elle propose des balades et des guides pratiques, ainsi que des ateliers vélos et des services de marquage Bicycode. L’association s’engage également dans des actions pour l’aménagement et la réglementation en faveur des mobilités actives. Elle publie régulièrement une lettre d’information électronique et un journal sur les mobilités actives en Occitanie. Enfin, elle travaille en collaboration avec d’autres associations et partenaires locaux pour promouvoir des solutions de mobilité durables et inclusives."
   },
   {
     "name": "AF3V",
     "description": "L’AF3V répertorie, cartographie et qualifie l’ensemble du réseau français des véloroutes et voies vertes.",
-    "url": "AF3V | Association française pour le développement des véloroutes et des voies vertes",
+    "url": "https://www.af3v.org",
     "tags": "Voyages 2) Vélos",
     "color": "",
     "moralscore": "-",
@@ -45,7 +47,8 @@
     "region": "",
     "address": "",
     "type": ["association"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "L'AF3V (Association française pour le développement des véloroutes et des voies vertes) est une association nationale d'usagers travaillant à la promotion et au développement d'un réseau sécurisé et de qualité pour les déplacements actifs sur l'ensemble du territoire français. Elle représente les utilisateurs auprès des pouvoirs publics, valorise les itinéraires existants et en identifie de nouveaux, offrant une base de données fiable et étant reconnue comme interlocutrice privilégiée des décideurs. L'AF3V gère également une carte interactive des véloroutes et voies vertes de France, facilitant la planification des déplacements et du tourisme à vélo."
   },
   {
     "name": "agencedespyrenees",
@@ -61,7 +64,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Atelier Vélocidade",
@@ -73,11 +77,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "",
     "address": "6 rue Astronome Vidal, 09500 MIREPOIX",
     "type": ["company"],
-    "price": "50€-100€"
+    "price": "50€-100€",
+    "description_ai": "Atelier Vélocidade est une marque française spécialisée dans la fabrication artisanale de sacoches bikepacking pour vélo, conçues et fabriquées à la main dans leur atelier à Mirepoix, en Ariège. Ils proposent une collection bikepacking avec des nouveautés telles que des chaussettes Explore et une musette Elemento. Leur gamme comprend également des sacoches de selle, guidon, cadre et roue, ainsi que des sacs à dos et banane. Ils sont engagés dans la durabilité en utilisant des matériaux certifiés Oeko-Tex et en reversant une partie de leurs ventes à des associations environnementales. En plus de leur engagement pour l'environnement, ils offrent également un service de réparation pour leurs sacoches."
   },
   {
     "name": "Babboe",
@@ -93,7 +98,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Babboe, numéro 1 mondial des vélos cargos depuis 15 ans, propose des vélos adaptés à tous : familles, chiens et professionnels. Leur gamme inclut une dizaine de modèles, tels que les vélos cargo familiaux Big, City et Mini, les vélos cargo pour chiens Dog et Go, ainsi que des vélos cargo professionnels. Babboe se distingue par la qualité de ses produits à des prix abordables, assortie d'un service client disponible dans toute la France."
   },
   {
     "name": "AXALKO",
@@ -109,7 +115,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": ">1.000€"
+    "price": ">1.000€",
+    "description_ai": "Axalko est une entreprise spécialisée dans la fabrication de cadres de vélos haut de gamme à partir de fibres naturelles et du bois. Conçus, testés et produits dans les forêts du Pays Basque, les vélos Axalko sont disponibles en versions gravel, route et urbaine. Grâce à une technologie exclusive, ces cadres allient rigidité, flexibilité et légèreté pour offrir une expérience de conduite optimale. Chaque cadre est unique et personnalisé en fonction de la taille, du poids et du style de conduite de chaque cycliste. Axalko s'engage également dans une démarche durable avec une empreinte carbone nulle et l'utilisation de matériaux respectueux de l'environnement."
   },
   {
     "name": "Barooders",
@@ -125,7 +132,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Barooders est une plateforme spécialisée dans la vente de vélos et équipements de sport d'occasion, offrant des annonces vérifiées et une garantie \"satisfait ou remboursé\". Leur sélection inclut une large gamme de vélos (ville, électriques, route, etc.), pièces détachées, accessoires et vêtements. Les clients bénéficient d'un service client actif 7j/7 et peuvent payer en 4 fois sans frais. Barooders travaille avec plus de 1000 reconditionneurs professionnels pour assurer la qualité du matériel et s'engage dans une démarche écologique en proposant des vélos reconditionnés ou de seconde main."
   },
   {
     "name": "Blablacar",
@@ -141,7 +149,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": "Fonction de l'offre choisie"
+    "price": "Fonction de l'offre choisie",
+    "description_ai": ""
   },
   {
     "name": "BlablacarDaily",
@@ -157,7 +166,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": "Fonction de l'offre choisie"
+    "price": "Fonction de l'offre choisie",
+    "description_ai": "BlaBlaCar Daily est l'application de covoiturage dédiée aux trajets quotidiens, offrant une solution pratique, économique et écologique pour vos déplacements domicile-travail. En tant que conducteur, vous pouvez économiser jusqu'à 190 € par mois et bénéficier d'une prime covoiturage de 100 € avec les 10 premiers trajets réalisés. Les passagers peuvent profiter de leurs 10 premiers trajets offerts. L'application propose une expérience utilisateur simple et intuitive, avec une messagerie intégrée pour faciliter la communication entre conducteurs et passagers. BlaBlaCar Daily s'engage également auprès des entreprises pour promouvoir la mobilité douce et verte, ainsi que le renforcement du lien social au sein des équipes."
   },
   {
     "name": "Biked",
@@ -173,7 +183,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Biked est une plateforme dédiée à l'achat et la vente de matériel vélo d'occasion entre passionnés, offrant des milliers d'articles soigneusement sélectionnés et une garantie qualité. Elle propose une large gamme de vélos, pièces détachées et équipements pour tous les types de cyclisme, tels que VTT, route, BMX, ville et E-Bike. Biked sécurise les transactions avec un paiement et une livraison inclus, et permet aux utilisateurs de publier leurs produits gratuitement. L'équipe d'experts est disponible pour aider les utilisateurs et assurer une expérience agréable et sans souci. Rejoignez la communauté Biked et donnez une seconde vie à votre matériel vélo !"
   },
   {
     "name": "Bonus Velo",
@@ -189,7 +200,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Bonus Velo est une initiative du gouvernement français, disponible sur Service-Public.fr, qui fournit des informations sur les conditions à remplir pour bénéficier d'une aide financière pour l'achat ou la location d'un vélo neuf ou d'occasion, y compris les vélos électriques et les vélos cargo, pliants ou adaptés aux personnes en situation de handicap. Le bonus écologique est fixé à 40% du coût d'acquisition dans la limite de 150€ pour les vélos classiques et jusqu'à 2000€ pour les vélos spécifiques. Les demandes d'aide doivent être faites en ligne dans les six mois suivant la date de facturation du vélo."
   },
   {
     "name": "Boulanger",
@@ -205,7 +217,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Boulanger propose une large sélection de trottinettes électriques pour adultes et enfants, offrant une autonomie allant jusqu'à 70 km et se pliant en moins de 10 secondes pour une grande praticité. Retrait en magasin en 1h disponible. La marque Ninebot est mise en avant pour sa fiabilité et ses modèles performants. Les soldes trottinettes électriques sont à prévoir pour juin 2024."
   },
   {
     "name": "Butchers and Bicyles",
@@ -221,7 +234,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Butchers & Bicycles is a Danish company that produces high-quality electric cargo bikes, featuring the unique BUILT TO TILT technology. They offer a variety of models and accessories, with over 180 dealers worldwide providing test rides and assistance. The company is committed to eco-friendly mobility and has even inspired businesses to adopt their cargo bikes for urban logistics. With a focus on customer service and sustainability, Butchers & Bicycles continues to revolutionize transportation in urban environments."
   },
   {
     "name": "Carqon",
@@ -237,7 +251,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Carqon est une marque spécialisée dans la fabrication de vélos cargo haut de gamme, électriques et robustes, dédiés particulièrement aux parents pour optimiser leur vie de famille. Leur offre inclut deux modèles phares : le Carqon Classic, élégant et robuste, et le Carqon Cruise, léger, confortable et sûr. Les clients peuvent demander un essai en magasin et bénéficier du service client Carqon pour une expérience optimale. La société, fondée avec l'ambition de définir une nouvelle référence en matière de design, fonctionnalité et technologie, attache une grande importance à la sécurité et au confort dans ses conceptions innovantes."
   },
   {
     "name": "Chronotrains",
@@ -253,7 +268,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Chronotrains est une ressource en ligne qui permet de découvrir les destinations accessibles en train depuis chaque gare en Europe, avec un temps de trajet maximal de 8 heures. La carte interactive offre une visualisation des isochrones à partir d'une ville donnée, et permet également de rechercher une gare spécifique ou de sélectionner parmi des exemples tels qu'Amsterdam, Berlin, Paris et Milan. Les temps de trajet estimés sont basés sur les données de la Deutsche Bahn via Direkt Bahn Guru, bien que les horaires réels puissent varier."
   },
   {
     "name": "Citiz",
@@ -265,11 +281,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": ["company"],
-    "price": "Fonction de l'offre choisie"
+    "price": "Fonction de l'offre choisie",
+    "description_ai": "Citiz est une coopérative proposant un service d'autopartage en Occitanie, offrant une alternative économique et pratique à la possession d'une voiture personnelle. Avec plus de 45 stations et une variété de véhicules disponibles 24h/24, les utilisateurs peuvent choisir la voiture qui correspond à leurs besoins et réserver en ligne ou par téléphone. Les tarifs sont calculés à l'heure et au kilomètre, incluant carburant, assurance et entretien. Citiz s'adresse aux particuliers, professionnels et personnes à mobilité réduite, et propose des options supplémentaires telles que le rachat partiel de franchise et la location pour les jeunes conducteurs."
   },
   {
     "name": "Citroen",
@@ -281,11 +298,12 @@
     "weight": 1383,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Citroën ë-C3 est la version électrique de la citadine iconique de la marque. Elle offre une autonomie de 320 km (WLTP) et se recharge rapidement de 20% à 80% en 26 minutes. Disponible en deux niveaux d'équipement, elle propose des fonctionnalités uniques telles que le confort suprême avec les sièges et suspensions Citroën Advanced Comfort®, des équipements info-divertissements et de connectivité de dernière génération, ainsi qu'un moteur électrique de 113 ch/83 kW. La ë-C3 est également éligible à des offres de location longue durée attractives."
   },
   {
     "name": "Citroen ami",
@@ -297,11 +315,12 @@
     "weight": "482 kg",
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Citroën Ami est une petite voiture électrique sans permis, idéale pour la mobilité urbaine. Rechargeable sur une prise standard, elle offre une autonomie de 75 km et se recharge en seulement 3 heures. Disponible à partir de 49,99€/mois, elle s'adresse aux personnes à la recherche d'une solution de mobilité écologique et accessible dès l'âge de 14 ans. Citroën Ami propose également des options de personnalisation pour répondre aux besoins et aux goûts de chacun."
   },
   {
     "name": "Citroen e-Berliingo",
@@ -313,11 +332,12 @@
     "weight": 1664,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Citroen e-C4",
@@ -329,11 +349,12 @@
     "weight": 1541,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Citroën propose la nouvelle ë-C4 X Électrique, offrant les mêmes caractéristiques que la version thermique, avec un moteur délivrant une puissance de 100 kW. Des offres promotionnelles sont disponibles, dont une LLD avec bonus écologique et prime à la conversion déduits. La commande peut être passée en ligne et la livraison s'effectue en point de vente ou à domicile. La ë-C4 Électrique garantit une mobilité zéro émission et bénéficie du confort et de la praticité Citroën."
   },
   {
     "name": "Covoiteo",
@@ -346,10 +367,11 @@
     "vehicule": "",
     "creationlocation": "",
     "location": "store",
-    "region": 31,
+    "region": "31",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Covoiteo est le service de covoiturage du quotidien proposé par Tisséo Voyageurs en partenariat avec Karos. Il vise à faciliter les trajets courts et réguliers en voiture partagée, tels que les déplacements domicile-travail ou vers les lieux d'études ou de loisirs. L'application gratuite met en relation conducteurs et passagers et garantit le retour des passagers sous certaines conditions. Le covoiturage avec Covoiteo permet des économies, la rencontre de nouvelles personnes et la réduction de l'empreinte carbone. Tisséo Voyageurs a également mis en place des arrêts dédiés au covoiturage pour favoriser l'intermodalité et la prise en charge des passagers."
   },
   {
     "name": "Cyclable",
@@ -361,11 +383,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Cyclable est une entreprise spécialisée dans la vente de vélos et d'accessoires pour tous types de pratiques et pour tous les âges. Fondée en 2005, elle propose une large sélection de vélos électriques, vélos de ville, vélos pliants, vélos de randonnée et vélos cargo, ainsi que des équipements pour les enfants. Cyclable est également engagée dans l'économie circulaire avec ses services Cyclable Services et Cyclable Occasion. L'entreprise dispose d'un réseau de magasins en France et en Suisse, ainsi qu'une boutique en ligne avec la possibilité de commander directement en ligne et de retirer en magasin. Les clients peuvent également bénéficier de conseils personnalisés grâce aux services Click and Test et Click and Collect."
   },
   {
     "name": "Cycles Motard",
@@ -378,10 +401,11 @@
     "vehicule": "",
     "creationlocation": "",
     "location": "store",
-    "region": 31,
+    "region": "31",
     "address": "Av. Yves Brunaud, 31000 Toulouse",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Decathlon",
@@ -393,11 +417,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "Monde",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Decathlon, spécialiste des sports urbains, propose une sélection de trottinettes électriques pour adultes et enfants offrant un excellent rapport qualité/prix. Ces trottinettes sont adaptées à tous les déplacements quotidiens grâce à leur assistance électrique permettant de parcourir de plus longues distances sans se fatiguer. Decathlon propose des modèles pliables et compacts, ainsi qu'une large gamme de pièces détachées pour l'entretien et l'amélioration de la durée de vie de votre trottinette électrique. Les marques renommées telles que Xiaomi, Micro, Ninebot, Globber et Oxelo sont disponibles chez Decathlon."
   },
   {
     "name": "Décathlon vélo électrique",
@@ -409,11 +434,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Découvrez notre sélection de vélos électriques Decathlon, proposée à des prix variés pour répondre aux besoins de tous les cyclistes souhaitant faciliter leurs déplacements et préserver l'environnement. Nous offrons une large gamme de modèles pour hommes et femmes, allant des vélos de ville aux VTT électriques, en passant par les vélos pliants électriques. Nos vélos électriques sont équipés de moteurs puissants et de batteries longue durée pour vous garantir une expérience de conduite agréable et sans effort. De plus, Decathlon propose régulièrement des promotions pour vous permettre d'acquérir votre vélo électrique au meilleur prix."
   },
   {
     "name": "direkt.bahn.guru",
@@ -429,7 +455,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Direkt.bahn.guru est une plateforme européenne offrant une recherche simplifiée et centralisée pour trouver des connexions ferroviaires directes au départ de votre ville. Ce service met à disposition des voyageurs une vaste couverture ferroviaire à travers l'Europe, facilitant ainsi la planification de leurs déplacements en train. Grâce à une interface intuitive et conviviale, les utilisateurs peuvent accéder à des itinéraires ferroviaires directs et détaillés, leur permettant de voyager en toute simplicité et sérénité à travers le continent."
   },
   {
     "name": "Discovery Trains",
@@ -445,7 +472,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": "Fonction de l'offre choisie"
+    "price": "Fonction de l'offre choisie",
+    "description_ai": "Discovery Trains est une agence de voyage parisienne, fondée en 2007 et spécialisée dans les voyages en train de luxe et réguliers. Elle est la seule agence française représentante des trains autrichiens (OBB), suisses (CFF/SBB) et du Swiss Travel System. Discovery Trains propose des circuits individuels et accompagnés dans plus de 50 pays à travers le monde, avec une expertise particulière pour l'Europe de l'Ouest et de l'Est, l'Asie, l'Océanie et l'Afrique. Leur équipe de spécialistes chevronnés crée des itinéraires originaux et bien rythmés, avec une attention particulière pour les trains panoramiques et nocturnes."
   },
   {
     "name": "Douze cycles",
@@ -461,7 +489,8 @@
     "region": "National",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Douze Cycles propose des vélos-cargos pratiques, responsables et complets pour une mobilité individuelle quotidienne. Ces vélos biporteurs et longtails sont des solutions habiles pour se sentir mieux, partager des moments privilégiés, se rendre au travail ou voyager de manière plus respectueuse de l'environnement. Les valeurs de Douze Cycles incluent la durabilité, l'innovation et la qualité. Ils s'engagent à offrir des vélos-cargos performants et adaptés aux besoins des particuliers et des professionnels, avec des gammes V2G et LT, ainsi qu'un service après-vente et un support technique dédiés. Douze Cycles est animé par la vision de contribuer au bonheur des gens grâce à des cargo-bikes bien conçus."
   },
   {
     "name": "Ecomode",
@@ -477,7 +506,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Ecomode est une application toulousaine récompensant les déplacements bas carbone dans l'agglomération toulousaine, disponible sur Google Play et l'App Store. Elle accompagne les utilisateurs dans leurs trajets éco-responsables en mesurant les économies de CO2 et de carburant, et propose des alternatives à la voiture thermique individuelle. Les utilisateurs peuvent gagner des points pour chaque kg de CO2 évité et les échanger contre des récompenses locales et écoresponsables sur la boutique en ligne. L'application encourage l'adoption de l'écomobilité pour réduire le stress, la fatigue et la pollution de l'air, et améliorer la qualité de l'air. Ecomode est soutenue par l'État et a remporté l'appel à programmes Certificats d'Économies d'Énergie."
   },
   {
     "name": "ECO geste université",
@@ -493,7 +523,8 @@
     "region": "",
     "address": "",
     "type": ["Le Service Public"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": ""
   },
   {
     "name": "Fiat 500e",
@@ -505,11 +536,12 @@
     "weight": 1255,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Fiat 500e est une voiture électrique disponible en trois carrosseries : Berline, Cabriolet et 3+1. Avec son design unique et emblématique, elle offre une expérience de conduite électrique grâce à sa batterie rechargeable en seulement 5 minutes pour 50 km d'autonomie. Elle dispose d'aides à la conduite de niveau 2 et d'une autonomie allant jusqu'à 320 km (cycle mixte WLTP). La Fiat 500e propose également des packs Confort, Style et Tech pour la personnaliser selon vos besoins."
   },
   {
     "name": "Fiat 600e",
@@ -521,11 +553,12 @@
     "weight": 1520,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Nouvelle Fiat 600e est une voiture électrique emblématique de la marque italienne, offrant une autonomie allant jusqu'à 600km en ville et 409km en cycle mixte WLTP. Elle se décline en deux versions et propose des caractéristiques telles qu'un coffre à ouverture mains-libres, une capacité de 360L, et un intérieur haut de gamme avec siège conducteur massant et chromothérapie. La Nouvelle 600 est équipée de technologies de dernière génération et s'inscrit dans l'art de vivre à l'italienne, avec une gamme de coloris inspirée des paysages italiens."
   },
   {
     "name": "Elorecycle",
@@ -537,11 +570,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": 76,
     "address": "51 Rue Molière - 76000 Rouen",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Elorecycle est un spécialiste du vélo électrique reconditionné, offrant une seconde vie à ces vélos grâce à une révision et un reconditionnement complets par leurs techniciens internes. Les vélos sont garantis 12 mois, notamment pour la batterie reconditionnée, et peuvent être jusqu'à 50% moins chers que les neufs. Elorecycle propose également une sélection d'accessoires pour accompagner l'utilisation des vélos électriques reconditionnés."
   },
   {
     "name": "Galian cycles",
@@ -557,7 +591,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Galian est une marque française spécialisée dans la fabrication de vélos cargo électriques haut de gamme, dont le célèbre modèle Formidable, combinant design, robustesse et sécurité. Leur engagement en faveur de la réindustrialisation française se traduit par une collaboration avec plus d'une dizaine d'experts et artisans locaux, ainsi que par une minimisation de l'empreinte carbone grâce à la relocalisation de la production. Le vélo cargotail, une innovation Galian, offre une solution tout-en-un pour les déplacements quotidiens et le transport de marchandises, alliant élégance et efficacité."
   },
   {
     "name": "GEOVELO",
@@ -573,7 +608,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "Geovelo est une application gratuite offrant des itinéraires vélo personnalisés et sécurisés, adaptés à votre profil et type de vélo. Elle calcule des trajets évitant les zones dangereuses et favorisant les pistes cyclables, avec un impact citoyen pour des villes plus cyclables. L'application propose également des balades et voyages à découvrir, ainsi que des fonctionnalités telles que la localisation de parkings vélo et points de réparation. Geovelo s'engage dans la transition écologique avec une application sans publicité, protégeant les données personnelles et soutenant le développement du vélo."
   },
   {
     "name": "GreenGo",
@@ -589,7 +625,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "GreenGo is a French platform offering a selection of over 12,000 eco-friendly accommodations across France, ranging from chalets to treehouses and ecolodges. These stays are carefully chosen for their authenticity, quality, and eco-responsible commitment, with hosts adhering to values of environmental responsibility and sustainability. GreenGo assesses the sustainability of accommodations using a grid of over 100 criteria and offers a carbon footprint measurement tool for hosts to progress towards more sustainable tourism. Travelers can choose from various experiences such as car-free getaways, romantic weekends, or nature breaks while supporting local initiatives and preserving biodiversity."
   },
   {
     "name": "GreenGo transport",
@@ -605,7 +642,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "GreenGo Transport est une plateforme française dédiée à la comparaison des émissions de CO2, du temps de trajet et du prix de différents modes de transport tels que le vélo, le train, l'autocar, la voiture thermique, la voiture électrique et l'avion. GreenGo vise à sensibiliser les utilisateurs à l'impact environnemental de leurs choix de transport et à promouvoir des modes de transport plus durables et écoresponsables. Les données sur les émissions de CO2 sont calculées en prenant en compte les distances, les facteurs d'émission et les facteurs spécifiques à chaque mode de transport, tels que la construction des véhicules et la production et distribution de carburant et d'électricité. Le temps de trajet inclut les temps d'attente et les correspondances, tandis que le prix concerne uniquement le trajet et non l'achat ou l'entretien des véhicules. GreenGo s'engage également dans une démarche de sélection et de durabilité en proposant une sélection d'hébergements écoresponsables en France."
   },
   {
     "name": "Gyroroue shop",
@@ -621,7 +659,8 @@
     "region": 75,
     "address": "101 Bd Voltaire. 75011 PARIS",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Gyroroue Shop est un spécialiste de la glisse urbaine proposant une large sélection de gyroroues et de trottinettes électriques des meilleures marques. Ils offrent des services tels que l'atelier SAV, l'essai des produits et des formations sur rendez-vous. Leur engagement envers la satisfaction client se traduit par une équipe à l'écoute des besoins et des problèmes de chaque client. Les produits sont garantis 24 mois (12 mois pour la batterie) et ils proposent un financement jusqu'à 60 fois. Les délais de livraison standard sont de 1 à 3 jours ouvrables pour les colis légers et de 2 à 5 jours ouvrables pour les colis plus volumineux ou plus lourds."
   },
   {
     "name": "Hexplo",
@@ -637,7 +676,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Hexplo est une application dédiée aux voyageurs à vélo, souvent qualifiée comme le \"Waze du voyage à vélo\". Elle offre une fonctionnalité GPS pour les cyclistes, mettant en avant les points d'intérêt locaux et les itinéraires les plus intéressants à découvrir. Disponible sur l'App Store, Hexplo se distingue par sa capacité à enrichir l'expérience des cyclistes-voyageurs en leur proposant des trajets personnalisés et riches en découvertes."
   },
   {
     "name": "HOURRAIL",
@@ -653,7 +693,8 @@
     "region": "",
     "address": "",
     "type": ["association"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "Hourrail est une plateforme dédiée à la planification de voyages respectueux de l'environnement, proposant des itinéraires à faible empreinte carbone. Les utilisateurs peuvent sélectionner leur ville de départ et d'arrivée, choisissant parmi une variété de destinations telles que la plage, la montagne, les villes festives, le patrimoine culturel et la campagne. Hourrail offre une alternative de voyage responsable et excitante, loin des moyens de transport polluants comme l'avion et la voiture."
   },
   {
     "name": "Hover-store",
@@ -669,7 +710,8 @@
     "region": 22,
     "address": "4 Rue de Balzac 22000 Saint Brieuc",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "illicov",
@@ -681,11 +723,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": 38,
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "IllicoV est une solution de covoiturage quotidien avec des lignes définies, s'apparentant aux itinéraires de bus, offrant des départs garantis aux heures de pointe. Les passagers voyagent en toute tranquillité tandis que les conducteurs peuvent gagner jusqu'à 100€ par mois grâce à des incitatifs. IllicoV est simple, flexible et adaptable aux imprévus du quotidien, permettant aux utilisateurs de choisir leur horaire en un clic, à l'avance ou à la dernière minute. Cette solution est recommandée par des utilisateurs satisfaits tels qu'Aurélie, Laurène, Yohann et Caroline, qui apprécient son caractère convivial et ses avantages pratiques. IllicoV est soutenu par l'ADEME dans le cadre de France Relance et propose une offre spécifique pour les collectivités."
   },
   {
     "name": "Interrail",
@@ -701,7 +744,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Interrail propose des voyages en train à travers l'Europe avec un seul billet pour 33 pays, offrant une grande flexibilité et confort. Le Pass est disponible en version Global pour voyager dans plusieurs pays ou Un Pays pour explorer une seule destination. Il inclut la plupart des trains, une livraison instantanée sur appareil mobile et des avantages auprès de partenaires en Europe. Les réservations de places et autres transports publics ne sont pas inclus. La politique de retour et d'échange est très souple."
   },
   {
     "name": "Jeep Avenger",
@@ -713,11 +757,12 @@
     "weight": 1595,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Jeep Avenger est un SUV compact disponible en motorisations 100% électrique, e-Hybrid et essence. Il se distingue par son design fonctionnel et son allure audacieuse, héritée de l'ADN de la marque Jeep. La Jeep Avenger propose trois motorisations différentes pour répondre aux besoins de chaque conducteur : 100% électrique, hybride et essence. Il est également équipé de systèmes avancés d'aide à la conduite pour plus de confort et de maîtrise dans tous les déplacements. La Jeep Avenger a remporté plusieurs prix, dont celui de la Voiture de l'Année européenne 2023 et est disponible en ligne ou en concession."
   },
   {
     "name": "Karos",
@@ -733,7 +778,8 @@
     "region": "",
     "address": "",
     "type": ["company"],
-    "price": "Fonction de l'offre choisie"
+    "price": "Fonction de l'offre choisie",
+    "description_ai": "Karos est l'application n°1 du covoiturage pour les trajets domicile-travail, simple et rapide, sans contraintes. Elle s'adresse aux particuliers, entreprises, collectivités et étudiants, offrant une prime de 100€ pour les conducteurs et des avantages personnalisés. Karos est une communauté active de covoitureurs, avec plus de 100 trajets disponibles à tout moment. L'application intelligente permet de partager des trajets réguliers et de dernière minute, en proposant des covoitureurs adaptés à vos habitudes. Karos a déjà permis d'éviter plus de 4 millions de kilogrammes d'émissions de CO2 depuis sa création."
   },
   {
     "name": "La balaguère",
@@ -745,11 +791,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Balaguère est une agence de voyage spécialisée dans les randonnées et treks dans le monde entier, avec une offre diversifiée comprenant des départs confirmés, en cours de confirmation et à venir. Les destinations proposées s'étendent des Pyrénées à l'Asie, en passant par la France, l'Europe, l'Afrique et les Amériques. Les séjours peuvent être accompagnés ou en liberté, avec une option dédiée aux familles. L'entreprise s'engage dans une démarche responsable et durable, avec une compensation carbone intégrale pour tous les voyages."
   },
   {
     "name": "Le monde",
@@ -765,7 +812,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Le Monde propose un calculateur pour estimer le temps nécessaire à compenser les émissions de CO2 d'un vol en avion, en proposant des écogestes individuels classés par efficacité. Malgré les effets du réchauffement climatique, les Français sont peu disposés à renoncer à l'avion, comme le montrent plusieurs sondages. Le site offre également des informations sur les émissions de gaz à effet de serre associées au transport aérien et des leviers de réduction des émissions issus d'une synthèse du GIEC."
   },
   {
     "name": "Les Halles de la Transition",
@@ -778,10 +826,11 @@
     "vehicule": "",
     "creationlocation": "",
     "location": "store",
-    "region": 31,
+    "region": "31",
     "address": "7 Rue du Canon d'Arcole, 31000 Toulouse",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Les Halles de la Transition est un tiers-lieu dédié à la transition écologique et solidaire situé à Toulouse. Il propose un espace de co-working, une cantine proposant des repas locaux et de saison, ainsi qu'un jardin. Des événements engagés sont organisés régulièrement et il est possible de louer des salles pour des réunions ou séminaires. Les Halles de la Transition offrent également un accompagnement pour les organisations dans leur transition grâce à une équipe de consultants. Le lieu est ouvert du mardi au samedi et se situe au 7 rue du Canon d'Arcole à Toulouse."
   },
   {
     "name": "M covoit’ Lignes+",
@@ -793,11 +842,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": 38,
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "M'Covoit' Lignes+ est un service de covoiturage du quotidien pour les trajets vers/depuis Grenoble dans les régions du Voironnais, Grésivaudan et Vercors. Il s'appuie sur des arrêts dédiés et fonctionne sans réservation préalable. Les passagers bénéficient de trajets gratuits et les conducteurs sont indemnisés pour la mise à disposition de leurs sièges libres. Ce service est financé par le SMMAG et la CCMV, dans le but de promouvoir le covoiturage pour les trajets quotidiens dans la région grenobloise."
   },
   {
     "name": "Mes aides Vélos",
@@ -813,7 +863,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "MesAidesVélo est une plateforme dédiée à l'information sur les aides disponibles pour l'achat d'un vélo. Elle permet aux utilisateurs de rechercher des aides en fonction de leur localisation, avec des exemples donnés dans plusieurs grandes villes françaises telles que Paris, Marseille, Lyon, Toulouse, Nice et Nantes. En cas d'erreur ou d'oubli, les utilisateurs sont invités à contacter l'équipe de MesAidesVélo. La plateforme propose également des informations sur l'aide au retrofit et dispose d'une liste complète des aides disponibles, ainsi qu'un code source pour les développeurs intéressés."
   },
   {
     "name": "Ministère du travail",
@@ -829,7 +880,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Le Ministère du Travail est une entité gouvernementale responsable de la définition et la mise en œuvre de la politique du travail en France. En mars 2018, une loi sur le renforcement du dialogue social a été adoptée, introduisant un droit au télétravail pour les salariés, sous réserve que leur poste soit éligible à cette forme de travail et que l'entreprise dispose des équipements nécessaires pour l'exercice de cette activité à distance. Cette loi vise à favoriser l'articulation entre la vie professionnelle et la vie personnelle des salariés, ainsi qu'à promouvoir des modes de travail plus flexibles et durables."
   },
   {
     "name": "Mobisus",
@@ -841,11 +893,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
-    "region": 31,
+    "location": "store-and-online",
+    "region": "31",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Tisséo Mobibus est le service de transport à la demande de Tisséo Collectivités, dédié aux personnes à mobilité réduite dans l'agglomération toulousaine. Ce service porte-à-porte ou adresse-à-adresse vise à faciliter les déplacements des personnes présentant un handicap et ne pouvant utiliser le réseau urbain traditionnel. Une application mobile permet aux usagers de réserver, gérer et suivre leurs transports en temps réel. Tisséo s'engage également à offrir un réseau accessible avec des solutions adaptées aux personnes à mobilité réduite, telles que des options de transport spécifiques et un guide d'accessibilité disponible en ligne."
   },
   {
     "name": "Mollow",
@@ -861,7 +914,8 @@
     "region": "",
     "address": "",
     "type": ["association"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "Mollow est une association de citoyens engagés qui vise à promouvoir un mode de voyage durable et responsable, en particulier le train, grâce à la diffusion d'outils et de ressources pour faciliter la transition vers des pratiques de voyage plus respectueuses de l'environnement. Leur initiative, \"Le voyage à portée de train\", encourage les voyageurs à opter pour le train comme moyen de transport écologique et pratique pour découvrir de nouvelles destinations. Mollow propose également des conseils et des astuces pour planifier des voyages durables et responsables, ainsi que des rencontres et des événements pour sensibiliser et mobiliser les citoyens autour des enjeux du tourisme durable."
   },
   {
     "name": "Loop Sports",
@@ -877,7 +931,8 @@
     "region": 74,
     "address": "805 Route des Futaies 74370 Villaz",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Nihola",
@@ -889,11 +944,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "France",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Nihola France propose des vélos triporteurs de qualité, fabriqués en France, inspirés du design danois. Leur catalogue comprend différentes gammes telles que CARGO, LOW, CARGO XL et MAXX, ainsi qu'une large sélection d'accessoires. Ces triporteurs sont adaptés aux besoins des particuliers, des professionnels et des collectivités, offrant des options musculaires et électriques pour une expérience de conduite agréable et respectueuse de l'environnement. Avec leur design élégant et leur construction robuste, les triporteurs Nihola sont reconnus pour leur stabilité, leur rapidité et leur maniabilité exceptionnelles."
   },
   {
     "name": "Nissan LEAF",
@@ -905,11 +961,12 @@
     "weight": 1580,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Omnium Cargo",
@@ -921,11 +978,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "Europe",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Omnium Cargo est une marque spécialisée dans la fabrication de vélos cargo de haute qualité, conçus pour le transport de colis, de personnes et pour les déplacements urbains. Leur gamme de produits comprend plusieurs modèles de vélos cargo, tels que le CARGO V3, l'E-CARGO V3 et le TITANIUM CARGO, ainsi que des versions mini telles que le MINI-MAX V3 et le TITANIUM MINI-MAX. Ils proposent également des vélos électriques équipés du moteur SHIMANO STEPS, capable de gravir les pentes les plus raides. Omnium Cargo offre la possibilité de personnaliser n'importe quel modèle avec des cadres en titane sur mesure. En plus des vélos, la marque propose une large sélection de composants et d'accessoires pour améliorer votre expérience de conduite."
   },
   {
     "name": "Opel Combo electrique",
@@ -937,11 +995,12 @@
     "weight": 1590,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Opel Combo-e Cargo est un utilitaire entièrement électrique offrant une efficacité optimale et une e-mobilité sans compromis. Il associe l'expérience Opel à une ingénierie de précision pour des performances commerciales améliorées. Avec une autonomie maximale de 275 km et une batterie garantie pendant 8 ans ou 160 000 km, il est équipé d'un moteur électrique quasi silencieux pour une expérience de conduite confortable et respectueuse de l'environnement. Le Combo-e Cargo dispose d'un volume de chargement jusqu’à 4,4m3 et offre des coûts d'entretien et d'exploitations considérablement réduits."
   },
   {
     "name": "Opel Corsa electrique",
@@ -953,11 +1012,12 @@
     "weight": 1530,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Opel soutient la transition vers une mobilité électrique et propose des véhicules électriques abordables, tels que la Corsa Electric à partir de 99€/mois et le Mokka Electric à partir de 139€/mois. Ces offres s'inscrivent dans le cadre du dispositif d'aide à la location du gouvernement pour encourager l'adoption des voitures électriques. Les véhicules électriques Opel sont éligibles au bonus écologique et à l'aide au leasing électrique, permettant des loyers fixes inférieurs au marché et des économies sur le carburant. Les offres s'adressent aux ménages éligibles avec des revenus fiscaux de référence par part inférieurs à 15 400 euros et une distance domicile-travail supérieure à 15 kilomètres. Les véhicules électriques Opel disposent d'une autonomie adaptée aux usages généraux et les clients peuvent bénéficier d'un accompagnement pour l'achat et l'installation d'une borne de recharge à domicile."
   },
   {
     "name": "Pedibus",
@@ -969,11 +1029,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Pedibus est une initiative de l'association Colibris, encouragent les déplacements écologiques et actifs des enfants vers l'école. Inspiré des systèmes de ramassage scolaire à pied développés au Canada et en Australie, Pedibus vise à réduire la dépendance à la voiture, favoriser les liens sociaux, promouvoir la sécurité des piétons et encourager l'activité physique quotidienne chez les enfants. Les parents ou des bénévoles accompagnent les élèves à l'école à pied, selon un itinéraire et des arrêts préétablis. Pedibus offre également une occasion d'initier les enfants aux bons réflexes à avoir en tant que piétons et de promouvoir l'écomobilité. L'association Colibris propose des ressources et des conseils pour aider à la mise en place d'un système Pedibus, y compris des informations juridiques et des exemples de réussites dans différentes villes françaises."
   },
   {
     "name": "Peugeot e-2008",
@@ -985,11 +1046,12 @@
     "weight": 1625,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Peugeot e-208",
@@ -1001,11 +1063,12 @@
     "weight": 1530,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Peugeot e-208 est une citadine sportive et électrique, équipée du PEUGEOT i-Cockpit® 3D. Elle est disponible dans une large gamme de motorisations, y compris électrique, hybride et essence. La version électrique offre une autonomie allant jusqu'à 410 km selon le cycle WLTP. La e-208 est également disponible avec une borne de recharge offerte pour les clients particuliers. Le PEUGEOT i-Cockpit® offre une expérience de conduite ergonomique et intuitive, avec un combiné numérique personnalisable et un écran tactile HD. Les sièges électriques avant enveloppants et massants sont disponibles pour plus de confort et de bien-être à bord. La conduite semi-autonome est également disponible pour une sérénité accrue sur la route."
   },
   {
     "name": "Peugeot e-rifter",
@@ -1017,11 +1080,12 @@
     "weight": 1743,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Prime à la conversion.gouv",
@@ -1037,7 +1101,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Le dispositif de prime à la conversion des véhicules, géré par le Ministère de la transition énergétique, a pour objectif d'aider les Français, particuliers et professionnels, à remplacer leurs véhicules polluants par des modèles plus respectueux de l'environnement. Ce programme inclut également un bonus écologique et des aides pour l'acquisition ou la location de cycles peu polluants. Les modalités d'attribution ont récemment évolué en février 2024, avec la mise à jour des barèmes et l'introduction de nouvelles aides, telles que l'aide exceptionnelle pour les taxis adaptés aux personnes à mobilité réduite dans le cadre des Jeux Olympiques et Paralympiques de Paris 2024. Les demandes d'aides doivent être déposées dans les six mois suivant la date de facturation du véhicule ou, dans le cas d'une location, du premier loyer."
   },
   {
     "name": "Prime co-voiturage",
@@ -1053,7 +1118,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Le covoiturage est une offre de transport non professionnelle où les passagers partagent simplement les frais du trajet avec le conducteur. En France, l'assurance responsabilité civile automobile obligatoire couvre les dommages causés aux tiers lors d'un accident de covoiturage. Toutefois, certaines situations spécifiques peuvent entraîner une indemnisation réduite ou nulle, comme l'utilisation du véhicule pour les trajets domicile-travail sans autorisation préalable ou la cession du volant à un passager contrevenant aux dispositions du contrat d'assurance. Il est possible de souscrire une garantie spécifique au covoiturage pour éviter les complications potentielles."
   },
   {
     "name": "Railtrip travel",
@@ -1069,7 +1135,8 @@
     "region": "",
     "address": "",
     "type": ["association"],
-    "price": "Gratuit"
+    "price": "Gratuit",
+    "description_ai": "Railtrip est une agence de voyages spécialisée dans les itinéraires ferroviaires à travers l'Europe. Elle propose une diversité de séjours thématiques dans différents pays européens, tels que l'Ecosse sur les traces d'Harry Potter, la Hongrie pour une déconnexion totale, ou encore la Norvège pour s'immerger dans les fjords et le mode de vie norvégien. Railtrip met en avant le réseau ferroviaire européen pour découvrir des régions dépaysantes et offre des itinéraires allant de 6 à 15 jours, incluant parfois des traversées en ferry et des randonnées. L'agence propose également des citytrips en Europe et des voyages en Belgique."
   },
   {
     "name": "Région Occitanie voitures",
@@ -1085,7 +1152,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Région Occitanie propose une aide financière, l'Éco-chèque mobilité, pour l'achat d'une voiture électrique ou hybride rechargeable d'occasion, dans le cadre de son plan d'actions pour la mobilité, l'environnement et le pouvoir d'achat. Cette aide est destinée aux personnes physiques majeures domiciliées en région Occitanie, dont le revenu fiscal de référence par part est inférieur ou égal à 14 089 €, ou aux personnes exerçant certaines professions médico-sociales à domicile en région Occitanie. La voiture doit avoir un taux d'émission de CO2 inférieur ou égal à 20 g/km pour une voiture électrique et à 50 g/km pour une voiture hybride rechargeable, et avoir été achetée auprès d'un professionnel de la vente automobile exerçant son activité professionnelle sur le territoire de la région Occitanie. L'aide est cumulable avec la prime à la conversion de l'État et son montant est de 30% du coût d'acquisition, plafonné à 2000 € pour les particuliers et à 4000 € pour les professionnels médico-sociaux."
   },
   {
     "name": "Région Occitanie mobilité",
@@ -1101,7 +1169,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La Région Occitanie/Pyrénées-Méditerranée s'est engagée à devenir la première région à énergie positive et s'efforce de réduire les émissions de gaz à effet de serre dans les transports. Dans ce cadre, elle propose des aides financières pour l'acquisition de vélos et de voitures électriques ou hybrides rechargeables, telles que l'Éco-chèque mobilité. Ce dispositif vise à encourager les modes de transport propres et à préserver le pouvoir d'achat des habitants. Il comprend des aides pour l'achat d'un vélo à assistance électrique, d'un bonus forfait mobilité durable, d'un bonus vélo adapté PMR, et pour les lycéens boursiers de classe de seconde. Des aides sont également prévues pour l'achat ou la location d'une voiture électrique ou hybride rechargeable neuve avec mise au rebut d'un véhicule ancien, ainsi que pour l'achat d'une voiture électrique ou hybride rechargeable d'occasion."
   },
   {
     "name": "Renault TWINGO",
@@ -1113,11 +1182,12 @@
     "weight": 1168,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Renault Twingo E-Tech 10"
   },
   {
     "name": "Renault",
@@ -1129,11 +1199,12 @@
     "weight": 1502,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Renault est une marque reconnue pour sa gamme de véhicules particuliers et utilitaires, dont certains sont électriques ou hybrides. Le modèle Zoe E-Tech 10"
   },
   {
     "name": "Renault Kangoo e-tech",
@@ -1145,11 +1216,12 @@
     "weight": 1616,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "Renault Mégan e-tech",
@@ -1161,11 +1233,12 @@
     "weight": 1605,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "MINT Bikes",
@@ -1181,7 +1254,8 @@
     "region": 13,
     "address": "13290 Les Milles",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "MINT Bikes est le sp√©cialiste fran√ßais du v√©lo reconditionn√© haut de gamme, offrant une large s√©lection de v√©los d'occasion r√©vis√©s avec soin dans leurs ateliers en France. Les v√©los sont remis en √©tat selon plus de 100 points de contr√īle et √©quip√©s de pi√®ces neuves si n√©cessaire. MINT Bikes propose des v√©los √©lectriques, de route, de ville, VTT et VTC, adapt√©s √† toutes les morphologies et tous les budgets. Tous les v√©los reconditionn√©s sont √©ligibles √† la prime d'√âtat et sont couverts par une garantie de 12 mois."
   },
   {
     "name": "RIESE & MULLER",
@@ -1193,11 +1267,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "Europe",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": ["company"],
-    "price": ">1.000€"
+    "price": ">1.000€",
+    "description_ai": "Riese & Müller est une marque spécialisée dans la fabrication de vélos haut de gamme, proposant des E-Bikes, vélos cargo et vélos pliants alliant qualité exceptionnelle, innovation technologique et design soigné dans les moindres détails. Leur gamme de vélos cargo facilite le transport de charges et attire l'attention grâce à leur robustesse et leur design élégant. La marque s'engage dans la construction de la mobilité de demain en proposant des solutions innovantes pour réduire les émissions et offrir des systèmes de transport durables et performants. Leur technologie Control assure une conduite sportive et sûre grâce à une suspension intégrale et une traction optimale."
   },
   {
     "name": "Sailcoop",
@@ -1209,11 +1284,12 @@
     "weight": "-",
     "vehicule": "Voile",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Sailcoop est une coopérative visant à changer notre rapport au voyage en utilisant l'énergie inépuisable et gratuite du vent comme alternative décarbonée aux modes de transport polluants. Elle propose des traversées à la voile vers la Corse et bientôt en Bretagne, pendant la saison estivale. En tant que coopérative, Sailcoop permet aux citoyens, collectivités et structures de participer à cette aventure. Les actualités mettent en avant l'innovation et l'impact environnemental de ce projet, développé à La Rochelle et Vannes."
   },
   {
     "name": "Schot-Mob",
@@ -1225,11 +1301,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "France",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Schot-Mob est une entreprise française spécialisée dans la fabrication et la vente de triporteurs électriques, assemblés en France avec une main-d'œuvre locale. Leur gamme de produits comprend des triporteurs adaptés aux besoins des particuliers et des professionnels, pour les loisirs, l'agriculture et les services. Ces véhicules écologiques et silencieux sont homologués pour une utilisation sur la voie publique et offrent une maniabilité optimale pour une variété d'usages. Schot-Mob propose également des pièces détachées et un service après-vente pour assurer la durabilité de ses produits."
   },
   {
     "name": "Moustache Bike",
@@ -1241,11 +1318,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "France",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Moustache Bikes est une marque française spécialisée dans la fabrication de vélos électriques. Elle propose une large gamme de vélos électriques pour tous les usages : urbain, polyvalent, VTT, cargo, gravel, tandem, fat et enfants. Leur conviction est que le vélo électrique représente une opportunité incroyable pour le développement de l'utilisation des vélos. Les vélos électriques Moustache sont réputés pour leur confort, leur design distinctif et leur qualité de fabrication française. Ils sont équipés de moteurs Bosch et offrent une expérience de conduite agréable et fluide. La marque propose également une gamme d'accessoires pour accompagner l'utilisation de ses vélos."
   },
   {
     "name": "Skoka Enyaq",
@@ -1257,11 +1335,12 @@
     "weight": 1992,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": ""
   },
   {
     "name": "SNCF voyageurs activités",
@@ -1273,11 +1352,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "SNCF Voyageurs, à travers sa marque liO Train en Occitanie, propose une large sélection d'activités et de découvertes pour voyager durablement et profiter des richesses de la région. Des formules adaptées aux jeunes et aux seniors facilitent les déplacements en train à des tarifs avantageux. Parmi les activités proposées, on trouve des randonnées accessibles depuis les gares, telles que la boucle de Notre-Dame de la Sablette ou la balade sur la Via Garona. En plus des services de transport, SNCF Voyageurs offre des solutions pour voyager avec son vélo, des options d'assistance et des contacts utiles pour faciliter les déplacements en train en Occitanie.\n\nLes informations supplémentaires utilisées pour enrichir la présentation initiale concernent :\n\n* Les formules tarifaires adaptées à différents publics (jeunes, seniors, groupes) et les avantages associés (réductions, voyages gratuits)\n* La promotion des déplacements durables et de la découverte de la région Occitanie\n* La mise en avant d'activités spécifiques, comme les randonnées accessibles depuis les gares\n* Les services complémentaires offerts par SNCF Voyageurs, tels que le transport et l'assistance pour les vélos, les contacts utiles et les solutions d'accessibilité."
   },
   {
     "name": "SNCF voyageurs lieux",
@@ -1289,11 +1369,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "La SNCF Occitanie propose des formules et abonnements pour voyager en train à travers la région, avec des réductions pour les jeunes et les seniors. Le service liO Train permet de se déplacer vers une sélection de lieux incontournables et Grands Sites Occitanie, tels qu'Agde, Albi ou Narbonne, à petits prix. Les voyageurs peuvent également bénéficier de tarifs préférentiels sur les activités et entrées aux musées ou châteaux, sur présentation d'un titre de transport liO Train. Le Train Jaune offre une expérience unique en traversant le Parc naturel régional des Pyrénées catalanes et le Canigou."
   },
   {
     "name": "SNCF-TER- Occitanie week-end",
@@ -1305,11 +1386,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "Occitanie : 09 -11-12-30-31-34-46-48-65-66-81-82",
     "address": "",
     "type": ["Le Service Public"],
-    "price": "<50€"
+    "price": "<50€",
+    "description_ai": "La Région Occitanie et SNCF Voyageurs proposent des voyages en train à 1€ tous les premiers week-ends du mois, à destination des adultes et enfants de 4 à 11 ans. Les billets sont disponibles à la vente 10 jours avant les dates de voyage et sont non échangeables, non remboursables et non cumulables avec d'autres promotions. Cette offre est valable à bord des trains liO SNCF Occitanie, du Train Jaune et des bus de substitution, jusqu'à Avignon, Tarascon-sur-Rhône, Clermont-Ferrand, Agen, Pau et Brive. Les places ne sont pas attribuées et la place assise n'est pas garantie. Les bagages doivent être étiquetés et les animaux sont soumis à des conditions spécifiques. SNCF et liO sont des marques déposées de SNCF et de la Région Occitanie Pyrénées-Méditerranée respectivement."
   },
   {
     "name": "SNCF-TER- Occitanie",
@@ -1321,11 +1403,12 @@
     "weight": "-",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "Occitanie : 09 -11-12-30-31-34-46-48-65-66-81-82",
     "address": "",
     "type": ["Le Service Public"],
-    "price": "<50€"
+    "price": "<50€",
+    "description_ai": "La SNCF propose des billets AvantagiO' à 1€ pour voyager à travers toute la région Occitanie en train liO, sous certaines conditions et dans la limite des disponibilités. D'autres formules et tarifs réduits sont également accessibles, notamment pour les jeunes et les seniors. Les billets peuvent être achetés sur le site liO Train SNCF Occitanie, l'application SNCF Connect, ou dans les agences de voyages agréées SNCF. Il est important de noter que ces billets sont non échangeables et non remboursables. La SNCF propose également des lignes entières à 1€, ainsi que des formules d'abonnement pour des trajets réguliers."
   },
   {
     "name": "Tern Bicycles",
@@ -1337,11 +1420,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Tern Bicycles est une entreprise spécialisée dans la conception de vélos électriques cargo, pliants et Bosch pour les familles. Leur gamme de produits inclut des modèles tels que le GSD, l'Orox, le HSD, le NBD, le Quick Haul, et le Vektron, ainsi qu'une variété d'accessoires pour personnaliser et faciliter le transport de passagers, de marchandises et d'animaux. Les vélos Tern sont réputés pour leur qualité, leur durabilité et leur design compact, offrant une solution de mobilité pratique et écologique pour les déplacements quotidiens. L'entreprise travaille en étroite collaboration avec Bosch pour offrir des vélos électriques équipés des meilleurs moteurs et systèmes du marché."
   },
   {
     "name": "Toulouse Bikes",
@@ -1354,10 +1438,11 @@
     "vehicule": "",
     "creationlocation": "",
     "location": "store",
-    "region": 31,
+    "region": "31",
     "address": "164 Route de Revel. 31400 Toulouse",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "TOULOUSE BIKES est un magasin de vélos situé à Toulouse, dans le quartier de Montaudran, offrant des vélos haut de gamme de marques renommées mondiales telles que SCOTT, TREK, BMC, HAIBIKE, LOOK et Winora. Le magasin propose également des vélos performants et abordables pour les débutants et une large sélection allant des vélos électriques aux vélos de route et VTT. Les clients bénéficient de conseils personnalisés pour choisir un vélo adapté à leurs besoins et leur budget, ainsi que d'essais et d'offres promotionnelles régulières. En plus du magasin physique, TOULOUSE BIKES dispose d'un site de vente en ligne et d'un centre de formation \"Bikes Academy\" pour les passionnés de vélo."
   },
   {
     "name": "Toulouse métropole",
@@ -1373,7 +1458,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Toulouse Métropole propose une aide financière pour remplacer un véhicule polluant par un véhicule peu émissif ou pour changer la motorisation d'un véhicule existant vers une option moins polluante. Cette aide s'adresse aux particuliers, professionnels et associations résidant ou ayant leur activité sur l'une des 37 communes de la métropole, sous conditions de ressources. Les véhicules éligibles incluent les voitures particulières, les deux-roues motorisés et les services d'autopartage. Le montant de l'aide varie en fonction des revenus et du type de véhicule, représentant jusqu'à 40% du prix hors taxe et plafonné selon les catégories. Cette initiative vise à améliorer la qualité de l'air et la santé des habitants dans le cadre du Plan Climat Air Énergie Territorial (PCAET)."
   },
   {
     "name": "Trainline",
@@ -1389,7 +1475,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Trainline aide les voyageurs à réserver des billets de train pour la France et l'Europe, en comparant les horaires et les prix sur une plateforme unique. En tant que distributeur officiel pour SNCF et d'autres transporteurs européens, Trainline propose des billets sans frais supplémentaires et accepte les cartes de réduction et de fidélité. Les utilisateurs peuvent gérer leurs billets et cartes directement depuis l'application mobile. Trainline gagne de l'argent grâce à une commission sur chaque billet vendu, sans frais de réservation pour les billets vendus en France."
   },
   {
     "name": "Tribugo",
@@ -1405,7 +1492,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Tribulive est une plateforme numérique dédiée aux organisateurs d'événements, offrant des solutions de mobilité durable pour décarboner les déplacements des festivaliers. Elle propose une carte interactive mettant en avant des options telles que le covoiturage, les navettes, le train et le vélo. En 2023, des festivals comme Hellfest, Paléo Festival et Festival Musilac ont utilisé Tribulive pour optimiser la mobilité de leur public. La plateforme aide non seulement à réduire l'empreinte carbone et à améliorer l'expérience utilisateur, mais aussi à fidéliser le public en favorisant des habitudes durables et des rencontres autour d'intérêts communs."
   },
   {
     "name": "Trips",
@@ -1421,7 +1509,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Triporteur et Biporteur électrique TRIPS est une entreprise française spécialisée dans la conception et la fabrication interne de produits de construction et de rénovation pour professionnels. Ils proposent des solutions de mobilité durable pour le transport et la logistique, avec une gamme de triporteurs et biporteurs électriques personnalisables, comprenant des modules cargo, isotherme, food, plancher plat, pick-up et taxi. L'entreprise dispose d'un formulaire de contact pour les demandes de renseignements, achats, SAV, partenariats et emplois.\n\n* Mentions légales, CGV, Politique de confidentialité et Plan du site en bas de page\n* Utilisation de cookies pour améliorer les services\n* Réseaux sociaux : Linkedin TRIPSYoutube TRIPSFacebook TRIPS"
   },
   {
     "name": "Projet Boussole",
@@ -1433,11 +1522,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": 92,
     "address": "7 Rue Foucault\n92110 Clichy",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Projet Boussole est une entreprise spécialisée dans la vente de vélos reconditionnés, classiques et électriques, avec une garantie allant jusqu'à un an. Leur atelier est situé à Clichy et propose également des services de réparation et de reprise de vélos. Les vélos sont remis à neuf par des mécaniciens expérimentés et sont éligibles aux aides de l'État et de la région IDF. Projet Boussole offre également la possibilité de payer en plusieurs fois sans frais et propose des accessoires tels que des antivols, casques et assurances pour accompagner l'achat de leurs vélos."
   },
   {
     "name": "Urban Arrow",
@@ -1449,11 +1539,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Urban Arrow, basée en Europe, est reconnue pour la qualité et l'expérience de conduite de ses vélos cargo électriques haut de gamme. Depuis 2011, la marque conçoit des vélos dignes de confiance en collaboration avec des partenaires renommés comme Bosch, Enviolo et Schwalbe. Urban Arrow propose une large gamme de vélos cargo offrant des solutions simples et durables pour divers besoins de transport. La marque est engagée à améliorer votre quotidien et à rendre l'expérience des zones urbaines et périurbaines plus agréable grâce à ses vélos cargo, offrant une maniabilité et un équilibre exceptionnels."
   },
   {
     "name": "Urban Cycle",
@@ -1465,16 +1556,17 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": 75,
     "address": "9 rue de la Pierre Levée\n75011 Paris",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Urban Cycle est une entreprise de coursiers à vélo et vélos cargo à Paris, en activité depuis plus de 20 ans. Ils sont les seuls à proposer des livraisons exclusivement à vélo pour des colis allant jusqu'à 80kg dans Paris et la première ceinture, et jusqu'à 8kg dans les départements 92, 93 et 94. Ils utilisent exclusivement des vélos cargo Bullitts depuis plus de 10 ans et sont également revendeurs de ces vélos et de leurs accessoires. Urban Cycle propose également un service web-client pour gérer les envois en toute tranquillité. L'entreprise est située au 9 rue de la Pierre Levée, 75011 Paris et peut être contactée par téléphone au 01 43 38 38 38 ou par email à l'adresse urbancycle[at]urbancycle.fr."
   },
   {
     "name": "Uwinbike",
     "description": "Uwinbike propose une solution innovante, digitale et simple pour mettre en œuvre la digitalisation du Forfait Mobilité Durable vélo dans chaque entreprise.",
-    "url": "Uwinbike | Indemnités vélo | Occitanie",
+    "url": "https://www.uwinbike.com/",
     "tags": "Mobilité douce -> Écosystème",
     "color": "",
     "moralscore": "",
@@ -1485,7 +1577,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Uwinbike est une entreprise basée en Occitanie, proposant une application dédiée à la mobilité active et à la digitalisation du Forfait Mobilité Durable vélo pour les entreprises. L'application est gratuite, respectueuse de la vie privée et des données personnelles, et permet aux cyclistes de produire des justificatifs de pédalage domicile-travail pour bénéficier de l'indemnité vélo sans cotisations sociales ni impôts. Uwinbike a été lauréat du concours \"Ma solution pour le climat\" de la région Occitanie en mars 2020 et s'engage à favoriser l'utilisation du vélo en entreprise grâce à une solution innovante et digitale."
   },
   {
     "name": "Volkswagen e-up",
@@ -1497,11 +1590,12 @@
     "weight": 1235,
     "vehicule": "",
     "creationlocation": "N/A pour la catégorie Acheter un véhicule",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "National & international",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Volkswagen e-up! est une voiture électrique compacte et connectée, offrant une autonomie allant jusqu'à 260 km (WLTP) et des fonctionnalités telles que la recharge différée et la compatibilité avec les smartphones. Son design extérieur et intérieur frais et minimaliste est disponible avec des packs d'équipements optionnels pour une personnalisation accrue. L'e-up! est équipée de série avec des fonctionnalités pratiques telles que l'assistant de maintien dans la voie Lane Assist et la reconnaissance des panneaux de signalisation."
   },
   {
     "name": "Voyager en Train",
@@ -1517,7 +1611,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Voyager en Train est un média et blog voyage dédié au voyage ferroviaire, fondé par Gwénaëlle et Victor en 2019. Ils partagent leurs conseils et bons plans pour des voyages en train réussis en France et en Europe, avec des informations pratiques sur les tarifs, cartes de réduction, services à bord et plus encore. Le site propose également une librairie avec des recommandations de livres sur les trains et des idées cadeaux. Voyager en Train s'engage pour un voyage bas carbone et encourage l'utilisation du train comme alternative écologique à l'avion."
   },
   {
     "name": "Wee-bot",
@@ -1533,7 +1628,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Weebot est un spécialiste de la distribution de trottinettes électriques, vélos électriques et accessoires en ligne. La marque propose une large sélection de produits, allant des trottinettes électriques tout-terrain aux vélos électriques en passant par les équipements de protection et les pièces détachées. Les produits Weebot sont équipés de composants certifiés CE et bénéficient d'une garantie de 2 ans avec un SAV assuré par des techniciens spécialisés en France. Weebot propose également des ateliers à Boulogne-Billancourt, Lyon et Bordeaux pour permettre aux clients de tester les produits et bénéficier de conseils personnalisés."
   },
   {
     "name": "Yuba",
@@ -1545,11 +1641,12 @@
     "weight": "",
     "vehicule": "",
     "creationlocation": "",
-    "location": "store and online",
+    "location": "store-and-online",
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Yuba est une marque pionnière dans la conception et la production de vélos cargo depuis plus de 15 ans, offrant des solutions innovantes pour une mobilité plus douce dans le monde entier. Leurs vélos sont uniques, conçus en France et équipés de composants de qualité, adaptés à tous les usagers pour un confort de route optimal. Yuba propose une large gamme de vélos cargo, allant des modèles compacts comme le FastRack et le Kombi E5, aux modèles allongés tels que le Spicy Curry AT et le Mundo EP8, ainsi que des biporteurs comme le Supercargo CL. Chaque vélo est personnalisable grâce à une variété d'accessoires et d'add-ons, permettant aux cyclistes de créer leur propre vélo de rêve pour les transports quotidiens et les aventures en famille ou entre amis. En choisissant Yuba, vous participez à la réduction des émissions de CO2 et adoptez un mode de vie plus sain et plus aventureux."
   },
   {
     "name": "Tuvalum",
@@ -1565,7 +1662,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Tuvalum est le leader dans la vente de vélos d'occasion reconditionnés et certifiés en France. Leur processus de reconditionnement est réalisé par des experts dans leur laboratoire Tuvalum Lab, garantissant la qualité et la sécurité des vélos vendus sur leur plateforme. En plus de proposer des vélos d'occasion en excellent état, Tuvalum offre également une assistance à ses utilisateurs grâce à son service client et une plateforme conviviale pour faciliter l'expérience d'achat et de vente de vélos d'occasion."
   },
   {
     "name": "Upway",
@@ -1581,7 +1679,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Upway est le spécialiste français du vélo électrique reconditionné, offrant des modèles abordables et garantis 1 an, avec une réduction allant jusqu'à 60% par rapport au neuf. Les vélos sont reconditionnés par des professionnels et incluent des types variés tels que VTT, VTC, vélo de ville, cargo, pliant, route et speed bike, issus de marques renommées telles que Moustache, Cube, Giant, O2feel, Lapierre, Haibike, Kalkhoff et Riese & Müller. Upway propose également des accessoires et des guides pour vous aider à choisir le vélo électrique idéal."
   },
   {
     "name": "Velopage",
@@ -1597,7 +1696,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Velopage est une plateforme française spécialisée dans les petites annonces de vélos d'occasion. Les utilisateurs peuvent y trouver ou vendre des vélos en parcourant les annonces classées par catégories (route, montagne, urbain, enfants) ou par emplacement. De plus, Velopage offre des fonctionnalités telles qu'un forum pour publier des demandes de vélos spécifiques et la possibilité de publier une annonce gratuitement pour vendre rapidement son vélo."
   },
   {
     "name": "Vendre son vélo",
@@ -1613,7 +1713,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Vendre son vélo est une plateforme sécurisée et vérifiée basée en Suisse, offrant une perspective européenne pour l'achat et la vente de vélos d'occasion, reconditionnés ou neufs. Elle propose une large sélection allant des vélos de route et VTT aux vélos électriques et reconditionnés, avec plus de 1700 modèles disponibles. Chaque annonce est vérifiée pour garantir la fiabilité des informations et la qualité des vélos proposés. En achetant un vélo d'occasion reconditionné, vous réalisez des économies et contribuez à la réduction de l'empreinte carbone. La plateforme promeut une consommation responsable et durable, avec des valeurs écologiques et solidaires."
   },
   {
     "name": "Zyclora",
@@ -1629,7 +1730,8 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Zyclora est le leader dans l'achat-vente de vélos d'occasion reconditionnés en France, avec plus de 10 ans d'expérience et près de 10 000 vélos vendus depuis 2015. La marque propose une large sélection de vélos de route, VTT, gravel et électriques reconditionnés par des mécaniciens professionnels dans leur atelier, issus des plus grandes marques telles qu'Orbea, Specialized, KTM, Giant, Cannondale, Scott, Trek, BH, Bianchi, Megamo, Conor, Cube, Merida et BMC. Zyclora offre une garantie d'un an sur tous les vélos vendus et dispose d'un stock de plus de 1 000 vélos reconditionnés disponibles dans leur magasin de plus de 2 500 m2. La livraison est assurée dans toute la France et près d'un tiers des vélos sont financés grâce à des facilités de paiement proposées sur les principales plateformes telles que Paypal et Sequra."
   },
   {
     "name": "Cocoli",
@@ -1645,6 +1747,7 @@
     "region": "",
     "address": "",
     "type": [""],
-    "price": ""
+    "price": "",
+    "description_ai": "Cocolis est une plateforme de covoiturage de colis permettant l'envoi et la réception d'objets variés entre particuliers et commerçants, à des prix jusqu'à 80% moins chers pour les gros colis et meubles. Chaque livraison permet d'éviter l'émission de 25kg de CO2. Le processus est simple : déposez une annonce avec les caractéristiques du colis, puis convenez des modalités avec le transporteur proposé. Les transactions sont sécurisées et assurées jusqu'à 5000€. Cocolis offre une alternative écologique et économique aux services de transport traditionnels, avec une communauté de plus en plus engagée dans ce modèle collaboratif et respectueux de l'environnement."
   }
 ]

@@ -34,7 +34,6 @@ const ServiceCard = ({
   theme: Theme;
   color: string;
 }) => {
-  const t = useTranslations('common');
   const tServices = useTranslations('services');
 
   if (!service) {
@@ -45,7 +44,7 @@ const ServiceCard = ({
     <Card h={'100%'} bg={backgroundColor} color={color}>
       {!noImage ? (
         <CardSection>
-          <Image src={getLogoImage({ service })} alt={service.name} height={100} />
+          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>

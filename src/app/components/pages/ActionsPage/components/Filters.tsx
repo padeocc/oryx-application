@@ -47,6 +47,12 @@ const FiltersComponent = ({
     return { label: label.includes(`region_${value}_label`) ? value : label, value };
   });
 
+  const locationOptions = [
+    { label: t('location-online-label'), value: 'online' },
+    { label: t('location-store-label'), value: 'store' }
+    // { label: t('location-online-store-label'), value: 'store-and-online' }
+  ];
+
   useEffect(() => {
     form.setValues(filters);
     form.setInitialValues(filters);
@@ -116,13 +122,23 @@ const FiltersComponent = ({
     form.setInitialValues(allValues);
   };
 
+  const saveLocationFilter = (location: string | undefined | null) => {
+    const allValues = {
+      ...form.values,
+      location: location || undefined
+    };
+    form.setValues(allValues);
+    handleSubmit(allValues);
+    form.setInitialValues(allValues);
+  };
+
   return (
     <form
       onSubmit={form.onSubmit(values => {
         handleSubmit(values);
         form.setInitialValues(values);
       })}>
-      <Grid gutter={'md'}>
+      <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Group justify="flex-start" pl="md" pt="md" pb="md" gap={'xl'}>
             {options}
@@ -137,37 +153,40 @@ const FiltersComponent = ({
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <Stack gap={'md'}>
-            <Title order={5} c="dark">
-              {t('subjects-label')}
-            </Title>
-            {allCategories.length > 0 ? (
-              <Group gap={'xs'}>
-                {allCategories.map((category, index) => (
-                  <Chip
-                    key={`cat-${index}`}
-                    checked={form.values?.categories?.includes(category)}
-                    color={color}
-                    onClick={() => {
-                      return saveCategories(category);
-                    }}>
-                    {category}
-                  </Chip>
-                ))}
-              </Group>
-            ) : null}
-
+            <Group gap={'xs'}>
+              <Title order={5} c="dark">
+                {t('subjects-label')}
+              </Title>
+              {allCategories.length > 0 ? (
+                <>
+                  {allCategories.map((category, index) => (
+                    <Chip
+                      size={'xs'}
+                      key={`cat-${index}`}
+                      checked={form.values?.categories?.includes(category)}
+                      color={color}
+                      onClick={() => {
+                        return saveCategories(category);
+                      }}>
+                      {category}
+                    </Chip>
+                  ))}
+                </>
+              ) : null}
+            </Group>
             {Object.keys(otherFilters)?.length ? (
-              <>
+              <Group gap={'xs'}>
                 <Title order={5} c="dark">
                   {t('actions-label')}
                 </Title>
-                <Group>
+                <>
                   {Object.keys(otherFilters).map(otherFilterKey => {
                     // @ts-ignore
                     const type = otherFilters[otherFilterKey] as 'boolean' | 'string';
                     if (type === 'boolean') {
                       return (
                         <Chip
+                          size={'xs'}
                           key={`filter-${otherFilterKey}`}
                           // @ts-ignore
                           checked={!!form?.values?.others?.[otherFilterKey]}
@@ -180,26 +199,32 @@ const FiltersComponent = ({
                     }
                     return null;
                   })}
-                </Group>
-              </>
+                </>
+              </Group>
             ) : null}
-          </Stack>
-        </GridCol>
-      </Grid>
-      <Grid pt="md">
-        <GridCol span={{ base: 12, sm: 6, lg: 4 }}>
-          <Stack gap={'md'}>
-            <Title order={5} c="dark">
-              {t('regions-label')}
-            </Title>
-            <Select
-              placeholder={t('filter-region-label')}
-              data={regionsOptions}
-              multiple
-              onChange={saveRegionsFilter}
-              clearable
-              onClear={() => saveRegionsFilter(null)}
-            />
+            <Group gap={'xs'}>
+              <Title order={5} c="dark">
+                {t('regions-label')}
+              </Title>
+              <Select
+                size="xs"
+                placeholder={t('filter-region-label')}
+                data={regionsOptions}
+                multiple
+                onChange={saveRegionsFilter}
+                clearable
+                onClear={() => saveRegionsFilter(null)}
+              />
+              <Select
+                size="xs"
+                placeholder={t('filter-location-label')}
+                data={locationOptions}
+                multiple
+                onChange={saveLocationFilter}
+                clearable
+                onClear={() => saveLocationFilter(undefined)}
+              />
+            </Group>
           </Stack>
         </GridCol>
       </Grid>

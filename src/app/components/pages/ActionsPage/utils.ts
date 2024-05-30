@@ -1,6 +1,5 @@
 import { Theme } from '@/config';
-import { intersection } from 'lodash';
-import uniq from 'lodash/uniq';
+import { intersection, uniq } from 'lodash';
 import qs from 'qs';
 
 export type Category = string;
@@ -97,6 +96,7 @@ export type Filters = {
   codes?: (string | undefined)[];
   regions?: Region[];
   others?: OtherFilters;
+  location?: string;
 };
 
 export type FetchServicesResponse = {
@@ -123,6 +123,7 @@ export const fetchServices = async ({ filters }: { filters?: Filters }): Promise
 
   const others = filters?.others || {};
   const regions = filters?.regions || [];
+  const location = filters?.location || undefined;
 
   const allFilters = Object.keys(allOthersFields).reduce((all, filterKey) => {
     // @ts-ignore
@@ -135,12 +136,13 @@ export const fetchServices = async ({ filters }: { filters?: Filters }): Promise
   }, {});
 
   const regionsFilters = regions?.[0] ? { region: regions?.[0] } : {};
+  const locationFilters = location ? { location } : {};
 
   const stringifiedQuery = qs.stringify({
     pagination: { start: 0, limit },
     sort,
     populate: 'logo',
-    filters: { ...allFilters, ...regionsFilters }
+    filters: { ...allFilters, ...regionsFilters, ...locationFilters }
   });
 
   const fetchUrl = `${baseUrl}/${filters?.theme}?${stringifiedQuery}`;
@@ -182,8 +184,7 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    cache: 'no-cache'
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
   });
   const solution = await response.json();
   const item = solution?.data?.[0];
