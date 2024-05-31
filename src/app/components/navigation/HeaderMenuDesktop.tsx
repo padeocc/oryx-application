@@ -14,11 +14,11 @@ const HeaderMenuDesktop = async () => {
           <Button
             {...others}
             p={'xs'}
-            variant="transparent"
+            variant={priority ? 'filled' : 'transparent'}
             key={`item-desktop-${itemgroupindex}-${itemindex}-${name}`}
             component={Link}
             href={href}
-            color={priority ? 'orange' : 'var(--mantine-color-dark-outline)'}>
+            color={priority ? 'green' : 'var(--mantine-color-dark-outline)'}>
             {name}
           </Button>
         );
@@ -33,7 +33,7 @@ const HeaderMenuDesktop = async () => {
           <DotsThreeOutlineVertical size={24} color="var(--mantine-color-dark-outline)" />
         </Container>
       </MenuTarget>
-      <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
+      <MenuDropdown>
         {(await getFooterLinks()).map((itemsGroup, itemgroupindex) => (
           <div key={`group-more-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {

@@ -1,10 +1,12 @@
 'use client';
 
+import { Theme } from '@/config';
 import { Popover, PopoverDropdown, PopoverTarget, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Link from 'next/link';
 import { Service } from '../../../utils';
 
-const Description = ({ service }: { service: Service }) => {
+const Description = ({ service, theme }: { service: Service; theme: Theme }) => {
   const [opened, { close, open }] = useDisclosure(false);
 
   return (
@@ -28,9 +30,11 @@ const Description = ({ service }: { service: Service }) => {
         </Text>
       </PopoverTarget>
       <PopoverDropdown style={{ pointerEvents: 'none' }}>
-        <Text fz="sm" size="sm">
-          {service.description}
-        </Text>
+        <Link href={`/action/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+          <Text fz="sm" size="sm">
+            {service.description}
+          </Text>
+        </Link>
       </PopoverDropdown>
     </Popover>
   );

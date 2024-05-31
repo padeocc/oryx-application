@@ -13,7 +13,7 @@ const green: MantineColorsTuple = [
   '#34796e'
 ];
 
-const gray: MantineColorsTuple = [
+const gray_oryx: MantineColorsTuple = [
   '#dbdbdb',
   '#dfdfdf',
   '#e3e3e3',
@@ -46,7 +46,7 @@ export const theme: MantineThemeOverride = {
   },
   colors: {
     green,
-    gray
+    gray_oryx
   },
   primaryColor: 'green'
 };

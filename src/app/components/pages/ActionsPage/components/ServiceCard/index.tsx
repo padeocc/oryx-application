@@ -69,16 +69,16 @@ const ServiceCard = ({
                 </Title>
               </GridCol>
             </Grid>
-            <Description service={service} />
+            <Description service={service} theme={theme} />
           </Stack>
         </Stack>
         <CardSection c={color}>
-          <Group justify="center" p="md" fz="sm">
+          <Group justify="space-between" p="md" fz="sm">
             <Link href={`/action/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
               {tServices('details-label')}
             </Link>
             <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">
-              <Link href={service.url} target="_blank" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link href={service.url} target="_blank" style={{ color: 'inherit' }}>
                 {tServices('access-label')}
               </Link>
             </Tooltip>

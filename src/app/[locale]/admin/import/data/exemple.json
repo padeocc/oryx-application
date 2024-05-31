@@ -1,0 +1,26 @@
+[
+  {
+    "name": "See Food Reboot",
+    "description": "Découvrez nos délicieux poissons d'origine végétale - 100% végétal, naturel et fièrement fabriqué en France. Goûtez à nos savoureux saumon, thon et tarama à …",
+    "url": "https://www.olalafoods.fr/fr/",
+    "tags": "Flexitarien - Remplacer la viande rouge",
+    "location": "online",
+    "region": "",
+    "address": "",
+    "type": ["company"],
+    "price": "Fonction de l'offre choisie",
+    "description_ai": "See Food Reboot, également connue sous le nom d'OLALA!, propose des délicieuses alternatives végétales aux produits de la mer, 100% végétales et naturelles, fabriquées avec fierté en France. Leur menu comprend des options savoureuses telles que du saumon, du thon et du tarama végétal. Ces produits sont non seulement étonnamment délicieux et riches en oméga-3, mais ils sont également meilleurs pour la planète, émettant jusqu'à 11 fois moins de CO2 que les poissons traditionnels. Recommandés par des chefs et des experts culinaires, les produits See Food Reboot sont une nouvelle génération de produits de la mer, offrant une expérience gustative unique et durable."
+  },
+  {
+    "name": "tyk affinage végetal",
+    "description": "Ty'K Affinage, ce sont des alternatives au fromage affinées 100 % végétales et bio. Elles sont crémeuses, fondantes, aux saveurs gourmandes.",
+    "url": "https://tyk-affinage-vegetal.com/",
+    "tags": "Devenir végétalien",
+    "location": "store",
+    "region": "National",
+    "address": "",
+    "type": [""],
+    "price": "",
+    "description_ai": "Ty'K Affinage est une entreprise artisanale proposant des alternatives au fromage affinées 100 % végétales et biologiques, à base de noix de cajou. Leur gamme se compose de spécialités telles que Le Petit Boucan, au caractère crémeux et fleuri, et Le Pebeyec, à la fois fort en surface et tendre à l'intérieur. Ces alternatives au fromage sont affinées en cave selon la tradition fromagère et sont disponibles en différentes tailles, y compris en version XXL. Ty'K Affinage s'engage dans une production éthique et responsable, avec des emballages compostables et une démarche zéro déchet. Leurs affinés sont également disponibles dans les rayons de magasins et dans les cuisines de restaurants."
+  }
+]

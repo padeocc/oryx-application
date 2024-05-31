@@ -14,7 +14,7 @@ const HeaderMenuMobile = async () => {
           <DotsThreeOutlineVertical size={24} color="var(--mantine-color-dark-outline)" />
         </Container>
       </MenuTarget>
-      <MenuDropdown bg={'var(--mantine-color-dark-outline)'}>
+      <MenuDropdown>
         {getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
           <div key={`group-mobile-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {

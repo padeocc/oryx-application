@@ -1,13 +1,11 @@
 'use client';
 
 import { Badge, Collapse, Group, Stack } from '@mantine/core';
-import { Minus, Plus } from '@phosphor-icons/react/dist/ssr';
 import { useState } from 'react';
 
 const Tags = ({ tags, color }: { tags: string[]; color: string }) => {
   const [opened, setOpen] = useState(false);
   const [firstTag, ...otherTags] = tags;
-  const Icon = opened ? Minus : Plus;
   return tags?.length > 1 ? (
     <Group
       style={{ cursor: 'pointer' }}
@@ -21,7 +19,9 @@ const Tags = ({ tags, color }: { tags: string[]; color: string }) => {
           <Badge key={`tag-${firstTag}`} size="sm" variant="outline" color={color} bg="white">
             {firstTag}
           </Badge>
-          <Icon style={{ backgroundColor: 'white', color, border: `1px solid ${color}` }} fontSize={'1rem'} />
+          <Badge color={color}>
+            {opened ? '-' : '+'} {opened ? null : otherTags.length}
+          </Badge>
         </Group>
         <Collapse in={opened}>
           <Group gap={'sm'}>

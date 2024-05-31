@@ -3,9 +3,7 @@ import { Theme } from '@/config';
 import { Title } from '@mantine/core';
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import uniq from 'lodash/uniq';
-import foods from './data/foods.json';
-import goods from './data/goods.json';
-import transports from './data/transports.json';
+import foods from './data/exemple.json';
 
 const createCodeField = (name: string) => {
   return name
@@ -125,30 +123,13 @@ const importData = async () => {
     });
   };
 
-  importValues({ items: goods, theme: 'goods' });
-  transports; //importValues({ items: transports, theme: 'transports' });
-  foods; //importValues({ items: foods, theme: 'foods' });
-
-  const goodsTags = getUniquesTags(goods);
-  const transportsTags = getUniquesTags(transports);
+  importValues({ items: foods, theme: 'foods' });
   const foodsTags = getUniquesTags(foods);
 
   return (
     <>
       <CheckCircle fontSize={'10rem'} color="green" />
       <br />
-      <br />
-      <br />
-      <Title order={3}>Goods ({goods.length})</Title>
-      {uniq(goodsTags).map(t => (
-        <div key={`${t}`}>{t}</div>
-      ))}
-      <br />
-      <br />
-      <Title order={3}>Transport ({transports.length})</Title>
-      {uniq(transportsTags).map(t => (
-        <div key={`${t}`}>{t}</div>
-      ))}
       <br />
       <br />
       <Title order={3}>Food ({foods.length})</Title>

@@ -10,7 +10,8 @@ export const getNavigationItems = ({
       {
         name: t('actions_label'),
         href: '/finder',
-        isExternal: false
+        isExternal: false,
+        priority: 1
       }
     ],
     [
@@ -30,8 +31,20 @@ export const getFooterLinks = async () => {
   return [
     [
       {
+        name: t('oryx_history_label'),
+        href: 'https://1drv.ms/w/s!Al0P33X3XVIrpDooSGXVof1Hktqa?e=actXOWn',
+        isExternal: true
+      },
+      {
+        name: t('chart_label'),
+        href: 'https://1drv.ms/w/s!Al0P33X3XVIrsnQ5HfkQz17U5GQO?e=flncre',
+        isExternal: true
+      }
+    ],
+    [
+      {
         name: t('roadmap_label'),
-        href: 'https://github.com/orgs/padeocc/projects/3/views/4',
+        href: 'https://1drv.ms/p/s!Al0P33X3XVIrswG6TzJ6UZ-eYeJT?e=lmLt3V',
         isExternal: true
       },
       {
