@@ -1,7 +1,7 @@
 import Script from 'next/script';
 
 const GoogleAnalytics = () => {
-  const googleAnalyticsId = process?.env?.PUBLIC_NEXT_GOOGLE_ANALYTICS_ID || '';
+  const googleAnalyticsId = process?.env?.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '';
 
   return googleAnalyticsId ? (
     <div className="container">

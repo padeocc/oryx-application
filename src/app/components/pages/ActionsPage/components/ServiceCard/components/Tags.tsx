@@ -15,7 +15,7 @@ const Tags = ({ tags, color }: { tags: string[]; color: string }) => {
         setOpen(!opened);
       }}>
       <Stack>
-        <Group>
+        <Group wrap="nowrap">
           <Badge key={`tag-${firstTag}`} size="sm" variant="outline" color={color} bg="white">
             {firstTag}
           </Badge>

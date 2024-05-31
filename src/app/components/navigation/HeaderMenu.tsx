@@ -18,7 +18,7 @@ const HeaderMenu = async () => {
                 Oryx
               </Title>
             </Group>
-            <Title c="gray" fz="md">
+            <Title c="dark" fz="md">
               {t('welcome')}
             </Title>
           </Stack>

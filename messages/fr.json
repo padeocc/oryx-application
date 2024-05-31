@@ -176,7 +176,8 @@
   },
   "navigation_items": {
     "actions_label": "Trouver un service",
-    "donate_label": "Faire un don"
+    "donate_label": "Faire un don",
+    "contact_label": "Nous contacter"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",
@@ -256,5 +257,25 @@
     "sourcecode_label": "Code source",
     "whoarewe_label": "Qui sommes-nous ?",
     "donate_label": "Faire un don"
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
+    "form-name-label": "Prénom et nom",
+    "form-name-palceholder": "",
+    "form-company-label": "Entreprise ou association",
+    "form-company-palceholder": "",
+    "form-email-label": "Email",
+    "form-email-palceholder": "",
+    "form-message-label": "Message",
+    "form-message-palceholder": "",
+    "form-submit-label": "Envoyer",
+    "form-error-unknow": "Champ invalide",
+    "form-error-required": "Champ obligatoire",
+    "or-separator": "Ou",
+    "form-sent-success-title": "Message envoyé !",
+    "form-sent-success-message": "Nous répondrons à votre message !",
+    "form-sent-fail-title": "Echec lors de l'envoi",
+    "form-sent-fail-message": "Merci de vérifier les champs obligatoires"
   }
 }
