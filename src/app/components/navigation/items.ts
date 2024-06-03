@@ -39,19 +39,19 @@ export const getFooterLinks = async () => {
     [
       {
         name: t('oryx_history_label'),
-        href: 'https://1drv.ms/w/s!Al0P33X3XVIrpDooSGXVof1Hktqa?e=actXOWn',
+        href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
         isExternal: true
       },
       {
         name: t('chart_label'),
-        href: 'https://1drv.ms/w/s!Al0P33X3XVIrsnQ5HfkQz17U5GQO?e=flncre',
+        href: 'https://docs.google.com/document/d/10AFQddEf68BSCenJ6aDNBDk3R9Lac8U2',
         isExternal: true
       }
     ],
     [
       {
         name: t('roadmap_label'),
-        href: 'https://1drv.ms/p/s!Al0P33X3XVIrswG6TzJ6UZ-eYeJT?e=lmLt3V',
+        href: 'https://github.com/orgs/padeocc/projects/3/views/4',
         isExternal: true
       },
       {

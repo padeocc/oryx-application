@@ -234,7 +234,7 @@
   },
   "themes": {
     "foods": "Alimentation",
-    "goods": "Biens",
+    "goods": "Biens, mode, maison, électronique",
     "transports": "Transport"
   },
   "services": {
@@ -253,7 +253,7 @@
     "actions_label": "Trouver un service",
     "chart_label": "Charte de l'application",
     "oryx_history_label": "Génèse de l'application",
-    "roadmap_label": "Les futures fonctionnalités",
+    "roadmap_label": "Futures fonctionnalités",
     "sourcecode_label": "Code source",
     "whoarewe_label": "Qui sommes-nous ?",
     "donate_label": "Faire un don"

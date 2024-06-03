@@ -1,13 +1,13 @@
 import { DefaultMantineColor } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
-import { Basketball, BowlFood, Scooter } from '@phosphor-icons/react/dist/ssr';
+import { BowlFood, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 
 export type Theme = 'foods' | 'goods' | 'transports';
 
 export const themesIcons: { [key: string]: Icon } = {
   transports: Scooter,
   foods: BowlFood,
-  goods: Basketball
+  goods: TShirt
 };
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {

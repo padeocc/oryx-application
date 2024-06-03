@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import ServiceCard from '../../ActionsPage/components/ServiceCard';
 import { Service } from '../../ActionsPage/utils';
+import style from './theme-section.module.css';
 
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const Icon = themesIcons[theme];
@@ -25,11 +26,11 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
 
   return (
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
-      <Group gap={'xs'} align="baseline">
-        <Icon />
+      <Group gap={'xs'}>
+        <Icon size="1.2rem" />
         <Title order={3}>{tTheme(theme)}</Title>
         {mouseOver ? (
-          <Text visibleFrom="sm" {...moreLinkProps}>
+          <Text visibleFrom="sm" {...moreLinkProps} className={style['more-text-container']}>
             {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
           </Text>
         ) : null}

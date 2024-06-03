@@ -1,8 +1,11 @@
-import { Stack } from '@mantine/core';
+import { Button, Stack } from '@mantine/core';
+import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 import { fetchServices } from '../ActionsPage/utils';
 import ThemeSection from './components/ThemeSection';
 
 const HomePage = async ({}: {}) => {
+  const t = await getTranslations('home_page');
   const transports = await fetchServices({
     filters: {
       theme: 'transports',
@@ -33,6 +36,9 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'}>
       <Stack gap={'3rem'} pt="2rem">
+        <Button size="xl" component={Link} href={'/finder'} hiddenFrom="md">
+          {t('find_inspiration')}
+        </Button>
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />
         <ThemeSection items={goods.services} theme={'goods'} />

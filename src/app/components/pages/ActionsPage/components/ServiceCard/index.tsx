@@ -1,3 +1,5 @@
+'use client';
+
 import { getLogoImage } from '@/app/components/content/utils';
 import NotFound from '@/app/components/navigation/NotFound';
 import { Service, getOtherFilters } from '@/app/components/pages/ActionsPage/utils';
@@ -13,13 +15,14 @@ import {
   Image,
   Stack,
   StyleProp,
-  Title,
-  Tooltip
+  Title
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import Description from './components/Description';
+import Links from './components/Links';
 import Tags from './components/Tags';
+import style from './server-card.module.css';
 
 const ServiceCard = ({
   service,
@@ -34,8 +37,8 @@ const ServiceCard = ({
   theme: Theme;
   color: string;
 }) => {
-  const tServices = useTranslations('services');
   const tFilters = useTranslations('filters_component');
+  const [hover, { close, open }] = useDisclosure(false);
 
   if (!service) {
     return <NotFound />;
@@ -47,7 +50,13 @@ const ServiceCard = ({
     .map(field => tFilters(`filter-${field}-label`));
 
   return (
-    <Card h={'100%'} bg={backgroundColor} color={color}>
+    <Card
+      h={'100%'}
+      bg={backgroundColor}
+      color={color}
+      onMouseEnter={open}
+      onMouseLeave={close}
+      className={style['card']}>
       {!noImage ? (
         <CardSection>
           <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
@@ -62,7 +71,6 @@ const ServiceCard = ({
                   <Tags tags={[...service.tags, ...fields]} color={color} />
                 </Group>
               </GridCol>
-
               <GridCol span={{ base: 12 }}>
                 <Title order={3} c={color}>
                   {service.name}
@@ -73,16 +81,7 @@ const ServiceCard = ({
           </Stack>
         </Stack>
         <CardSection c={color}>
-          <Group justify="space-between" p="md" fz="sm">
-            <Link href={`/action/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-              {tServices('details-label')}
-            </Link>
-            <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">
-              <Link href={service.url} target="_blank" style={{ color: 'inherit' }}>
-                {tServices('access-label')}
-              </Link>
-            </Tooltip>
-          </Group>
+          <Links service={service} theme={theme} hover={hover} />
         </CardSection>
       </Flex>
     </Card>
