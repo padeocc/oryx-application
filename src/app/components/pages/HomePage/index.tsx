@@ -33,6 +33,15 @@ const HomePage = async ({}: {}) => {
     }
   });
 
+  const events = await fetchServices({
+    filters: {
+      theme: 'events',
+      categories: [],
+      sortBy: 'createdAt:desc',
+      limit: 3
+    }
+  });
+
   return (
     <Stack gap={'xl'}>
       <Stack gap={'3rem'} pt="2rem">
@@ -42,6 +51,7 @@ const HomePage = async ({}: {}) => {
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />
         <ThemeSection items={goods.services} theme={'goods'} />
+        <ThemeSection items={events.services} theme={'events'} />
       </Stack>
     </Stack>
   );

@@ -196,6 +196,9 @@ export const getOtherFilters = (theme: Theme): OtherFilters => {
     case 'transports':
       return {};
 
+    case 'events':
+      return {};
+
       break;
     case 'foods':
       return {

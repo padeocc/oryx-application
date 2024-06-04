@@ -38,9 +38,9 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
           {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
         </Text>
       </Group>
-      <Grid grow justify="stretch" c={color}>
+      <Grid justify="stretch" c={color}>
         {items.map((service, index) => (
-          <GridCol span={{ base: 12, sm: 6, md: 3 }} key={`action-${service.name}-${index}`}>
+          <GridCol span={{ base: 12, sm: 6, md: 4 }} key={`action-${service.name}-${index}`}>
             <ServiceCard
               service={service}
               backgroundColor={'var(--mantine-primary-color-2)'}
