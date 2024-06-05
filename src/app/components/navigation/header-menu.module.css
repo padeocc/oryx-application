@@ -1,0 +1,6 @@
+.container {
+  background-image: url('/images/header-background.svg');
+  background-size: cover;
+  background-position-y: 45%;
+  background-color: var(--mantine-primary-color-2);
+}
