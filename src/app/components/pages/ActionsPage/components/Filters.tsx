@@ -211,6 +211,7 @@ const FiltersComponent = ({
                 placeholder={t('filter-region-label')}
                 data={regionsOptions}
                 multiple
+                defaultValue={filters?.regions?.[0] || ''}
                 onChange={saveRegionsFilter}
                 clearable
                 onClear={() => saveRegionsFilter(null)}
@@ -220,6 +221,7 @@ const FiltersComponent = ({
                 placeholder={t('filter-location-label')}
                 data={locationOptions}
                 multiple
+                defaultValue={filters?.location || ''}
                 onChange={saveLocationFilter}
                 clearable
                 onClear={() => saveLocationFilter(undefined)}
