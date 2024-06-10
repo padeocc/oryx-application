@@ -251,7 +251,9 @@
     "type-public-service-label": "Service Public",
     "type-school-label": "Ecole",
     "access-label": "Site internet",
-    "details-label": "Détails"
+    "details-label": "Détails",
+    "tags-others-opened-label": "{count, plural, =0 {} =1 {} other {Cacher}}",
+    "tags-others-closed-label": "{count, plural, =0 {} =1 {} other {Voir les # mots-clés}}"
   },
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"

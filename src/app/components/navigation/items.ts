@@ -65,6 +65,11 @@ export const getFooterLinks = async () => {
         name: t('whoarewe_label'),
         href: 'https://www.padeo.fr',
         isExternal: true
+      },
+      {
+        name: 'LinkedIn',
+        href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
+        isExternal: true
       }
     ]
   ];

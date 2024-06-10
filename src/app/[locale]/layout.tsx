@@ -52,9 +52,25 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages({ locale });
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Padeo',
+    url: 'https://www.padeo.fr',
+    sameAs: ['https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/']
+  };
+
+  const umamiComponent = process?.env?.UMAMI_TRACKER_ID ? (
+    <script defer src="https://cloud.umami.is/script.js" data-website-id={process.env.UMAMI_TRACKER_ID}></script>
+  ) : null;
 
   return (
     <html lang={locale}>
+      <head>
+        <GDPRConsent />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {umamiComponent}
+      </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ColorSchemeScript defaultColorScheme="light" />
@@ -71,7 +87,6 @@ export default async function RootLayout({
             </AppShell>
           </MantineProvider>
           <GoogleAnalytics />
-          <GDPRConsent />
         </NextIntlClientProvider>
       </body>
     </html>
