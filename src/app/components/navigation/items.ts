@@ -49,11 +49,11 @@ export const getFooterLinks = async () => {
       }
     ],
     [
-      {
-        name: t('roadmap_label'),
-        href: 'https://github.com/orgs/padeocc/projects/3/views/4',
-        isExternal: true
-      },
+      // {
+      //   name: t('roadmap_label'),
+      //   href: 'https://github.com/orgs/padeocc/projects/3/views/4',
+      //   isExternal: true
+      // },
       {
         name: t('sourcecode_label'),
         href: 'https://github.com/padeocc/oryx-application',

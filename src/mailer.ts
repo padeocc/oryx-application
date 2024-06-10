@@ -23,6 +23,7 @@ export const sendContactEmail = async (
   const company = formData.get('company');
   const message = formData.get('message')?.toString();
   const name = formData.get('name');
+  const url = formData.get('url');
   const recaptcha = formData.get('g-recaptcha-response');
 
   try {
@@ -61,7 +62,7 @@ export const sendContactEmail = async (
       to: process.env.MAILER_CONTACT_TO,
       subject: `[DEPUIS ORYX] ${message?.substring(1, 30)}`,
       text: `${email} - ${name} - ${company} - ${message?.toString()}`,
-      html: `<div><b>Email:</b> ${email} <br/><br/> <b>Name:</b> ${name} <br/><br/> <b>Company:</b> ${company} <br/><br/> <b>Message:</b> ${message?.toString()}</div>`
+      html: `<div><b>Email:</b> ${email} <br/><br/> <b>Name:</b> ${name} <br/><br/> <b>Company:</b> ${company} <br/><br/><b>Url:</b> ${url} <br/><br/> <b>Message:</b> ${message?.toString()}</div>`
     };
 
     const info = await transporter.sendMail(emailMessage);

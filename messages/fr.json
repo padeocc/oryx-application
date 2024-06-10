@@ -264,6 +264,7 @@
     "title": "Nous contacter",
     "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
     "form-name-label": "Prénom et nom",
+    "form-url-label": "Site",
     "form-name-palceholder": "",
     "form-company-label": "Entreprise ou association",
     "form-company-palceholder": "",
