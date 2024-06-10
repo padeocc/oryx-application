@@ -1,6 +1,6 @@
 import { Category, Filters, OtherFilters, Region } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesColors, themesIcons } from '@/config';
-import { Chip, Grid, GridCol, Group, Loader, Select, Stack, Text, Title } from '@mantine/core';
+import { Chip, Grid, GridCol, Group, Loader, Select, Stack, Text } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { PottedPlant } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
@@ -148,15 +148,17 @@ const FiltersComponent = ({
           {loading ? (
             <Loader type="dots" color="black" size={'sm'} />
           ) : (
-            <Title order={2}>{t('inspirations_found', { count: itemsCount })} </Title>
+            <Text fz="xl" fw={'bold'}>
+              {t('inspirations_found', { count: itemsCount })}{' '}
+            </Text>
           )}
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <Stack gap={'md'}>
             <Group gap={'xs'}>
-              <Title order={5} c="dark">
+              <Text fz="md" fw={'bold'} c="dark">
                 {t('subjects-label')}
-              </Title>
+              </Text>
               {allCategories.length > 0 ? (
                 <>
                   {allCategories.map((category, index) => (
@@ -176,9 +178,9 @@ const FiltersComponent = ({
             </Group>
             {Object.keys(otherFilters)?.length ? (
               <Group gap={'xs'}>
-                <Title order={5} c="dark">
+                <Text fz="md" fw={'bold'} c="dark">
                   {t('actions-label')}
-                </Title>
+                </Text>
                 <>
                   {Object.keys(otherFilters).map(otherFilterKey => {
                     // @ts-ignore
@@ -203,9 +205,9 @@ const FiltersComponent = ({
               </Group>
             ) : null}
             <Group gap={'xs'}>
-              <Title order={5} c="dark">
+              <Text fz="md" fw={'bold'} c="dark">
                 {t('regions-label')}
-              </Title>
+              </Text>
               <Select
                 size="xs"
                 placeholder={t('filter-region-label')}

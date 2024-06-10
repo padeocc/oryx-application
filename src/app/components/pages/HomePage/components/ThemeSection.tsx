@@ -46,6 +46,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
               backgroundColor={'var(--mantine-primary-color-2)'}
               theme={theme}
               color={color}
+              titleOrder={4}
             />
           </GridCol>
         ))}

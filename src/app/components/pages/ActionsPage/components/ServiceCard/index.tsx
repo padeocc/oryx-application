@@ -15,7 +15,8 @@ import {
   Image,
   Stack,
   StyleProp,
-  Title
+  Title,
+  TitleOrder
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
@@ -29,13 +30,15 @@ const ServiceCard = ({
   noImage = false,
   backgroundColor,
   theme,
-  color
+  color,
+  titleOrder = 3
 }: {
   service: Service;
   noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
   theme: Theme;
   color: string;
+  titleOrder?: TitleOrder;
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
@@ -72,7 +75,7 @@ const ServiceCard = ({
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>
-                <Title order={3} c={color}>
+                <Title order={titleOrder} c={color}>
                   {service.name}
                 </Title>
               </GridCol>
