@@ -45,7 +45,8 @@ const HeaderMenuDesktop = async () => {
                   href={href}
                   {...others}
                   fz={'lg'}
-                  color="gray">
+                  color="gray"
+                  style={{ textDecoration: isExternal ? 'underline' : 'none', textDecorationColor: '#eee' }}>
                   {name}
                 </MenuItem>
               );

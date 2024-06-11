@@ -190,7 +190,8 @@
     "oryx_history_label": "Génèse de l'application",
     "roadmap_label": "Futures fonctionnalités",
     "sourcecode_label": "Code source",
-    "whoarewe_label": "Qui sommes-nous ?"
+    "whoarewe_label": "Qui sommes-nous ?",
+    "contact_label": "Nous contacter"
   },
   "home_page": {
     "discover_actions": "Les derniers services ajoutés",
