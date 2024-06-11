@@ -1,4 +1,3 @@
-import GoogleAnalytics from '@/components/GoogleAnalytics';
 import HeaderMenu from '@/components/navigation/HeaderMenu';
 import { theme } from '@/theme';
 import { AppShell, AppShellMain, ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
@@ -67,7 +66,6 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <GDPRConsent />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {umamiComponent}
       </head>
@@ -83,10 +81,10 @@ export default async function RootLayout({
                 <Container maw={'1280px'} p="md">
                   {children}
                 </Container>
+                <GDPRConsent />
               </AppShellMain>
             </AppShell>
           </MantineProvider>
-          <GoogleAnalytics />
         </NextIntlClientProvider>
       </body>
     </html>

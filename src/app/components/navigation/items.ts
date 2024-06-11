@@ -71,6 +71,12 @@ export const getFooterLinks = async () => {
         href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
         isExternal: true
       }
+    ],
+    [
+      {
+        name: t('legal_label'),
+        href: '/legal'
+      }
     ]
   ];
 };
