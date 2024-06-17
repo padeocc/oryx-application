@@ -22,8 +22,7 @@
     "react-cookie-consent": "^9.0.0",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
-    "yup": "^1.4.0",
-    "zustand": "^4.5.2"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.4",

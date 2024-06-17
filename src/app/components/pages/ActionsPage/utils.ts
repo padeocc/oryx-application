@@ -92,28 +92,63 @@ export type Filters = {
   sortBy?: string;
   limit?: number;
   theme: string | undefined;
-  categories: string[];
+  categories?: string[] | undefined;
   codes?: (string | undefined)[];
   regions?: Region[];
-  others?: OtherFilters;
   location?: string;
+  organic?: boolean;
+  local?: boolean;
+  season?: boolean;
+  shortcircuit?: boolean;
+  wastereducer?: boolean;
+  foodwastereducer?: boolean;
+  cookmore?: boolean;
+  used?: boolean;
+  rent?: boolean;
+  mutualise?: boolean;
+  repair?: boolean;
+  ecobuilt?: boolean;
+  lowtech?: boolean;
+  recycled?: boolean;
+  reused?: boolean;
+  diy?: boolean;
+  comparer?: boolean;
+  relocating?: boolean;
 };
 
 export type FetchServicesResponse = {
   services: Service[];
   meta: { pagination: { start: number; limit: number; total: number } };
 };
-export const fetchServices = async ({ filters }: { filters?: Filters }): Promise<FetchServicesResponse> => {
-  const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
-  const theme = filters?.theme as Theme;
 
-  if (!theme) {
-    return { meta: { pagination: { limit: 0, start: 0, total: 0 } }, services: [] };
-  }
+export type UrlParameters = {
+  pagination: {
+    start: number;
+    limit: number;
+  };
+  sort: string;
+  populate: string;
+  filters: Filters;
+  theme: Theme;
+};
 
+export const generateUrl = ({
+  filters,
+  theme,
+  ignoreCategories
+}: {
+  filters: Filters;
+  theme: Theme;
+  ignoreCategories?: boolean; // Workaround
+}) => {
   const allOthersFields: OtherFilters = getOtherFilters(theme);
   const limit = filters?.limit || -1;
   const sort = filters?.sortBy || 'name:asc';
+  const regions = filters?.regions || [];
+  const location = filters?.location || undefined;
+  const categories = (!ignoreCategories && filters?.categories) || [];
+  const regionsFilters = regions?.[0] ? { region: regions?.[0] } : {};
+  const locationFilters = location ? { location } : {};
 
   //let filtersCatgeoriesString = '';
   // if (filters?.categories?.length) {
@@ -121,36 +156,51 @@ export const fetchServices = async ({ filters }: { filters?: Filters }): Promise
   //   filtersCatgeoriesString = `${qs.stringify({ filters: { tags: { $in: filters.categories } } })}`;
   // }
 
-  const others = filters?.others || {};
-  const regions = filters?.regions || [];
-  const location = filters?.location || undefined;
-
   const allFilters = Object.keys(allOthersFields).reduce((all, filterKey) => {
     // @ts-ignore
-    const value = others?.[filterKey];
+    // const value = others?.[filterKey];
 
-    if (value) {
-      return { ...all, [filterKey]: { $eq: value } };
-    }
+    // if (value) {
+    //   return { ...all, [filterKey]: { $eq: value } };
+    // }
     return all;
   }, {});
 
-  const regionsFilters = regions?.[0] ? { region: regions?.[0] } : {};
-  const locationFilters = location ? { location } : {};
+  let filtersParam = { ...allFilters, ...regionsFilters, ...locationFilters } as Filters;
 
-  const stringifiedQuery = qs.stringify({
+  if (!ignoreCategories) {
+    filtersParam = { ...filtersParam, categories };
+  }
+
+  const params: UrlParameters = {
+    filters: filtersParam,
     pagination: { start: 0, limit },
     sort,
     populate: 'logo',
-    filters: { ...allFilters, ...regionsFilters, ...locationFilters }
-  });
+    theme
+  };
 
-  const fetchUrl = `${baseUrl}/${filters?.theme}?${stringifiedQuery}`;
+  return qs.stringify(params);
+};
 
-  const response = await fetch(fetchUrl, {
+export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
+  const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
+  const theme = filters?.theme as Theme;
+
+  if (!theme || !filters) {
+    return { meta: { pagination: { limit: -1, start: 0, total: 0 } }, services: [] };
+  }
+
+  const fetchUrlNoCatgeories = `${baseUrl}/${filters?.theme}?${generateUrl({
+    filters,
+    theme,
+    ignoreCategories: true
+  })}`;
+
+  console.log({ fetchUrlNoCatgeories });
+  const response = await fetch(fetchUrlNoCatgeories, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
   });
-
   const solutions = await response.json();
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
 

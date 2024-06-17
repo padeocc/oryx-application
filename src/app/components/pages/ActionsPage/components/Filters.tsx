@@ -26,7 +26,8 @@ const FiltersComponent = ({
   itemsCount,
   allCategories,
   allRegions,
-  otherFilters = {}
+  otherFilters = {},
+  theme
 }: {
   filters: Filters;
   loading: boolean;
@@ -35,23 +36,23 @@ const FiltersComponent = ({
   allCategories: Category[];
   allRegions: Region[];
   otherFilters: OtherFilters;
+  theme: Theme;
 }) => {
   const t = useTranslations('filters_component');
   const tTheme = useTranslations('themes');
   const form = useForm({
     initialValues: filters
   });
-  const selectedTheme = filters.theme as Theme;
   const regionsOptions = allRegions.map(value => {
     const label = t(`region_${value}_label`) || value;
     return { label: label.includes(`region_${value}_label`) ? value : label, value };
   });
-
   const locationOptions = [
     { label: t('location-online-label'), value: 'online' },
     { label: t('location-store-label'), value: 'store' }
     // { label: t('location-online-store-label'), value: 'store-and-online' }
   ];
+  const color = themesColors[theme];
 
   useEffect(() => {
     form.setValues(filters);
@@ -59,28 +60,26 @@ const FiltersComponent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
-  const options = Object.keys(themesIcons).map(theme => {
-    const color = themesColors[theme];
+  const themesOptions = Object.keys(themesIcons).map(parsedTheme => {
+    const color = themesColors[parsedTheme];
     return (
       <Link
-        href={`/actions/${theme}`}
+        href={`/actions/${parsedTheme}`}
         style={{ color: 'inherit', textDecoration: 'none' }}
-        key={`select-theme-${theme}`}>
+        key={`select-theme-${parsedTheme}`}>
         <Stack align="center" gap={'xs'}>
-          {getIconFromTheme(theme as Theme, selectedTheme === theme, color)}
-          <Text fz="xs" ta="center" c={selectedTheme === theme ? color : 'lightgray'}>
-            {tTheme(theme)}
+          {getIconFromTheme(parsedTheme as Theme, theme === parsedTheme, color)}
+          <Text fz="xs" ta="center" c={theme === parsedTheme ? color : 'lightgray'}>
+            {tTheme(parsedTheme)}
           </Text>
         </Stack>
       </Link>
     );
   });
 
-  const color = themesColors[selectedTheme];
-
   const saveCategories = (category: string) => {
     const currentCategories = form.values.categories;
-    let values = form.values.categories;
+    let values = form?.values?.categories || [];
     if (currentCategories?.includes(category)) {
       values = values.filter(c => c !== category);
     } else {
@@ -91,24 +90,19 @@ const FiltersComponent = ({
       categories: values
     };
     form.setValues(allValues);
-    handleSubmit(allValues);
     form.setInitialValues(allValues);
+    handleSubmit(allValues);
   };
 
   const saveOtherFilters = (fieldKey: string) => {
-    const formOthers = form?.values?.others || {};
-    const others: OtherFilters = {
-      ...formOthers,
-      // @ts-ignore
-      [fieldKey]: !formOthers?.[fieldKey]
-    };
     const allValues = {
       ...form.values,
-      others
+      // @ts-ignore
+      [fieldKey]: !!form?.[fieldKey]
     };
     form.setValues(allValues);
-    handleSubmit(allValues);
     form.setInitialValues(allValues);
+    handleSubmit(allValues);
   };
 
   const saveRegionsFilter = (region: string | null) => {
@@ -141,7 +135,7 @@ const FiltersComponent = ({
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Group justify="flex-start" pl="md" pt="md" pb="md" gap={'xl'}>
-            {options}
+            {themesOptions}
           </Group>
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">
@@ -191,7 +185,7 @@ const FiltersComponent = ({
                           size={'xs'}
                           key={`filter-${otherFilterKey}`}
                           // @ts-ignore
-                          checked={!!form?.values?.others?.[otherFilterKey]}
+                          checked={!!form?.values?.[otherFilterKey]}
                           onClick={() => {
                             return saveOtherFilters(otherFilterKey);
                           }}>

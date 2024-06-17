@@ -2,7 +2,6 @@
 
 import { FetchServicesResponse, Filters, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
 import { themes } from '@/config';
-import { useLocalState } from '@/state';
 import {
   Badge,
   Button,
@@ -30,10 +29,9 @@ const FinderPage = ({
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
   const [categories, setCategories] = useState<string[]>([]);
-  const { filters, setFilters } = useLocalState();
 
   const form = useForm({
-    initialValues: filters
+    initialValues: { theme: undefined, categories: [] }
   });
   const selectedTheme = form.values.theme;
   const selectedTags = form.values.categories;
@@ -66,7 +64,7 @@ const FinderPage = ({
       <Title order={2}>{t('title')}</Title>
       <form
         action={async () => {
-          setFilters(form.values);
+          // setFilters(form.values);
           redirect(`/actions/${selectedTheme}`);
         }}>
         <Grid>
