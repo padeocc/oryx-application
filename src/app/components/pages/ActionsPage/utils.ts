@@ -91,10 +91,10 @@ export type OtherFilters = {
 export type Filters = {
   sortBy?: string;
   limit?: number;
-  theme: string | undefined;
+  theme: Theme;
   categories?: string[] | undefined;
   codes?: (string | undefined)[];
-  regions?: Region[];
+  region?: Region;
   location?: string;
   organic?: boolean;
   local?: boolean;
@@ -134,20 +134,22 @@ export type UrlParameters = {
 
 export const generateUrl = ({
   filters,
-  theme,
   ignoreCategories
 }: {
   filters: Filters;
-  theme: Theme;
   ignoreCategories?: boolean; // Workaround
 }) => {
+  const theme = filters.theme as Theme;
+  if (!theme) {
+    throw 'Theme is missing';
+  }
   const allOthersFields: OtherFilters = getOtherFilters(theme);
   const limit = filters?.limit || -1;
   const sort = filters?.sortBy || 'name:asc';
-  const regions = filters?.regions || [];
+  const region = filters?.region;
   const location = filters?.location || undefined;
   const categories = (!ignoreCategories && filters?.categories) || [];
-  const regionsFilters = regions?.[0] ? { region: regions?.[0] } : {};
+  const regionFilters = region ? { region } : {};
   const locationFilters = location ? { location } : {};
 
   //let filtersCatgeoriesString = '';
@@ -158,15 +160,14 @@ export const generateUrl = ({
 
   const allFilters = Object.keys(allOthersFields).reduce((all, filterKey) => {
     // @ts-ignore
-    // const value = others?.[filterKey];
-
-    // if (value) {
-    //   return { ...all, [filterKey]: { $eq: value } };
-    // }
+    const value = filters?.[filterKey];
+    if (value) {
+      return { ...all, [filterKey]: { $eq: value } };
+    }
     return all;
   }, {});
 
-  let filtersParam = { ...allFilters, ...regionsFilters, ...locationFilters } as Filters;
+  let filtersParam = { ...allFilters, ...regionFilters, ...locationFilters } as Filters;
 
   if (!ignoreCategories) {
     filtersParam = { ...filtersParam, categories };
@@ -179,29 +180,32 @@ export const generateUrl = ({
     populate: 'logo',
     theme
   };
-
   return qs.stringify(params);
 };
 
 export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
-  const theme = filters?.theme as Theme;
+  const theme = filters?.theme;
 
   if (!theme || !filters) {
     return { meta: { pagination: { limit: -1, start: 0, total: 0 } }, services: [] };
   }
 
-  const fetchUrlNoCatgeories = `${baseUrl}/${filters?.theme}?${generateUrl({
+  const fetchUrlNoCategories = `${baseUrl}/${filters?.theme}?${generateUrl({
     filters,
-    theme,
     ignoreCategories: true
   })}`;
 
-  console.log({ fetchUrlNoCatgeories });
-  const response = await fetch(fetchUrlNoCatgeories, {
+  const response = await fetch(fetchUrlNoCategories, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
   });
   const solutions = await response.json();
+  console.log({
+    filters,
+    solutions: JSON.stringify(solutions.data, null, 2),
+    error: JSON.stringify(solutions.error, null, 2)
+  });
+
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
 
   // Workaround

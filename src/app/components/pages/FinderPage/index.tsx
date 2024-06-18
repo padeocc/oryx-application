@@ -1,7 +1,12 @@
 'use client';
 
-import { FetchServicesResponse, Filters, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
-import { themes } from '@/config';
+import {
+  FetchServicesResponse,
+  Filters,
+  generateUrl,
+  getTagsFromServices
+} from '@/app/components/pages/ActionsPage/utils';
+import { Theme, themes } from '@/config';
 import {
   Badge,
   Button,
@@ -18,7 +23,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslations } from 'next-intl';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const FinderPage = ({
@@ -29,9 +34,9 @@ const FinderPage = ({
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
   const [categories, setCategories] = useState<string[]>([]);
-
+  const [filters, setFilters] = useState<Filters>();
   const form = useForm({
-    initialValues: { theme: undefined, categories: [] }
+    initialValues: { theme: 'transports', categories: [] } as Filters
   });
   const selectedTheme = form.values.theme;
   const selectedTags = form.values.categories;
@@ -59,13 +64,15 @@ const FinderPage = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTheme]);
 
+  const actionUrl = generateUrl({ filters: form.getValues() });
+
   return (
     <Stack>
       <Title order={2}>{t('title')}</Title>
       <form
         action={async () => {
-          // setFilters(form.values);
-          redirect(`/actions/${selectedTheme}`);
+          setFilters(form.values);
+          //redirect(`/actions/${selectedTheme}`);
         }}>
         <Grid>
           <GridCol span={{ base: 12, sm: 6 }}>
@@ -81,7 +88,7 @@ const FinderPage = ({
                         value={theme}
                         checked={selectedTheme === theme}
                         onChange={theme => {
-                          form.setValues({ theme: theme.target.value });
+                          form.setValues({ theme: (theme?.target?.value as Theme) || undefined });
                         }}
                       />
                     ))}
@@ -128,7 +135,12 @@ const FinderPage = ({
                       {selectedTags?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
                     </Group>
                   </Stack>
-                  <Button size="xl" type="submit" disabled={!selectedTags?.length}>
+                  <Button
+                    size="xl"
+                    type="submit"
+                    disabled={!selectedTags?.length}
+                    component={Link}
+                    href={actionUrl ? `/actions/${selectedTheme}?${actionUrl}` : '#'}>
                     {t('validate')}
                   </Button>
                 </Stack>

@@ -20,18 +20,18 @@ const List = ({
   filters,
   data,
   theme,
-  categories = [],
+  allCategories = [],
   total,
   color,
-  regions
+  allRegions
 }: {
   filters: Filters;
   data: Service[];
   theme: Theme;
-  categories: Category[];
+  allCategories: Category[];
   total: number;
   color: string;
-  regions: Region[];
+  allRegions: Region[];
 }) => {
   const t = useTranslations('content');
   const otherFilters = getOtherFilters(theme);
@@ -44,10 +44,10 @@ const List = ({
         loading={false}
         filters={filters}
         handleSubmit={(filters: Filters) => {
-          router.push(`/actions/${theme}?${generateUrl({ filters, theme })}`);
+          router.push(`/actions/${theme}?${generateUrl({ filters })}`);
         }}
-        allCategories={categories}
-        allRegions={regions}
+        allCategories={allCategories}
+        allRegions={allRegions}
         otherFilters={otherFilters}
         theme={theme}
       />

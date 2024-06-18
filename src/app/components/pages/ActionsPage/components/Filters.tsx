@@ -95,25 +95,29 @@ const FiltersComponent = ({
   };
 
   const saveOtherFilters = (fieldKey: string) => {
+    console.log(form.getValues(), form?.[fieldKey]?.['$eq']);
+
+    // @ts-ignore
+    const currentValue = !!form?.[fieldKey];
     const allValues = {
       ...form.values,
       // @ts-ignore
-      [fieldKey]: !!form?.[fieldKey]
+      [fieldKey]: !currentValue
     };
+    console.log(fieldKey, !currentValue);
     form.setValues(allValues);
     form.setInitialValues(allValues);
     handleSubmit(allValues);
   };
 
-  const saveRegionsFilter = (region: string | null) => {
-    const regions: string[] = region ? [region] : [];
+  const saveRegionFilter = (region: string | undefined) => {
     const allValues = {
       ...form.values,
-      regions
+      region
     };
     form.setValues(allValues);
-    handleSubmit(allValues);
     form.setInitialValues(allValues);
+    handleSubmit(allValues);
   };
 
   const saveLocationFilter = (location: string | undefined | null) => {
@@ -122,8 +126,8 @@ const FiltersComponent = ({
       location: location || undefined
     };
     form.setValues(allValues);
-    handleSubmit(allValues);
     form.setInitialValues(allValues);
+    handleSubmit(allValues);
   };
 
   return (
@@ -207,10 +211,12 @@ const FiltersComponent = ({
                 placeholder={t('filter-region-label')}
                 data={regionsOptions}
                 multiple
-                defaultValue={filters?.regions?.[0] || ''}
-                onChange={saveRegionsFilter}
+                defaultValue={filters?.region || ''}
+                onChange={v => {
+                  return saveRegionFilter(v || undefined);
+                }}
                 clearable
-                onClear={() => saveRegionsFilter(null)}
+                onClear={() => saveRegionFilter(undefined)}
               />
               <Select
                 size="xs"
