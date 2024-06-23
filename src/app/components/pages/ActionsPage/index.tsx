@@ -23,18 +23,25 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: U
   const { services, meta } = await fetchServices({
     filters
   });
-  const allCategories: Category[] = getTagsFromServices(services);
+  const { services: allServices } = await fetchServices({
+    filters: { theme }
+  });
+
+  const activeCategories: Category[] = getTagsFromServices(services);
+  const allCategories: Category[] = getTagsFromServices(allServices);
   const allRegions: Region[] = getRegionsfromServices(services);
+
   const color = themesColors[theme];
 
   return (
     <List
       data={services}
       theme={theme}
-      allCategories={allCategories}
       total={meta?.pagination?.total || 0}
       color={color}
       allRegions={allRegions}
+      allCategories={allCategories}
+      activeCategories={activeCategories}
       filters={filters}
     />
   );

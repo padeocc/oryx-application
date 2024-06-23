@@ -1,12 +1,12 @@
 import { Theme, themesColors } from '@/config';
 import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
-import { ArrowLeft } from '@phosphor-icons/react/dist/ssr';
 import { format } from 'date-fns';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { Service, fetchService, getOtherFilters } from '../ActionsPage/utils';
+import BackItem from './components/BackItem';
 
 const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');
@@ -29,9 +29,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   return (
     <Stack>
       <Group>
-        <Link href={`/actions/${theme}`}>
-          <ArrowLeft color="black" />
-        </Link>
+        <BackItem theme={theme} />
         <Title order={3} c={color}>
           {name}
         </Title>

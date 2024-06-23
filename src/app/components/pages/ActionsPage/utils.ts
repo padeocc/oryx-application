@@ -162,7 +162,7 @@ export const generateUrl = ({
     // @ts-ignore
     const value = filters?.[filterKey];
     if (value) {
-      return { ...all, [filterKey]: { $eq: value } };
+      return { ...all, [filterKey]: value };
     }
     return all;
   }, {});
@@ -200,12 +200,6 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
   });
   const solutions = await response.json();
-  console.log({
-    filters,
-    solutions: JSON.stringify(solutions.data, null, 2),
-    error: JSON.stringify(solutions.error, null, 2)
-  });
-
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
 
   // Workaround

@@ -25,6 +25,7 @@ const FiltersComponent = ({
   handleSubmit,
   itemsCount,
   allCategories,
+  activeCategories,
   allRegions,
   otherFilters = {},
   theme
@@ -34,6 +35,7 @@ const FiltersComponent = ({
   handleSubmit: (values: Filters) => void;
   itemsCount: number;
   allCategories: Category[];
+  activeCategories: Category[];
   allRegions: Region[];
   otherFilters: OtherFilters;
   theme: Theme;
@@ -95,16 +97,13 @@ const FiltersComponent = ({
   };
 
   const saveOtherFilters = (fieldKey: string) => {
-    console.log(form.getValues(), form?.[fieldKey]?.['$eq']);
-
     // @ts-ignore
-    const currentValue = !!form?.[fieldKey];
+    const currentValue = form?.getValues()?.[fieldKey];
     const allValues = {
       ...form.values,
       // @ts-ignore
       [fieldKey]: !currentValue
     };
-    console.log(fieldKey, !currentValue);
     form.setValues(allValues);
     form.setInitialValues(allValues);
     handleSubmit(allValues);
@@ -154,17 +153,18 @@ const FiltersComponent = ({
         <GridCol span={{ base: 12 }}>
           <Stack gap={'md'}>
             <Group gap={'xs'}>
-              <Text fz="md" fw={'bold'} c="dark">
-                {t('subjects-label')}
-              </Text>
               {allCategories.length > 0 ? (
                 <>
+                  <Text fz="md" fw={'bold'} c="dark">
+                    {t('subjects-label')}
+                  </Text>
                   {allCategories.map((category, index) => (
                     <Chip
                       size={'xs'}
                       key={`cat-${index}`}
                       checked={form.values?.categories?.includes(category)}
                       color={color}
+                      disabled={!activeCategories.find(activeCategory => activeCategory === category)}
                       onClick={() => {
                         return saveCategories(category);
                       }}>
