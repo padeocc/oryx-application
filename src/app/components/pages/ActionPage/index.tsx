@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
-import { Service, fetchService, getOtherFilters } from '../ActionsPage/utils';
+import { Service, fetchService, getActionFilters } from '../ActionsPage/utils';
 import BackItem from './components/BackItem';
 
 const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
@@ -19,7 +19,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   }
 
   //@ts-ignore
-  const fields = Object.keys(getOtherFilters(theme)).filter(f => !!service[f]);
+  const fields = Object.keys(getActionFilters(theme)).filter(f => !!service[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 

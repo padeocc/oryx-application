@@ -5,13 +5,13 @@ import {
   Category,
   Filters,
   Region,
-  UrlParameters,
+  RequestParameters,
   fetchServices,
   getRegionsfromServices,
   getTagsFromServices
 } from './utils';
 
-const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: UrlParameters }) => {
+const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: RequestParameters }) => {
   if (!theme) {
     return <NotFound />;
   }
@@ -29,7 +29,7 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: U
 
   const activeCategories: Category[] = getTagsFromServices(services);
   const allCategories: Category[] = getTagsFromServices(allServices);
-  const allRegions: Region[] = getRegionsfromServices(services);
+  const allRegions: Region[] = getRegionsfromServices(allServices);
 
   const color = themesColors[theme];
 

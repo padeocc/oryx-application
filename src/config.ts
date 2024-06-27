@@ -1,24 +1,26 @@
 import { DefaultMantineColor } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
-import { BowlFood, CalendarCheck, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
+import { BowlFood, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 
-export type Theme = 'foods' | 'goods' | 'transports' | 'events';
+export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services';
 
 export const themesIcons: { [key: string]: Icon } = {
   transports: Scooter,
   foods: BowlFood,
   goods: TShirt,
-  events: CalendarCheck
+  events: CalendarCheck,
+  services: CallBell
 };
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {
   transports: 'indigo',
   foods: 'orange',
   goods: 'pink',
-  events: 'blue'
+  events: 'blue',
+  services: 'grape'
 };
 
-export const themes: Theme[] = ['foods', 'goods', 'transports', 'events'];
+export const themes: Theme[] = ['foods', 'goods', 'transports', 'events', 'services'];
 
 export const imagesMapping: { [key: string]: string } = {
   'mode, bijoux, lunettes': 'fashion',

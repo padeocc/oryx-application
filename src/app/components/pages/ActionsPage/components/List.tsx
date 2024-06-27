@@ -8,10 +8,10 @@ import {
   Region,
   Service,
   generateUrl,
-  getOtherFilters
+  getActionFilters
 } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
-import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
+import { Alert, Grid, GridCol, Group, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -38,7 +38,7 @@ const List = ({
 }) => {
   const t = useTranslations('content');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const otherFilters = getOtherFilters(theme);
+  const actionFilters = getActionFilters(theme);
   const router = useRouter();
 
   useEffect(() => {
@@ -48,6 +48,7 @@ const List = ({
   return (
     <>
       <FiltersComponent
+        theme={theme}
         itemsCount={total}
         loading={isLoading}
         filters={filters}
@@ -55,24 +56,27 @@ const List = ({
           setIsLoading(true);
           router.push(`/actions/${theme}?${generateUrl({ filters })}`);
         }}
-        allCategories={allCategories}
         activeCategories={activeCategories}
+        allCategories={allCategories}
         allRegions={allRegions}
-        otherFilters={otherFilters}
-        theme={theme}
+        allActionFilters={actionFilters}
       />
-      <Grid justify="flex-start" align="top" mt="lg">
-        {isLoading ? (
-          <Loader />
-        ) : data.length === 0 ? (
+      {isLoading ? (
+        <Group justify="center" p="xl" m="xl">
+          <Loader size={'xl'} />
+        </Group>
+      ) : data.length === 0 ? (
+        <Grid justify="flex-start" align="top" mt="lg">
           <GridCol span={{ base: 12 }} key={`action-empty`}>
             <Alert variant="outline" color="orange" title={t('no_results')} icon={<SmileyMeh size={30} />}>
               <Text>{t('contact_us')}</Text>
             </Alert>
           </GridCol>
-        ) : (
-          data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 4 }} key={`action-${service.name}-${index}`}>
+        </Grid>
+      ) : (
+        <Grid justify="flex-start" align="top" mt="lg">
+          {data.map((service, index) => (
+            <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`action-${service.name}-${index}`}>
               <ServiceCard
                 service={service}
                 backgroundColor={'var(--mantine-primary-color-2)'}
@@ -80,9 +84,9 @@ const List = ({
                 color={color}
               />
             </GridCol>
-          ))
-        )}
-      </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 };

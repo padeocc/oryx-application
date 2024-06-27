@@ -1,10 +1,12 @@
 import ActionsPage from '@/app/components/pages/ActionsPage';
-import { UrlParameters } from '@/app/components/pages/ActionsPage/utils';
+import { RequestParameters } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import { set } from 'lodash';
 
-const transformParams = (params: { [key: string]: string | string[] | undefined } | undefined = {}): UrlParameters => {
-  const result: UrlParameters = {
+const transformParams = (
+  params: { [key: string]: string | string[] | undefined } | undefined = {}
+): RequestParameters => {
+  const result: RequestParameters = {
     pagination: {
       start: 0,
       limit: -1
@@ -33,7 +35,7 @@ export default function ActionsTheme({
   params: { theme: Theme };
   searchParams?: { [key: string]: string | string[] | undefined } | undefined;
 }) {
-  const parameters: UrlParameters = transformParams(searchParams);
+  const parameters: RequestParameters = transformParams(searchParams);
   return (
     <main>
       <ActionsPage theme={params.theme} parameters={parameters} />

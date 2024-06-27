@@ -2,7 +2,7 @@
 
 import { getLogoImage } from '@/app/components/content/utils';
 import NotFound from '@/app/components/navigation/NotFound';
-import { Service, getOtherFilters } from '@/app/components/pages/ActionsPage/utils';
+import { Service, getActionFilters } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
 import {
   Card,
@@ -47,7 +47,7 @@ const ServiceCard = ({
     return <NotFound />;
   }
 
-  const fields = Object.keys(getOtherFilters(theme))
+  const fields = Object.keys(getActionFilters(theme))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));

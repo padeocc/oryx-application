@@ -63,7 +63,7 @@ export type Service = {
   logo?: { data: ImageData };
 };
 
-export type OtherFilters = {
+export type ActionFilters = {
   [key in
     | 'organic'
     | 'local'
@@ -121,7 +121,7 @@ export type FetchServicesResponse = {
   meta: { pagination: { start: number; limit: number; total: number } };
 };
 
-export type UrlParameters = {
+export type RequestParameters = {
   pagination: {
     start: number;
     limit: number;
@@ -143,7 +143,7 @@ export const generateUrl = ({
   if (!theme) {
     throw 'Theme is missing';
   }
-  const allOthersFields: OtherFilters = getOtherFilters(theme);
+  const allOthersFields: ActionFilters = getActionFilters(theme);
   const limit = filters?.limit || -1;
   const sort = filters?.sortBy || 'name:asc';
   const region = filters?.region;
@@ -173,7 +173,7 @@ export const generateUrl = ({
     filtersParam = { ...filtersParam, categories };
   }
 
-  const params: UrlParameters = {
+  const params: RequestParameters = {
     filters: filtersParam,
     pagination: { start: 0, limit },
     sort,
@@ -197,7 +197,8 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
   })}`;
 
   const response = await fetch(fetchUrlNoCategories, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { revalidate: 3600 }
   });
   const solutions = await response.json();
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
@@ -232,19 +233,24 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { revalidate: 3600 }
   });
   const solution = await response.json();
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
 };
 
-export const getOtherFilters = (theme: Theme): OtherFilters => {
+export const getActionFilters = (theme: Theme): ActionFilters => {
   switch (theme) {
     case 'transports':
       return {};
 
     case 'events':
+      return {};
+
+      break;
+    case 'services':
       return {};
 
       break;
