@@ -33,8 +33,8 @@ const FiltersComponent = ({
   loading,
   handleSubmit,
   itemsCount,
-  allCategories,
-  activeCategories,
+  allTags,
+  activeTags,
   allRegions,
   allActionFilters = {},
   theme
@@ -43,8 +43,8 @@ const FiltersComponent = ({
   loading: boolean;
   handleSubmit: (values: Filters) => void;
   itemsCount: number;
-  allCategories: Category[];
-  activeCategories: Category[];
+  allTags: Category[];
+  activeTags: Category[];
   allRegions: Region[];
   allActionFilters: ActionFilters;
   theme: Theme;
@@ -91,10 +91,10 @@ const FiltersComponent = ({
     );
   });
 
-  const saveCategories = (categories: string[]) => {
+  const saveTags = (tags: string[]) => {
     const allValues = {
       ...form.values,
-      categories
+      tags
     };
     form.setValues(allValues);
     form.setInitialValues(allValues);
@@ -149,7 +149,7 @@ const FiltersComponent = ({
   };
 
   const values = form?.getValues();
-  const selectedCategories = values?.['categories'];
+  const selectedTags = values?.['tags'];
   const selectedActions = Object.keys(allActionFilters).filter(action => {
     //@ts-ignore
     return !!values?.[action];
@@ -181,10 +181,10 @@ const FiltersComponent = ({
         <GridCol span={{ base: 12 }}>
           <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing={'sm'}>
             <ChipSelect
-              all={allCategories.map(item => ({ label: item, value: item }))}
-              selected={selectedCategories}
-              save={saveCategories}
-              placeholder={t('subjects-label', { count: selectedCategories?.length || 0 })}
+              all={allTags.map(item => ({ label: item, value: item }))}
+              selected={selectedTags}
+              save={saveTags}
+              placeholder={t('subjects-label', { count: selectedTags?.length || 0 })}
               className={styles.filterSelect}
             />
             <ChipSelect
@@ -235,7 +235,7 @@ const FiltersComponent = ({
                 const emptyValues: Filters = {
                   ...actions,
                   theme,
-                  categories: [],
+                  tags: [],
                   region: '',
                   location: ''
                 };

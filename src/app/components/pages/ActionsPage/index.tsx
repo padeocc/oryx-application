@@ -27,10 +27,9 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
     filters: { theme }
   });
 
-  const activeCategories: Category[] = getTagsFromServices(services);
-  const allCategories: Category[] = getTagsFromServices(allServices);
-  const allRegions: Region[] = getRegionsfromServices(services);
-
+  const activeTags: Category[] = getTagsFromServices(services);
+  const allTags: Category[] = getTagsFromServices(allServices);
+  const allRegions: Region[] = getRegionsfromServices(allServices);
   const color = themesColors[theme];
 
   return (
@@ -40,8 +39,8 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
       total={meta?.pagination?.total || 0}
       color={color}
       allRegions={allRegions}
-      allCategories={allCategories}
-      activeCategories={activeCategories}
+      allTags={allTags}
+      activeTags={activeTags}
       filters={filters}
     />
   );

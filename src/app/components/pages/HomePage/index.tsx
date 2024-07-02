@@ -9,7 +9,7 @@ const HomePage = async ({}: {}) => {
   const transports = await fetchServices({
     filters: {
       theme: 'transports',
-      categories: [],
+      tags: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }
@@ -18,7 +18,7 @@ const HomePage = async ({}: {}) => {
   const goods = await fetchServices({
     filters: {
       theme: 'goods',
-      categories: [],
+      tags: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }
@@ -27,7 +27,7 @@ const HomePage = async ({}: {}) => {
   const foods = await fetchServices({
     filters: {
       theme: 'foods',
-      categories: [],
+      tags: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }
@@ -36,7 +36,7 @@ const HomePage = async ({}: {}) => {
   const events = await fetchServices({
     filters: {
       theme: 'events',
-      categories: [],
+      tags: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }
@@ -45,7 +45,7 @@ const HomePage = async ({}: {}) => {
   const services = await fetchServices({
     filters: {
       theme: 'services',
-      categories: [],
+      tags: [],
       sortBy: 'createdAt:desc',
       limit: 3
     }

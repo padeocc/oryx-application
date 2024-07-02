@@ -33,24 +33,24 @@ const FinderPage = ({
 }) => {
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
-  const [categories, setCategories] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
   // const [filters, setFilters] = useState<Filters>();
   const form = useForm({
-    initialValues: { theme: 'transports', categories: [] } as Filters
+    initialValues: { theme: 'transports', tags: [] } as Filters
   });
   const selectedTheme = form.values.theme;
-  const selectedTags = form.values.categories;
+  const selectedTags = form.values.tags;
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchServices({
         filters: {
           theme: selectedTheme,
-          categories: []
+          tags: []
         }
       });
-      const categories = getTagsFromServices(data.services);
-      setCategories(categories);
+      const tags = getTagsFromServices(data.services);
+      setTags(tags);
     };
     fetchData();
 
@@ -59,7 +59,7 @@ const FinderPage = ({
 
   useEffect(() => {
     if (!!selectedTheme) {
-      form.setFieldValue('categories', []);
+      form.setFieldValue('tags', []);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTheme]);
@@ -95,20 +95,18 @@ const FinderPage = ({
                   </Stack>
                 </RadioGroup>
               </Card>
-              {categories?.length ? (
+              {tags?.length ? (
                 <Card>
                   <Title order={2}>{t('interested_themes')}</Title>
-                  <CheckboxGroup
-                    onChange={categories => form.setFieldValue('categories', categories)}
-                    value={selectedTags}>
+                  <CheckboxGroup onChange={tags => form.setFieldValue('tags', tags)} value={selectedTags}>
                     <Stack gap="xs" pt="xs">
-                      {categories.map(category => (
+                      {tags.map(category => (
                         <Checkbox
                           id={category}
                           key={category}
                           label={category}
                           value={category}
-                          name={`categories[${category}]`}
+                          name={`tags[${category}]`}
                           checked={selectedTags?.includes(category)}
                         />
                       ))}

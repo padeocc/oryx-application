@@ -11,7 +11,7 @@ const transformParams = (
       start: 0,
       limit: -1
     },
-    sort: '',
+    sortBy: '',
     populate: '',
     filters: {
       theme: 'transports'

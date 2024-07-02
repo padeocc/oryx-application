@@ -23,8 +23,8 @@ const List = ({
   theme,
   total,
   color,
-  allCategories = [],
-  activeCategories = [],
+  allTags = [],
+  activeTags = [],
   allRegions
 }: {
   filters: Filters;
@@ -32,8 +32,8 @@ const List = ({
   theme: Theme;
   total: number;
   color: string;
-  allCategories: Category[];
-  activeCategories: Category[];
+  allTags: Category[];
+  activeTags: Category[];
   allRegions: Region[];
 }) => {
   const t = useTranslations('content');
@@ -56,8 +56,8 @@ const List = ({
           setIsLoading(true);
           router.push(`/actions/${theme}?${generateUrl({ filters })}`);
         }}
-        activeCategories={activeCategories}
-        allCategories={allCategories}
+        activeTags={activeTags}
+        allTags={allTags}
         allRegions={allRegions}
         allActionFilters={actionFilters}
       />

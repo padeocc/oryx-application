@@ -46,7 +46,7 @@ const ChipSelect = ({
               checked={selected.includes(item?.value)}
               onChange={value => {
                 if (single) {
-                  return save([item.value]);
+                  return save(value ? [item.value] : []);
                 }
                 let items = selected ? [...selected] : [];
                 if (value) {
