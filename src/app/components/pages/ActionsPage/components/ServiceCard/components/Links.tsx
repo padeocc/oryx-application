@@ -1,10 +1,10 @@
 'use client';
 
 import { Theme } from '@/config';
+import { Service } from '@/types';
 import { Group, Tooltip } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Service } from '../../../utils';
 
 const Links = ({ service, theme, hover }: { service: Service; theme: Theme; hover: boolean }) => {
   const tServices = useTranslations('services');

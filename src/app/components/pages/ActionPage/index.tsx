@@ -1,11 +1,12 @@
 import { Theme, themesColors } from '@/config';
+import { Service } from '@/types';
 import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
 import { format } from 'date-fns';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
-import { Service, fetchService, getActionFilters } from '../ActionsPage/utils';
+import { fetchService, getActionFilters } from '../ActionsPage/utils';
 import BackItem from './components/BackItem';
 
 const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {

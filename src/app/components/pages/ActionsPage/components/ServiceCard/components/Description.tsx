@@ -1,10 +1,10 @@
 'use client';
 
 import { Theme } from '@/config';
+import { Service } from '@/types';
 import { Popover, PopoverDropdown, PopoverTarget, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
-import { Service } from '../../../utils';
 
 const Description = ({ service, theme }: { service: Service; theme: Theme }) => {
   const [opened, { close, open }] = useDisclosure(false);

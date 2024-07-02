@@ -2,15 +2,9 @@
 
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import {
-  Category,
-  Filters,
-  Region,
-  Service,
-  generateUrl,
-  getActionFilters
-} from '@/app/components/pages/ActionsPage/utils';
+import { getActionFilters, getNavigationUrl } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
+import { Category, Filters, Region, Service } from '@/types';
 import { Alert, Grid, GridCol, Group, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
@@ -54,7 +48,7 @@ const List = ({
         filters={filters}
         handleSubmit={(filters: Filters) => {
           setIsLoading(true);
-          router.push(`/actions/${theme}?${generateUrl({ filters })}`);
+          router.push(`/actions/${theme}?${getNavigationUrl({ filters })}`);
         }}
         activeTags={activeTags}
         allTags={allTags}

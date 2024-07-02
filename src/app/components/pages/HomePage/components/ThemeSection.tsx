@@ -1,12 +1,12 @@
 'use client';
 
 import { Theme, themesColors, themesIcons } from '@/config';
+import { Service } from '@/types';
 import { Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import ServiceCard from '../../ActionsPage/components/ServiceCard';
-import { Service } from '../../ActionsPage/utils';
 import style from './theme-section.module.css';
 
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {

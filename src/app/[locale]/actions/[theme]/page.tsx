@@ -1,6 +1,6 @@
 import ActionsPage from '@/app/components/pages/ActionsPage';
-import { RequestParameters } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
+import { RequestParameters } from '@/types';
 import { set } from 'lodash';
 
 const transformParams = (

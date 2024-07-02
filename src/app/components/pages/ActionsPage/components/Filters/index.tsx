@@ -1,5 +1,5 @@
-import { ActionFilters, Category, Filters, Region } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themesColors, themesIcons } from '@/config';
+import { ActionFilters, Category, Filters, Region } from '@/types';
 import {
   Alert,
   Button,
@@ -227,9 +227,7 @@ const FiltersComponent = ({
               href={`/actions/${theme}`}
               onClick={() => {
                 const actions: { [x: string]: boolean } = Object.keys(allActionFilters).reduce(
-                  (all: { [key: string]: boolean }, action: string) => {
-                    return { ...all, [action]: false };
-                  },
+                  (all: { [key: string]: boolean }, action: string) => ({ ...all, [action]: false }),
                   {}
                 );
                 const emptyValues: Filters = {

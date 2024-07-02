@@ -1,12 +1,8 @@
 'use client';
 
-import {
-  FetchServicesResponse,
-  Filters,
-  generateUrl,
-  getTagsFromServices
-} from '@/app/components/pages/ActionsPage/utils';
+import { getNavigationUrl, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
 import { Theme, themes } from '@/config';
+import { FetchServicesResponse, Filters } from '@/types';
 import {
   Badge,
   Button,
@@ -34,7 +30,6 @@ const FinderPage = ({
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
   const [tags, setTags] = useState<string[]>([]);
-  // const [filters, setFilters] = useState<Filters>();
   const form = useForm({
     initialValues: { theme: 'transports', tags: [] } as Filters
   });
@@ -64,16 +59,12 @@ const FinderPage = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTheme]);
 
-  const actionUrl = generateUrl({ filters: form.getValues() });
+  const actionUrl = getNavigationUrl({ filters: form.getValues() });
 
   return (
     <Stack>
       <Title order={2}>{t('title')}</Title>
-      <form
-        action={async () => {
-          //setFilters(form.values);
-          //redirect(`/actions/${selectedTheme}`);
-        }}>
+      <form>
         <Grid>
           <GridCol span={{ base: 12, sm: 6 }}>
             <Stack>
@@ -130,7 +121,8 @@ const FinderPage = ({
                   <Stack gap="xs">
                     {selectedTags?.length ? <Title order={3}>{t('themes')}</Title> : null}
                     <Group gap="xs">
-                      {selectedTags?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
+                      {selectedTags?.map((category: string) => <Badge key={`tag-${category}`}>{category}</Badge>) ||
+                        null}
                     </Group>
                   </Stack>
                   <Button

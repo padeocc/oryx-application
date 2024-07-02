@@ -1,20 +1,14 @@
 import { Theme, themesColors } from '@/config';
+import { Category, Filters, Region, RequestParameters } from '@/types';
 import NotFound from '../../navigation/NotFound';
 import List from './components/List';
-import {
-  Category,
-  Filters,
-  Region,
-  RequestParameters,
-  fetchServices,
-  getRegionsfromServices,
-  getTagsFromServices
-} from './utils';
+import { fetchServices, getRegionsfromServices, getTagsFromServices } from './utils';
 
 const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: RequestParameters }) => {
   if (!theme) {
     return <NotFound />;
   }
+
   const filters: Filters = {
     ...(parameters?.filters || {}),
     theme
@@ -23,6 +17,7 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
   const { services, meta } = await fetchServices({
     filters
   });
+
   const { services: allServices } = await fetchServices({
     filters: { theme }
   });

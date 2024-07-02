@@ -1,4 +1,5 @@
-import { Chip, Input, Menu, MenuDropdown, MenuTarget, SimpleGrid } from '@mantine/core';
+import { Button, Chip, Group, Input, Menu, MenuDropdown, MenuTarget, SimpleGrid } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 
 const ChipSelect = ({
   all,
@@ -16,6 +17,7 @@ const ChipSelect = ({
   single?: boolean;
 }) => {
   const selectedItem = single && selected?.[0] ? selected[0] : null;
+  const t = useTranslations('filters_component');
   const placeholderToDisplay =
     (selectedItem && all.find(item => item.value === selectedItem)?.label) || placeholder || '';
 
@@ -60,6 +62,17 @@ const ChipSelect = ({
             </Chip>
           ))}
         </SimpleGrid>
+        <Group justify="flex-end">
+          <Button
+            size="xs"
+            variant="subtle"
+            disabled={selected.length === 0}
+            onClick={() => {
+              save([]);
+            }}>
+            {t('reset-filter-label')}
+          </Button>
+        </Group>
       </MenuDropdown>
     </Menu>
   );
