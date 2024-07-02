@@ -62,7 +62,7 @@ const ChipSelect = ({
             </Chip>
           ))}
         </SimpleGrid>
-        <Group justify="flex-end">
+        <Group justify="flex-end" pt="sm">
           <Button
             size="xs"
             variant="subtle"

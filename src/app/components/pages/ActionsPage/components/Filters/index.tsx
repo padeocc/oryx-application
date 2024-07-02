@@ -164,9 +164,7 @@ const FiltersComponent = ({
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Alert>
-            <Group justify="flex-start" pt="md" pb="md" gap={'sm'}>
-              {themesOptions}
-            </Group>
+            <SimpleGrid cols={{ base: 10 }}>{themesOptions}</SimpleGrid>
           </Alert>
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">
