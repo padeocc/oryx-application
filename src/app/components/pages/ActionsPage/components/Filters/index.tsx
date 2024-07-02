@@ -8,7 +8,6 @@ import {
   GridCol,
   Group,
   Loader,
-  MultiSelect,
   MultiSelectProps,
   Select,
   SelectProps,
@@ -21,6 +20,7 @@ import { PottedPlant } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import ChipSelect from './ChipSelect';
 import styles from './filters.module.css';
 
 const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
@@ -145,7 +145,7 @@ const FiltersComponent = ({
     variant: 'filled',
     classNames: { input: styles.filterSelect },
     styles: { pill: { display: 'none' } },
-    searchable: true
+    comboboxProps: { position: 'bottom', withinPortal: false, zIndex: 1000 }
   };
 
   const values = form?.getValues();
@@ -164,7 +164,7 @@ const FiltersComponent = ({
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Alert>
-            <Group justify="flex-start" pl="md" pt="md" pb="md" gap={'xl'}>
+            <Group justify="flex-start" pt="md" pb="md" gap={'sm'}>
               {themesOptions}
             </Group>
           </Alert>
@@ -180,43 +180,29 @@ const FiltersComponent = ({
         </GridCol>
         <GridCol span={{ base: 12 }}>
           <SimpleGrid cols={{ base: 1, xs: 2, md: 4 }} spacing={'sm'}>
-            <MultiSelect
-              {...selectsStyleProps}
-              disabled={allCategories?.length <= 0}
+            <ChipSelect
+              all={allCategories.map(item => ({ label: item, value: item }))}
+              selected={selectedCategories}
+              save={saveCategories}
               placeholder={t('subjects-label', { count: selectedCategories?.length || 0 })}
-              onChange={saveCategories}
-              data={allCategories.map(category => {
-                return {
-                  label: category,
-                  value: category,
-                  disabled: !activeCategories.find(activeCategory => activeCategory === category)
-                };
-              })}
-              defaultValue={selectedCategories}
+              className={styles.filterSelect}
             />
-            <MultiSelect
-              {...selectsStyleProps}
-              disabled={Object.keys(allActionFilters)?.length <= 0}
+            <ChipSelect
+              all={Object.keys(allActionFilters).map(action => ({ label: t(`filter-${action}-label`), value: action }))}
+              selected={selectedActions}
+              save={saveActionsFilters}
               placeholder={t('actions-label', { count: selectedActions?.length || 0 })}
-              onChange={saveActionsFilters}
-              data={Object.keys(allActionFilters).map(action => ({
-                label: t(`filter-${action}-label`),
-                value: action
-              }))}
-              defaultValue={selectedActions}
+              className={styles.filterSelect}
             />
-            <Select
-              {...(selectsStyleProps as SelectProps)}
-              size="lg"
-              radius={0}
-              clearable
-              variant="filled"
-              placeholder={t('filter-region-label')}
-              data={regionsOptions}
-              onChange={v => {
-                return saveRegionFilter(v || undefined);
+            <ChipSelect
+              all={regionsOptions}
+              selected={values.region ? [values.region] : []}
+              save={regions => {
+                saveRegionFilter(regions[0]);
               }}
-              onClear={() => saveRegionFilter(undefined)}
+              placeholder={t('filter-region-label')}
+              className={styles.filterSelect}
+              single
             />
             <Select
               {...(selectsStyleProps as SelectProps)}
@@ -228,6 +214,7 @@ const FiltersComponent = ({
               data={locationOptions}
               onChange={saveLocationFilter}
               onClear={() => saveLocationFilter(undefined)}
+              styles={{ input: { cursor: 'pointer' } }}
             />
           </SimpleGrid>
         </GridCol>

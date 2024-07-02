@@ -34,7 +34,7 @@ const FinderPage = ({
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
   const [categories, setCategories] = useState<string[]>([]);
-  const [filters, setFilters] = useState<Filters>();
+  // const [filters, setFilters] = useState<Filters>();
   const form = useForm({
     initialValues: { theme: 'transports', categories: [] } as Filters
   });
@@ -71,7 +71,7 @@ const FinderPage = ({
       <Title order={2}>{t('title')}</Title>
       <form
         action={async () => {
-          setFilters(form.values);
+          //setFilters(form.values);
           //redirect(`/actions/${selectedTheme}`);
         }}>
         <Grid>

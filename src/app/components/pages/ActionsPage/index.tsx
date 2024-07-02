@@ -29,7 +29,7 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
 
   const activeCategories: Category[] = getTagsFromServices(services);
   const allCategories: Category[] = getTagsFromServices(allServices);
-  const allRegions: Region[] = getRegionsfromServices(allServices);
+  const allRegions: Region[] = getRegionsfromServices(services);
 
   const color = themesColors[theme];
 
