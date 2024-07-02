@@ -1,6 +1,7 @@
 import { DefaultMantineColor } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
 import { BowlFood, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
+import { ActionFilters } from './types';
 
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services';
 
@@ -34,4 +35,53 @@ export const imagesMapping: { [key: string]: string } = {
   'acheter une voiture bas carbone': 'cars',
   'acheter une voiture': 'cars',
   vélos: 'bikes'
+};
+
+export const getActionFilters = (theme: Theme): ActionFilters => {
+  switch (theme) {
+    case 'transports':
+      return {};
+
+    case 'events':
+      return {};
+
+      break;
+    case 'services':
+      return {};
+
+      break;
+    case 'foods':
+      return {
+        organic: 'boolean',
+        local: 'boolean',
+        season: 'boolean',
+        shortcircuit: 'boolean',
+        wastereducer: 'boolean',
+        foodwastereducer: 'boolean',
+        cookmore: 'boolean'
+      };
+
+      break;
+    case 'goods':
+      return {
+        used: 'boolean',
+        rent: 'boolean',
+        mutualise: 'boolean',
+        repair: 'boolean',
+        ecobuilt: 'boolean',
+        local: 'boolean',
+        organic: 'boolean',
+        lowtech: 'boolean',
+        recycled: 'boolean',
+        reused: 'boolean',
+        diy: 'boolean',
+        wastereducer: 'boolean',
+        comparer: 'boolean',
+        relocating: 'boolean'
+      };
+
+    default:
+      break;
+  }
+  return {};
 };

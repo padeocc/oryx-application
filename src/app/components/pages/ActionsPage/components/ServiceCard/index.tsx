@@ -2,8 +2,7 @@
 
 import { getLogoImage } from '@/app/components/content/utils';
 import NotFound from '@/app/components/navigation/NotFound';
-import { getActionFilters } from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
+import { Theme, getActionFilters } from '@/config';
 import { Service } from '@/types';
 import {
   Card,

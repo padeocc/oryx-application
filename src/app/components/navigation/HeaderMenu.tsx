@@ -13,7 +13,7 @@ const HeaderMenu = async () => {
       <Flex justify={'space-between'} align={'center'} w="100%" h="100%">
         <Link href="/" style={{ textDecoration: 'none' }}>
           <Stack gap="0">
-            <Title c="green" order={1} fw={'bolder'}>
+            <Title c="green_oryx" order={1} fw={'bolder'}>
               Oryx
             </Title>
             <Title c="dark" fz="sm" fw={'bold'} order={2}>

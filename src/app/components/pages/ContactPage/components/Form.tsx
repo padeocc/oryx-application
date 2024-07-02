@@ -121,7 +121,6 @@ const ContactForm = ({
           opened={okNotification}
           p="0"
           m="0"
-          c={'green'}
           styles={{
             content: { border: '0px', boxShadow: 'none', backgroundColor: 'transparent' }
           }}

@@ -1,4 +1,4 @@
-import { Theme } from '@/config';
+import { Theme, getActionFilters } from '@/config';
 import { APIFilters, ActionFilters, FetchServicesResponse, Filters, RequestParameters, Service } from '@/types';
 import { merge, uniq } from 'lodash';
 import qs from 'qs';
@@ -94,53 +94,4 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const solution = await response.json();
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
-};
-
-export const getActionFilters = (theme: Theme): ActionFilters => {
-  switch (theme) {
-    case 'transports':
-      return {};
-
-    case 'events':
-      return {};
-
-      break;
-    case 'services':
-      return {};
-
-      break;
-    case 'foods':
-      return {
-        organic: 'boolean',
-        local: 'boolean',
-        season: 'boolean',
-        shortcircuit: 'boolean',
-        wastereducer: 'boolean',
-        foodwastereducer: 'boolean',
-        cookmore: 'boolean'
-      };
-
-      break;
-    case 'goods':
-      return {
-        used: 'boolean',
-        rent: 'boolean',
-        mutualise: 'boolean',
-        repair: 'boolean',
-        ecobuilt: 'boolean',
-        local: 'boolean',
-        organic: 'boolean',
-        lowtech: 'boolean',
-        recycled: 'boolean',
-        reused: 'boolean',
-        diy: 'boolean',
-        wastereducer: 'boolean',
-        comparer: 'boolean',
-        relocating: 'boolean'
-      };
-
-    default:
-      break;
-  }
-  return {};
 };

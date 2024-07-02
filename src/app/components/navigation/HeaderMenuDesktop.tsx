@@ -18,7 +18,7 @@ const HeaderMenuDesktop = async () => {
             key={`item-desktop-${itemgroupindex}-${itemindex}-${name}`}
             component={Link}
             href={href}
-            color={priority ? 'green' : 'var(--mantine-color-dark-outline)'}>
+            color={priority ? 'green_oryx' : 'var(--mantine-color-dark-outline)'}>
             {name}
           </Button>
         );

@@ -2,8 +2,8 @@
 
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import { getActionFilters, getNavigationUrl } from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
+import { getNavigationUrl } from '@/app/components/pages/ActionsPage/utils';
+import { Theme, getActionFilters } from '@/config';
 import { Category, Filters, Region, Service } from '@/types';
 import { Alert, Grid, GridCol, Group, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
