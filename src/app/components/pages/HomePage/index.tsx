@@ -1,7 +1,7 @@
-import { Button, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { fetchServices } from '../ActionsPage/utils';
+import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
 
 const HomePage = async ({}: {}) => {
@@ -54,9 +54,7 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'}>
       <Stack gap={'3rem'} pt="2rem">
-        <Button size="xl" component={Link} href={'/finder'} hiddenFrom="md">
-          {t('find_inspiration')}
-        </Button>
+        <ExamplesSection />
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />
         <ThemeSection items={goods.services} theme={'goods'} />
