@@ -1,5 +1,19 @@
-import { Button, Chip, Group, Input, Menu, MenuDropdown, MenuTarget, SimpleGrid } from '@mantine/core';
+import { inputDefaultBackgrounColor } from '@/theme';
+import {
+  Badge,
+  Button,
+  Chip,
+  CloseButton,
+  Group,
+  Input,
+  Menu,
+  MenuDropdown,
+  MenuTarget,
+  SimpleGrid
+} from '@mantine/core';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const ChipSelect = ({
   all,
@@ -7,7 +21,8 @@ const ChipSelect = ({
   save,
   placeholder,
   className,
-  single
+  single,
+  color
 }: {
   all: { value: string; label: string }[];
   selected?: string[];
@@ -15,28 +30,47 @@ const ChipSelect = ({
   placeholder: string;
   className: string;
   single?: boolean;
+  color: string;
 }) => {
+  const [opened, setOpened] = useState(false);
   const selectedItem = single && selected?.[0] ? selected[0] : null;
   const t = useTranslations('filters_component');
   const placeholderToDisplay =
     (selectedItem && all.find(item => item.value === selectedItem)?.label) || placeholder || '';
 
   return (
-    <Menu position="bottom-start" radius={0} withinPortal>
+    <Menu position="bottom-start" radius={0} withinPortal opened={opened} onChange={setOpened}>
       <MenuTarget>
-        <Input
-          readOnly
-          c={'dark'}
-          disabled={all?.length <= 0}
-          placeholder={placeholderToDisplay}
-          size="lg"
-          radius="0"
-          variant="filled"
-          className={className}
-          styles={{ input: { cursor: 'pointer' } }}
-        />
+        <Group bg={inputDefaultBackgrounColor} w="100%" align="center" style={{ cursor: 'pointer' }}>
+          {all?.length <= 0 ? (
+            <Input
+              readOnly
+              c={'dark'}
+              disabled
+              placeholder={placeholderToDisplay}
+              size="lg"
+              radius="0"
+              variant="filled"
+              className={className}
+            />
+          ) : (
+            <Link href="#" style={{ cursor: 'pointer', color: 'black', textDecoration: 'none' }}>
+              <Group gap={'xs'} p="md">
+                {placeholderToDisplay}
+                {selected.length ? <Badge color={color}>{selected.length}</Badge> : null}
+              </Group>
+            </Link>
+          )}
+        </Group>
       </MenuTarget>
       <MenuDropdown p="md">
+        <Group justify="flex-end">
+          <CloseButton
+            onClick={() => {
+              setOpened(false);
+            }}
+          />
+        </Group>
         <SimpleGrid cols={{ base: 1, xs: 2, md: 3 }} spacing={'0.4rem'} style={{ overflow: 'scroll', width: '100%' }}>
           {all.map(item => (
             <Chip
@@ -69,6 +103,7 @@ const ChipSelect = ({
             disabled={selected.length === 0}
             onClick={() => {
               save([]);
+              setOpened(false);
             }}>
             {t('reset-filter-label')}
           </Button>

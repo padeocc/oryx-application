@@ -34,3 +34,5 @@ export const theme: MantineThemeOverride = {
   },
   primaryColor: 'green_oryx'
 };
+
+export const inputDefaultBackgrounColor = '#f1f3f5';

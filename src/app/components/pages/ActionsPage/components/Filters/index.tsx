@@ -1,4 +1,5 @@
 import { Theme, themesColors, themesIcons } from '@/config';
+import { inputDefaultBackgrounColor } from '@/theme';
 import { ActionFilters, Category, Filters, Region } from '@/types';
 import {
   Alert,
@@ -34,7 +35,6 @@ const FiltersComponent = ({
   handleSubmit,
   itemsCount,
   allTags,
-  activeTags,
   allRegions,
   allActionFilters = {},
   theme
@@ -44,13 +44,13 @@ const FiltersComponent = ({
   handleSubmit: (values: Filters) => void;
   itemsCount: number;
   allTags: Category[];
-  activeTags: Category[];
   allRegions: Region[];
   allActionFilters: ActionFilters;
   theme: Theme;
 }) => {
   const t = useTranslations('filters_component');
   const tTheme = useTranslations('themes');
+  const color = themesColors[theme];
   const form = useForm({
     initialValues: filters
   });
@@ -164,7 +164,7 @@ const FiltersComponent = ({
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Alert>
-            <SimpleGrid cols={{ base: 10 }}>{themesOptions}</SimpleGrid>
+            <SimpleGrid cols={{ base: 8, sm: 8, md: 8, lg: 10 }}>{themesOptions}</SimpleGrid>
           </Alert>
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">
@@ -184,6 +184,7 @@ const FiltersComponent = ({
               save={saveTags}
               placeholder={t('subjects-label', { count: selectedTags?.length || 0 })}
               className={styles.filterSelect}
+              color={color}
             />
             <ChipSelect
               all={Object.keys(allActionFilters).map(action => ({ label: t(`filter-${action}-label`), value: action }))}
@@ -191,6 +192,7 @@ const FiltersComponent = ({
               save={saveActionsFilters}
               placeholder={t('actions-label', { count: selectedActions?.length || 0 })}
               className={styles.filterSelect}
+              color={color}
             />
             <ChipSelect
               all={regionsOptions}
@@ -201,6 +203,7 @@ const FiltersComponent = ({
               placeholder={t('filter-region-label')}
               className={styles.filterSelect}
               single
+              color={color}
             />
             <Select
               {...(selectsStyleProps as SelectProps)}
@@ -213,6 +216,7 @@ const FiltersComponent = ({
               onChange={saveLocationFilter}
               onClear={() => saveLocationFilter(undefined)}
               styles={{ input: { cursor: 'pointer' } }}
+              bg={inputDefaultBackgrounColor}
             />
           </SimpleGrid>
         </GridCol>
