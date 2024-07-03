@@ -11,7 +11,7 @@ const Example = ({ link, Icon, text }: { link: string; Icon: Icon; text: string 
   return (
     <GridCol span={{ base: 12, lg: 6 }}>
       <Link style={linkStyle} href={link}>
-        <Flex justify={'left'} align={'center'} gap={'sm'} fz={'md'}>
+        <Flex justify={'left'} align={'center'} gap={'sm'} fz={'lg'}>
           <Icon />
           {text}
         </Flex>

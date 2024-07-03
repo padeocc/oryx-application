@@ -51,8 +51,6 @@
     "filter-foodwastereducer-label": "Réduire les déchets organiques",
     "filter-local-label": "Consommer local",
     "filter-location-label": "Type de magasin",
-    "reset-action-label": "Réinitialiser tous les filtres",
-    "reset-filter-label": "Réinitialiser ce filtre",
     "filter-lowtech-label": "Low tech",
     "filter-mutualise-label": "Mutualiser",
     "filter-organic-label": "Consommer bio",
@@ -174,6 +172,8 @@
     "region_973_label": "Guyane",
     "region_974_label": "La Réunion",
     "region_976_label": "Mayotte",
+    "reset-action-label": "Réinitialiser tous les filtres",
+    "reset-filter-label": "Réinitialiser ce filtre",
     "subjects-label": "{count, plural, =0 {Sujets (tous)} =1 {Sujets} other {Sujets}}"
   },
   "finder_page": {
@@ -186,26 +186,26 @@
   "footer": {
     "actions_label": "Trouver un service",
     "chart_label": "Charte de l'application",
+    "contact_label": "Nous contacter",
     "donate_label": "Faire un don",
     "legal_label": "Page légale (CGU)",
     "oryx_history_label": "Génèse de l'application",
     "roadmap_label": "Futures fonctionnalités",
     "sourcecode_label": "Code source",
-    "whoarewe_label": "Qui sommes-nous ?",
-    "contact_label": "Nous contacter"
+    "whoarewe_label": "Qui sommes-nous ?"
   },
   "home_page": {
-    "examples_title": "Que peut faire Oryx pour vous ?",
     "discover_actions": "Les derniers services ajoutés",
+    "example_bike": " Comment trouver les ateliers vélos en Haute-Garonne ?",
+    "example_food": "Comment consommer local, de saison, et bio ?",
+    "example_phone": "Où acheter des produits électronique d'occasion en ligne ?",
+    "example_train": "Comment partir à Rome en train depuis chez moi ?",
+    "examples_title": "Que peut faire Oryx pour vous ?",
     "find_inspiration": "Trouver un service !",
     "find_others_inspiration": "Chercher selon vos envies !",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
-    "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément",
-    "example_bike": " Comment trouver les ateliers vélos en Haute-Garonne ?",
-    "example_food": "Comment consommer local, de saison, et bio ?",
-    "example_train": "Comment partir à Rome en train depuis chez moi ?",
-    "example_phone": "Où acheter des produits électronique d'occasion en ligne ?"
+    "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément"
   },
   "legal": {
     "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",
@@ -326,8 +326,8 @@
     "events": "Evénements",
     "foods": "Alimentation",
     "goods": "Biens, mode, maison, électronique",
-    "transports": "Transport",
-    "services": "Services"
+    "services": "Services",
+    "transports": "Transport"
   },
   "user_actions": {
     "coming_soon": "Bientôt disponible !",
