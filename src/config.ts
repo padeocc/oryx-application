@@ -1,27 +1,29 @@
 import { DefaultMantineColor } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
-import { BowlFood, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
+import { BowlFood, BuildingApartment, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 import { ActionFilters } from './types';
 
-export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services';
+export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 
 export const themesIcons: { [key: string]: Icon } = {
   transports: Scooter,
   foods: BowlFood,
   goods: TShirt,
   events: CalendarCheck,
-  services: CallBell
+  services: CallBell,
+  accommodations: BuildingApartment
 };
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {
-  transports: 'indigo',
-  foods: 'orange',
-  goods: 'pink',
-  events: 'blue',
-  services: 'grape'
+  transports: 'indigo.5',
+  foods: 'orange.7',
+  goods: 'pink.7',
+  events: 'blue.7',
+  services: 'grape.3',
+  accommodations: 'indigo.9'
 };
 
-export const themes: Theme[] = ['foods', 'goods', 'transports', 'events', 'services'];
+export const themes: Theme[] = ['foods', 'goods', 'transports', 'events', 'services', 'accommodations'];
 
 export const imagesMapping: { [key: string]: string } = {
   'mode, bijoux, lunettes': 'fashion',
@@ -47,6 +49,9 @@ export const getActionFilters = (theme: Theme): ActionFilters => {
 
       break;
     case 'services':
+      return {};
+
+    case 'accommodations':
       return {};
 
       break;

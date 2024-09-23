@@ -327,7 +327,8 @@
     "foods": "Alimentation",
     "goods": "Biens, mode, maison, électronique",
     "services": "Services",
-    "transports": "Transport"
+    "transports": "Transport",
+    "accommodations": "Bâtiment et logement"
   },
   "user_actions": {
     "coming_soon": "Bientôt disponible !",

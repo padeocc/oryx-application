@@ -2,6 +2,7 @@ import { Theme, getActionFilters, themesColors } from '@/config';
 import { Service } from '@/types';
 import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
 import { format } from 'date-fns';
+import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
@@ -27,6 +28,9 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
   labelRegion = labelRegion.includes(`region_${service.region}_label`) ? service.region : labelRegion;
 
+  //TODO refacto type on CMS
+  const typeLabel = (isArray(type) ? type[0] : type) || 'company';
+
   return (
     <Stack>
       <Group>
@@ -37,9 +41,11 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
       </Group>
       <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
         <Group gap={'xs'}>
-          <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
-            {t(`type-${type?.[0] || 'company'}-label`)}
-          </Badge>
+          {type && (
+            <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {t(`type-${typeLabel}-label`)}
+            </Badge>
+          )}
           {service.location ? (
             <Badge
               key={`tag-${service.location}`}

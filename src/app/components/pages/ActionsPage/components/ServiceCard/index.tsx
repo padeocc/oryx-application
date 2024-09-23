@@ -71,7 +71,7 @@ const ServiceCard = ({
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
-                  <Tags tags={[...service.tags, ...fields]} color={color} />
+                  <Tags tags={[...(service?.tags || []), ...fields]} color={color} />
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>

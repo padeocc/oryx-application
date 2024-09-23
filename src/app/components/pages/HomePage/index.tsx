@@ -10,7 +10,7 @@ const HomePage = async ({}: {}) => {
     filters: {
       theme: 'transports',
       tags: [],
-      sortBy: 'createdAt:desc',
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -19,7 +19,7 @@ const HomePage = async ({}: {}) => {
     filters: {
       theme: 'goods',
       tags: [],
-      sortBy: 'createdAt:desc',
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -28,7 +28,7 @@ const HomePage = async ({}: {}) => {
     filters: {
       theme: 'foods',
       tags: [],
-      sortBy: 'createdAt:desc',
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -37,7 +37,7 @@ const HomePage = async ({}: {}) => {
     filters: {
       theme: 'events',
       tags: [],
-      sortBy: 'createdAt:desc',
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -46,7 +46,16 @@ const HomePage = async ({}: {}) => {
     filters: {
       theme: 'services',
       tags: [],
-      sortBy: 'createdAt:desc',
+      sortBy: 'updatedAt:desc',
+      limit: 3
+    }
+  });
+
+  const accommodations = await fetchServices({
+    filters: {
+      theme: 'accommodations',
+      tags: [],
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -60,6 +69,7 @@ const HomePage = async ({}: {}) => {
         <ThemeSection items={goods.services} theme={'goods'} />
         <ThemeSection items={events.services} theme={'events'} />
         <ThemeSection items={services.services} theme={'services'} />
+        <ThemeSection items={accommodations.services} theme={'accommodations'} />
       </Stack>
     </Stack>
   );
