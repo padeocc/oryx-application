@@ -12,40 +12,69 @@
   "bookmark": {
     "tooltip_label": "Enregistrer cette action comme une action préférée !"
   },
+  "common": {
+    "see_more": "Voir plus",
+    "see_more_theme": "Voir plus de propositions sur ce thème"
+  },
+  "contact": {
+    "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
+    "form-company-label": "Entreprise ou association",
+    "form-company-palceholder": "",
+    "form-email-label": "Email",
+    "form-email-palceholder": "",
+    "form-error-required": "Champ obligatoire",
+    "form-error-unknow": "Champ invalide",
+    "form-message-label": "Message",
+    "form-message-palceholder": "",
+    "form-name-label": "Prénom et nom",
+    "form-name-palceholder": "",
+    "form-sent-fail-message": "Merci de vérifier les champs obligatoires",
+    "form-sent-fail-title": "Echec lors de l'envoi",
+    "form-sent-success-message": "Nous répondrons à votre message !",
+    "form-sent-success-title": "Message envoyé !",
+    "form-submit-label": "Envoyer",
+    "form-url-label": "Site",
+    "or-separator": "Ou",
+    "title": "Nous contacter"
+  },
   "content": {
     "choose_theme": "Choisir un thème !",
     "contact_us": "Vous voulez ajouter une initiative ? Contactez-nous !",
     "no_results": "Pas de résultat pour cette recherche !"
   },
   "filters_component": {
-    "regions-label": "Localisations : ",
-    "actions-label": "Actions : ",
-    "subjects-label": "Sujets : ",
-    "inspirations_found": "{count, plural, =0 {Aucune action trouvée avec ces filtres} =1 {Une action trouvée !} other {# inspirations trouvées}}",
-    "filter-organic-label": "Consommer bio",
+    "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
+    "filter-comparer-label": "Comparer",
+    "filter-cookmore-label": "Pour cuisiner plus",
+    "filter-diy-label": "Faire soit-même",
+    "filter-ecobuilt-label": "Construction écoresponsable",
+    "filter-foodwastereducer-label": "Réduire les déchets organiques",
     "filter-local-label": "Consommer local",
+    "filter-location-label": "Type de magasin",
+    "filter-lowtech-label": "Low tech",
+    "filter-mutualise-label": "Mutualiser",
+    "filter-organic-label": "Consommer bio",
+    "filter-recycled-label": "Recycler",
+    "filter-region-label": "Région (un seul choix possible)",
+    "filter-relocating-label": "Relocaliser",
+    "filter-rent-label": "Louer",
+    "filter-repair-label": "Réparer",
+    "filter-reused-label": "Réutiliser",
     "filter-season-label": "Consommer de saison",
     "filter-shortcircuit-label": "Privilégier le circuit court",
-    "filter-wastereducer-label": "Réduire les déchets",
-    "filter-foodwastereducer-label": "Réduire les déchets organiques",
-    "filter-cookmore-label": "Pour cuisiner plus",
-    "location-label": "Sélectionner votre région",
     "filter-used-label": "Acheter d'occasion",
-    "filter-reused-label": "Réutiliser",
-    "filter-rent-label": "Louer",
-    "filter-mutualise-label": "Mutualiser",
-    "filter-repair-label": "Réparer",
-    "filter-ecobuilt-label": "Construction écoresponsable",
-    "filter-lowtech-label": "Low tech",
-    "filter-recycled-label": "Recycler",
-    "filter-diy-label": "Faire soit-même",
-    "filter-comparer-label": "Comparer",
-    "filter-relocating-label": "Relocaliser",
+    "filter-wastereducer-label": "Réduire les déchets",
     "filter-weight-label": "Poids",
-    "filter-region-label": "Région",
-    "filter-location-label": "Type de magasin",
+    "inspirations_found": "{count, plural, =0 {Aucune inspiration trouvée avec ces filtres} =1 {Une inspiration trouvée !} other {# inspirations trouvées}}",
+    "location-label": "Sélectionner votre région",
+    "location-online-label": "En ligne seulement",
+    "location-online-store-label": "En ligne et en magasin",
+    "location-store-and-online-label": "En magasin et en ligne",
+    "location-store-label": "En magasin seulement",
     "region_01_label": "Ain",
     "region_02_label": "Aisne",
+    "region_2A_label": "Corse-du-Sud",
+    "region_2B_label": "Haute-Corse",
     "region_03_label": "Allier",
     "region_04_label": "Alpes-de-Haute-Provence",
     "region_05_label": "Hautes-Alpes",
@@ -72,8 +101,6 @@
     "region_27_label": "Eure",
     "region_28_label": "Eure-et-Loir",
     "region_29_label": "Finistère",
-    "region_2A_label": "Corse-du-Sud",
-    "region_2B_label": "Haute-Corse",
     "region_30_label": "Gard",
     "region_31_label": "Haute-Garonne",
     "region_32_label": "Gers",
@@ -145,24 +172,82 @@
     "region_973_label": "Guyane",
     "region_974_label": "La Réunion",
     "region_976_label": "Mayotte",
-    "location-online-store-label": "En ligne et en magasin",
-    "location-online-label": "En ligne seulement",
-    "location-store-label": "En magasin seulement",
-    "location-store-and-online": "En magasin et en ligne"
+    "reset-action-label": "Réinitialiser tous les filtres",
+    "reset-filter-label": "Réinitialiser ce filtre",
+    "subjects-label": "{count, plural, =0 {Sujets (tous)} =1 {Sujets} other {Sujets}}"
   },
   "finder_page": {
     "interested_themes": "Quels sont les sujets qui vous intéressent ?",
     "summary": "Récapitulatif",
     "themes": "Thèmes",
-    "validate": "Valider les choix",
-    "title": "Trouver un service !"
+    "title": "Trouver un service !",
+    "validate": "Valider les choix"
+  },
+  "footer": {
+    "actions_label": "Trouver un service",
+    "chart_label": "Charte de l'application",
+    "contact_label": "Nous contacter",
+    "donate_label": "Faire un don",
+    "legal_label": "Page légale (CGU)",
+    "oryx_history_label": "Génèse de l'application",
+    "roadmap_label": "Futures fonctionnalités",
+    "sourcecode_label": "Code source",
+    "whoarewe_label": "Qui sommes-nous ?"
   },
   "home_page": {
     "discover_actions": "Les derniers services ajoutés",
+    "example_bike": " Comment trouver les ateliers vélos en Haute-Garonne ?",
+    "example_food": "Comment consommer local, de saison, et bio ?",
+    "example_phone": "Où acheter des produits électronique d'occasion en ligne ?",
+    "example_train": "Comment partir à Rome en train depuis chez moi ?",
+    "examples_title": "Que peut faire Oryx pour vous ?",
     "find_inspiration": "Trouver un service !",
+    "find_others_inspiration": "Chercher selon vos envies !",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
-    "welcome": "Le compagnon des initiatives écoresponsables !"
+    "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément"
+  },
+  "legal": {
+    "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",
+    "consent_content": "Ce site n'utilise pas de cookies pour enregistrer votre activité. Cependant, des cookies sont utilisés pour des raisons de sécurité lors de l'envoi d'informations via le formulaire de contact. De plus, des cookies peuvent être employés pour identifier un utilisateur en cas de création de compte. En poursuivant votre navigation sur cette plateforme, vous acceptez les conditions énoncées dans notre page des CGU.",
+    "consent_hide": "J'accepte",
+    "content": {
+      "access": "L'accès à la Plateforme est gratuit. L'Utilisateur est responsable de son matériel informatique, de sa connexion internet, et de la sécurité de son équipement.",
+      "applicableLaw": "Les présentes CGU sont régies par le droit français. Tout litige relatif à leur interprétation et/ou à leur exécution relève des tribunaux compétents de Toulouse.",
+      "companyRights": "Si un Utilisateur constate que sa société apparaît sur le site, il a le droit d'y apporter des modifications ou de demander la suppression des informations en nous envoyant un message via le formulaire de contact.",
+      "intellectualProperty": "La Plateforme et son contenu (textes, images, graphismes, logo, etc.) sont protégés par les droits de propriété intellectuelle. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments de la Plateforme, quel que soit le moyen ou le procédé utilisé, est interdite sans l'autorisation écrite préalable de PADEO.",
+      "legalMentions": {
+        "editor": "Éditeur de la Plateforme",
+        "editorInfo": "PADEO, Association loi 1901\nAdresse : 34 Avenue Jules Julien - 31400 Toulouse - France\nEmail : contact@padeo.fr\nSirène : 924 348 022",
+        "hosting": "Hébergeurs de la Plateforme",
+        "hostingInfo": " Infomaniak Network SA - Rue Eugène Marziano 25 - 1227 Les Acacias (GE) - Suisse. \n Vercel Inc.",
+        "publicationDirector": "Directeur de la publication",
+        "publicationDirectorInfo": "Olivier Debarge",
+        "tracking": "Outil d'analyse de trafic sur la plateforme",
+        "trackingInfo": "Nous utilisons Umami. Umami est une solution d'analyse de sites web que nous avons choisie pour sa conformité au RGPD et son respect de la vie privée. Umami ne partage pas vos données avec des tiers, garantissant la confidentialité des données des utilisateurs. Nous utilisons Google ReCaptcha pour l'envoi d'informations par des formulaires."
+      },
+      "modifications": "PADEO se réserve le droit de modifier les présentes CGU à tout moment. Les modifications seront notifiées aux Utilisateurs par tout moyen approprié. L'utilisation continue de la Plateforme après modification des CGU vaut acceptation des modifications par l'Utilisateur.",
+      "personalData": "En conformité avec le Règlement Général sur la Protection des Données (RGPD), PADEO s'engage à protéger les données personnelles des Utilisateurs. Responsable du traitement : PADEO\nAdresse : 34 Avenue Jules Julien - 31400 Toulouse - France\nEmail : contact@padeo.fr\nFinalités du traitement : Les données collectées sont utilisées pour :\n- Gérer les comptes Utilisateur\n- Fournir les services de la Plateforme\n- Améliorer l'expérience Utilisateur\n- Envoyer des informations relatives aux services de PADEO et de ses partenaires, sous réserve du consentement de l'Utilisateur\nDroits des Utilisateurs : Conformément à la réglementation en vigueur, l'Utilisateur dispose des droits suivants sur ses données :\n- Droit d'accès\n- Droit de rectification\n- Droit à l'effacement\n- Droit à la limitation du traitement\n- Droit d'opposition\n- Droit à la portabilité\nPour exercer ces droits, l'Utilisateur peut contacter PADEO par email à contact@padeo.fr ou par courrier à l'adresse suivante : 34 Avenue Jules Julien - 31400 Toulouse - France.",
+      "platformPurpose": "La Plateforme Oryx a pour but de permettre à ses Utilisateurs de trouver des services éco-responsables afin de favoriser l'adoption de pratiques durables et respectueuses de l'environnement.",
+      "preamble": "Les présentes conditions générales d'utilisation (ci-après \"CGU\") ont pour objet de définir les modalités et conditions dans lesquelles l'association PADEO (ci-après \"PADEO\"), dont le siège social est situé 34 Avenue Jules Julien - 31400 Toulouse - France, met à disposition des utilisateurs (ci-après \"Utilisateur(s)\") sa plateforme en ligne Oryx (ci-après \"la Plateforme\"), accessible à l'adresse oryxchange.com (ci-après \"le Site\"). En accédant et en utilisant la Plateforme, l'Utilisateur accepte sans réserve les présentes CGU.",
+      "responsibilities": "PADEO s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur la Plateforme. Cependant, PADEO ne peut garantir que les informations sont complètes, exactes, et à jour en toutes circonstances. L'Utilisateur utilise la Plateforme à ses propres risques. PADEO ne saurait être tenu responsable des dommages directs ou indirects résultant de l'accès ou de l'utilisation de la Plateforme.",
+      "userAccount": "L'inscription sur la Plateforme est facultative pour accéder à certaines fonctionnalités. Pour s'inscrire, l'Utilisateur doit fournir des informations exactes et à jour. L'Utilisateur s'engage à ne pas divulguer ses identifiants de connexion et à informer immédiatement PADEO de toute utilisation non autorisée de son compte."
+    },
+    "lastUpdate": "Dernière mise à jour : 11/06/2024",
+    "sections": {
+      "access": "Accès à la Plateforme",
+      "applicableLaw": "Droit applicable et juridiction compétente",
+      "companyRights": "Droits des sociétés ou associations",
+      "intellectualProperty": "Propriété intellectuelle",
+      "legalMentions": "Mentions légales",
+      "modifications": "Modification des CGU",
+      "personalData": "Données personnelles",
+      "platformPurpose": "Objet de la Plateforme",
+      "preamble": "Préambule",
+      "responsibilities": "Responsabilités",
+      "userAccount": "Inscription et compte Utilisateur"
+    },
+    "title": "Conditions Générales d'Utilisation de la plateforme Oryx"
   },
   "login_form_page": {
     "email_address": "Adresse email",
@@ -175,10 +260,15 @@
   "login_page": {
     "login": "Se connecter"
   },
+  "metadata": {
+    "description": "Trouver des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
+    "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
+    "title": "Oryx, le compagnon des initiatives écoresponsables !"
+  },
   "navigation_items": {
     "actions_label": "Trouver un service",
-    "donate_label": "Faire un don",
-    "contact_label": "Nous contacter"
+    "contact_label": "Nous contacter",
+    "donate_label": "Faire un don"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",
@@ -194,9 +284,16 @@
   "reset_password_page": {
     "reset_password_title": "Réinitialiser son mot de passe"
   },
-  "common": {
-    "see_more": "Voir plus",
-    "see_more_theme": "Voir plus de propositions sur ce thème"
+  "services": {
+    "access-label": "Site internet",
+    "details-label": "Détails",
+    "tags-others-closed-label": "{count, plural, =0 {} =1 {} other {Voir les # mots-clés}}",
+    "tags-others-opened-label": "{count, plural, =0 {} =1 {} other {Cacher}}",
+    "type-association-label": "Association",
+    "type-company-label": "Entreprise",
+    "type-public-service-label": "Service Public",
+    "type-school-label": "Ecole",
+    "updatedat_label": "Date de dernière mise à jour : {date}"
   },
   "signup_form_page": {
     "email_label": "Adresse email",
@@ -225,6 +322,14 @@
     "withdraw_consent": "Droit de retrait du consentement :",
     "withdraw_consent_description": "Vous avez le droit de retirer votre consentement à tout moment. Le retrait du consentement peut être effectué en modifiant les paramètres de votre compte ou en suivant les instructions fournies dans notre politique de confidentialité."
   },
+  "themes": {
+    "events": "Evénements",
+    "foods": "Alimentation",
+    "goods": "Biens, mode, maison, électronique",
+    "services": "Services",
+    "transports": "Transport",
+    "accommodations": "Bâtiment et logement"
+  },
   "user_actions": {
     "coming_soon": "Bientôt disponible !",
     "create_page_text": "À partir d'ici, vous pourrez bientôt créer votre page publique regroupant l'ensemble des services que vous utilisez au quotidien ! Et communiquer dessus.",
@@ -233,51 +338,7 @@
     "share_page_label": "Lien vers ma page",
     "user_actions_title": "Mes actions"
   },
-  "themes": {
-    "foods": "Alimentation",
-    "goods": "Biens, mode, maison, électronique",
-    "transports": "Transport",
-    "events": "Evénements"
-  },
-  "services": {
-    "updatedat_label": "Date de dernière mise à jour : {date}",
-    "type-company-label": "Entreprise",
-    "type-association-label": "Association",
-    "type-public-service-label": "Service Public",
-    "type-school-label": "Ecole",
-    "access-label": "Site internet",
-    "details-label": "Détails"
-  },
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"
-  },
-  "footer": {
-    "actions_label": "Trouver un service",
-    "chart_label": "Charte de l'application",
-    "oryx_history_label": "Génèse de l'application",
-    "roadmap_label": "Futures fonctionnalités",
-    "sourcecode_label": "Code source",
-    "whoarewe_label": "Qui sommes-nous ?",
-    "donate_label": "Faire un don"
-  },
-  "contact": {
-    "title": "Nous contacter",
-    "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
-    "form-name-label": "Prénom et nom",
-    "form-name-palceholder": "",
-    "form-company-label": "Entreprise ou association",
-    "form-company-palceholder": "",
-    "form-email-label": "Email",
-    "form-email-palceholder": "",
-    "form-message-label": "Message",
-    "form-message-palceholder": "",
-    "form-submit-label": "Envoyer",
-    "form-error-unknow": "Champ invalide",
-    "form-error-required": "Champ obligatoire",
-    "or-separator": "Ou",
-    "form-sent-success-title": "Message envoyé !",
-    "form-sent-success-message": "Nous répondrons à votre message !",
-    "form-sent-fail-title": "Echec lors de l'envoi",
-    "form-sent-fail-message": "Merci de vérifier les champs obligatoires"
   }
 }

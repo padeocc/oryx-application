@@ -1,7 +1,7 @@
-import { Button, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { fetchServices } from '../ActionsPage/utils';
+import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
 
 const HomePage = async ({}: {}) => {
@@ -9,8 +9,8 @@ const HomePage = async ({}: {}) => {
   const transports = await fetchServices({
     filters: {
       theme: 'transports',
-      categories: [],
-      sortBy: 'createdAt:desc',
+      tags: [],
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -18,8 +18,8 @@ const HomePage = async ({}: {}) => {
   const goods = await fetchServices({
     filters: {
       theme: 'goods',
-      categories: [],
-      sortBy: 'createdAt:desc',
+      tags: [],
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -27,8 +27,8 @@ const HomePage = async ({}: {}) => {
   const foods = await fetchServices({
     filters: {
       theme: 'foods',
-      categories: [],
-      sortBy: 'createdAt:desc',
+      tags: [],
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -36,8 +36,26 @@ const HomePage = async ({}: {}) => {
   const events = await fetchServices({
     filters: {
       theme: 'events',
-      categories: [],
-      sortBy: 'createdAt:desc',
+      tags: [],
+      sortBy: 'updatedAt:desc',
+      limit: 3
+    }
+  });
+
+  const services = await fetchServices({
+    filters: {
+      theme: 'services',
+      tags: [],
+      sortBy: 'updatedAt:desc',
+      limit: 3
+    }
+  });
+
+  const accommodations = await fetchServices({
+    filters: {
+      theme: 'accommodations',
+      tags: [],
+      sortBy: 'updatedAt:desc',
       limit: 3
     }
   });
@@ -45,13 +63,13 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'}>
       <Stack gap={'3rem'} pt="2rem">
-        <Button size="xl" component={Link} href={'/finder'} hiddenFrom="md">
-          {t('find_inspiration')}
-        </Button>
+        <ExamplesSection />
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />
         <ThemeSection items={goods.services} theme={'goods'} />
         <ThemeSection items={events.services} theme={'events'} />
+        <ThemeSection items={services.services} theme={'services'} />
+        <ThemeSection items={accommodations.services} theme={'accommodations'} />
       </Stack>
     </Stack>
   );

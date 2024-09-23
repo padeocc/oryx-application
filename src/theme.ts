@@ -1,6 +1,6 @@
 import { MantineColorsTuple, MantineThemeOverride } from '@mantine/core';
 
-const green: MantineColorsTuple = [
+const green_oryx: MantineColorsTuple = [
   '#f1f9f8',
   '#e4efee',
   '#c4dfda',
@@ -11,21 +11,6 @@ const green: MantineColorsTuple = [
   '#549c90',
   '#478c80',
   '#34796e'
-];
-
-const gray_oryx: MantineColorsTuple = [
-  '#dbdbdb',
-  '#dfdfdf',
-  '#e3e3e3',
-  '#e7e7e7',
-  '#ebebeb',
-  '#eeeeee',
-  '#f1f1f1',
-  '#f4f4f4',
-  '#f7f7f7',
-  '#f9f9f9',
-  '#fcfcfc',
-  '#ffffff'
 ];
 
 export const theme: MantineThemeOverride = {
@@ -45,8 +30,9 @@ export const theme: MantineThemeOverride = {
     }
   },
   colors: {
-    green,
-    gray_oryx
+    green_oryx
   },
-  primaryColor: 'green'
+  primaryColor: 'green_oryx'
 };
+
+export const inputDefaultBackgrounColor = '#f1f3f5';

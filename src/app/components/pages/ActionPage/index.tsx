@@ -1,12 +1,14 @@
-import { Theme, themesColors } from '@/config';
+import { Theme, getActionFilters, themesColors } from '@/config';
+import { Service } from '@/types';
 import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
-import { ArrowLeft } from '@phosphor-icons/react/dist/ssr';
 import { format } from 'date-fns';
+import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
-import { Service, fetchService, getOtherFilters } from '../ActionsPage/utils';
+import { fetchService } from '../ActionsPage/utils';
+import BackItem from './components/BackItem';
 
 const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');
@@ -18,29 +20,32 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
     return <NotFound message={`${code} - ${theme}`} />;
   }
 
-  //@ts-ignore
-  const fields = Object.keys(getOtherFilters(theme)).filter(f => !!service[f]);
+  // @ts-ignore
+  const fields = Object.keys(getActionFilters(theme)).filter((f: string) => !!service?.[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
   let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
   labelRegion = labelRegion.includes(`region_${service.region}_label`) ? service.region : labelRegion;
 
+  //TODO refacto type on CMS
+  const typeLabel = (isArray(type) ? type[0] : type) || 'company';
+
   return (
     <Stack>
       <Group>
-        <Link href={`/actions/${theme}`}>
-          <ArrowLeft color="black" />
-        </Link>
+        <BackItem theme={theme} />
         <Title order={3} c={color}>
           {name}
         </Title>
       </Group>
       <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
         <Group gap={'xs'}>
-          <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
-            {t(`type-${type?.[0] || 'company'}-label`)}
-          </Badge>
+          {type && (
+            <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {t(`type-${typeLabel}-label`)}
+            </Badge>
+          )}
           {service.location ? (
             <Badge
               key={`tag-${service.location}`}

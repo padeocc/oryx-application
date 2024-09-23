@@ -1,8 +1,8 @@
 'use client';
 
-import { FetchServicesResponse, Filters, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
-import { themes } from '@/config';
-import { useLocalState } from '@/state';
+import { getNavigationUrl, getTagsFromServices } from '@/app/components/pages/ActionsPage/utils';
+import { Theme, themes } from '@/config';
+import { FetchServicesResponse, Filters } from '@/types';
 import {
   Badge,
   Button,
@@ -19,7 +19,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslations } from 'next-intl';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const FinderPage = ({
@@ -29,25 +29,23 @@ const FinderPage = ({
 }) => {
   const t = useTranslations('finder_page');
   const tTheme = useTranslations('themes');
-  const [categories, setCategories] = useState<string[]>([]);
-  const { filters, setFilters } = useLocalState();
-
+  const [tags, setTags] = useState<string[]>([]);
   const form = useForm({
-    initialValues: filters
+    initialValues: { theme: 'transports', tags: [] } as Filters
   });
   const selectedTheme = form.values.theme;
-  const selectedTags = form.values.categories;
+  const selectedTags = form.values.tags;
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchServices({
         filters: {
           theme: selectedTheme,
-          categories: []
+          tags: []
         }
       });
-      const categories = getTagsFromServices(data.services);
-      setCategories(categories);
+      const tags = getTagsFromServices(data.services);
+      setTags(tags);
     };
     fetchData();
 
@@ -56,19 +54,17 @@ const FinderPage = ({
 
   useEffect(() => {
     if (!!selectedTheme) {
-      form.setFieldValue('categories', []);
+      form.setFieldValue('tags', []);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTheme]);
 
+  const actionUrl = getNavigationUrl({ filters: form.getValues() });
+
   return (
     <Stack>
       <Title order={2}>{t('title')}</Title>
-      <form
-        action={async () => {
-          setFilters(form.values);
-          redirect(`/actions/${selectedTheme}`);
-        }}>
+      <form>
         <Grid>
           <GridCol span={{ base: 12, sm: 6 }}>
             <Stack>
@@ -83,27 +79,25 @@ const FinderPage = ({
                         value={theme}
                         checked={selectedTheme === theme}
                         onChange={theme => {
-                          form.setValues({ theme: theme.target.value });
+                          form.setValues({ theme: (theme?.target?.value as Theme) || undefined });
                         }}
                       />
                     ))}
                   </Stack>
                 </RadioGroup>
               </Card>
-              {categories?.length ? (
+              {tags?.length ? (
                 <Card>
                   <Title order={2}>{t('interested_themes')}</Title>
-                  <CheckboxGroup
-                    onChange={categories => form.setFieldValue('categories', categories)}
-                    value={selectedTags}>
+                  <CheckboxGroup onChange={tags => form.setFieldValue('tags', tags)} value={selectedTags}>
                     <Stack gap="xs" pt="xs">
-                      {categories.map(category => (
+                      {tags.map(category => (
                         <Checkbox
                           id={category}
                           key={category}
                           label={category}
                           value={category}
-                          name={`categories[${category}]`}
+                          name={`tags[${category}]`}
                           checked={selectedTags?.includes(category)}
                         />
                       ))}
@@ -127,10 +121,16 @@ const FinderPage = ({
                   <Stack gap="xs">
                     {selectedTags?.length ? <Title order={3}>{t('themes')}</Title> : null}
                     <Group gap="xs">
-                      {selectedTags?.map(category => <Badge key={`tag-${category}`}>{category}</Badge>) || null}
+                      {selectedTags?.map((category: string) => <Badge key={`tag-${category}`}>{category}</Badge>) ||
+                        null}
                     </Group>
                   </Stack>
-                  <Button size="xl" type="submit" disabled={!selectedTags?.length}>
+                  <Button
+                    size="xl"
+                    type="submit"
+                    disabled={!selectedTags?.length}
+                    component={Link}
+                    href={actionUrl ? `/actions/${selectedTheme}?${actionUrl}` : '#'}>
                     {t('validate')}
                   </Button>
                 </Stack>

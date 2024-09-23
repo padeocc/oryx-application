@@ -1,175 +1,79 @@
-import { Theme } from '@/config';
-import { intersection, uniq } from 'lodash';
+import { Theme, getActionFilters } from '@/config';
+import { APIFilters, ActionFilters, FetchServicesResponse, Filters, RequestParameters, Service } from '@/types';
+import { merge, uniq } from 'lodash';
 import qs from 'qs';
 
-export type Category = string;
-export type Region = string;
-export type FetchAction = ({ vertical }: { vertical: string }) => Promise<Service>;
+const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
+  const { sortBy, limit = -1, start = 0, theme, region, location, tags = [], ...actions } = filters;
 
-type ImageFormat = {
-  ext: string;
-  url: string;
-  hash: string;
-  mime: string;
-  name: string;
-  path: string | null;
-  size: number;
-  width: number;
-  height: number;
-  sizeInBytes: number;
+  const tagsFilters = tags.length ? { $or: tags.map(tag => ({ tags: { $containsi: tag } })) } : {};
+  // Workaround https://github.com/Zaydme/strapi-plugin-multi-select/issues/27
+
+  const actionFilters = Object.keys(actions).length
+    ? { $or: Object.keys(actions).map(action => ({ [action]: { $eq: true } })) }
+    : {};
+
+  return qs.stringify({
+    sortBy,
+    pagination: {
+      start,
+      limit
+    },
+    filters: { region, location, ...merge(tagsFilters, actionFilters) },
+    populate: 'logo'
+  } as APIFilters);
 };
 
-type ImageFormats = {
-  thumbnail: ImageFormat;
-};
-
-type ImageAttributes = {
-  name: string;
-  alternativeText: string | null;
-  caption: string | null;
-  width: number;
-  height: number;
-  formats: ImageFormats;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: string | null;
-  provider: string;
-  provider_metadata: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-interface ImageData {
-  id: number;
-  attributes: ImageAttributes;
-}
-
-export type Service = {
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date;
-  description: string;
-  url: string;
-  tags: string[];
-  type: string[];
-  code: string;
-  region: Region;
-  location: string;
-  country: string;
-  logo?: { data: ImageData };
-};
-
-export type OtherFilters = {
-  [key in
-    | 'organic'
-    | 'local'
-    | 'season'
-    | 'shortcircuit'
-    | 'wastereducer'
-    | 'foodwastereducer'
-    | 'cookmore'
-    | 'used'
-    | 'rent'
-    | 'mutualise'
-    | 'repair'
-    | 'ecobuilt'
-    | 'local'
-    | 'organic'
-    | 'lowtech'
-    | 'recycled'
-    | 'reused'
-    | 'diy'
-    | 'wastereducer'
-    | 'comparer'
-    | 'relocating']?: 'string' | 'number' | 'boolean';
-};
-
-export type Filters = {
-  sortBy?: string;
-  limit?: number;
-  theme: string | undefined;
-  categories: string[];
-  codes?: (string | undefined)[];
-  regions?: Region[];
-  others?: OtherFilters;
-  location?: string;
-};
-
-export type FetchServicesResponse = {
-  services: Service[];
-  meta: { pagination: { start: number; limit: number; total: number } };
-};
-export const fetchServices = async ({ filters }: { filters?: Filters }): Promise<FetchServicesResponse> => {
-  const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
-  const theme = filters?.theme as Theme;
-
+export const getNavigationUrl = ({ filters: initialFilters }: { filters: Filters }) => {
+  const theme = initialFilters.theme as Theme;
   if (!theme) {
-    return { meta: { pagination: { limit: 0, start: 0, total: 0 } }, services: [] };
+    throw 'Theme is missing';
   }
+  const actionFields: ActionFilters = getActionFilters(theme);
+  const { limit = -1, sortBy = 'name:asc', region, location, tags } = initialFilters;
+  const regionFilters = region ? { region } : {};
+  const locationFilters = location ? { location } : {};
+  const tagsFilters = tags ? { tags } : {};
 
-  const allOthersFields: OtherFilters = getOtherFilters(theme);
-  const limit = filters?.limit || -1;
-  const sort = filters?.sortBy || 'name:asc';
-
-  //let filtersCatgeoriesString = '';
-  // if (filters?.categories?.length) {
-  //   // Does not work https://github.com/Zaydme/strapi-plugin-multi-select/issues/27
-  //   filtersCatgeoriesString = `${qs.stringify({ filters: { tags: { $in: filters.categories } } })}`;
-  // }
-
-  const others = filters?.others || {};
-  const regions = filters?.regions || [];
-  const location = filters?.location || undefined;
-
-  const allFilters = Object.keys(allOthersFields).reduce((all, filterKey) => {
+  const actionFilters = Object.keys(actionFields).reduce((all, filterKey) => {
     // @ts-ignore
-    const value = others?.[filterKey];
-
+    const value = initialFilters?.[filterKey];
     if (value) {
-      return { ...all, [filterKey]: { $eq: value } };
+      return { ...all, [filterKey]: value };
     }
     return all;
   }, {});
 
-  const regionsFilters = regions?.[0] ? { region: regions?.[0] } : {};
-  const locationFilters = location ? { location } : {};
+  const filters = { ...tagsFilters, ...actionFilters, ...regionFilters, ...locationFilters } as Filters;
 
-  const stringifiedQuery = qs.stringify({
+  const params: RequestParameters = {
+    filters,
     pagination: { start: 0, limit },
-    sort,
+    sortBy,
     populate: 'logo',
-    filters: { ...allFilters, ...regionsFilters, ...locationFilters }
-  });
+    theme
+  };
+  return qs.stringify(params);
+};
 
-  const fetchUrl = `${baseUrl}/${filters?.theme}?${stringifiedQuery}`;
+export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
+  const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
+  const theme = filters?.theme;
+
+  if (!theme || !filters) {
+    return { meta: { pagination: { limit: -1, start: 0, total: 0 } }, services: [] };
+  }
+
+  const fetchUrl = `${baseUrl}/${filters?.theme}?${generateAPIUrl({
+    filters
+  })}`;
 
   const response = await fetch(fetchUrl, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { revalidate: 3600 }
   });
-
   const solutions = await response.json();
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
-
-  // Workaround
-  if (filters?.categories?.length) {
-    const filteredServices = services.filter(service => {
-      return intersection(service.tags, filters.categories).length > 0;
-    });
-    return {
-      services: filteredServices,
-      meta: {
-        pagination: {
-          limit: solutions?.meta?.pagination?.limit || 0,
-          start: solutions?.meta?.pagination?.start || 0,
-          total: filteredServices.length
-        }
-      }
-    };
-  }
 
   return { services, meta: solutions.meta };
 };
@@ -184,54 +88,10 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` }
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { revalidate: 3600 }
   });
   const solution = await response.json();
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
-};
-
-export const getOtherFilters = (theme: Theme): OtherFilters => {
-  switch (theme) {
-    case 'transports':
-      return {};
-
-    case 'events':
-      return {};
-
-      break;
-    case 'foods':
-      return {
-        organic: 'boolean',
-        local: 'boolean',
-        season: 'boolean',
-        shortcircuit: 'boolean',
-        wastereducer: 'boolean',
-        foodwastereducer: 'boolean',
-        cookmore: 'boolean'
-      };
-
-      break;
-    case 'goods':
-      return {
-        used: 'boolean',
-        rent: 'boolean',
-        mutualise: 'boolean',
-        repair: 'boolean',
-        ecobuilt: 'boolean',
-        local: 'boolean',
-        organic: 'boolean',
-        lowtech: 'boolean',
-        recycled: 'boolean',
-        reused: 'boolean',
-        diy: 'boolean',
-        wastereducer: 'boolean',
-        comparer: 'boolean',
-        relocating: 'boolean'
-      };
-
-    default:
-      break;
-  }
-  return {};
 };

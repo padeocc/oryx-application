@@ -26,7 +26,8 @@ const HeaderMenuMobile = async () => {
                   href={href}
                   {...others}
                   fz={'lg'}
-                  color="gray">
+                  color="gray"
+                  style={{ textDecoration: isExternal ? 'underline' : 'none', textDecorationColor: '#eee' }}>
                   {name}
                 </MenuItem>
               );
@@ -46,7 +47,8 @@ const HeaderMenuMobile = async () => {
                   href={href}
                   {...others}
                   fz={'lg'}
-                  color="gray">
+                  color="gray"
+                  style={{ textDecoration: isExternal ? 'underline' : 'none', textDecorationColor: '#eee' }}>
                   {name}
                 </MenuItem>
               );

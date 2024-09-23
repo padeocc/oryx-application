@@ -9,8 +9,7 @@ const ContactPage = async ({}: {}) => {
     <Stack>
       <Title order={2}>{t('title')}</Title>
       <Text>{t('description')}</Text>
-
-      <Alert c="green">
+      <Alert c="green_oryx">
         <Form sendContactEmail={sendContactEmail} />
       </Alert>
     </Stack>

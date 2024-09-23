@@ -38,6 +38,23 @@ export const getFooterLinks = async () => {
   return [
     [
       {
+        name: t('whoarewe_label'),
+        href: 'https://www.padeo.fr',
+        isExternal: true
+      },
+      {
+        name: 'LinkedIn',
+        href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
+        isExternal: true
+      },
+      {
+        name: t('sourcecode_label'),
+        href: 'https://github.com/padeocc/oryx-application',
+        isExternal: true
+      }
+    ],
+    [
+      {
         name: t('oryx_history_label'),
         href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
         isExternal: true
@@ -50,21 +67,9 @@ export const getFooterLinks = async () => {
     ],
     [
       {
-        name: t('roadmap_label'),
-        href: 'https://github.com/orgs/padeocc/projects/3/views/4',
-        isExternal: true
-      },
-      {
-        name: t('sourcecode_label'),
-        href: 'https://github.com/padeocc/oryx-application',
-        isExternal: true
-      }
-    ],
-    [
-      {
-        name: t('whoarewe_label'),
-        href: 'https://www.padeo.fr',
-        isExternal: true
+        name: t('legal_label'),
+        href: '/legal',
+        isExternal: false
       }
     ]
   ];

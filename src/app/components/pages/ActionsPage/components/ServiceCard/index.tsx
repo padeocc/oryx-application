@@ -2,8 +2,8 @@
 
 import { getLogoImage } from '@/app/components/content/utils';
 import NotFound from '@/app/components/navigation/NotFound';
-import { Service, getOtherFilters } from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
+import { Theme, getActionFilters } from '@/config';
+import { Service } from '@/types';
 import {
   Card,
   CardSection,
@@ -15,7 +15,8 @@ import {
   Image,
   Stack,
   StyleProp,
-  Title
+  Title,
+  TitleOrder
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
@@ -29,13 +30,15 @@ const ServiceCard = ({
   noImage = false,
   backgroundColor,
   theme,
-  color
+  color,
+  titleOrder = 3
 }: {
   service: Service;
   noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
   theme: Theme;
   color: string;
+  titleOrder?: TitleOrder;
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
@@ -44,7 +47,7 @@ const ServiceCard = ({
     return <NotFound />;
   }
 
-  const fields = Object.keys(getOtherFilters(theme))
+  const fields = Object.keys(getActionFilters(theme))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
@@ -68,11 +71,11 @@ const ServiceCard = ({
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
-                  <Tags tags={[...service.tags, ...fields]} color={color} />
+                  <Tags tags={[...(service?.tags || []), ...fields]} color={color} />
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>
-                <Title order={3} c={color}>
+                <Title order={titleOrder} c={color}>
                   {service.name}
                 </Title>
               </GridCol>

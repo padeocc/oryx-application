@@ -2,102 +2,82 @@
 
 import FiltersComponent from '@/app/components/pages/ActionsPage/components/Filters';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
-import {
-  Category,
-  FetchServicesResponse,
-  Filters,
-  Region,
-  Service,
-  getOtherFilters
-} from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
-import { useLocalState } from '@/state';
-import { Alert, Grid, GridCol, Loader, Text } from '@mantine/core';
+import { getNavigationUrl } from '@/app/components/pages/ActionsPage/utils';
+import { Theme, getActionFilters } from '@/config';
+import { Category, Filters, Region, Service } from '@/types';
+import { Alert, Grid, GridCol, Group, Loader, Text } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const List = ({
-  fetchServices,
-  data: initialData,
+  filters,
+  data,
   theme,
-  categories = [],
-  total: initialTotal,
+  total,
   color,
-  regions
+  allTags = [],
+  allRegions
 }: {
-  fetchServices: ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>;
+  filters: Filters;
   data: Service[];
   theme: Theme;
-  categories: Category[];
   total: number;
   color: string;
-  regions: Region[];
+  allTags: Category[];
+  allRegions: Region[];
 }) => {
   const t = useTranslations('content');
-  const [data, setData] = useState<Service[]>(initialData);
-  const [loading, setLoading] = useState<boolean>(false);
-  const { filters, setFilters } = useLocalState();
-  const [total, setTotal] = useState<number>(initialTotal);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const actionFilters = getActionFilters(theme);
+  const router = useRouter();
 
   useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      const data = await fetchServices({ filters });
-      setData(data.services);
-      setTotal(data?.meta?.pagination?.total || 0);
-      setLoading(false);
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.categories, filters.others, filters.regions, filters.location]);
-
-  useEffect(() => {
-    const hasthemeSwitched = theme !== filters?.theme;
-    if (hasthemeSwitched) {
-      setFilters({ theme, categories: [], others: {}, regions: [], location: undefined });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.theme]);
-
-  const otherFilters = getOtherFilters(theme);
+    setIsLoading(false);
+  }, [filters]);
 
   return (
     <>
       <FiltersComponent
+        theme={theme}
         itemsCount={total}
-        loading={loading}
+        loading={isLoading}
         filters={filters}
-        handleSubmit={setFilters}
-        allCategories={categories}
-        allRegions={regions}
-        otherFilters={otherFilters}
+        handleSubmit={(filters: Filters) => {
+          setIsLoading(true);
+          router.push(`/actions/${theme}?${getNavigationUrl({ filters })}`);
+        }}
+        allTags={allTags}
+        allRegions={allRegions}
+        allActionFilters={actionFilters}
       />
-      <Grid justify="flex-start" align="top" mt="lg">
-        {loading ? (
-          <GridCol span={{ base: 12 }} ta="center" p="xl">
-            <Loader />
-          </GridCol>
-        ) : (
-          data.map((service, index) => (
-            <GridCol span={{ base: 12, sm: 4, md: 3 }} key={`action-${service.name}-${index}`}>
-              <ServiceCard
-                service={service}
-                backgroundColor={'var(--mantine-primary-color-2)'}
-                theme={filters.theme as Theme}
-                color={color}
-              />
-            </GridCol>
-          ))
-        )}
-        {!loading && data.length === 0 ? (
+      {isLoading ? (
+        <Group justify="center" p="xl" m="xl">
+          <Loader size={'xl'} />
+        </Group>
+      ) : data.length === 0 ? (
+        <Grid justify="flex-start" align="top" mt="lg">
           <GridCol span={{ base: 12 }} key={`action-empty`}>
             <Alert variant="outline" color="orange" title={t('no_results')} icon={<SmileyMeh size={30} />}>
               <Text>{t('contact_us')}</Text>
             </Alert>
           </GridCol>
-        ) : null}
-      </Grid>
+        </Grid>
+      ) : (
+        <Grid justify="flex-start" align="top" mt="lg">
+          {data.map((service, index) => (
+            <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`action-${service.name}-${index}`}>
+              <ServiceCard
+                service={service}
+                backgroundColor={'var(--mantine-primary-color-2)'}
+                theme={theme}
+                color={color}
+              />
+            </GridCol>
+          ))}
+        </Grid>
+      )}
     </>
   );
 };

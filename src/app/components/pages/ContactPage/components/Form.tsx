@@ -43,7 +43,8 @@ const ContactForm = ({
       company: '',
       message: '',
       name: '',
-      recaptcha: ''
+      recaptcha: '',
+      url: ''
     }
   });
 
@@ -95,6 +96,7 @@ const ContactForm = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
+          <TextInput label={t('form-url-label')} name="url" disabled={isSending} {...form.getInputProps('url')} />
           <Textarea
             {...form.getInputProps('message')}
             label={t('form-message-label')}
@@ -119,7 +121,6 @@ const ContactForm = ({
           opened={okNotification}
           p="0"
           m="0"
-          c={'green'}
           styles={{
             content: { border: '0px', boxShadow: 'none', backgroundColor: 'transparent' }
           }}
