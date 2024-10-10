@@ -43,6 +43,8 @@
     "no_results": "Pas de résultat pour cette recherche !"
   },
   "filters_component": {
+    "quicksearch-placeholder": "Entrer un ou plusieurs mots-clés",
+    "quicksearch-no-results": "Pas de résultat",
     "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
     "filter-comparer-label": "Comparer",
     "filter-cookmore-label": "Pour cuisiner plus",
