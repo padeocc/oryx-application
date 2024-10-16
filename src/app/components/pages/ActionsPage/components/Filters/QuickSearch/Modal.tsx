@@ -68,7 +68,8 @@ const Modal = ({
       label: result.label,
       description: `${result.description.slice(0, 200)}...`,
       leftSection: result.logo ? <Image src={result.logo} w={30} height={30} alt="" /> : null,
-      onClick: () => router.push(result.url)
+      onClick: () => router.push(result.url),
+      keywords: [debouncedTerm]
     };
   });
 
@@ -85,6 +86,7 @@ const Modal = ({
         }}
         scrollable
         size={'xl'}
+        limit={100}
         actions={actions}
         nothingFound={
           isSearching ? (

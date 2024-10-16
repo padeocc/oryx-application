@@ -11,7 +11,10 @@ export const search = async ({ query }: { query: string }) => {
       requests: [
         {
           indexName: 'code',
-          query
+          query: query,
+
+          ignorePlurals: 'true',
+          typoTolerance: 'min'
         }
       ]
     },
