@@ -1,4 +1,3 @@
-import { search } from '@/algolia/search';
 import { Theme, themesColors, themesIcons } from '@/config';
 import { inputDefaultBackgrounColor } from '@/theme';
 import { ActionFilters, Category, Filters, Region } from '@/types';
@@ -24,7 +23,6 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import ChipSelect from './ChipSelect';
 import styles from './filters.module.css';
-import QuickSearch from './QuickSearch';
 
 const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
   const Icon = themesIcons?.[theme] || PottedPlant;
@@ -166,16 +164,7 @@ const FiltersComponent = ({
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
           <Alert>
-            <Grid justify="space-between">
-              <GridCol span={{ base: 10 }}>
-                <SimpleGrid cols={{ base: 8, sm: 8, md: 8, lg: 10 }}>{themesOptions}</SimpleGrid>
-              </GridCol>
-              <GridCol span={{ base: 1 }} m="xl">
-                <Group justify="end" align="enrightd">
-                  <QuickSearch onSearch={search} />
-                </Group>
-              </GridCol>
-            </Grid>
+            <SimpleGrid cols={{ base: 8, sm: 8, md: 8, lg: 10 }}>{themesOptions}</SimpleGrid>
           </Alert>
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">

@@ -5,6 +5,11 @@ import { Theme } from '@/config';
 import { algoliasearch } from 'algoliasearch';
 import { IResults } from './types';
 
+const client = algoliasearch(
+  process?.env?.NEXT_PUBLIC_ALGOLIA_KEY || '',
+  process?.env?.NEXT_PUBLIC_ALGOLIA_WRITE_AUTH_KEY || ''
+);
+
 export const runIndexation = async () => {
   const transports = (
     (
@@ -85,17 +90,13 @@ export const runIndexation = async () => {
       return {
         description: service.description,
         label: service.name,
-        url: `https://oryxchange.com/fr/action/${service.theme}/${service.code}`,
-        logo: logo ? `https://cms.oryxchange.com${logo}` : undefined,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/fr/action/${service.theme}/${service.code}`,
+        logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
         id: service.code,
-        theme: service.theme as Theme
+        theme: service.theme as Theme,
+        tags: service.tags.join(', ')
       };
     }
-  );
-
-  const client = algoliasearch(
-    process?.env?.NEXT_PUBLIC_ALGOLIA_KEY || '',
-    process?.env?.NEXT_PUBLIC_ALGOLIA_WRITE_AUTH_KEY || ''
   );
 
   return client.saveObjects({ indexName: 'code', objects: all });

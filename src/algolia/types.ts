@@ -7,5 +7,5 @@ export interface IResults {
   logo?: string;
   id: string;
   theme: Theme;
-  objectID?: string;
+  tags: string;
 }

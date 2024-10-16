@@ -11,7 +11,7 @@ import GDPRConsent from '../components/navigation/GDPRConsent';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-const url = 'https://www.oryxchange.com';
+const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
 
 const authors: Author[] = [
   { name: 'Padeo', url: 'https://www.padeo.fr' },

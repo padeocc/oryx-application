@@ -70,7 +70,7 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
 
   const response = await fetch(fetchUrl, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    next: { revalidate: 3600 }
+    next: { tags: ['cms'] }
   });
   const solutions = await response.json();
   const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
@@ -89,7 +89,7 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    next: { revalidate: 3600 }
+    next: { tags: ['cms'] }
   });
   const solution = await response.json();
   const item = solution?.data?.[0];

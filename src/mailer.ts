@@ -1,13 +1,14 @@
 'use server';
 
-import nodemailer from 'nodemailer';
+import nodemailer, { TransportOptions } from 'nodemailer';
+import SMTPPool from 'nodemailer/lib/smtp-pool';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { ValidationError, object, string } from 'yup';
 
-const host = process.env.MAILER_HOST;
-const port = process.env.MAILER_PORT;
-const user = process.env.MAILER_USER;
-const password = process.env.MAILER_PASSWORD;
+const host = process?.env?.MAILER_HOST || '';
+const port = process?.env?.MAILER_PORT ? Number(process?.env?.MAILER_PORT) : 0;
+const user = process?.env?.MAILER_USER || '';
+const password = process?.env?.MAILER_PASSWORD || '';
 
 const sendContactEmailSchema = object({
   name: string().required(),
@@ -38,24 +39,23 @@ export const sendContactEmail = async (
     }
 
     await sendContactEmailSchema.validate({ email, company, message, name }, { abortEarly: false });
-    const transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo> = nodemailer.createTransport(
-      {
-        //@ts-ignore
-        host,
-        port,
-        auth: {
-          user,
-          pass: password
-        },
-        logger: true,
-        debug: process.env.NODE_ENV === 'development'
+    const sentMessageInfo: SMTPPool.Options = {
+      host,
+      port,
+      auth: {
+        user,
+        pass: password
       },
-      {
-        from: `<${user}>`,
-        headers: {
-          'X-Laziness-level': 1000
-        }
-      }
+      logger: true,
+      debug: process.env.NODE_ENV === 'development',
+      pool: true
+    };
+
+    const options: TransportOptions = {};
+
+    const transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo> = nodemailer.createTransport(
+      sentMessageInfo,
+      options
     );
 
     const emailMessage = {
