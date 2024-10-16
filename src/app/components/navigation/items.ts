@@ -6,14 +6,6 @@ export const getNavigationItems = ({
   t: any;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
   const menu = [
-    // [
-    //   {
-    //     name: t('actions_label'),
-    //     href: '/finder',
-    //     isExternal: false,
-    //     priority: 1,
-    //   }
-    // ],
     [
       {
         name: t('contact_label'),

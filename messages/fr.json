@@ -208,7 +208,8 @@
     "find_others_inspiration": "Chercher selon vos envies !",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
-    "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément"
+    "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément",
+    "search_label": "Rechercher par mots clés !"
   },
   "legal": {
     "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",

@@ -7,7 +7,6 @@ import { Button, Image, Loader, Stack, Text } from '@mantine/core';
 import { Spotlight, SpotlightActionData, spotlight } from '@mantine/spotlight';
 import { ArrowSquareOut, MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
@@ -15,19 +14,20 @@ const Modal = ({
   onSearch,
   results,
   setResults,
-  label
+  label,
+  size = 'md'
 }: {
   onSearch: ({ query }: { query: string }) => any;
   results: IResults[];
   setResults: Dispatch<SetStateAction<IResults[]>>;
   label: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }) => {
   const t = useTranslations('filters_component');
   const tThemes = useTranslations('themes');
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
-  const router = useRouter();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -64,35 +64,34 @@ const Modal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedTerm]);
 
-  const actions: SpotlightActionData[] = results.map(result => {
-    return {
-      id: result.id,
-      label: result.label,
-      group: tThemes(result.theme),
-      description: `${result.description.slice(0, 200)}...`,
-      leftSection: result.logo ? <Image src={result.logo} w={30} height={30} alt="" /> : null,
-      rightSection: (
-        <a
-          href={result.url}
-          target="_blank"
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            window.open(result.url, '_blank');
-          }}>
-          <Text p="md" c="green_oryx">
-            <ArrowSquareOut color="inherit" size="1.1rem" />
-          </Text>
-        </a>
-      ),
-      onClick: () => router.push(result.url),
-      keywords: [debouncedTerm]
-    };
-  });
+  const actions: SpotlightActionData[] = results.map(result => ({
+    id: result.id,
+    component: 'a',
+    href: result.url,
+    label: result.label,
+    group: tThemes(result.theme),
+    description: `${result.description.slice(0, 200)}...`,
+    leftSection: result.logo ? <Image src={result.logo} w={30} height={30} alt="" /> : null,
+    rightSection: (
+      <a
+        href={result.url}
+        target="_blank"
+        onClick={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(result.url, '_blank');
+        }}>
+        <Text p="md" c="green_oryx">
+          <ArrowSquareOut color="inherit" size="1.1rem" />
+        </Text>
+      </a>
+    ),
+    keywords: [debouncedTerm]
+  }));
 
   return (
     <>
-      <Button leftSection={<MagnifyingGlass size={14} weight="light" />} onClick={spotlight.open}>
+      <Button leftSection={<MagnifyingGlass size={14} weight="light" />} onClick={spotlight.open} size={size}>
         {label}
       </Button>
       <Spotlight

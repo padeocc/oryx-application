@@ -1,5 +1,7 @@
-import { Stack } from '@mantine/core';
+import { search } from '@/algolia/search';
+import { Group, Stack } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
+import QuickSearch from '../ActionsPage/components/Filters/QuickSearch';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
@@ -62,8 +64,13 @@ const HomePage = async ({}: {}) => {
 
   return (
     <Stack gap={'xl'}>
-      <Stack gap={'3rem'} pt="2rem">
-        <ExamplesSection />
+      <Stack gap={'2.5rem'} pt="2rem">
+        <Stack gap="md">
+          <ExamplesSection />
+          <Group key="header-group-mobile" w="100%" align="center" justify="center">
+            <QuickSearch onSearch={search} label={t('search_label')} size="xl" />
+          </Group>
+        </Stack>
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />
         <ThemeSection items={goods.services} theme={'goods'} />

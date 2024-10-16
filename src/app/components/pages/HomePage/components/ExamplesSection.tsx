@@ -1,4 +1,4 @@
-import { Alert, Button, CSSProperties, Flex, Grid, GridCol, Space, Stack } from '@mantine/core';
+import { Alert, CSSProperties, Flex, Grid, GridCol, Space, Stack } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
 import { PersonSimpleBike, Phone, Plant, Train } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
@@ -63,9 +63,6 @@ const ExamplesSection = async () => {
           />
         </Grid>
         <Space />
-        <Button size="sm" component={Link} href={'/finder'}>
-          {t('find_others_inspiration')}
-        </Button>
       </Stack>
     </Alert>
   );
