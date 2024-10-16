@@ -5,10 +5,11 @@ import '@mantine/spotlight/styles.css';
 import { IResults } from '@/algolia/types';
 import { Button, Image, Loader, Stack, Text } from '@mantine/core';
 import { Spotlight, SpotlightActionData, spotlight } from '@mantine/spotlight';
-import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
+import { ArrowSquareOut, MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import styles from './styles.module.css';
 
 const Modal = ({
   onSearch,
@@ -22,6 +23,7 @@ const Modal = ({
   label: string;
 }) => {
   const t = useTranslations('filters_component');
+  const tThemes = useTranslations('themes');
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
@@ -66,8 +68,23 @@ const Modal = ({
     return {
       id: result.id,
       label: result.label,
+      group: tThemes(result.theme),
       description: `${result.description.slice(0, 200)}...`,
       leftSection: result.logo ? <Image src={result.logo} w={30} height={30} alt="" /> : null,
+      rightSection: (
+        <a
+          href={result.url}
+          target="_blank"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.open(result.url, '_blank');
+          }}>
+          <Text p="md" c="green_oryx">
+            <ArrowSquareOut color="inherit" size="1.1rem" />
+          </Text>
+        </a>
+      ),
       onClick: () => router.push(result.url),
       keywords: [debouncedTerm]
     };
@@ -84,6 +101,7 @@ const Modal = ({
             filter: isSearching ? 'blur(3px)' : 'inherit'
           }
         }}
+        classNames={{ actionsGroup: styles.groupname }}
         scrollable
         size={'xl'}
         limit={100}

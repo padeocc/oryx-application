@@ -12,9 +12,8 @@ export const search = async ({ query }: { query: string }) => {
         {
           indexName: 'code',
           query: query,
-
           ignorePlurals: 'true',
-          typoTolerance: 'min'
+          typoTolerance: 'strict'
         }
       ]
     },
