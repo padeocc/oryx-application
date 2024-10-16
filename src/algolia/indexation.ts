@@ -26,8 +26,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'goods',
           tags: [],
-          sortBy: 'updatedAt:desc',
-          limit: 3
+          sortBy: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -87,11 +86,12 @@ export const runIndexation = async () => {
       return {
         description: service.description,
         label: service.name,
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/fr/action/${service.theme}/${service.code}`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
         logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
         id: service.code,
         theme: service.theme as Theme,
-        tags: service.tags.join(', ')
+        tags: (service?.tags || []).join(', '),
+        objectID: service.code
       };
     }
   );
