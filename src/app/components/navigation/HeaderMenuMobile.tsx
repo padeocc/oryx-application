@@ -1,7 +1,9 @@
+import { search } from '@/algolia/search';
 import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import QuickSearch from '../pages/ActionsPage/components/Filters/QuickSearch';
 import { getFooterLinks, getNavigationItems } from './items';
 
 const HeaderMenuMobile = async () => {
@@ -35,6 +37,10 @@ const HeaderMenuMobile = async () => {
             {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
           </div>
         ))}
+        <MenuDivider />
+
+        <QuickSearch onSearch={search} label={t('actions_label')} />
+
         <MenuDivider />
         {(await getFooterLinks()).map((itemsGroup, itemgroupindex) => (
           <div key={`group-mobile-bottom-${itemgroupindex}`}>

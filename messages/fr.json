@@ -39,7 +39,7 @@
   },
   "content": {
     "choose_theme": "Choisir un thème !",
-    "contact_us": "Vous voulez ajouter une initiative ? Contactez-nous !",
+    "contact_us": "Contactez-nous",
     "no_results": "Pas de résultat pour cette recherche !"
   },
   "filters_component": {
@@ -71,6 +71,9 @@
     "location-online-store-label": "En ligne et en magasin",
     "location-store-and-online-label": "En magasin et en ligne",
     "location-store-label": "En magasin seulement",
+    "quicksearch-contact-us": "Il n'y a pas d'offre correspondant à ces critères pour l'instant sur Oryx; si vous avez des suggestions, contactez-nous !",
+    "quicksearch-no-results": "Pas de résultat",
+    "quicksearch-placeholder": "Entrer un ou plusieurs mots-clés (par exemples \"vélo\", \"voyage\", \"cuisine\", ...)",
     "region_01_label": "Ain",
     "region_02_label": "Aisne",
     "region_2A_label": "Corse-du-Sud",
@@ -266,7 +269,7 @@
     "title": "Oryx, le compagnon des initiatives écoresponsables !"
   },
   "navigation_items": {
-    "actions_label": "Trouver un service",
+    "actions_label": "Chercher un service",
     "contact_label": "Nous contacter",
     "donate_label": "Faire un don"
   },
@@ -323,12 +326,12 @@
     "withdraw_consent_description": "Vous avez le droit de retirer votre consentement à tout moment. Le retrait du consentement peut être effectué en modifiant les paramètres de votre compte ou en suivant les instructions fournies dans notre politique de confidentialité."
   },
   "themes": {
+    "accommodations": "Bâtiment et logement",
     "events": "Evénements",
     "foods": "Alimentation",
     "goods": "Biens, mode, maison, électronique",
     "services": "Services",
-    "transports": "Transport",
-    "accommodations": "Bâtiment et logement"
+    "transports": "Transport"
   },
   "user_actions": {
     "coming_soon": "Bientôt disponible !",
