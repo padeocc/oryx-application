@@ -3,7 +3,7 @@ import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import QuickSearch from '../pages/ActionsPage/components/Filters/QuickSearch';
+import QuickSearch from '../common/QuickSearch';
 import { getFooterLinks, getNavigationItems } from './items';
 
 const HeaderMenuMobile = async () => {

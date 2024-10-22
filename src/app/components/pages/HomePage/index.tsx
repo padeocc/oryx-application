@@ -1,11 +1,11 @@
 import { search } from '@/algolia/search';
-import { Group, Stack } from '@mantine/core';
+import { Group, Stack, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import QuickSearch from '../ActionsPage/components/Filters/QuickSearch';
+import QuickSearch from '../../common/QuickSearch';
+import ThemesBanner from '../../common/ThemesBanner';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
-
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
   const transports = await fetchServices({
@@ -13,7 +13,7 @@ const HomePage = async ({}: {}) => {
       theme: 'transports',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -22,7 +22,7 @@ const HomePage = async ({}: {}) => {
       theme: 'goods',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -31,7 +31,7 @@ const HomePage = async ({}: {}) => {
       theme: 'foods',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -40,7 +40,7 @@ const HomePage = async ({}: {}) => {
       theme: 'events',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -49,7 +49,7 @@ const HomePage = async ({}: {}) => {
       theme: 'services',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -58,7 +58,7 @@ const HomePage = async ({}: {}) => {
       theme: 'accommodations',
       tags: [],
       sortBy: 'updatedAt:desc',
-      limit: 3
+      limit: 4
     }
   });
 
@@ -70,6 +70,10 @@ const HomePage = async ({}: {}) => {
           <Group key="header-group-mobile" w="100%" align="center" justify="center">
             <QuickSearch onSearch={search} label={t('search_label')} size="xl" />
           </Group>
+        </Stack>
+        <Stack gap="sm">
+          <Title order={3}>{t('explore_themes_label')}</Title>
+          <ThemesBanner coloredByDefault />
         </Stack>
         <ThemeSection items={transports.services} theme={'transports'} />
         <ThemeSection items={foods.services} theme={'foods'} />

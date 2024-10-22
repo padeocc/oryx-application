@@ -16,7 +16,7 @@ export const getNavigationItems = ({
     [
       {
         name: t('donate_label'),
-        href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/1',
+        href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/2',
         isExternal: true
       }
     ]

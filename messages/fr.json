@@ -46,7 +46,7 @@
     "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
     "filter-comparer-label": "Comparer",
     "filter-cookmore-label": "Pour cuisiner plus",
-    "filter-diy-label": "Faire soit-même",
+    "filter-diy-label": "Faire soi-même",
     "filter-ecobuilt-label": "Construction écoresponsable",
     "filter-foodwastereducer-label": "Réduire les déchets organiques",
     "filter-local-label": "Consommer local",
@@ -209,7 +209,8 @@
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
     "welcome": "Trouver l'action éco-responsable pour se mettre en mouvement instantanément",
-    "search_label": "Rechercher par mots clés !"
+    "search_label": "Rechercher par mots clés !",
+    "explore_themes_label": "Explorer par thèmes"
   },
   "legal": {
     "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",

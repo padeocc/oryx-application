@@ -1,10 +1,9 @@
+import ThemesBanner from '@/app/components/common/ThemesBanner';
 import { Theme, themesColors, themesIcons } from '@/config';
 import { inputDefaultBackgrounColor } from '@/theme';
 import { ActionFilters, Category, Filters, Region } from '@/types';
 import {
-  Alert,
   Button,
-  Container,
   Grid,
   GridCol,
   Group,
@@ -13,7 +12,6 @@ import {
   Select,
   SelectProps,
   SimpleGrid,
-  Stack,
   Text
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -71,25 +69,6 @@ const FiltersComponent = ({
     form.setInitialValues(filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
-
-  const themesOptions = Object.keys(themesIcons).map(parsedTheme => {
-    const color = themesColors[parsedTheme];
-    const actualColor = theme === parsedTheme ? color : 'dark';
-
-    return (
-      <Link
-        href={`/actions/${parsedTheme}`}
-        style={{ color: 'inherit', textDecoration: 'none' }}
-        key={`select-theme-${parsedTheme}`}>
-        <Stack align="center" gap={'xs'}>
-          <Container c={actualColor}>{getIconFromTheme(parsedTheme as Theme, theme === parsedTheme)}</Container>
-          <Text fz="xs" ta="center" c={actualColor} visibleFrom="sm">
-            {tTheme(parsedTheme)}
-          </Text>
-        </Stack>
-      </Link>
-    );
-  });
 
   const saveTags = (tags: string[]) => {
     const allValues = {
@@ -163,9 +142,7 @@ const FiltersComponent = ({
       })}>
       <Grid gutter={'sm'}>
         <GridCol span={{ base: 12 }}>
-          <Alert>
-            <SimpleGrid cols={{ base: 8, sm: 8, md: 8, lg: 10 }}>{themesOptions}</SimpleGrid>
-          </Alert>
+          <ThemesBanner selectedTheme={theme} />
         </GridCol>
         <GridCol span={{ base: 12 }} mih="4em">
           {loading ? (
