@@ -1,7 +1,8 @@
 import ActionPage from '@/app/components/pages/ActionPage';
 import { Theme } from '@/config';
 
-export default function Action({ params }: { params: { code: string; theme: Theme } }) {
+export default async function Action(props: { params: Promise<{ code: string; theme: Theme }> }) {
+  const params = await props.params;
   const code = params.code;
   const theme = params.theme;
   return (

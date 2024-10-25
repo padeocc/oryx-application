@@ -52,6 +52,8 @@ const ServiceCard = ({
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
 
+  const domain = process.env.NEXT_PUBLIC_STRAPI_ENDPOINT;
+
   return (
     <Card
       h={'100%'}
@@ -62,7 +64,7 @@ const ServiceCard = ({
       className={style['card']}>
       {!noImage ? (
         <CardSection>
-          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
+          <Image src={getLogoImage({ service, theme, domain })} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>

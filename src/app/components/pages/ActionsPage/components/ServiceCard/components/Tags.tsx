@@ -23,7 +23,6 @@ const Tags = ({ tags, color }: { tags: string[]; color: string }) => {
             {firstTag}
           </Badge>
           <Badge color={color} size="xs">
-            {/* {opened ? '-' : '+'} {opened ? null : otherTags.length} {} */}
             {opened
               ? t('tags-others-opened-label', { count: tags.length })
               : t('tags-others-closed-label', { count: tags.length })}

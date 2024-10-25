@@ -2,8 +2,7 @@
 
 import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
-import { algoliasearch } from 'algoliasearch';
-import { IResults } from './types';
+import { SaveObjectsOptions, algoliasearch } from 'algoliasearch';
 
 const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
 
@@ -80,21 +79,28 @@ export const runIndexation = async () => {
     )?.services || []
   )?.map(service => ({ ...service, theme: 'accommodations' }));
 
-  const all: IResults[] = [...accommodations, ...services, ...events, ...foods, ...goods, ...transports].map(
-    service => {
-      const logo = service.logo?.data?.attributes?.url;
-      return {
-        description: service.description,
-        label: service.name,
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
-        logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
-        id: service.code,
-        theme: service.theme as Theme,
-        tags: (service?.tags || []).join(', '),
-        objectID: service.code
-      };
-    }
-  );
+  const all: Record<string, unknown>[] = [
+    ...accommodations,
+    ...services,
+    ...events,
+    ...foods,
+    ...goods,
+    ...transports
+  ].map(service => {
+    const logo = service.logo?.data?.attributes?.url;
+    return {
+      description: service.description,
+      label: service.name,
+      url: `${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
+      logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
+      id: service.code,
+      theme: service.theme as Theme,
+      tags: (service?.tags || []).join(', '),
+      objectID: service.code
+    };
+  });
 
-  return client.saveObjects({ indexName: 'code', objects: all });
+  const parameters: SaveObjectsOptions = { indexName: 'code', objects: all };
+
+  return client.saveObjects(parameters);
 };
