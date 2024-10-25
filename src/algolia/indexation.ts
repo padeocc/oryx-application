@@ -2,9 +2,9 @@
 
 import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
 import { Theme } from '@/config';
-import { SaveObjectsOptions, searchClient } from 'algoliasearch';
+import { SaveObjectsOptions, algoliasearch } from 'algoliasearch';
 
-const client = searchClient(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
+const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
 
 export const runIndexation = async () => {
   const transports = (

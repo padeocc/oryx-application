@@ -298,6 +298,10 @@
     "type-company-label": "Entreprise",
     "type-public-service-label": "Service Public",
     "type-school-label": "Ecole",
+    "type-cooperative-label": "Coopérative",
+    "type-scop-label": "SCOP",
+    "type-scic-label": "SCIC",
+    "type-sasesus-label": "SAS agrément ESUS",
     "updatedat_label": "Date de dernière mise à jour : {date}"
   },
   "signup_form_page": {
