@@ -35,7 +35,7 @@ const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: The
 
   return (
     <Alert>
-      <SimpleGrid cols={{ base: 8, sm: 8, md: 8, lg: 10 }}>{themesOptions}</SimpleGrid>
+      <SimpleGrid cols={{ base: 7, sm: 7, md: 7, lg: 9 }}>{themesOptions}</SimpleGrid>
     </Alert>
   );
 };

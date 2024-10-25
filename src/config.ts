@@ -6,12 +6,12 @@ import { ActionFilters } from './types';
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 
 export const themesIcons: { [key: string]: Icon } = {
-  transports: Scooter,
   foods: BowlFood,
+  accommodations: BuildingApartment,
   goods: TShirt,
-  events: CalendarCheck,
   services: CallBell,
-  accommodations: BuildingApartment
+  transports: Scooter,
+  events: CalendarCheck
 };
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {

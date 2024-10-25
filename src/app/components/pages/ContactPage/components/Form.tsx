@@ -7,9 +7,11 @@ import { useTranslations } from 'next-intl';
 import { RefObject, useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-const ContactForm = ({
-  sendContactEmail
+const Form = ({
+  sendContactEmail,
+  sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
 }: {
+  sitekey?: string;
   sendContactEmail: (formData: FormData) => Promise<{
     sent: boolean;
     errors?: { [key: string]: string };
@@ -106,11 +108,7 @@ const ContactForm = ({
             disabled={isSending}
             rows={5}
           />
-          <ReCAPTCHA
-            sitekey={process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-            ref={recaptcha}
-            {...form.getInputProps('recaptcha')}
-          />
+          <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
           <Button type="submit" loading={isSending}>
             {t('form-submit-label')}
           </Button>
@@ -156,4 +154,4 @@ const ContactForm = ({
   );
 };
 
-export default ContactForm;
+export default Form;

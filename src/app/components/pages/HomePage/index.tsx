@@ -1,4 +1,6 @@
 import { search } from '@/algolia/search';
+import { Theme, themesIcons } from '@/config';
+import { Service } from '@/types';
 import { Group, Stack, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import QuickSearch from '../../common/QuickSearch';
@@ -6,62 +8,28 @@ import ThemesBanner from '../../common/ThemesBanner';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
+
+const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
+  return (
+    await fetchServices({
+      filters: {
+        theme,
+        tags: [],
+        sortBy: 'updatedAt:desc',
+        limit: 4
+      }
+    })
+  ).services;
+};
+
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
-  const transports = await fetchServices({
-    filters: {
-      theme: 'transports',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
-  const goods = await fetchServices({
-    filters: {
-      theme: 'goods',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
-  const foods = await fetchServices({
-    filters: {
-      theme: 'foods',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
-  const events = await fetchServices({
-    filters: {
-      theme: 'events',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
-  const services = await fetchServices({
-    filters: {
-      theme: 'services',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
-  const accommodations = await fetchServices({
-    filters: {
-      theme: 'accommodations',
-      tags: [],
-      sortBy: 'updatedAt:desc',
-      limit: 4
-    }
-  });
-
+  const themesSections = await Promise.all(
+    Object.keys(themesIcons).map(async theme => {
+      const services = await fetchThemeServices({ theme: theme as Theme });
+      return <ThemeSection items={services} theme={theme as Theme} key={`theme-${theme}`} />;
+    })
+  );
   return (
     <Stack gap={'xl'}>
       <Stack gap={'2.5rem'} pt="2rem">
@@ -75,12 +43,7 @@ const HomePage = async ({}: {}) => {
           <Title order={3}>{t('explore_themes_label')}</Title>
           <ThemesBanner coloredByDefault />
         </Stack>
-        <ThemeSection items={transports.services} theme={'transports'} />
-        <ThemeSection items={foods.services} theme={'foods'} />
-        <ThemeSection items={goods.services} theme={'goods'} />
-        <ThemeSection items={events.services} theme={'events'} />
-        <ThemeSection items={services.services} theme={'services'} />
-        <ThemeSection items={accommodations.services} theme={'accommodations'} />
+        {themesSections}
       </Stack>
     </Stack>
   );

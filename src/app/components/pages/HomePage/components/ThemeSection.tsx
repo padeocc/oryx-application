@@ -15,7 +15,6 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const tTheme = useTranslations('themes');
   const tCommon = useTranslations('common');
   const [mouseOver, setMouseOver] = useState<boolean>(false);
-
   const moreLinkProps = {
     c: color,
     size: 'md',
