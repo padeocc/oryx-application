@@ -28,13 +28,14 @@ const transformParams = (
   return result;
 };
 
-export default function ActionsTheme({
-  params,
-  searchParams
-}: {
-  params: { theme: Theme };
-  searchParams?: { [key: string]: string | string[] | undefined } | undefined;
-}) {
+export default async function ActionsTheme(
+  props: {
+    params: Promise<{ theme: Theme }>;
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined } | undefined>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const parameters: RequestParameters = transformParams(searchParams);
   return (
     <main>

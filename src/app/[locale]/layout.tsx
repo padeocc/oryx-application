@@ -18,7 +18,11 @@ const authors: Author[] = [
   { name: 'Oryx', url }
 ];
 
-export const generateMetadata = async ({ params: { locale = 'fr' } }: { params: { locale: string } }) => {
+export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
+  const params = await props.params;
+
+  const { locale = 'fr' } = params;
+
   const messages = await getMessages({ locale });
   const metadata: any = messages.metadata || {};
   const metadataTags: Metadata = {
@@ -43,13 +47,13 @@ export const generateMetadata = async ({ params: { locale = 'fr' } }: { params: 
   return metadataTags;
 };
 
-export default async function RootLayout({
-  children,
-  params: { locale = 'fr' }
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+export default async function RootLayout(props: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const params = await props.params;
+
+  const { locale = 'fr' } = params;
+
+  const { children } = props;
+
   const messages = await getMessages({ locale });
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -64,7 +68,7 @@ export default async function RootLayout({
   ) : null;
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-mantine-color-scheme="light">
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {umamiComponent}

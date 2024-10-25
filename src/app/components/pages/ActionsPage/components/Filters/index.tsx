@@ -47,14 +47,14 @@ const FiltersComponent = ({
   theme: Theme;
 }) => {
   const t = useTranslations('filters_component');
-  const tTheme = useTranslations('themes');
   const color = themesColors[theme];
   const form = useForm({
     initialValues: filters
   });
 
   const regionsOptions = allRegions.map(value => {
-    const label = t(`region_${value}_label`) || value;
+    const numberedValue = Number(value);
+    const label = numberedValue ? t(`region_${value}_label`) : value;
     return { label: label.includes(`region_${value}_label`) ? value : label, value };
   });
 

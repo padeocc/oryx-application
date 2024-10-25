@@ -19,7 +19,7 @@ const ContactForm = ({
   const [okNotification, setOkNotification] = useState<boolean>(false);
   const [koNotification, setKoNotification] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
-  const recaptcha: RefObject<ReCAPTCHA> = useRef(null);
+  const recaptcha: RefObject<ReCAPTCHA | null> = useRef(null);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
