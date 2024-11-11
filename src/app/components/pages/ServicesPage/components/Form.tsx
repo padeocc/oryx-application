@@ -5,6 +5,7 @@ import { Button, ComboboxData, Select, SimpleGrid, Stack, TextInput } from '@man
 import { useForm } from '@mantine/form';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 const Form = ({ initialValues, distinctValues }: { initialValues: Filters; distinctValues: DistinctFilters }) => {
@@ -30,6 +31,7 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
         }}
         action={async (values: FormData) => {
           setIsSending(false);
+          redirect(`?filters=${JSON.stringify(Object.fromEntries(values.entries()))}`);
         }}>
         <Stack>
           <TextInput
@@ -45,18 +47,21 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
             <Select
               size="lg"
               placeholder={t('filter-theme-label')}
+              name="theme"
               {...form.getInputProps('theme')}
               data={getFilters(distinctValues.theme, 'theme')}
             />
             <Select
               size="lg"
               placeholder={t('filter-region-label')}
+              name="region"
               {...form.getInputProps('region')}
               data={getFilters(distinctValues.region, 'region')}
             />
             <Select
               size="lg"
               placeholder={t('filter-location-label')}
+              name="location"
               {...form.getInputProps('location')}
               data={getFilters(distinctValues.location, 'location')}
             />
