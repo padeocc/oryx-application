@@ -87,7 +87,7 @@ export const runIndexation = async () => {
     ...goods,
     ...transports
   ].map(service => {
-    const logo = service.logo?.data?.attributes?.url;
+    const logo = service.logo;
     return {
       description: service.description,
       label: service.name,
@@ -96,7 +96,10 @@ export const runIndexation = async () => {
       id: service.code,
       theme: service.theme as Theme,
       tags: (service?.tags || []).join(', '),
-      objectID: service.code
+      objectID: service.code,
+      region: service.region,
+      type: service.type,
+      location: service.location
     };
   });
 

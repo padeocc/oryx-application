@@ -1,5 +1,5 @@
 import ThemesBanner from '@/app/components/common/ThemesBanner';
-import { Theme, themesColors, themesIcons } from '@/config';
+import { Theme, themesColors } from '@/config';
 import { inputDefaultBackgrounColor } from '@/theme';
 import { ActionFilters, Category, Filters, Region } from '@/types';
 import {
@@ -15,17 +15,11 @@ import {
   Text
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { PottedPlant } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import ChipSelect from './ChipSelect';
 import styles from './filters.module.css';
-
-const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
-  const Icon = themesIcons?.[theme] || PottedPlant;
-  return <Icon size={30} style={{ cursor: 'pointer' }} weight={selected ? 'fill' : 'regular'} />;
-};
 
 const FiltersComponent = ({
   filters,

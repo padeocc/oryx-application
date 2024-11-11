@@ -1,3 +1,4 @@
+import { FacetHits } from 'algoliasearch';
 import { Theme } from './config';
 
 export type Category = string;
@@ -58,7 +59,7 @@ export type Service = {
   region: Region;
   location: string;
   country: string;
-  logo?: { data: ImageData };
+  logo?: { data: ImageData } | string;
 };
 
 export type ActionFilters = {
@@ -87,10 +88,11 @@ export type ActionFilters = {
 };
 
 export type Filters = {
+  query?: string;
   sortBy?: string;
   limit?: number;
   start?: number;
-  theme: Theme;
+  theme?: Theme;
   tags?: string[] | undefined;
   codes?: (string | undefined)[];
   region?: Region;
@@ -113,6 +115,10 @@ export type Filters = {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
+};
+
+export type DistinctFilters = {
+  [key in 'theme' | 'region' | 'location']: FacetHits[];
 };
 
 export type APIFilters = {
