@@ -20,7 +20,7 @@ export const themesColors: { [key: string]: DefaultMantineColor } = {
   foods: 'orange.7',
   goods: 'pink.7',
   events: 'blue.7',
-  services: 'grape.3',
+  services: 'grape.7',
   accommodations: 'indigo.9'
 };
 

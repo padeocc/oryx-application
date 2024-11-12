@@ -3,7 +3,6 @@ import { Icon } from '@phosphor-icons/react';
 import { PersonSimpleBike, Phone, Plant, Train } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { getNavigationUrl } from '../../ActionsPage/utils';
 
 const linkStyle: CSSProperties = { color: 'black', textDecoration: 'none', overflow: 'auto' };
 
@@ -28,36 +27,22 @@ const ExamplesSection = async () => {
       <Stack>
         <Grid justify="space-between">
           <Example
-            link={`/actions/transports?${getNavigationUrl({
-              filters: { theme: 'transports', region: '31', start: 0, limit: -1, tags: ['Vélos'] }
-            })}`}
+            link={`/services?filters={"theme":"transports", "region":"31"}`}
             Icon={PersonSimpleBike}
             text={t('example_bike')}
           />
           <Example
-            link={`/actions/foods?${getNavigationUrl({
-              filters: { theme: 'foods', start: 0, limit: -1, season: true, local: true, organic: true }
-            })}`}
+            link={`/services?filters={"theme":"foods", "season": true, "local": true, "organic":true}`}
             Icon={Plant}
             text={t('example_food')}
           />
           <Example
-            link={`/actions/transports?${getNavigationUrl({
-              filters: { theme: 'transports', start: 0, limit: -1, tags: ['Train'] }
-            })}`}
+            link={`/services?filters={"theme":"transports", "query":"train"}`}
             Icon={Train}
             text={t('example_train')}
           />
           <Example
-            link={`/actions/goods?${getNavigationUrl({
-              filters: {
-                theme: 'goods',
-                start: 0,
-                limit: -1,
-                tags: ['Electronique', 'Électroménager'],
-                location: 'online'
-              }
-            })}`}
+            link={`/services?filters={"theme":"goods", "query":"Electronique Électroménager", "location": "online"}`}
             Icon={Phone}
             text={t('example_phone')}
           />

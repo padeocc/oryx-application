@@ -197,7 +197,7 @@ const FiltersComponent = ({
               variant="subtle"
               size="sm"
               component={Link}
-              href={`/actions/${theme}`}
+              href={`/services?filters={"theme":"${theme}"}`}
               onClick={() => {
                 const actions: { [x: string]: boolean } = Object.keys(allActionFilters).reduce(
                   (all: { [key: string]: boolean }, action: string) => ({ ...all, [action]: false }),

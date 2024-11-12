@@ -13,7 +13,7 @@ const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: The
 
     return (
       <Link
-        href={`/actions/${parsedTheme}`}
+        href={`/services?filters={"theme":"${parsedTheme}"}`}
         style={{ color: 'inherit', textDecoration: 'none' }}
         key={`select-theme-${parsedTheme}`}>
         <Stack align="center" gap={'xs'}>
