@@ -1,7 +1,9 @@
 'use client';
 
+import { getIconFromTheme } from '@/app/components/content/utils-ui';
+import { Theme, themesColors } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
-import { Button, ComboboxData, Select, SimpleGrid, Stack, TextInput } from '@mantine/core';
+import { Button, ComboboxData, Flex, Group, Select, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
@@ -38,18 +40,35 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
             size="xl"
             withAsterisk
             label={''}
-            placeholder={t('form-query-palceholder')}
+            placeholder={t('form-query-placeholder')}
             name="query"
             disabled={isSending}
             {...form.getInputProps('query')}
           />
-          <SimpleGrid cols={{ base: 1, md: 4 }}>
+          <Group justify="right">
             <Select
               size="lg"
               placeholder={t('filter-theme-label')}
               name="theme"
               {...form.getInputProps('theme')}
               data={getFilters(distinctValues.theme, 'theme')}
+              clearable
+              miw={'40%'}
+              renderOption={({ option, checked }) => {
+                const color = themesColors[option.value];
+                const themeIcon = getIconFromTheme({
+                  theme: option.value as Theme,
+                  size: 20,
+                  selected: true,
+                  color
+                });
+                return (
+                  <Flex mih={50} gap="sm" justify="center" align="center" direction="row" wrap="nowrap" c={color}>
+                    {themeIcon ? themeIcon : null}
+                    {option.label}
+                  </Flex>
+                );
+              }}
             />
             <Select
               size="lg"
@@ -57,6 +76,7 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
               name="region"
               {...form.getInputProps('region')}
               data={getFilters(distinctValues.region, 'region')}
+              clearable
             />
             <Select
               size="lg"
@@ -64,11 +84,12 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
               name="location"
               {...form.getInputProps('location')}
               data={getFilters(distinctValues.location, 'location')}
+              clearable
             />
             <Button size="lg" type="submit" loading={isSending}>
               {t('form-submit-label')}
             </Button>
-          </SimpleGrid>
+          </Group>
         </Stack>
       </form>
     </>

@@ -87,11 +87,13 @@ export const runIndexation = async () => {
     ...goods,
     ...transports
   ].map(service => {
-    const logo = service.logo;
+    /*@ts-ignore*/
+    const logo = service?.logo?.data?.attributes?.url || '';
+
     return {
       description: service.description,
       label: service.name,
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
+      url: service.url, //`${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
       logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
       id: service.code,
       theme: service.theme as Theme,

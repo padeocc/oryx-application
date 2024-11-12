@@ -10,13 +10,14 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       logo: result.logo,
       tags: result.tags.split(','),
       url: result.url,
+      region: result.region,
+      location: result.location,
+      theme: result.theme,
       // Rest is empty for now
       createdAt: new Date(),
       updatedAt: new Date(),
       publishedAt: new Date(),
       type: [],
-      region: '',
-      location: '',
       country: ''
     };
     return service;

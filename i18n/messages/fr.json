@@ -19,15 +19,15 @@
   "contact": {
     "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
     "form-company-label": "Entreprise ou association",
-    "form-company-palceholder": "",
+    "form-company-placeholder": "",
     "form-email-label": "Email",
-    "form-email-palceholder": "",
+    "form-email-placeholder": "",
     "form-error-required": "Champ obligatoire",
     "form-error-unknow": "Champ invalide",
     "form-message-label": "Message",
-    "form-message-palceholder": "",
+    "form-message-placeholder": "",
     "form-name-label": "Prénom et nom",
-    "form-name-palceholder": "",
+    "form-name-placeholder": "",
     "form-sent-fail-message": "Merci de vérifier les champs obligatoires",
     "form-sent-fail-title": "Echec lors de l'envoi",
     "form-sent-success-message": "Nous répondrons à votre message !",
@@ -40,7 +40,8 @@
   "content": {
     "choose_theme": "Choisir un thème !",
     "contact_us": "Contactez-nous",
-    "no_results": "Pas de résultat pour cette recherche !"
+    "no_results": "Pas de résultat pour cette recherche !",
+    "total-results-label": "{count} {count, plural, =0 {résultat trouvé !} =1 {résultat trouvé !} other {résultats trouvés !}}"
   },
   "filters_component": {
     "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
@@ -313,11 +314,11 @@
     "type-scic-label": "SCIC",
     "type-sasesus-label": "SAS agrément ESUS",
     "updatedat_label": "Date de dernière mise à jour : {date}",
-    "form-query-palceholder": "Chercher par mot-clés !",
-    "form-submit-label": "Chercher",
+    "form-query-placeholder": "Chercher par mot-clés !",
+    "form-submit-label": "Lister !",
     "filter-location-label": "Types de magasin",
     "filter-region-label": "Régions",
-    "filter-theme-label": "Thémes"
+    "filter-theme-label": "Thèmes"
   },
   "signup_form_page": {
     "email_label": "Adresse email",

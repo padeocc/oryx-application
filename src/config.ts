@@ -3,6 +3,7 @@ import { Icon } from '@phosphor-icons/react';
 import { BowlFood, BuildingApartment, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 import { ActionFilters } from './types';
 
+export const PAGINATION_LIMIT = 20;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 
 export const themesIcons: { [key: string]: Icon } = {

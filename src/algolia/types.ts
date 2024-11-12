@@ -8,4 +8,6 @@ export interface IResult {
   id: string;
   theme: Theme;
   tags: string;
+  region: string;
+  location: string;
 }

@@ -59,6 +59,7 @@ export type Service = {
   region: Region;
   location: string;
   country: string;
+  theme: Theme;
   logo?: { data: ImageData } | string;
 };
 
