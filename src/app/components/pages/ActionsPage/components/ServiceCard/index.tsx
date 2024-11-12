@@ -64,11 +64,7 @@ const ServiceCard = ({
       className={style['card']}>
       {!noImage ? (
         <CardSection>
-          <Image
-            src={service.logo ? service.logo : getLogoImage({ service, theme, domain })}
-            alt={service.name}
-            height={100}
-          />
+          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>

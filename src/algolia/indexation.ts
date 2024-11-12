@@ -93,7 +93,7 @@ export const runIndexation = async () => {
     return {
       description: service.description,
       label: service.name,
-      url: service.url, //`${process.env.NEXT_PUBLIC_APP_URL}/action/${service.theme}/${service.code}`,
+      url: service.url,
       logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
       id: service.code,
       theme: service.theme as Theme,
@@ -101,7 +101,8 @@ export const runIndexation = async () => {
       objectID: service.code,
       region: service.region,
       type: service.type,
-      location: service.location
+      location: service.location,
+      updatedAt: service.updatedAt.toString()
     };
   });
 

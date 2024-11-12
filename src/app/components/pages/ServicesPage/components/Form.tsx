@@ -53,7 +53,8 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
               {...form.getInputProps('theme')}
               data={getFilters(distinctValues.theme, 'theme')}
               clearable
-              miw={'40%'}
+              miw={'35%'}
+              maxLength={10}
               renderOption={({ option, checked }) => {
                 const color = themesColors[option.value];
                 const themeIcon = getIconFromTheme({
@@ -63,7 +64,7 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
                   color
                 });
                 return (
-                  <Flex mih={50} gap="sm" justify="center" align="center" direction="row" wrap="nowrap" c={color}>
+                  <Flex gap="sm" justify="center" align="center" direction="row" wrap="nowrap" c={color}>
                     {themeIcon ? themeIcon : null}
                     {option.label}
                   </Flex>

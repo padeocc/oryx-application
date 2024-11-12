@@ -73,7 +73,15 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
     next: { tags: ['cms'] }
   });
   const solutions = await response.json();
-  const services: Service[] = solutions.data?.map((solution: { attributes: Service }) => solution.attributes) || [];
+  const services: Service[] =
+    solutions.data?.map((solution: { attributes: Service }) => {
+      /*@ts-ignore */
+      const logo = solution?.attributes?.logo?.data?.attributes?.url;
+      return {
+        ...solution.attributes,
+        logo: logo ? `${process?.env?.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined
+      };
+    }) || [];
 
   return { services, meta: solutions.meta };
 };

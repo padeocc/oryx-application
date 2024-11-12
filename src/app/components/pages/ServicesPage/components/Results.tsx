@@ -3,7 +3,7 @@ import { transformServicesFromResults } from '@/algolia/utils';
 import ServiceCard from '@/app/components/pages/ActionsPage/components/ServiceCard';
 import { themesColors } from '@/config';
 import { Filters } from '@/types';
-import { Alert, Grid, GridCol, Stack, Text, Title } from '@mantine/core';
+import { Alert, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import Pagination from './Pagination';
@@ -51,7 +51,9 @@ const Results = ({
         </Stack>
       )}
 
-      <Pagination page={activePage} total={total} filters={filters} />
+      <Group justify="end">
+        <Pagination page={activePage} total={total} filters={filters} />
+      </Group>
     </Stack>
   );
 };

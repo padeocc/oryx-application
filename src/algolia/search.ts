@@ -30,6 +30,7 @@ export const search = async ({
       requests: [
         {
           indexName: 'code',
+
           query,
           ignorePlurals: 'true',
           typoTolerance: 'strict',
