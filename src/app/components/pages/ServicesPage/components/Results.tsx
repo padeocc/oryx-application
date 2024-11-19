@@ -38,7 +38,9 @@ const Results = ({
           <Title order={2}>{t(`total-results-label`, { count: totalNumberOfResults })}</Title>
           <Grid justify="flex-start" align="top" mt="lg">
             {transformServicesFromResults({ results: data }).map((service, index) => (
-              <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`action-${service.name}-${index}`}>
+              <GridCol
+                span={{ base: 12, xs: 6, md: 4, xl: 3 }}
+                key={`action-${service.theme}-${service.name}-${index}`}>
                 <ServiceCard
                   service={service}
                   backgroundColor={'var(--mantine-primary-color-2)'}
@@ -50,10 +52,11 @@ const Results = ({
           </Grid>
         </Stack>
       )}
-
-      <Group justify="end">
-        <Pagination page={activePage} total={total} filters={filters} />
-      </Group>
+      {total > 1 ? (
+        <Group justify="end">
+          <Pagination page={activePage} total={total} filters={filters} />
+        </Group>
+      ) : null}
     </Stack>
   );
 };

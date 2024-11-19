@@ -67,7 +67,7 @@ const List = ({
       ) : (
         <Grid justify="flex-start" align="top" mt="lg">
           {data.map((service, index) => (
-            <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`action-${service.name}-${index}`}>
+            <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`action-${service.theme}-${service.name}-${index}`}>
               <ServiceCard
                 service={service}
                 backgroundColor={'var(--mantine-primary-color-2)'}

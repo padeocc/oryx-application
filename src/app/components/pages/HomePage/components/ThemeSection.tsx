@@ -39,7 +39,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
       </Group>
       <Grid justify="stretch" c={color}>
         {items.map((service, index) => (
-          <GridCol span={{ base: 12, xs: 6, md: 3 }} key={`action-${service.name}-${index}`}>
+          <GridCol span={{ base: 12, xs: 6, md: 3 }} key={`action-${service.theme}-${service.name}-${index}`}>
             <ServiceCard
               service={service}
               backgroundColor={'var(--mantine-primary-color-2)'}

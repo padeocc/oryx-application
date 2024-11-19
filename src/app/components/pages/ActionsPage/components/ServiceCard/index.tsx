@@ -52,8 +52,6 @@ const ServiceCard = ({
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
 
-  const domain = process.env.NEXT_PUBLIC_STRAPI_ENDPOINT;
-
   return (
     <Card
       h={'100%'}
@@ -73,7 +71,11 @@ const ServiceCard = ({
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
-                  <Tags tags={[...(service?.tags || []), ...fields]} color={color} />
+                  <Tags
+                    tags={[...(service?.tags || []), ...fields]}
+                    color={color}
+                    basekey={`${theme}-${service.name}`}
+                  />
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>
