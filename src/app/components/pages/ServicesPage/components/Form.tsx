@@ -16,7 +16,11 @@ const Form = ({ initialValues, distinctValues }: { initialValues: Filters; disti
 
   const getFilters = (facet: FacetHits[], name: string): ComboboxData =>
     facet.map(({ value, count }) => {
-      const label = tFilters(`${name}_${value}_label`);
+      let label = value;
+      const key = `${name}_${value.replaceAll(' ', '-')}_label`;
+      if (tFilters.has(key)) {
+        label = tFilters(key);
+      }
       return { label: `${label} (${count})`, value };
     });
 

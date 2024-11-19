@@ -26,6 +26,8 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
   const allRegions: Region[] = getRegionsfromServices(allServices);
   const color = themesColors[theme];
 
+  //permanentRedirect(`/services/${username}`) // Navigate to the new user profile
+
   return (
     <List
       data={services}

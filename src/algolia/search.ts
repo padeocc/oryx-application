@@ -4,8 +4,6 @@ import { PAGINATION_LIMIT } from '@/config';
 import { Filters } from '@/types';
 import { algoliasearch, FacetFilters, FacetHits, SearchForFacetValuesProps, SearchResponses } from 'algoliasearch';
 
-const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
-
 export const search = async ({
   query,
   limit = PAGINATION_LIMIT,
@@ -25,6 +23,7 @@ export const search = async ({
     return [`${filterKey}:${value}`];
   });
 
+  const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
   const results = await client.search(
     {
       requests: [
@@ -50,5 +49,6 @@ export const getFieldDistinctsValues = async ({ name: facetName }: { name: strin
     indexName: 'code',
     facetName
   };
+  const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
   return (await client.searchForFacetValues(params))?.facetHits || [];
 };
