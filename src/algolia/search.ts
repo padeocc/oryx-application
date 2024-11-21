@@ -29,7 +29,6 @@ export const search = async ({
       requests: [
         {
           indexName: 'code',
-
           query,
           ignorePlurals: 'true',
           typoTolerance: 'strict',
@@ -40,6 +39,19 @@ export const search = async ({
       ]
     },
     { cacheable: true }
+  );
+
+  console.info(
+    {
+      indexName: 'code',
+      query,
+      ignorePlurals: 'true',
+      typoTolerance: 'strict',
+      facetFilters,
+      page,
+      hitsPerPage: limit
+    },
+    JSON.stringify(results, null, 2)
   );
   return results;
 };

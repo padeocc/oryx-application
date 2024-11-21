@@ -100,7 +100,25 @@ export const runIndexation = async () => {
       region: service.region,
       type: service.type,
       location: service.location,
-      updatedAt: service.updatedAt.toString()
+      updatedAt: service.updatedAt.toString(),
+      organic: service?.organic,
+      local: service?.local,
+      season: service?.season,
+      shortcircuit: service?.shortcircuit,
+      wastereducer: service?.wastereducer,
+      foodwastereducer: service?.foodwastereducer,
+      cookmore: service?.cookmore,
+      used: service?.used,
+      rent: service?.rent,
+      mutualise: service?.mutualise,
+      repair: service?.repair,
+      ecobuilt: service?.ecobuilt,
+      lowtech: service?.lowtech,
+      recycled: service?.recycled,
+      reused: service?.reused,
+      diy: service?.diy,
+      comparer: service?.comparer,
+      relocating: service?.relocating
     };
   });
 

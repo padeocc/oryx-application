@@ -1,5 +1,5 @@
-import { Theme, getActionFilters } from '@/config';
-import { APIFilters, ActionFilters, FetchServicesResponse, Filters, RequestParameters, Service } from '@/types';
+import { Theme } from '@/config';
+import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
 import { merge, uniq } from 'lodash';
 import qs from 'qs';
 
@@ -22,38 +22,6 @@ const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
     filters: { region, location, ...merge(tagsFilters, actionFilters) },
     populate: 'logo'
   } as APIFilters);
-};
-
-export const getNavigationUrl = ({ filters: initialFilters }: { filters: Filters }) => {
-  const theme = initialFilters.theme as Theme;
-  if (!theme) {
-    throw 'Theme is missing';
-  }
-  const actionFields: ActionFilters = getActionFilters(theme);
-  const { limit = -1, sortBy = 'name:asc', region, location, tags } = initialFilters;
-  const regionFilters = region ? { region } : {};
-  const locationFilters = location ? { location } : {};
-  const tagsFilters = tags ? { tags } : {};
-
-  const actionFilters = Object.keys(actionFields).reduce((all, filterKey) => {
-    // @ts-ignore
-    const value = initialFilters?.[filterKey];
-    if (value) {
-      return { ...all, [filterKey]: value };
-    }
-    return all;
-  }, {});
-
-  const filters = { ...tagsFilters, ...actionFilters, ...regionFilters, ...locationFilters } as Filters;
-
-  const params: RequestParameters = {
-    filters,
-    pagination: { start: 0, limit },
-    sortBy,
-    populate: 'logo',
-    theme
-  };
-  return qs.stringify(params);
 };
 
 export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {

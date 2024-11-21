@@ -23,9 +23,46 @@ const ServicesPage = async ({
     location: await getFieldDistinctsValues({ name: 'location' })
   };
 
+  const defaultValues: Filters = {
+    region: '',
+    location: '',
+    theme: '',
+    query: '',
+    organic: false,
+    local: false,
+    season: false,
+    shortcircuit: false,
+    wastereducer: false,
+    foodwastereducer: false,
+    cookmore: false,
+    used: false,
+    rent: false,
+    mutualise: false,
+    repair: false,
+    ecobuilt: false,
+    lowtech: false,
+    recycled: false,
+    reused: false,
+    diy: false,
+    comparer: false,
+    relocating: false
+  };
+
+  const cleanedFilters = {
+    ...defaultValues,
+    ...Object.keys(filters).reduce((all: {}, key: string) => {
+      /*@ts-ignore*/
+      const value = filters?.[key];
+      if (value) {
+        return { ...all, [key]: value };
+      }
+      return { ...all, [key]: '' };
+    }, {})
+  };
+
   return (
     <>
-      <Form initialValues={filters} distinctValues={distinctValues} />
+      <Form initialValues={cleanedFilters} distinctValues={distinctValues} />
       <Results
         filters={filters}
         data={hits as IResult[]}

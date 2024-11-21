@@ -61,6 +61,24 @@ export type Service = {
   country: string;
   theme: Theme;
   logo?: { data: ImageData } | string;
+  organic?: boolean;
+  local?: boolean;
+  season?: boolean;
+  shortcircuit?: boolean;
+  wastereducer?: boolean;
+  foodwastereducer?: boolean;
+  cookmore?: boolean;
+  used?: boolean;
+  rent?: boolean;
+  mutualise?: boolean;
+  repair?: boolean;
+  ecobuilt?: boolean;
+  lowtech?: boolean;
+  recycled?: boolean;
+  reused?: boolean;
+  diy?: boolean;
+  comparer?: boolean;
+  relocating?: boolean;
 };
 
 export type ActionFilters = {
@@ -93,7 +111,7 @@ export type Filters = {
   sortBy?: string;
   limit?: number;
   start?: number;
-  theme?: Theme;
+  theme?: Theme | '';
   tags?: string[] | undefined;
   codes?: (string | undefined)[];
   region?: Region;

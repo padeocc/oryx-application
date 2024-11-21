@@ -1,8 +1,0 @@
-.filterSelect {
-  &::placeholder {
-    color: var(--mantine-color-default-5);
-  }
-  & input::placeholder {
-    color: var(--mantine-color-default-5);
-  }
-}

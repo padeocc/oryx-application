@@ -40,24 +40,12 @@ export const imagesMapping: { [key: string]: string } = {
   vélos: 'bikes'
 };
 
-export const getActionFilters = (theme: Theme): ActionFilters => {
-  switch (theme) {
-    case 'transports':
-      return {};
-
-    case 'events':
-      return {};
-
-      break;
-    case 'services':
-      return {};
-
-    case 'accommodations':
-      return {};
-
-      break;
-    case 'foods':
-      return {
+export const getActionFilters = (themes?: Theme[]): ActionFilters => {
+  let actions = {};
+  if (!themes || themes.includes('foods')) {
+    actions = {
+      ...actions,
+      ...{
         organic: 'boolean',
         local: 'boolean',
         season: 'boolean',
@@ -65,11 +53,13 @@ export const getActionFilters = (theme: Theme): ActionFilters => {
         wastereducer: 'boolean',
         foodwastereducer: 'boolean',
         cookmore: 'boolean'
-      };
-
-      break;
-    case 'goods':
-      return {
+      }
+    };
+  }
+  if (!themes || themes.includes('goods')) {
+    actions = {
+      ...actions,
+      ...{
         used: 'boolean',
         rent: 'boolean',
         mutualise: 'boolean',
@@ -84,10 +74,8 @@ export const getActionFilters = (theme: Theme): ActionFilters => {
         wastereducer: 'boolean',
         comparer: 'boolean',
         relocating: 'boolean'
-      };
-
-    default:
-      break;
+      }
+    };
   }
-  return {};
+  return actions;
 };
