@@ -12,7 +12,7 @@ const PaginationComponent = ({ page, total, filters }: { page: number; total: nu
       defaultValue={Number(page + 1)}
       value={Number(page + 1)}
       total={total}
-      size={'xl'}
+      size={'md'}
       onChange={(pageNumber: number) => {
         return router.push(`?filters=${JSON.stringify(filters)}&page=${pageNumber}`);
       }}

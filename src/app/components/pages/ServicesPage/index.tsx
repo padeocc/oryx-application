@@ -1,9 +1,9 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
 import { DistinctFilters, Filters } from '@/types';
+import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
-import Form from './components/Form';
-import Results from './components/Results';
+import Content from './components/Content';
 
 const ServicesPage = async ({
   parameters: { filters: filtersParam, page: pageParam = '1' }
@@ -56,21 +56,21 @@ const ServicesPage = async ({
       if (value) {
         return { ...all, [key]: value };
       }
-      return { ...all, [key]: '' };
+      return { ...all, [key]: undefined };
     }, {})
   };
 
   return (
-    <>
-      <Form initialValues={cleanedFilters} distinctValues={distinctValues} />
-      <Results
-        filters={filters}
-        data={hits as IResult[]}
-        total={nbPages}
-        activePage={page}
+    <Stack gap="xl">
+      <Content
+        filters={cleanedFilters}
+        distinctValues={distinctValues}
+        hits={hits as IResult[]}
+        pagesCount={nbPages}
+        page={page}
         totalNumberOfResults={nbHits}
       />
-    </>
+    </Stack>
   );
 };
 

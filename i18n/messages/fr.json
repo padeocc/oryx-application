@@ -319,7 +319,7 @@
     "filter-location-label": "Types de magasin",
     "filter-region-label": "Régions",
     "filter-theme-label": "Thèmes",
-    "form-drawer-label": "Filtres avancés",
+    "form-drawer-label": "{count, plural, =0 {Filtres avancés} other {Filtres avancés ({count})}}",
     "form-clear-filters-label": "Réinitialiser les filtres",
     "action-organic-label": "Produits biologiques",
     "action-local-label": "Produits locaux",
@@ -338,7 +338,8 @@
     "action-reused-label": "Réutilisé",
     "action-diy-label": "Faire soi-même",
     "action-comparer-label": "Comparer",
-    "action-relocating-label": "Relocaliser"
+    "action-relocating-label": "Relocaliser",
+    "form-submit-actions-label": "Filtrer avec ces actions"
   },
   "signup_form_page": {
     "email_label": "Adresse email",
