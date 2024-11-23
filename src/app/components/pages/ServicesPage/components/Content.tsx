@@ -3,17 +3,18 @@
 import { IResult } from '@/algolia/types';
 import { DistinctFilters, Filters } from '@/types';
 import { Divider, Stack } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from './Form';
 import Results from './Results';
 
-const Content = async ({
+const Content = ({
   filters,
   distinctValues,
   hits,
   pagesCount,
   page,
-  totalNumberOfResults
+  totalNumberOfResults,
+  asLoader = false
 }: {
   filters: Filters;
   distinctValues: DistinctFilters;
@@ -21,12 +22,17 @@ const Content = async ({
   pagesCount: number;
   page: number;
   totalNumberOfResults: number;
+  asLoader?: boolean;
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(asLoader);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [filters]);
 
   return (
     <Stack gap="xl">
-      <Form initialValues={filters} distinctValues={distinctValues} setIsLoading={setIsLoading} isLoading={isLoading} />
+      <Form initialValues={filters} distinctValues={distinctValues} isLoading={isLoading} setIsLoading={setIsLoading} />
       <Divider />
       <Results
         filters={filters}

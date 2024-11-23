@@ -21,7 +21,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   }
 
   // @ts-ignore
-  const fields = Object.keys(getActionFilters(theme)).filter((f: string) => !!service?.[f]);
+  const fields = Object.keys(getActionFilters([theme])).filter((f: string) => !!service?.[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 

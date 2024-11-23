@@ -47,7 +47,7 @@ const ServiceCard = ({
     return <NotFound />;
   }
 
-  const fields = Object.keys(getActionFilters(theme))
+  const fields = Object.keys(getActionFilters([theme]))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));

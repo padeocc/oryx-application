@@ -27,13 +27,13 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 const Form = ({
   initialValues,
   distinctValues,
-  setIsLoading,
-  isLoading
+  isLoading,
+  setIsLoading
 }: {
   initialValues: Filters;
   distinctValues: DistinctFilters;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
   const t = useTranslations('services');
   const tFilters = useTranslations('filters_component');
@@ -45,10 +45,6 @@ const Form = ({
     form.setValues(initialValues);
     form.setInitialValues(initialValues);
   }, [initialValues]);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   const getFilters = (facet: FacetHits[], name: string): ComboboxData => {
     const list = facet.map(({ value, count }) => {
@@ -64,6 +60,7 @@ const Form = ({
   });
 
   const handleSubmit = (values: Filters) => {
+    setIsLoading(true);
     const cleanedValues: Filters = Object.keys(values).reduce((all, valueKey) => {
       /* @ts-ignore */
       const value = values?.[valueKey];
@@ -73,7 +70,7 @@ const Form = ({
       return { ...all, [valueKey]: value };
     }, {});
 
-    return redirect(`?filters=${encodeURIComponent(JSON.stringify(cleanedValues))}`);
+    redirect(`/services?filters=${encodeURIComponent(JSON.stringify(cleanedValues))}&loader=true`);
   };
 
   const values = form.getValues();
@@ -95,12 +92,14 @@ const Form = ({
         loaderProps={{ color: 'green_oryx', type: 'bars' }}
       />
       <form
-        onSubmit={() => {
-          setIsLoading(true);
+        onSubmit={e => {
+          e.preventDefault();
+          e.stopPropagation();
         }}
-        action={async (values: FormData) => {
-          handleSubmit(Object.fromEntries(values.entries()));
-        }}>
+        // action={async (values: FormData) => {
+        //   handleSubmit(Object.fromEntries(values.entries()));
+        // }}
+      >
         <Stack>
           <TextInput
             size="xl"
@@ -183,7 +182,13 @@ const Form = ({
               }}>
               {t('form-clear-filters-label')}
             </Button>
-            <Button size="lg" type="submit" disabled={!form.isDirty()}>
+            <Button
+              size="lg"
+              type="submit"
+              disabled={!form.isDirty()}
+              onClick={() => {
+                handleSubmit(form.getValues());
+              }}>
               <MagnifyingGlass size={'2rem'} />
             </Button>
           </Group>

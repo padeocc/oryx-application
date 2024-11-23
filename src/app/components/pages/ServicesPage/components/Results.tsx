@@ -28,14 +28,11 @@ const Results = ({
   if (isLoading) {
     return (
       <Stack>
-        <Group justify="space-between">
-          <Skeleton />
-        </Group>
         <Grid justify="flex-start" align="top" mt="lg">
-          {[...Array(9)].map((_item, index) => (
+          {[...Array(12)].map((_item, index) => (
             <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`skel-${index}`}>
               <Card>
-                <Skeleton height={'10rem'}></Skeleton>
+                <Skeleton height={'12rem'} />
               </Card>
             </GridCol>
           ))}

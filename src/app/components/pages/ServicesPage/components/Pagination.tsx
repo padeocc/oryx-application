@@ -6,16 +6,13 @@ import { useRouter } from 'next/navigation';
 
 const PaginationComponent = ({ page, total, filters }: { page: number; total: number; filters: Filters }) => {
   const router = useRouter();
-
   return (
     <Pagination
       defaultValue={Number(page + 1)}
       value={Number(page + 1)}
       total={total}
       size={'md'}
-      onChange={(pageNumber: number) => {
-        return router.push(`?filters=${JSON.stringify(filters)}&page=${pageNumber}`);
-      }}
+      onChange={(pageNumber: number) => router.push(`?filters=${JSON.stringify(filters)}&page=${pageNumber}`)}
     />
   );
 };
