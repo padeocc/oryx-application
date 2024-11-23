@@ -24,7 +24,7 @@ const Content = ({
   totalNumberOfResults: number;
   asLoader?: boolean;
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(asLoader);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setIsLoading(false);

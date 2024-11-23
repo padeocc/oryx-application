@@ -70,7 +70,7 @@ const Form = ({
       return { ...all, [valueKey]: value };
     }, {});
 
-    redirect(`/services?filters=${encodeURIComponent(JSON.stringify(cleanedValues))}&loader=true`);
+    redirect(`/services?filters=${encodeURIComponent(JSON.stringify(cleanedValues))}`);
   };
 
   const values = form.getValues();
@@ -95,11 +95,7 @@ const Form = ({
         onSubmit={e => {
           e.preventDefault();
           e.stopPropagation();
-        }}
-        // action={async (values: FormData) => {
-        //   handleSubmit(Object.fromEntries(values.entries()));
-        // }}
-      >
+        }}>
         <Stack>
           <TextInput
             size="xl"

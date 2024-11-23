@@ -3,7 +3,7 @@ import { transformServicesFromResults } from '@/algolia/utils';
 import ServiceCard from '@/app/components/ServiceCard';
 import { themesColors } from '@/config';
 import { Filters } from '@/types';
-import { Alert, Card, Grid, GridCol, Group, Skeleton, Stack, Text, Title } from '@mantine/core';
+import { Alert, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { SmileyMeh } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import Pagination from './Pagination';
@@ -31,9 +31,11 @@ const Results = ({
         <Grid justify="flex-start" align="top" mt="lg">
           {[...Array(12)].map((_item, index) => (
             <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`skel-${index}`}>
-              <Card>
-                <Skeleton height={'12rem'} />
-              </Card>
+              <ServiceCard
+                color={'var(--mantine-primary-color-7)'}
+                asLoader
+                backgroundColor={'var(--mantine-primary-color-2)'}
+              />
             </GridCol>
           ))}
         </Grid>

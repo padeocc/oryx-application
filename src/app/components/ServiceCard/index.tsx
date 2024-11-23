@@ -13,6 +13,8 @@ import {
   GridCol,
   Group,
   Image,
+  Loader,
+  Skeleton,
   Stack,
   StyleProp,
   Title,
@@ -31,19 +33,36 @@ const ServiceCard = ({
   backgroundColor,
   theme,
   color,
-  titleOrder = 3
+  titleOrder = 3,
+  asLoader
 }: {
-  service: Service;
+  service?: Service;
   noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
-  theme: Theme;
+  theme?: Theme;
   color: string;
   titleOrder?: TitleOrder;
+  asLoader?: boolean;
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
 
-  if (!service) {
+  if (asLoader) {
+    return (
+      <Card h={'100%'} bg={backgroundColor} color={color} className={style['card']}>
+        <CardSection m="sm">
+          <Group align="center" justify="center">
+            <Loader color={color} />
+          </Group>
+        </CardSection>
+        <CardSection c={color}>
+          <Skeleton h="3rem" />
+        </CardSection>
+      </Card>
+    );
+  }
+
+  if (!service || !theme) {
     return <NotFound />;
   }
 
