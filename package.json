@@ -14,7 +14,7 @@
     "@mantine/form": "^7.14.1",
     "@mantine/spotlight": "^7.14.1",
     "@phosphor-icons/react": "^2.1.7",
-    "algoliasearch": "^5.14.2",
+    "algoliasearch": "^5.15.0",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
     "next": "15.0.3",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/lodash": "^4.17.13",
     "@types/node": "^22",
-    "@types/nodemailer": "^6.4.16",
+    "@types/nodemailer": "^6.4.17",
     "@types/qs": "^6.9.17",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",

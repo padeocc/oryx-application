@@ -55,6 +55,7 @@
     "filter-lowtech-label": "Low tech",
     "filter-mutualise-label": "Mutualiser",
     "filter-organic-label": "Consommer bio",
+    "filter-economic-label": "Economique",
     "filter-recycled-label": "Recycler",
     "filter-region-label": "Région (un seul choix possible)",
     "filter-relocating-label": "Relocaliser",
@@ -214,6 +215,7 @@
     "example_food": "Comment consommer local, de saison, et bio ?",
     "example_phone": "Où acheter des produits électronique d'occasion en ligne ?",
     "example_train": "Comment partir à Rome en train depuis chez moi ?",
+    "example_economic": "Comment faire des économies ?",
     "examples_title": "Que peut faire Oryx pour vous ?",
     "find_inspiration": "Trouver un service !",
     "find_others_inspiration": "Chercher selon vos envies !",
@@ -339,6 +341,7 @@
     "action-diy-label": "Faire soi-même",
     "action-comparer-label": "Comparer",
     "action-relocating-label": "Relocaliser",
+    "action-economic-label": "Choix économiques",
     "form-submit-actions-label": "Filtrer avec ces actions"
   },
   "signup_form_page": {

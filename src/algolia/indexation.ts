@@ -102,6 +102,7 @@ export const runIndexation = async () => {
       location: service.location,
       updatedAt: service.updatedAt.toString(),
       organic: service?.organic,
+      economic: service?.economic,
       local: service?.local,
       season: service?.season,
       shortcircuit: service?.shortcircuit,

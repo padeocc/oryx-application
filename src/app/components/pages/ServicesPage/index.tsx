@@ -29,6 +29,7 @@ const ServicesPage = async ({
     theme: '',
     query: '',
     organic: false,
+    economic: false,
     local: false,
     season: false,
     shortcircuit: false,

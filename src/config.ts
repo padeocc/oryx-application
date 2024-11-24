@@ -52,7 +52,8 @@ export const getActionFilters = (themes?: Theme[]): ActionFilters => {
         shortcircuit: 'boolean',
         wastereducer: 'boolean',
         foodwastereducer: 'boolean',
-        cookmore: 'boolean'
+        cookmore: 'boolean',
+        economic: 'boolean'
       }
     };
   }
@@ -67,6 +68,7 @@ export const getActionFilters = (themes?: Theme[]): ActionFilters => {
         ecobuilt: 'boolean',
         local: 'boolean',
         organic: 'boolean',
+        econoic: 'boolean',
         lowtech: 'boolean',
         recycled: 'boolean',
         reused: 'boolean',
