@@ -3,6 +3,7 @@ import { Icon } from '@phosphor-icons/react';
 import { BowlFood, BuildingApartment, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 import { ActionFilters } from './types';
 
+export const PAGINATION_LIMIT = 20;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 
 export const themesIcons: { [key: string]: Icon } = {
@@ -19,7 +20,7 @@ export const themesColors: { [key: string]: DefaultMantineColor } = {
   foods: 'orange.7',
   goods: 'pink.7',
   events: 'blue.7',
-  services: 'grape.3',
+  services: 'grape.7',
   accommodations: 'indigo.9'
 };
 
@@ -39,36 +40,27 @@ export const imagesMapping: { [key: string]: string } = {
   vélos: 'bikes'
 };
 
-export const getActionFilters = (theme: Theme): ActionFilters => {
-  switch (theme) {
-    case 'transports':
-      return {};
-
-    case 'events':
-      return {};
-
-      break;
-    case 'services':
-      return {};
-
-    case 'accommodations':
-      return {};
-
-      break;
-    case 'foods':
-      return {
+export const getActionFilters = (themes?: Theme[]): ActionFilters => {
+  let actions = {};
+  if (!themes || themes.includes('foods')) {
+    actions = {
+      ...actions,
+      ...{
         organic: 'boolean',
         local: 'boolean',
         season: 'boolean',
         shortcircuit: 'boolean',
         wastereducer: 'boolean',
         foodwastereducer: 'boolean',
-        cookmore: 'boolean'
-      };
-
-      break;
-    case 'goods':
-      return {
+        cookmore: 'boolean',
+        economic: 'boolean'
+      }
+    };
+  }
+  if (!themes || themes.includes('goods')) {
+    actions = {
+      ...actions,
+      ...{
         used: 'boolean',
         rent: 'boolean',
         mutualise: 'boolean',
@@ -76,6 +68,7 @@ export const getActionFilters = (theme: Theme): ActionFilters => {
         ecobuilt: 'boolean',
         local: 'boolean',
         organic: 'boolean',
+        economic: 'boolean',
         lowtech: 'boolean',
         recycled: 'boolean',
         reused: 'boolean',
@@ -83,10 +76,8 @@ export const getActionFilters = (theme: Theme): ActionFilters => {
         wastereducer: 'boolean',
         comparer: 'boolean',
         relocating: 'boolean'
-      };
-
-    default:
-      break;
+      }
+    };
   }
-  return {};
+  return actions;
 };

@@ -6,7 +6,7 @@ import { Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import ServiceCard from '../../ActionsPage/components/ServiceCard';
+import ServiceCard from '../../../ServiceCard';
 import style from './theme-section.module.css';
 
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
@@ -19,7 +19,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     c: color,
     size: 'md',
     component: Link,
-    href: `/actions/${theme}`,
+    href: `/services?filters={"theme":"${theme}"}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
   };
 
@@ -39,7 +39,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
       </Group>
       <Grid justify="stretch" c={color}>
         {items.map((service, index) => (
-          <GridCol span={{ base: 12, xs: 6, md: 3 }} key={`action-${service.name}-${index}`}>
+          <GridCol span={{ base: 12, xs: 6, md: 3 }} key={`action-${service.theme}-${service.name}-${index}`}>
             <ServiceCard
               service={service}
               backgroundColor={'var(--mantine-primary-color-2)'}

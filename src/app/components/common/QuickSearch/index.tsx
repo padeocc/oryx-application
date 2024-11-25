@@ -2,7 +2,7 @@
 
 import '@mantine/spotlight/styles.css';
 
-import { IResults } from '@/algolia/types';
+import { IResult } from '@/algolia/types';
 import { useState } from 'react';
 import Modal from './Modal';
 
@@ -15,7 +15,7 @@ const QuickSearch = ({
   label: string;
   onSearch: ({ query }: { query: string }) => any;
 }) => {
-  const [results, setResults] = useState<IResults[]>([]);
+  const [results, setResults] = useState<IResult[]>([]);
   return <Modal onSearch={onSearch} results={results} setResults={setResults} label={label} size={size} />;
 };
 

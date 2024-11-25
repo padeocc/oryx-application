@@ -1,9 +1,7 @@
-import { search } from '@/algolia/search';
 import { Button, Container, Group, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import QuickSearch from '../common/QuickSearch';
 import { getFooterLinks, getNavigationItems } from './items';
 
 const HeaderMenuDesktop = async () => {
@@ -62,7 +60,9 @@ const HeaderMenuDesktop = async () => {
 
   return (
     <Group gap={'lg'}>
-      <QuickSearch onSearch={search} label={t('actions_label')} />
+      <Button component={Link} href="/services">
+        {t('actions_label')}
+      </Button>
       {elements} {more}
     </Group>
   );

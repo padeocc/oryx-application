@@ -2,7 +2,7 @@
 
 import '@mantine/spotlight/styles.css';
 
-import { IResults } from '@/algolia/types';
+import { IResult } from '@/algolia/types';
 import { Button, Image, Loader, Stack, Text } from '@mantine/core';
 import { Spotlight, SpotlightActionData, spotlight } from '@mantine/spotlight';
 import { ArrowSquareOut, MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
@@ -18,8 +18,8 @@ const Modal = ({
   size = 'md'
 }: {
   onSearch: ({ query }: { query: string }) => any;
-  results: IResults[];
-  setResults: Dispatch<SetStateAction<IResults[]>>;
+  results: IResult[];
+  setResults: Dispatch<SetStateAction<IResult[]>>;
   label: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }) => {

@@ -21,7 +21,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   }
 
   // @ts-ignore
-  const fields = Object.keys(getActionFilters(theme)).filter((f: string) => !!service?.[f]);
+  const fields = Object.keys(getActionFilters([theme])).filter((f: string) => !!service?.[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
@@ -42,13 +42,18 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
       <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
         <Group gap={'xs'}>
           {type && (
-            <Badge key={`tag-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+            <Badge
+              key={`tag-${theme}-${code}-${type}`}
+              size="sm"
+              variant="outline"
+              color="var(--mantine-color-dark-outline)"
+              bg="white">
               {t(`type-${typeLabel}-label`)}
             </Badge>
           )}
           {service.location ? (
             <Badge
-              key={`tag-${service.location}`}
+              key={`tag-${theme}-${service.name}-${service.location}`}
               size="sm"
               variant="outline"
               color="var(--mantine-color-dark-outline)"
@@ -59,7 +64,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
 
           {labelRegion ? (
             <Badge
-              key={`tag-${service.location}`}
+              key={`tag-${theme}-${service.name}-${service.region}`}
               size="sm"
               variant="outline"
               color="var(--mantine-color-dark-outline)"
@@ -69,14 +74,14 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
           ) : null}
 
           {tags.map(tag => (
-            <Badge key={`tag-${tag}`} size="sm" variant="outline" color={'white'} bg={color}>
+            <Badge key={`tag-${theme}-${service.name}-${tag}`} size="sm" variant="outline" color={'white'} bg={color}>
               {tag}
             </Badge>
           ))}
           {fields.map(field => {
             return (
               <Badge
-                key={`tag-${field}`}
+                key={`tag-${theme}-${service.name}-${field}`}
                 size="sm"
                 variant="outline"
                 color="var(--mantine-color-dark-outline)"

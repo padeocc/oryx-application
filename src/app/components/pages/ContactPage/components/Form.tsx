@@ -77,14 +77,14 @@ const Form = ({
           <TextInput
             withAsterisk
             label={t('form-name-label')}
-            placeholder={t('form-name-palceholder')}
+            placeholder={t('form-name-placeholder')}
             name="name"
             disabled={isSending}
             {...form.getInputProps('name')}
           />
           <TextInput
             label={t('form-company-label')}
-            placeholder={t('form-company-palceholder')}
+            placeholder={t('form-company-placeholder')}
             name="company"
             disabled={isSending}
             {...form.getInputProps('company')}
@@ -93,7 +93,7 @@ const Form = ({
             type="email"
             withAsterisk
             label={t('form-email-label')}
-            placeholder={t('form-email-palceholder')}
+            placeholder={t('form-email-placeholder')}
             name="email"
             disabled={isSending}
             {...form.getInputProps('email')}
@@ -102,7 +102,7 @@ const Form = ({
           <Textarea
             {...form.getInputProps('message')}
             label={t('form-message-label')}
-            placeholder={t('form-message-palceholder')}
+            placeholder={t('form-message-placeholder')}
             withAsterisk
             name="message"
             disabled={isSending}

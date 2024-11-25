@@ -1,13 +1,8 @@
 import { Theme, themesColors, themesIcons } from '@/config';
 import { Alert, Container, SimpleGrid, Stack, Text } from '@mantine/core';
-import { PottedPlant } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-
-const getIconFromTheme = (theme: Theme, selected: boolean = false) => {
-  const Icon = themesIcons?.[theme] || PottedPlant;
-  return <Icon size={30} style={{ cursor: 'pointer' }} weight={selected ? 'fill' : 'regular'} />;
-};
+import { getIconFromTheme } from '../content/utils-ui';
 
 const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: Theme; coloredByDefault?: boolean }) => {
   const tTheme = useTranslations('themes');
@@ -18,12 +13,15 @@ const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: The
 
     return (
       <Link
-        href={`/actions/${parsedTheme}`}
+        href={`/services?filters={"theme":"${parsedTheme}"}`}
         style={{ color: 'inherit', textDecoration: 'none' }}
         key={`select-theme-${parsedTheme}`}>
         <Stack align="center" gap={'xs'}>
           <Container c={actualColor}>
-            {getIconFromTheme(parsedTheme as Theme, selectedTheme === parsedTheme || coloredByDefault)}
+            {getIconFromTheme({
+              theme: parsedTheme as Theme,
+              selected: selectedTheme === parsedTheme || coloredByDefault
+            })}
           </Container>
           <Text fz="xs" ta="center" c={actualColor} visibleFrom="sm">
             {tTheme(parsedTheme)}

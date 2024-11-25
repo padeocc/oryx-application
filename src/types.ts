@@ -1,3 +1,4 @@
+import { FacetHits } from 'algoliasearch';
 import { Theme } from './config';
 
 export type Category = string;
@@ -58,7 +59,27 @@ export type Service = {
   region: Region;
   location: string;
   country: string;
-  logo?: { data: ImageData };
+  theme: Theme;
+  logo?: { data: ImageData } | string;
+  organic?: boolean;
+  economic?: boolean;
+  local?: boolean;
+  season?: boolean;
+  shortcircuit?: boolean;
+  wastereducer?: boolean;
+  foodwastereducer?: boolean;
+  cookmore?: boolean;
+  used?: boolean;
+  rent?: boolean;
+  mutualise?: boolean;
+  repair?: boolean;
+  ecobuilt?: boolean;
+  lowtech?: boolean;
+  recycled?: boolean;
+  reused?: boolean;
+  diy?: boolean;
+  comparer?: boolean;
+  relocating?: boolean;
 };
 
 export type ActionFilters = {
@@ -77,6 +98,7 @@ export type ActionFilters = {
     | 'ecobuilt'
     | 'local'
     | 'organic'
+    | 'economic'
     | 'lowtech'
     | 'recycled'
     | 'reused'
@@ -87,15 +109,17 @@ export type ActionFilters = {
 };
 
 export type Filters = {
+  query?: string;
   sortBy?: string;
   limit?: number;
   start?: number;
-  theme: Theme;
+  theme?: Theme | '';
   tags?: string[] | undefined;
   codes?: (string | undefined)[];
   region?: Region;
   location?: string;
   organic?: boolean;
+  economic?: boolean;
   local?: boolean;
   season?: boolean;
   shortcircuit?: boolean;
@@ -113,6 +137,10 @@ export type Filters = {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
+};
+
+export type DistinctFilters = {
+  [key in 'theme' | 'region' | 'location']: FacetHits[];
 };
 
 export type APIFilters = {

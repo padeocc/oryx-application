@@ -13,6 +13,8 @@ import {
   GridCol,
   Group,
   Image,
+  Loader,
+  Skeleton,
   Stack,
   StyleProp,
   Title,
@@ -31,28 +33,43 @@ const ServiceCard = ({
   backgroundColor,
   theme,
   color,
-  titleOrder = 3
+  titleOrder = 3,
+  asLoader
 }: {
-  service: Service;
+  service?: Service;
   noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
-  theme: Theme;
+  theme?: Theme;
   color: string;
   titleOrder?: TitleOrder;
+  asLoader?: boolean;
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
 
-  if (!service) {
+  if (asLoader) {
+    return (
+      <Card h={'100%'} bg={backgroundColor} color={color} className={style['card']}>
+        <CardSection m="sm">
+          <Group align="center" justify="center">
+            <Loader color={color} />
+          </Group>
+        </CardSection>
+        <CardSection c={color}>
+          <Skeleton h="3rem" />
+        </CardSection>
+      </Card>
+    );
+  }
+
+  if (!service || !theme) {
     return <NotFound />;
   }
 
-  const fields = Object.keys(getActionFilters(theme))
+  const fields = Object.keys(getActionFilters([theme]))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
-
-  const domain = process.env.NEXT_PUBLIC_STRAPI_ENDPOINT;
 
   return (
     <Card
@@ -64,7 +81,7 @@ const ServiceCard = ({
       className={style['card']}>
       {!noImage ? (
         <CardSection>
-          <Image src={getLogoImage({ service, theme, domain })} alt={service.name} height={100} />
+          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
         </CardSection>
       ) : null}
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
@@ -73,7 +90,11 @@ const ServiceCard = ({
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
-                  <Tags tags={[...(service?.tags || []), ...fields]} color={color} />
+                  <Tags
+                    tags={[...(service?.tags || []), ...fields]}
+                    color={color}
+                    basekey={`${theme}-${service.name}`}
+                  />
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>

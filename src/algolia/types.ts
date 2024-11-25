@@ -1,6 +1,6 @@
 import { Theme } from '@/config';
 
-export interface IResults {
+export interface IResult {
   label: string;
   description: string;
   url: string;
@@ -8,4 +8,6 @@ export interface IResults {
   id: string;
   theme: Theme;
   tags: string;
+  region: string;
+  location: string;
 }
