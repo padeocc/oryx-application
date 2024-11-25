@@ -1,4 +1,4 @@
-import { Alert, CSSProperties, Flex, Grid, GridCol, Space, Stack } from '@mantine/core';
+import { Alert, CSSProperties, Flex, Grid, GridCol, Space, Stack, Text, Title } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
 import { CurrencyEur, PersonSimpleBike, Phone, Plant, Train } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
@@ -23,8 +23,13 @@ const ExamplesSection = async () => {
   const t = await getTranslations('home_page');
 
   return (
-    <Alert title={t('examples_title')} p="md">
+    <Alert p="md">
       <Stack>
+        <Title order={2}>
+          <Text fz="2rem" c="green_oryx" fw="bold">
+            {t('examples_title')}
+          </Text>
+        </Title>
         <Grid justify="space-between">
           <Example link={`/services?filters={"economic": true}`} Icon={CurrencyEur} text={t('example_economic')} />
           <Example

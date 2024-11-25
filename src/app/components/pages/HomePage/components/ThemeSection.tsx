@@ -17,7 +17,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const moreLinkProps = {
     c: color,
-    size: 'md',
+    size: 'lg',
     component: Link,
     href: `/services?filters={"theme":"${theme}"}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
@@ -26,8 +26,14 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   return (
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
       <Group gap={'xs'}>
-        <Icon size="1.2rem" />
-        <Title order={3}>{tTheme(theme)}</Title>
+        <Title order={3}>
+          <Group justify="center" align="center" c={color} gap={'xs'}>
+            <Icon size="1.4rem" />
+            <Text fz={'xl'} c={'inherit'} fw="bold">
+              {tTheme(theme)}
+            </Text>
+          </Group>
+        </Title>
         {mouseOver ? (
           <Text visibleFrom="sm" {...moreLinkProps} className={style['more-text-container']}>
             {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
