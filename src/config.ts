@@ -68,7 +68,7 @@ export const getActionFilters = (themes?: Theme[]): ActionFilters => {
         ecobuilt: 'boolean',
         local: 'boolean',
         organic: 'boolean',
-        econoic: 'boolean',
+        economic: 'boolean',
         lowtech: 'boolean',
         recycled: 'boolean',
         reused: 'boolean',

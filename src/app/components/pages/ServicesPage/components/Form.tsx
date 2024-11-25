@@ -11,6 +11,7 @@ import {
   Flex,
   Group,
   LoadingOverlay,
+  Pill,
   Select,
   SimpleGrid,
   Stack,
@@ -127,7 +128,7 @@ const Form = ({
               clearable
               miw={'35%'}
               maxLength={10}
-              renderOption={({ option, checked }) => {
+              renderOption={({ option }) => {
                 const color = themesColors[option.value];
                 const themeIcon = getIconFromTheme({
                   theme: option.value as Theme,
@@ -162,6 +163,31 @@ const Form = ({
               clearable
             />
           </SimpleGrid>
+          <Group>
+            {selectedActions.map(action => {
+              return (
+                <Pill
+                  key={`action-pill-${action}`}
+                  withRemoveButton
+                  disabled={isLoading}
+                  onRemove={() => {
+                    const values = form.getValues();
+                    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+                      /*@ts-ignore*/
+                      const value = values?.[valueKey];
+                      if (valueKey === action) {
+                        return all;
+                      }
+                      return { ...all, [valueKey]: value };
+                    }, {});
+
+                    handleSubmit(updatedValues);
+                  }}>
+                  {t(`action-${action}-label`)}
+                </Pill>
+              );
+            })}
+          </Group>
           <Group align="end" justify="end">
             {Object.keys(actions)?.length ? (
               <Button onClick={openDrawer} variant="transparent">
@@ -206,7 +232,6 @@ const Form = ({
                   size="xs"
                   key={`chip_${action}`}
                   name={action}
-                  checked={selectedActions.includes(action)}
                   defaultChecked={selectedActions.includes(action)}
                   {...form.getInputProps(action)}
                 />

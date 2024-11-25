@@ -28,7 +28,7 @@ const ExamplesSection = async () => {
         <Grid justify="space-between">
           <Example link={`/services?filters={"economic": true}`} Icon={CurrencyEur} text={t('example_economic')} />
           <Example
-            link={`/services?filters={"theme":"transports", "region":"31"}`}
+            link={`/services?filters={"theme":"transports", "region":"31", "query": "vélo"}`}
             Icon={PersonSimpleBike}
             text={t('example_bike')}
           />

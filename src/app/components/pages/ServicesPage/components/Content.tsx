@@ -32,7 +32,12 @@ const Content = ({
 
   return (
     <Stack gap="xl">
-      <Form initialValues={filters} distinctValues={distinctValues} isLoading={isLoading} setIsLoading={setIsLoading} />
+      <Form
+        initialValues={filters}
+        distinctValues={distinctValues}
+        isLoading={isLoading || asLoader}
+        setIsLoading={setIsLoading}
+      />
       <Divider />
       <Results
         filters={filters}
@@ -40,7 +45,7 @@ const Content = ({
         total={pagesCount}
         activePage={page}
         totalNumberOfResults={totalNumberOfResults}
-        isLoading={isLoading}
+        isLoading={isLoading || asLoader}
       />
     </Stack>
   );

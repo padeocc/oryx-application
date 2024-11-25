@@ -1,17 +1,18 @@
 import { runIndexation } from '@/algolia/indexation';
 import { revalidateTag } from 'next/cache';
+import { type NextRequest } from 'next/server';
 
-export async function GET(request: Request, { params }: { params: Promise<{ clean: string }> }) {
-  // const clean = (await params)?.clean;
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const clean = searchParams.get('clean');
 
-  // console.log(await params);
-  // if (clean) {
-  /* Removing next.js cache */
-  revalidateTag('cms');
-  /* Reindexing Algolia */
-  const data = await runIndexation();
-  return Response.json({ data });
-  //}
+  if (clean) {
+    /* Removing next.js cache */
+    revalidateTag('cms');
+    /* Reindexing Algolia */
+    const data = await runIndexation();
+    return Response.json({ data });
+  }
 
   return Response.json({ nothing: true });
 }
