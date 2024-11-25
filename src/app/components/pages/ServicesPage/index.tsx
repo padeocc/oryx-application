@@ -26,7 +26,7 @@ const ServicesPage = async ({
   const defaultValues: Filters = {
     region: '',
     location: '',
-    theme: '',
+    theme: undefined,
     query: '',
     organic: false,
     economic: false,

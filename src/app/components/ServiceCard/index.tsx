@@ -29,7 +29,6 @@ import style from './server-card.module.css';
 
 const ServiceCard = ({
   service,
-  noImage = false,
   backgroundColor,
   theme,
   color,
@@ -37,7 +36,6 @@ const ServiceCard = ({
   asLoader
 }: {
   service?: Service;
-  noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
   theme?: Theme;
   color: string;
@@ -79,13 +77,11 @@ const ServiceCard = ({
       onMouseEnter={open}
       onMouseLeave={close}
       className={style['card']}>
-      {!noImage ? (
-        <CardSection>
-          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
-        </CardSection>
-      ) : null}
+      <CardSection>
+        <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
+      </CardSection>
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
-        <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
+        <Stack pt={'md'} justify="space-between" h={'100%'}>
           <Stack>
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>

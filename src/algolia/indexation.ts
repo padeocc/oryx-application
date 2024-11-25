@@ -85,14 +85,11 @@ export const runIndexation = async () => {
     ...goods,
     ...transports
   ].map(service => {
-    /*@ts-ignore*/
-    const logo = service?.logo?.data?.attributes?.url || '';
-
     return {
       description: service.description,
       label: service.name,
       url: service.url,
-      logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
+      logo: service?.logo,
       id: service.code,
       theme: service.theme as Theme,
       tags: (service?.tags || []).join(', '),

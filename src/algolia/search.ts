@@ -31,7 +31,7 @@ export const search = async ({
           indexName: 'code',
           query,
           ignorePlurals: 'true',
-          typoTolerance: 'strict',
+          typoTolerance: 'min',
           facetFilters,
           page,
           hitsPerPage: limit

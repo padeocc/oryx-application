@@ -60,9 +60,6 @@ const HeaderMenuDesktop = async () => {
 
   return (
     <Group gap={'lg'}>
-      <Button component={Link} href="/services">
-        {t('actions_label')}
-      </Button>
       {elements} {more}
     </Group>
   );

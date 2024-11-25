@@ -53,7 +53,7 @@ const Form = ({
       const label = tFilters.has(key) ? tFilters(key) : value;
       return { label: `${label} (${count})`, value };
     });
-    return [...list];
+    return [...list].sort((a, b) => (a.label > b.label ? 1 : -1));
   };
 
   const form = useForm({
@@ -99,7 +99,7 @@ const Form = ({
         }}>
         <Stack>
           <TextInput
-            size="xl"
+            size="md"
             withAsterisk
             label={''}
             placeholder={t('form-query-placeholder')}
@@ -115,12 +115,12 @@ const Form = ({
               </Group>
             }
           />
-          <SimpleGrid cols={3}>
+          <SimpleGrid cols={{ base: 1, sm: 3 }}>
             <Select
               value={initialValues.theme}
               defaultValue={initialValues.theme}
               disabled={isLoading}
-              size="lg"
+              size={'sm'}
               placeholder={t('filter-theme-label')}
               name="theme"
               {...form.getInputProps('theme')}
@@ -143,10 +143,17 @@ const Form = ({
                   </Flex>
                 );
               }}
+              onChange={theme => {
+                const fieldsToReset = getActionFilters(values?.theme ? [values?.theme] : []);
+                Object.keys(fieldsToReset).forEach(field => {
+                  form.setFieldValue(field, false);
+                });
+                form.setFieldValue('theme', (theme as Theme) || undefined);
+              }}
             />
             <Select
               disabled={isLoading}
-              size="lg"
+              size={'sm'}
               placeholder={t('filter-region-label')}
               name="region"
               {...form.getInputProps('region')}
@@ -155,7 +162,7 @@ const Form = ({
             />
             <Select
               disabled={isLoading}
-              size="lg"
+              size={'sm'}
               placeholder={t('filter-location-label')}
               name="location"
               {...form.getInputProps('location')}
@@ -197,6 +204,7 @@ const Form = ({
             <Button
               variant="transparent"
               onClick={() => {
+                setIsLoading(true);
                 form.reset();
                 form.setValues(initialValues);
                 form.setInitialValues(initialValues);
@@ -205,7 +213,7 @@ const Form = ({
               {t('form-clear-filters-label')}
             </Button>
             <Button
-              size="lg"
+              size="md"
               type="submit"
               disabled={!form.isDirty()}
               onClick={() => {
@@ -229,7 +237,7 @@ const Form = ({
                 <Checkbox
                   label={t(`action-${action}-label`)}
                   variant="filled"
-                  size="xs"
+                  size="sm"
                   key={`chip_${action}`}
                   name={action}
                   defaultChecked={selectedActions.includes(action)}

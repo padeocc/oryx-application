@@ -113,7 +113,7 @@ export type Filters = {
   sortBy?: string;
   limit?: number;
   start?: number;
-  theme?: Theme | '';
+  theme?: Theme | undefined;
   tags?: string[] | undefined;
   codes?: (string | undefined)[];
   region?: Region;

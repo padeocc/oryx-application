@@ -1,9 +1,7 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Button, Group, Stack } from '@mantine/core';
+import { Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
-import ThemesBanner from '../../common/ThemesBanner';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
@@ -32,15 +30,10 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'} pt="xl">
       <ExamplesSection />
-      <Group key="header-group-mobile" w="100%" align="center" justify="center">
-        <Button component={Link} href="/services" size="xl">
-          {t('search_label')}
-        </Button>
-      </Group>
-      <ThemesBanner coloredByDefault title={t('explore_themes_label')} />
-      <Stack gap={'xl'} pt="xl">
-        {themesSections}
-      </Stack>
+      <Text fz="2rem" c="green_oryx" fw="bold">
+        {t('explore_themes_label')}
+      </Text>
+      {themesSections}
     </Stack>
   );
 };

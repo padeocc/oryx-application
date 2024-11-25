@@ -1,4 +1,4 @@
-import { Button, Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
+import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
@@ -36,10 +36,6 @@ const HeaderMenuMobile = async () => {
           </div>
         ))}
         <MenuDivider />
-
-        <Button component={Link} href="/services">
-          {t('actions_label')}
-        </Button>
 
         <MenuDivider />
         {(await getFooterLinks()).map((itemsGroup, itemgroupindex) => (
