@@ -1,6 +1,6 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Button, Group, Stack, Title } from '@mantine/core';
+import { Button, Group, Stack } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import ThemesBanner from '../../common/ThemesBanner';
@@ -30,20 +30,15 @@ const HomePage = async ({}: {}) => {
     })
   );
   return (
-    <Stack gap={'xl'}>
-      <Stack gap={'2.5rem'} pt="2rem">
-        <Stack gap="md">
-          <ExamplesSection />
-          <Group key="header-group-mobile" w="100%" align="center" justify="center">
-            <Button component={Link} href="/services" size="xl">
-              {t('search_label')}
-            </Button>
-          </Group>
-        </Stack>
-        <Stack gap="sm">
-          <Title order={3}>{t('explore_themes_label')}</Title>
-          <ThemesBanner coloredByDefault />
-        </Stack>
+    <Stack gap={'xl'} pt="xl">
+      <ExamplesSection />
+      <Group key="header-group-mobile" w="100%" align="center" justify="center">
+        <Button component={Link} href="/services" size="xl">
+          {t('search_label')}
+        </Button>
+      </Group>
+      <ThemesBanner coloredByDefault title={t('explore_themes_label')} />
+      <Stack gap={'xl'} pt="xl">
         {themesSections}
       </Stack>
     </Stack>

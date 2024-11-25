@@ -4,7 +4,15 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { getIconFromTheme } from '../content/utils-ui';
 
-const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: Theme; coloredByDefault?: boolean }) => {
+const ThemesBanner = ({
+  selectedTheme,
+  coloredByDefault,
+  title
+}: {
+  selectedTheme?: Theme;
+  coloredByDefault?: boolean;
+  title?: string;
+}) => {
   const tTheme = useTranslations('themes');
 
   const themesOptions = Object.keys(themesIcons).map(parsedTheme => {
@@ -33,7 +41,14 @@ const ThemesBanner = ({ selectedTheme, coloredByDefault }: { selectedTheme?: The
 
   return (
     <Alert>
-      <SimpleGrid cols={{ base: 7, sm: 7, md: 7, lg: 9 }}>{themesOptions}</SimpleGrid>
+      <Stack gap="xl">
+        {title ? (
+          <Text fz="2rem" c="green_oryx" fw="bold">
+            {title}
+          </Text>
+        ) : null}
+        <SimpleGrid cols={{ base: 7, sm: 7, md: 7, lg: 9 }}>{themesOptions}</SimpleGrid>
+      </Stack>
     </Alert>
   );
 };
