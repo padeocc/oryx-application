@@ -5,17 +5,22 @@ import { getIconFromTheme } from '@/app/components/content/utils-ui';
 import { getActionFilters, Theme, themesColors } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
 import {
+  Alert,
   Button,
   Checkbox,
+  Collapse,
   ComboboxData,
-  Drawer,
+  Divider,
   Flex,
+  Grid,
+  GridCol,
   Group,
   LoadingOverlay,
   Pill,
   Select,
   SimpleGrid,
   Stack,
+  Text,
   TextInput
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -23,34 +28,51 @@ import { useDisclosure } from '@mantine/hooks';
 import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 const Form = ({
   initialValues,
   distinctValues,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  suggestions
 }: {
   initialValues: Filters;
   distinctValues: DistinctFilters;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  suggestions?: string[];
 }) => {
   const t = useTranslations('services');
   const tFilters = useTranslations('filters_component');
-  const [openedDrawer, { open: openDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [openedDrawer, { toggle }] = useDisclosure(false);
+
   const [actions, setActions] = useState<ActionFilters>(getActionFilters());
+  const typingTimeoutRef = useRef(null);
 
   useEffect(() => {
     setActions(getActionFilters(initialValues.theme ? [initialValues.theme] : undefined));
     form.setValues(initialValues);
   }, [initialValues]);
 
-  const getFilters = (facet: FacetHits[], name: string): ComboboxData => {
+  const getFilters = (facet: FacetHits[], name: string, splitter?: string): ComboboxData => {
     const list = facet.map(({ value, count }) => {
-      const key = `${name}_${value.replaceAll(' ', '-')}_label`;
-      const label = tFilters.has(key) ? tFilters(key) : value;
+      let label = '';
+      if (splitter) {
+        const pieces = value.split(splitter);
+        label = pieces
+          .map(piece => {
+            const cleanedPiece = piece.trim();
+            const key = `${name}_${cleanedPiece.replaceAll(' ', '-')}_label`;
+            return tFilters.has(key) ? tFilters(key) : cleanedPiece;
+          })
+          .join(', ');
+      } else {
+        const key = `${name}_${value.replaceAll(' ', '-')}_label`;
+        label = tFilters.has(key) ? tFilters(key) : value;
+      }
       return { label: `${label} (${count})`, value };
     });
     return [...list].sort((a, b) => (a.label > b.label ? 1 : -1));
@@ -107,6 +129,19 @@ const Form = ({
             name="query"
             disabled={isLoading}
             {...form.getInputProps('query')}
+            onChange={event => {
+              const value = event.target.value;
+              form.setFieldValue('query', value);
+
+              if (typingTimeoutRef.current) {
+                clearTimeout(typingTimeoutRef.current);
+              }
+
+              //@ts-ignore
+              typingTimeoutRef.current = setTimeout(() => {
+                handleSubmit(form.getValues());
+              }, 700);
+            }}
           />
           <SimpleGrid cols={{ base: 1, sm: 3 }}>
             <Select
@@ -141,6 +176,7 @@ const Form = ({
                   form.setFieldValue(field, false);
                 });
                 form.setFieldValue('theme', (theme as Theme) || undefined);
+                handleSubmit(form.getValues());
               }}
             />
             <Select
@@ -149,7 +185,11 @@ const Form = ({
               placeholder={t('filter-region-label')}
               name="region"
               {...form.getInputProps('region')}
-              data={getFilters(distinctValues.region, 'region')}
+              data={getFilters(distinctValues.region, 'region', ';')}
+              onChange={value => {
+                form.setFieldValue('region', value || undefined);
+                handleSubmit(form.getValues());
+              }}
             />
             <Select
               disabled={isLoading}
@@ -158,118 +198,151 @@ const Form = ({
               name="location"
               {...form.getInputProps('location')}
               data={getFilters(distinctValues.location, 'location')}
+              onChange={value => {
+                form.setFieldValue('location', value || undefined);
+                handleSubmit(form.getValues());
+              }}
             />
           </SimpleGrid>
 
-          <Group align="end" justify="end">
-            {Object.keys(actions)?.length ? (
-              <Button onClick={openDrawer} variant="transparent" disabled={isLoading}>
-                {t('form-drawer-label', { count: selectedActions.length })}
-              </Button>
-            ) : null}
-            <Button
-              variant="transparent"
-              disabled={isLoading}
-              onClick={() => {
-                setIsLoading(true);
-                form.reset();
-                form.setValues(initialValues);
-                redirect('/services');
-              }}>
-              {t('form-clear-filters-label')}
-            </Button>
-            <Button
-              size="md"
-              type="submit"
-              disabled={!form.isDirty() || isLoading}
-              onClick={() => {
-                handleSubmit(form.getValues());
-              }}>
-              <MagnifyingGlass size={'2rem'} />
-            </Button>
-          </Group>
-          <Group>
-            {selectedFilters.map(filter => {
-              /*@ts-ignore */
-              const value = values[filter];
-              const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
-              const label = tFilters.has(key) ? tFilters(key) : value;
-              return (
-                <Pill
-                  key={`action-pill-${filter}`}
-                  withRemoveButton
+          <Grid justify="space-between">
+            <GridCol span={{ base: 12, md: 6, lg: 7 }}>
+              {suggestions?.length ? (
+                <>
+                  <Group gap={'xs'}>
+                    <Text fz="sm">{tFilters('suggestions-title')}</Text>
+                    {suggestions.map(suggestion => {
+                      const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
+                      return (
+                        <Text
+                          fz="xs"
+                          component={Link}
+                          key={`sugg-${suggestion}`}
+                          href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
+                          styles={{ root: { textDecoration: 'underline' } }}>
+                          {suggestion}
+                        </Text>
+                      );
+                    })}
+                  </Group>
+                </>
+              ) : null}
+            </GridCol>
+            <GridCol span={{ base: 12, md: 6, lg: 5 }}>
+              <Group align="end" justify="end">
+                {Object.keys(actions)?.length ? (
+                  <Button onClick={toggle} variant="transparent" disabled={isLoading}>
+                    {t('form-drawer-label', { count: selectedActions.length })}
+                  </Button>
+                ) : null}
+                <Button
+                  variant="transparent"
                   disabled={isLoading}
-                  onRemove={() => {
-                    const values = form.getValues();
-                    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
-                      /*@ts-ignore*/
-                      const value = values?.[valueKey];
-                      return { ...all, [valueKey]: valueKey === filter ? undefined : value };
-                    }, {});
-                    form.setFieldValue(filter, filter === 'query' ? '' : undefined);
-                    handleSubmit(updatedValues);
+                  onClick={() => {
+                    setIsLoading(true);
+                    form.reset();
+                    form.setValues(initialValues);
+                    redirect('/services');
                   }}>
-                  {t(`filter-selected-${filter}-label`, { value: label })}
-                </Pill>
-              );
-            })}
-            {selectedActions.map(action => {
-              return (
-                <Pill
-                  key={`action-pill-${action}`}
-                  withRemoveButton
-                  disabled={isLoading}
-                  onRemove={() => {
-                    const values = form.getValues();
-                    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
-                      /*@ts-ignore*/
-                      const value = values?.[valueKey];
-                      if (valueKey === action) {
-                        return all;
-                      }
-                      return { ...all, [valueKey]: value };
-                    }, {});
-                    form.setFieldValue(action, undefined);
-                    handleSubmit(updatedValues);
-                  }}>
-                  {t(`action-${action}-label`)}
-                </Pill>
-              );
-            })}
-          </Group>
+                  {t('form-clear-filters-label')}
+                </Button>
+              </Group>
+            </GridCol>
+            <GridCol span={{ base: 12 }}>
+              <Collapse in={openedDrawer} transitionDuration={300} transitionTimingFunction="linear">
+                <Alert>
+                  <Stack>
+                    <Group>
+                      {Object.keys(actions)
+                        .sort((a, b) => (a > b ? 1 : -1))
+                        .map(action => {
+                          return (
+                            <Checkbox
+                              label={t(`action-${action}-label`)}
+                              variant="filled"
+                              size="sm"
+                              key={`chip_${action}`}
+                              name={action}
+                              defaultChecked={selectedActions.includes(action)}
+                              {...form.getInputProps(action)}
+                            />
+                          );
+                        })}
+                    </Group>
+                    <Group justify="right">
+                      <Button
+                        size="md"
+                        type="submit"
+                        disabled={!form.isDirty() || isLoading}
+                        onClick={() => {
+                          toggle();
+                          handleSubmit(form.getValues());
+                        }}>
+                        <MagnifyingGlass size={'2rem'} />
+                      </Button>
+                    </Group>
+                  </Stack>
+                </Alert>
+              </Collapse>
+            </GridCol>
+          </Grid>
+          {selectedFilters.length || selectedActions.length ? (
+            <>
+              <Divider />
+              <Group>
+                {selectedFilters.map(filter => {
+                  /*@ts-ignore */
+                  const value = values[filter];
+                  const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
+                  const label = tFilters.has(key) ? tFilters(key) : value;
+                  return (
+                    <Pill
+                      key={`action-pill-${filter}`}
+                      withRemoveButton
+                      disabled={isLoading}
+                      onRemove={() => {
+                        const values = form.getValues();
+                        const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+                          /*@ts-ignore*/
+                          const value = values?.[valueKey];
+                          return { ...all, [valueKey]: valueKey === filter ? undefined : value };
+                        }, {});
+                        form.setFieldValue(filter, filter === 'query' ? '' : undefined);
+                        handleSubmit(updatedValues);
+                      }}>
+                      {t(`filter-selected-${filter}-label`, { value: label })}
+                    </Pill>
+                  );
+                })}
+                {selectedActions.map(action => {
+                  return (
+                    <Pill
+                      key={`action-pill-${action}`}
+                      withRemoveButton
+                      disabled={isLoading}
+                      onRemove={() => {
+                        const values = form.getValues();
+                        const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+                          /*@ts-ignore*/
+                          const value = values?.[valueKey];
+                          if (valueKey === action) {
+                            return all;
+                          }
+                          return { ...all, [valueKey]: value };
+                        }, {});
+                        form.setFieldValue(action, undefined);
+                        handleSubmit(updatedValues);
+                      }}>
+                      {t(`action-${action}-label`)}
+                    </Pill>
+                  );
+                })}
+              </Group>
+            </>
+          ) : null}
         </Stack>
-        <Drawer
-          offset={8}
-          radius="md"
-          opened={openedDrawer}
-          onClose={() => {
-            closeDrawer();
-          }}
-          position={'right'}>
-          <Stack>
-            {Object.keys(actions).map(action => {
-              return (
-                <Checkbox
-                  label={t(`action-${action}-label`)}
-                  variant="filled"
-                  size="sm"
-                  key={`chip_${action}`}
-                  name={action}
-                  defaultChecked={selectedActions.includes(action)}
-                  {...form.getInputProps(action)}
-                />
-              );
-            })}
-            <Button
-              onClick={() => {
-                closeDrawer();
-                handleSubmit(form.getValues());
-              }}>
-              {t('form-submit-actions-label')}
-            </Button>
-          </Stack>
-        </Drawer>
       </form>
+      <Divider />
     </Stack>
   );
 };

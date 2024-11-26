@@ -1,7 +1,7 @@
 'use server';
 
 import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
+import { TAGSPLITTER, Theme } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 
 export const runIndexation = async () => {
@@ -92,7 +92,10 @@ export const runIndexation = async () => {
       logo: service?.logo,
       id: service.code,
       theme: service.theme as Theme,
-      tags: (service?.tags || []).join(', '),
+      tags: (service?.tags || [])
+        .map(t => t.trim())
+        .filter(t => !!t)
+        .join(TAGSPLITTER),
       objectID: service.code,
       region: service.region,
       type: service.type,

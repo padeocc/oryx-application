@@ -47,7 +47,8 @@ export const search = async ({
 export const getFieldDistinctsValues = async ({ name: facetName }: { name: string }): Promise<FacetHits[]> => {
   const params: SearchForFacetValuesProps = {
     indexName: 'code',
-    facetName
+    facetName,
+    searchForFacetValuesRequest: { maxFacetHits: 100 }
   };
   const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
   return (await client.searchForFacetValues(params))?.facetHits || [];

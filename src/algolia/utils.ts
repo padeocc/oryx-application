@@ -1,3 +1,4 @@
+import { TAGSPLITTER } from '@/config';
 import { Service } from '@/types';
 import { IResult } from './types';
 
@@ -8,7 +9,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       description: result.description,
       name: result.label,
       logo: result.logo,
-      tags: result.tags.split(','),
+      tags: result.tags.split(TAGSPLITTER),
       url: result.url,
       region: result.region,
       location: result.location,

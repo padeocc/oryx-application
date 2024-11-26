@@ -1,8 +1,10 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
+import { TAGSPLITTER } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
+import { uniq } from 'lodash';
 import Content from './components/Content';
 
 const ServicesPage = async ({
@@ -22,6 +24,23 @@ const ServicesPage = async ({
     region: await getFieldDistinctsValues({ name: 'region' }),
     location: await getFieldDistinctsValues({ name: 'location' })
   };
+
+  let suggestions: string[] = [];
+
+  if (filters.theme) {
+    const { results: allServices }: SearchResponses<unknown> = await search({
+      query: '',
+      page: 0,
+      limit: 1000,
+      filters: { theme: filters.theme }
+    });
+    suggestions = uniq(
+      /*@ts-ignore*/
+      allServices[0]?.hits.reduce((all: [], suggestion: IResult) => {
+        return [...all, ...suggestion?.tags?.split(TAGSPLITTER)];
+      }, [])
+    );
+  }
 
   const defaultValues: Filters = {
     region: '',
@@ -70,6 +89,7 @@ const ServicesPage = async ({
         pagesCount={nbPages}
         page={page}
         totalNumberOfResults={nbHits}
+        suggestions={suggestions}
       />
     </Stack>
   );
