@@ -32,12 +32,7 @@ const Content = ({
 
   return (
     <Stack gap="xl">
-      <Form
-        initialValues={filters}
-        distinctValues={distinctValues}
-        isLoading={isLoading || asLoader}
-        setIsLoading={setIsLoading}
-      />
+      <Form initialValues={filters} distinctValues={distinctValues} isLoading={asLoader} setIsLoading={setIsLoading} />
       <Divider />
       <Results
         filters={filters}

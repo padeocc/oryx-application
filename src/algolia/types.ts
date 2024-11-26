@@ -10,4 +10,5 @@ export interface IResult {
   tags: string;
   region: string;
   location: string;
+  economic: boolean;
 }

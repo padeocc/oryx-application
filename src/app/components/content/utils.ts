@@ -1,5 +1,5 @@
 import { Theme, imagesMapping } from '@/config';
-import { Service } from '@/types';
+import { Filters, Service } from '@/types';
 
 export const getLogoImage = ({ service, theme }: { service: Service; theme: Theme }) => {
   const tagKey = Object.keys(imagesMapping).find(tag => (service?.tags || []).map(t => t.toLowerCase()).includes(tag));
@@ -13,4 +13,17 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
   return (
     (imageFromCMS && `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${imageFromCMS}`) || imageFromSearch || defaultImage
   );
+};
+
+export const cleanFiltersValues = (values: Filters) => {
+  const cleanedValues: Filters = Object.keys(values).reduce((all, valueKey) => {
+    /* @ts-ignore */
+    const value = values?.[valueKey];
+    if (!value) {
+      return all;
+    }
+    return { ...all, [valueKey]: value };
+  }, {});
+
+  return encodeURIComponent(JSON.stringify(cleanedValues));
 };

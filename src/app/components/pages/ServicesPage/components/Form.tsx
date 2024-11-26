@@ -1,5 +1,6 @@
 'use client';
 
+import { cleanFiltersValues } from '@/app/components/content/utils';
 import { getIconFromTheme } from '@/app/components/content/utils-ui';
 import { getActionFilters, Theme, themesColors } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
@@ -19,7 +20,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { MagnifyingGlass, X } from '@phosphor-icons/react/dist/ssr';
+import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
 import { redirect } from 'next/navigation';
@@ -44,7 +45,6 @@ const Form = ({
   useEffect(() => {
     setActions(getActionFilters(initialValues.theme ? [initialValues.theme] : undefined));
     form.setValues(initialValues);
-    form.setInitialValues(initialValues);
   }, [initialValues]);
 
   const getFilters = (facet: FacetHits[], name: string): ComboboxData => {
@@ -62,24 +62,25 @@ const Form = ({
 
   const handleSubmit = (values: Filters) => {
     setIsLoading(true);
-    const cleanedValues: Filters = Object.keys(values).reduce((all, valueKey) => {
-      /* @ts-ignore */
-      const value = values?.[valueKey];
-      if (!value) {
-        return all;
-      }
-      return { ...all, [valueKey]: value };
-    }, {});
-
-    redirect(`/services?filters=${encodeURIComponent(JSON.stringify(cleanedValues))}`);
+    redirect(`/services?filters=${cleanFiltersValues(values)}`);
   };
 
   const values = form.getValues();
+
   const selectedActions = Object.keys(actions).reduce((all: string[], actionKey: string) => {
     /*@ts-ignore*/
     const value = values?.[actionKey];
     if (value) {
       return [...all, actionKey];
+    }
+    return all;
+  }, []);
+
+  const selectedFilters = ['theme', 'query', 'region', 'location'].reduce((all: string[], key: string) => {
+    /*@ts-ignore*/
+    const value = values?.[key];
+    if (value) {
+      return [...all, key];
     }
     return all;
   }, []);
@@ -106,14 +107,6 @@ const Form = ({
             name="query"
             disabled={isLoading}
             {...form.getInputProps('query')}
-            rightSection={
-              <Group
-                onClick={() => {
-                  form.setFieldValue('query', '');
-                }}>
-                <X size={'17px'} style={{ cursor: 'pointer' }} />
-              </Group>
-            }
           />
           <SimpleGrid cols={{ base: 1, sm: 3 }}>
             <Select
@@ -125,7 +118,6 @@ const Form = ({
               name="theme"
               {...form.getInputProps('theme')}
               data={getFilters(distinctValues.theme, 'theme')}
-              clearable
               miw={'35%'}
               maxLength={10}
               renderOption={({ option }) => {
@@ -158,7 +150,6 @@ const Form = ({
               name="region"
               {...form.getInputProps('region')}
               data={getFilters(distinctValues.region, 'region')}
-              clearable
             />
             <Select
               disabled={isLoading}
@@ -167,10 +158,61 @@ const Form = ({
               name="location"
               {...form.getInputProps('location')}
               data={getFilters(distinctValues.location, 'location')}
-              clearable
             />
           </SimpleGrid>
+
+          <Group align="end" justify="end">
+            {Object.keys(actions)?.length ? (
+              <Button onClick={openDrawer} variant="transparent" disabled={isLoading}>
+                {t('form-drawer-label', { count: selectedActions.length })}
+              </Button>
+            ) : null}
+            <Button
+              variant="transparent"
+              disabled={isLoading}
+              onClick={() => {
+                setIsLoading(true);
+                form.reset();
+                form.setValues(initialValues);
+                redirect('/services');
+              }}>
+              {t('form-clear-filters-label')}
+            </Button>
+            <Button
+              size="md"
+              type="submit"
+              disabled={!form.isDirty() || isLoading}
+              onClick={() => {
+                handleSubmit(form.getValues());
+              }}>
+              <MagnifyingGlass size={'2rem'} />
+            </Button>
+          </Group>
           <Group>
+            {selectedFilters.map(filter => {
+              /*@ts-ignore */
+              const value = values[filter];
+              const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
+              const label = tFilters.has(key) ? tFilters(key) : value;
+              return (
+                <Pill
+                  key={`action-pill-${filter}`}
+                  withRemoveButton
+                  disabled={isLoading}
+                  onRemove={() => {
+                    const values = form.getValues();
+                    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+                      /*@ts-ignore*/
+                      const value = values?.[valueKey];
+                      return { ...all, [valueKey]: valueKey === filter ? undefined : value };
+                    }, {});
+                    form.setFieldValue(filter, filter === 'query' ? '' : undefined);
+                    handleSubmit(updatedValues);
+                  }}>
+                  {t(`filter-selected-${filter}-label`, { value: label })}
+                </Pill>
+              );
+            })}
             {selectedActions.map(action => {
               return (
                 <Pill
@@ -187,40 +229,13 @@ const Form = ({
                       }
                       return { ...all, [valueKey]: value };
                     }, {});
-
+                    form.setFieldValue(action, undefined);
                     handleSubmit(updatedValues);
                   }}>
                   {t(`action-${action}-label`)}
                 </Pill>
               );
             })}
-          </Group>
-          <Group align="end" justify="end">
-            {Object.keys(actions)?.length ? (
-              <Button onClick={openDrawer} variant="transparent">
-                {t('form-drawer-label', { count: selectedActions.length })}
-              </Button>
-            ) : null}
-            <Button
-              variant="transparent"
-              onClick={() => {
-                setIsLoading(true);
-                form.reset();
-                form.setValues(initialValues);
-                form.setInitialValues(initialValues);
-                redirect('/services');
-              }}>
-              {t('form-clear-filters-label')}
-            </Button>
-            <Button
-              size="md"
-              type="submit"
-              disabled={!form.isDirty()}
-              onClick={() => {
-                handleSubmit(form.getValues());
-              }}>
-              <MagnifyingGlass size={'2rem'} />
-            </Button>
           </Group>
         </Stack>
         <Drawer

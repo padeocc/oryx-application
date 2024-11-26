@@ -13,6 +13,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       region: result.region,
       location: result.location,
       theme: result.theme,
+      economic: result.economic,
       // Rest is empty for now
       createdAt: new Date(),
       updatedAt: new Date(),

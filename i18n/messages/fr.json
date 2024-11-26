@@ -189,7 +189,8 @@
     "location_online_label": "En ligne seulement",
     "location_online-store_label": "En ligne et en magasin",
     "location_store-and-online_label": "En magasin et en ligne",
-    "location_store_label": "En magasin seulement"
+    "location_store_label": "En magasin seulement",
+    "economic-label": "Economique"
   },
   "finder_page": {
     "interested_themes": "Quels sont les sujets qui vous intéressent ?",
@@ -341,7 +342,11 @@
     "action-comparer-label": "Comparer",
     "action-relocating-label": "Relocaliser",
     "action-economic-label": "Choix économiques",
-    "form-submit-actions-label": "Filtrer avec ces actions"
+    "form-submit-actions-label": "Filtrer avec ces actions",
+    "filter-selected-location-label": "Type de magasin : {value}",
+    "filter-selected-region-label": "Région: {value}",
+    "filter-selected-theme-label": "Thème : {value}",
+    "filter-selected-query-label": "Recherche: {value}"
   },
   "signup_form_page": {
     "email_label": "Adresse email",
