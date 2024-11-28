@@ -12,7 +12,6 @@ import {
   ComboboxData,
   Divider,
   Flex,
-  FocusTrap,
   Grid,
   GridCol,
   Group,
@@ -122,30 +121,28 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
-          <FocusTrap>
-            <TextInput
-              size="md"
-              withAsterisk
-              label={''}
-              placeholder={t('form-query-placeholder')}
-              name="query"
-              disabled={isLoading}
-              {...form.getInputProps('query')}
-              onChange={event => {
-                const value = event.target.value;
-                form.setFieldValue('query', value);
+          <TextInput
+            size="md"
+            withAsterisk
+            label={''}
+            placeholder={t('form-query-placeholder')}
+            name="query"
+            disabled={isLoading}
+            {...form.getInputProps('query')}
+            onChange={event => {
+              const value = event.target.value;
+              form.setFieldValue('query', value);
 
-                if (typingTimeoutRef.current) {
-                  clearTimeout(typingTimeoutRef.current);
-                }
+              if (typingTimeoutRef.current) {
+                clearTimeout(typingTimeoutRef.current);
+              }
 
-                //@ts-ignore
-                typingTimeoutRef.current = setTimeout(() => {
-                  handleSubmit(form.getValues());
-                }, 700);
-              }}
-            />
-          </FocusTrap>
+              //@ts-ignore
+              typingTimeoutRef.current = setTimeout(() => {
+                handleSubmit(form.getValues());
+              }, 700);
+            }}
+          />
           <SimpleGrid cols={{ base: 1, sm: 3 }}>
             <Select
               value={initialValues.theme}
@@ -174,7 +171,7 @@ const Form = ({
                 );
               }}
               onChange={theme => {
-                const fieldsToReset = getActionFilters(values?.theme ? [values?.theme] : []);
+                const fieldsToReset = getActionFilters(values?.theme ? [values?.theme] : undefined);
                 Object.keys(fieldsToReset).forEach(field => {
                   form.setFieldValue(field, null);
                 });
