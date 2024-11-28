@@ -110,7 +110,7 @@ export type ActionFilters = {
 
 export type Filters = {
   query?: string;
-  sortBy?: string;
+  sort?: string;
   limit?: number;
   start?: number;
   theme?: Theme | null;
@@ -144,7 +144,7 @@ export type DistinctFilters = {
 };
 
 export type APIFilters = {
-  sortBy?: string;
+  sort?: string;
   pagination: { start?: number; limit?: number };
   filters: any;
   populate?: string | string[];
@@ -160,7 +160,7 @@ export type RequestParameters = {
     start: number;
     limit: number;
   };
-  sortBy: string;
+  sort: string;
   populate: string;
   filters: Filters;
   theme: Theme;

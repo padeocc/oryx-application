@@ -12,7 +12,7 @@ const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[
       filters: {
         theme,
         tags: [],
-        sortBy: 'updatedAt:desc',
+        sort: 'updatedAt:desc',
         limit: 4
       }
     })

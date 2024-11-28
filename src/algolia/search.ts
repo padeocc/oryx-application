@@ -7,12 +7,12 @@ import { algoliasearch, FacetFilters, FacetHits, SearchForFacetValuesProps, Sear
 export const search = async ({
   query,
   limit = PAGINATION_LIMIT,
-  sortBy = 'label',
+  sort = 'label',
   filters = {},
   page = 1
 }: {
   query: string;
-  sortBy?: string;
+  sort?: string;
   limit?: number;
   filters?: Filters;
   page: number;

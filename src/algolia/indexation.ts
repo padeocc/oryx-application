@@ -11,7 +11,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'transports',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -23,7 +23,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'goods',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -35,7 +35,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'foods',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -47,7 +47,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'events',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -59,7 +59,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'services',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
@@ -71,7 +71,7 @@ export const runIndexation = async () => {
         filters: {
           theme: 'accommodations',
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
