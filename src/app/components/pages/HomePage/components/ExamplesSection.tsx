@@ -1,21 +1,40 @@
-import { Alert, Button, CSSProperties, Flex, Grid, GridCol, Group, Space, Stack, Text, Title } from '@mantine/core';
+import { Alert, Badge, Button, Group, MantineGradient, MantineSize, Space, Stack, Text, Title } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
-import { CurrencyEur, PersonSimpleBike, Phone, Plant, Train } from '@phosphor-icons/react/dist/ssr';
+import { CurrencyEur, PersonSimpleBike, Plant, Train, WashingMachine } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-const linkStyle: CSSProperties = { color: 'black', textDecoration: 'none', overflow: 'auto' };
-
-const Example = ({ link, Icon, text }: { link: string; Icon: Icon; text: string }) => {
+const Example = ({
+  link,
+  Icon,
+  text,
+  gradient = { from: 'green_oryx.8', to: 'green_oryx.4', deg: 90 },
+  fz = 'sm'
+}: {
+  link: string;
+  Icon: Icon;
+  text: string;
+  gradient?: MantineGradient;
+  fz?: MantineSize;
+}) => {
   return (
-    <GridCol span={{ base: 12, lg: 6 }}>
-      <Link style={linkStyle} href={link}>
-        <Flex justify={'left'} align={'center'} gap={'sm'} fz={'lg'}>
-          <Icon />
-          {text}
-        </Flex>
-      </Link>
-    </GridCol>
+    <Link href={link}>
+      <Badge
+        variant="gradient"
+        gradient={gradient}
+        styles={{
+          root: {
+            textTransform: 'none',
+            cursor: 'pointer'
+          }
+        }}
+        fz={fz}
+        p="sm"
+        h="auto"
+        leftSection={<Icon weight="fill" fontSize={'1.6rem'} />}>
+        {text}
+      </Badge>
+    </Link>
   );
 };
 
@@ -29,8 +48,7 @@ const ExamplesSection = async () => {
             {t('examples_title')}
           </Text>
         </Title>
-        <Grid justify="space-between">
-          <Example link={`/services?filters={"economic": true}`} Icon={CurrencyEur} text={t('example_economic')} />
+        <Group justify="flex-start">
           <Example
             link={`/services?filters={"theme":"transports", "region":"31", "query": "vélo"}`}
             Icon={PersonSimpleBike}
@@ -48,10 +66,17 @@ const ExamplesSection = async () => {
           />
           <Example
             link={`/services?filters={"theme":"goods", "query":"Electronique Électroménager", "location": "online"}`}
-            Icon={Phone}
+            Icon={WashingMachine}
             text={t('example_phone')}
           />
-        </Grid>
+          <Example
+            link={`/services?filters={"economic": true}`}
+            Icon={CurrencyEur}
+            text={t('example_economic')}
+            gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+            fz="md"
+          />
+        </Group>
         <Space />
         <Group key="header-group-mobile" w="100%" align="center" justify="right">
           <Button component={Link} href="/services" size="xl">

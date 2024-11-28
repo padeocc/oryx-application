@@ -286,7 +286,8 @@
   },
   "navigation_items": {
     "contact_label": "Nous contacter",
-    "donate_label": "Faire un don"
+    "donate_label": "Faire un don",
+    "query-placeholder": "Faites une recherche !"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",

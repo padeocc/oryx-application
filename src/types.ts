@@ -113,11 +113,11 @@ export type Filters = {
   sortBy?: string;
   limit?: number;
   start?: number;
-  theme?: Theme | undefined;
-  tags?: string[] | undefined;
-  codes?: (string | undefined)[];
-  region?: Region;
-  location?: string;
+  theme?: Theme | null;
+  tags?: string[];
+  codes?: (string | null)[];
+  region?: Region | null;
+  location?: string | null;
   organic?: boolean;
   economic?: boolean;
   local?: boolean;

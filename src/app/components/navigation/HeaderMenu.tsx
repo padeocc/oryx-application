@@ -11,20 +11,22 @@ const HeaderMenu = async () => {
   return (
     <Container className={styles.container} fluid h={{ base: 120 }}>
       <Flex justify={'space-between'} align={'center'} w="100%" h="100%">
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <Stack gap="0">
-            <Title c="green_oryx" order={1} fw={'bolder'}>
-              Oryx
-            </Title>
-            <Title c="dark" fz="sm" fw={'bold'} order={2}>
-              {t('welcome')}
-            </Title>
-          </Stack>
-        </Link>
-        <Group hiddenFrom="md" key="header-group-mobile">
+        <Group w="auto">
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <Stack gap="0">
+              <Title c="green_oryx" order={1} fw={'bolder'}>
+                OryxChange
+              </Title>
+              <Title c="dark" fz="sm" fw={'bold'} order={2}>
+                {t('welcome')}
+              </Title>
+            </Stack>
+          </Link>
+        </Group>
+        <Group hiddenFrom="md" key="header-group-mobile" w="30%" align="flex-end" justify="flex-end">
           <HeaderMenuMobile />
         </Group>
-        <Group gap={'xl'} visibleFrom="md" key="header-group-desktop">
+        <Group gap={'xl'} visibleFrom="md" key="header-group-desktop" w="60%" justify="flex-end">
           <HeaderMenuDesktop />
         </Group>
       </Flex>

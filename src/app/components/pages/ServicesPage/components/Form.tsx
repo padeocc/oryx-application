@@ -12,6 +12,7 @@ import {
   ComboboxData,
   Divider,
   Flex,
+  FocusTrap,
   Grid,
   GridCol,
   Group,
@@ -47,8 +48,7 @@ const Form = ({
 }) => {
   const t = useTranslations('services');
   const tFilters = useTranslations('filters_component');
-  const [openedDrawer, { toggle }] = useDisclosure(false);
-
+  const [openedDrawer, { toggle, close }] = useDisclosure(false);
   const [actions, setActions] = useState<ActionFilters>(getActionFilters());
   const typingTimeoutRef = useRef(null);
 
@@ -84,6 +84,7 @@ const Form = ({
 
   const handleSubmit = (values: Filters) => {
     setIsLoading(true);
+    close();
     redirect(`/services?filters=${cleanFiltersValues(values)}`);
   };
 
@@ -121,28 +122,30 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
-          <TextInput
-            size="md"
-            withAsterisk
-            label={''}
-            placeholder={t('form-query-placeholder')}
-            name="query"
-            disabled={isLoading}
-            {...form.getInputProps('query')}
-            onChange={event => {
-              const value = event.target.value;
-              form.setFieldValue('query', value);
+          <FocusTrap>
+            <TextInput
+              size="md"
+              withAsterisk
+              label={''}
+              placeholder={t('form-query-placeholder')}
+              name="query"
+              disabled={isLoading}
+              {...form.getInputProps('query')}
+              onChange={event => {
+                const value = event.target.value;
+                form.setFieldValue('query', value);
 
-              if (typingTimeoutRef.current) {
-                clearTimeout(typingTimeoutRef.current);
-              }
+                if (typingTimeoutRef.current) {
+                  clearTimeout(typingTimeoutRef.current);
+                }
 
-              //@ts-ignore
-              typingTimeoutRef.current = setTimeout(() => {
-                handleSubmit(form.getValues());
-              }, 700);
-            }}
-          />
+                //@ts-ignore
+                typingTimeoutRef.current = setTimeout(() => {
+                  handleSubmit(form.getValues());
+                }, 700);
+              }}
+            />
+          </FocusTrap>
           <SimpleGrid cols={{ base: 1, sm: 3 }}>
             <Select
               value={initialValues.theme}
@@ -173,9 +176,9 @@ const Form = ({
               onChange={theme => {
                 const fieldsToReset = getActionFilters(values?.theme ? [values?.theme] : []);
                 Object.keys(fieldsToReset).forEach(field => {
-                  form.setFieldValue(field, false);
+                  form.setFieldValue(field, null);
                 });
-                form.setFieldValue('theme', (theme as Theme) || undefined);
+                form.setFieldValue('theme', (theme as Theme) || null);
                 handleSubmit(form.getValues());
               }}
             />
@@ -187,7 +190,7 @@ const Form = ({
               {...form.getInputProps('region')}
               data={getFilters(distinctValues.region, 'region', ';')}
               onChange={value => {
-                form.setFieldValue('region', value || undefined);
+                form.setFieldValue('region', value || null);
                 handleSubmit(form.getValues());
               }}
             />
@@ -199,14 +202,14 @@ const Form = ({
               {...form.getInputProps('location')}
               data={getFilters(distinctValues.location, 'location')}
               onChange={value => {
-                form.setFieldValue('location', value || undefined);
+                form.setFieldValue('location', value || null);
                 handleSubmit(form.getValues());
               }}
             />
           </SimpleGrid>
 
           <Grid justify="space-between">
-            <GridCol span={{ base: 12, md: 6, lg: 7 }}>
+            <GridCol span={{ base: 12, md: 7, lg: 8 }}>
               {suggestions?.length ? (
                 <>
                   <Group gap={'xs'}>
@@ -228,7 +231,7 @@ const Form = ({
                 </>
               ) : null}
             </GridCol>
-            <GridCol span={{ base: 12, md: 6, lg: 5 }}>
+            <GridCol span={{ base: 12, md: 5, lg: 4 }}>
               <Group align="end" justify="end">
                 {Object.keys(actions)?.length ? (
                   <Button onClick={toggle} variant="transparent" disabled={isLoading}>
@@ -264,6 +267,7 @@ const Form = ({
                               key={`chip_${action}`}
                               name={action}
                               defaultChecked={selectedActions.includes(action)}
+                              checked={selectedActions.includes(action)}
                               {...form.getInputProps(action)}
                             />
                           );
@@ -307,7 +311,7 @@ const Form = ({
                           const value = values?.[valueKey];
                           return { ...all, [valueKey]: valueKey === filter ? undefined : value };
                         }, {});
-                        form.setFieldValue(filter, filter === 'query' ? '' : undefined);
+                        form.setFieldValue(filter, filter === 'query' ? '' : null);
                         handleSubmit(updatedValues);
                       }}>
                       {t(`filter-selected-${filter}-label`, { value: label })}
@@ -330,7 +334,7 @@ const Form = ({
                           }
                           return { ...all, [valueKey]: value };
                         }, {});
-                        form.setFieldValue(action, undefined);
+                        form.setFieldValue(action, null);
                         handleSubmit(updatedValues);
                       }}>
                       {t(`action-${action}-label`)}
