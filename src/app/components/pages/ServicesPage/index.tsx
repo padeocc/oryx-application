@@ -43,9 +43,9 @@ const ServicesPage = async ({
   }
 
   const defaultValues: Filters = {
-    region: '',
-    location: '',
-    theme: undefined,
+    region: null,
+    location: null,
+    theme: null,
     query: '',
     organic: false,
     economic: false,
@@ -76,7 +76,7 @@ const ServicesPage = async ({
       if (value) {
         return { ...all, [key]: value };
       }
-      return { ...all, [key]: undefined };
+      return { ...all, [key]: null };
     }, {})
   };
 
