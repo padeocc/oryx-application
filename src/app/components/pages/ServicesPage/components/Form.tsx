@@ -215,13 +215,13 @@ const Form = ({
                       const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
                       return (
                         <div
+                          key={`sugg-${suggestion}`}
                           onClick={() => {
                             setIsLoading(true);
                           }}>
                           <Text
                             fz="xs"
                             component={Link}
-                            key={`sugg-${suggestion}`}
                             href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
                             styles={{ root: { textDecoration: 'underline' } }}>
                             {suggestion}
