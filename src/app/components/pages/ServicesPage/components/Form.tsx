@@ -214,14 +214,19 @@ const Form = ({
                     {suggestions.map(suggestion => {
                       const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
                       return (
-                        <Text
-                          fz="xs"
-                          component={Link}
-                          key={`sugg-${suggestion}`}
-                          href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
-                          styles={{ root: { textDecoration: 'underline' } }}>
-                          {suggestion}
-                        </Text>
+                        <div
+                          onClick={() => {
+                            setIsLoading(true);
+                          }}>
+                          <Text
+                            fz="xs"
+                            component={Link}
+                            key={`sugg-${suggestion}`}
+                            href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
+                            styles={{ root: { textDecoration: 'underline' } }}>
+                            {suggestion}
+                          </Text>
+                        </div>
                       );
                     })}
                   </Group>
@@ -276,6 +281,7 @@ const Form = ({
                         type="submit"
                         disabled={!form.isDirty() || isLoading}
                         onClick={() => {
+                          setIsLoading(true);
                           toggle();
                           handleSubmit(form.getValues());
                         }}>
