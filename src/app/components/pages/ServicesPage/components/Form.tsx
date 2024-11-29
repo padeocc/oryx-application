@@ -31,21 +31,20 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import ThemesSelector from './ThemesSelector';
 
 const Form = ({
   initialValues,
   distinctValues,
   isLoading,
   setIsLoading,
-  suggestions,
-  tags
+  suggestions
 }: {
   initialValues: Filters;
   distinctValues: DistinctFilters;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   suggestions?: string[];
-  tags?: string[];
 }) => {
   const t = useTranslations('services');
   const tFilters = useTranslations('filters_component');
@@ -123,6 +122,12 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
+          <ThemesSelector
+            selectedThemes={values.theme ? [values.theme] : []}
+            handleClick={(theme?: Theme) => {
+              form.setFieldValue('theme', theme);
+            }}
+          />
           <TextInput
             size="md"
             withAsterisk
@@ -142,7 +147,7 @@ const Form = ({
               //@ts-ignore
               typingTimeoutRef.current = setTimeout(() => {
                 handleSubmit(form.getValues());
-              }, 700);
+              }, 1500);
             }}
           />
           <SimpleGrid cols={{ base: 1, sm: 3 }}>
@@ -224,7 +229,6 @@ const Form = ({
                           }}>
                           <Text
                             fz="xs"
-                            fw={tags?.includes(suggestion) ? 'bold' : 'normal'}
                             component={Link}
                             href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
                             styles={{ root: { textDecoration: 'underline' } }}>

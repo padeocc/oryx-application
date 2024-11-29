@@ -15,7 +15,7 @@ export const getIconFromTheme = ({
   const Icon = themesIcons?.[theme];
 
   if (!Icon) {
-    return null;
+    return undefined;
   }
 
   return (

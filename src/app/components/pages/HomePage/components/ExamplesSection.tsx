@@ -1,42 +1,8 @@
-import { Alert, Badge, Button, Group, MantineGradient, MantineSize, Space, Stack, Text, Title } from '@mantine/core';
-import { Icon } from '@phosphor-icons/react';
-import { CurrencyEur, PersonSimpleBike, Plant, Train, WashingMachine } from '@phosphor-icons/react/dist/ssr';
+import Example from '@/app/components/common/Example';
+import { Alert, Button, Group, Space, Stack, Text, Title } from '@mantine/core';
+import { Carrot, CurrencyEur, PersonSimpleBike, Train, WashingMachine } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-
-const Example = ({
-  link,
-  Icon,
-  text,
-  gradient = { from: 'green_oryx.8', to: 'green_oryx.4', deg: 90 },
-  fz = 'sm'
-}: {
-  link: string;
-  Icon: Icon;
-  text: string;
-  gradient?: MantineGradient;
-  fz?: MantineSize;
-}) => {
-  return (
-    <Link href={link}>
-      <Badge
-        variant="gradient"
-        gradient={gradient}
-        styles={{
-          root: {
-            textTransform: 'none',
-            cursor: 'pointer'
-          }
-        }}
-        fz={fz}
-        p="sm"
-        h="auto"
-        leftSection={<Icon weight="fill" fontSize={'1.6rem'} />}>
-        {text}
-      </Badge>
-    </Link>
-  );
-};
 
 const ExamplesSection = async () => {
   const t = await getTranslations('home_page');
@@ -56,7 +22,7 @@ const ExamplesSection = async () => {
           />
           <Example
             link={`/services?filters={"theme":"foods", "season": true, "local": true, "organic":true}`}
-            Icon={Plant}
+            Icon={Carrot}
             text={t('example_food')}
           />
           <Example

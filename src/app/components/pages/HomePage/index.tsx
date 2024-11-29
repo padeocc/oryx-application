@@ -2,6 +2,7 @@ import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
 import { Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
+import ThemesBanner from '../../common/ThemesBanner';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
@@ -33,6 +34,7 @@ const HomePage = async ({}: {}) => {
       <Text fz="2rem" c="green_oryx" fw="bold">
         {t('explore_themes_label')}
       </Text>
+      <ThemesBanner />
       {themesSections}
     </Stack>
   );

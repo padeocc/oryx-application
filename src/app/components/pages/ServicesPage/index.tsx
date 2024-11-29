@@ -43,8 +43,6 @@ const ServicesPage = async ({
     );
   }
 
-  const tags: string[] = uniq(hits.flatMap(({ tags }) => tags?.split(TAGSPLITTER)));
-
   const defaultValues: Filters = {
     region: null,
     location: null,
@@ -93,7 +91,6 @@ const ServicesPage = async ({
         page={page}
         totalNumberOfResults={nbHits}
         suggestions={suggestions}
-        tags={tags}
       />
     </Stack>
   );

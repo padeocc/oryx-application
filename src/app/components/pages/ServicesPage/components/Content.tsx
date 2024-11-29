@@ -42,7 +42,6 @@ const Content = ({
         isLoading={asLoader}
         setIsLoading={setIsLoading}
         suggestions={suggestions}
-        tags={tags}
       />
       <Results
         filters={filters}
