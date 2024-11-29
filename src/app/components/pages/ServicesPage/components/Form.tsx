@@ -37,13 +37,15 @@ const Form = ({
   distinctValues,
   isLoading,
   setIsLoading,
-  suggestions
+  suggestions,
+  tags
 }: {
   initialValues: Filters;
   distinctValues: DistinctFilters;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   suggestions?: string[];
+  tags?: string[];
 }) => {
   const t = useTranslations('services');
   const tFilters = useTranslations('filters_component');
@@ -208,10 +210,11 @@ const Form = ({
           <Grid justify="space-between">
             <GridCol span={{ base: 12, md: 7, lg: 8 }}>
               {suggestions?.length ? (
-                <>
-                  <Group gap={'xs'}>
-                    <Text fz="sm">{tFilters('suggestions-title')}</Text>
-                    {suggestions.map(suggestion => {
+                <Group gap={'xs'}>
+                  <Text fz="sm">{tFilters('suggestions-title')}</Text>
+                  {suggestions
+                    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+                    .map(suggestion => {
                       const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
                       return (
                         <div
@@ -221,6 +224,7 @@ const Form = ({
                           }}>
                           <Text
                             fz="xs"
+                            fw={tags?.includes(suggestion) ? 'bold' : 'normal'}
                             component={Link}
                             href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
                             styles={{ root: { textDecoration: 'underline' } }}>
@@ -229,8 +233,7 @@ const Form = ({
                         </div>
                       );
                     })}
-                  </Group>
-                </>
+                </Group>
               ) : null}
             </GridCol>
             <GridCol span={{ base: 12, md: 5, lg: 4 }}>

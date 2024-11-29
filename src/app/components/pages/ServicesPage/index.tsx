@@ -17,7 +17,8 @@ const ServicesPage = async ({
   const { query = '', ...others } = filters;
   const { results }: SearchResponses<unknown> = await search({ query, filters: others, page: pageParameter - 1 });
   /*@ts-ignore*/
-  const { hits, nbHits, page = pageParameter, nbPages } = results[0] || {};
+  const { hits: hitsResults, nbHits, page = pageParameter, nbPages } = results[0] || {};
+  const hits = hitsResults as IResult[];
 
   const distinctValues: DistinctFilters = {
     theme: await getFieldDistinctsValues({ name: 'theme' }),
@@ -41,6 +42,8 @@ const ServicesPage = async ({
       }, [])
     );
   }
+
+  const tags: string[] = uniq(hits.flatMap(({ tags }) => tags?.split(TAGSPLITTER)));
 
   const defaultValues: Filters = {
     region: null,
@@ -85,11 +88,12 @@ const ServicesPage = async ({
       <Content
         filters={cleanedFilters}
         distinctValues={distinctValues}
-        hits={hits as IResult[]}
+        hits={hits}
         pagesCount={nbPages}
         page={page}
         totalNumberOfResults={nbHits}
         suggestions={suggestions}
+        tags={tags}
       />
     </Stack>
   );

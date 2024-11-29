@@ -15,7 +15,8 @@ const Content = ({
   page,
   totalNumberOfResults,
   asLoader = false,
-  suggestions
+  suggestions,
+  tags
 }: {
   filters: Filters;
   distinctValues: DistinctFilters;
@@ -25,6 +26,7 @@ const Content = ({
   totalNumberOfResults: number;
   asLoader?: boolean;
   suggestions?: string[];
+  tags?: string[];
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -40,6 +42,7 @@ const Content = ({
         isLoading={asLoader}
         setIsLoading={setIsLoading}
         suggestions={suggestions}
+        tags={tags}
       />
       <Results
         filters={filters}
