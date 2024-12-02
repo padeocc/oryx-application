@@ -1,6 +1,6 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
-import { TAGSPLITTER } from '@/config';
+import { TAGSPLITTER, themes } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
@@ -15,20 +15,24 @@ const ServicesPage = async ({
   const filters: Filters = (filtersParam && JSON.parse(filtersParam)) || {};
   const pageParameter: number = Number(pageParam) || 1;
   const { query = '', ...others } = filters;
-  const { results }: SearchResponses<unknown> = await search({ query, filters: others, page: pageParameter - 1 });
+
+  const { results }: SearchResponses<unknown> = await search({
+    query,
+    filters: others,
+    page: pageParameter - 1
+  });
   /*@ts-ignore*/
   const { hits: hitsResults, nbHits, page = pageParameter, nbPages } = results[0] || {};
   const hits = hitsResults as IResult[];
 
   const distinctValues: DistinctFilters = {
-    theme: await getFieldDistinctsValues({ name: 'theme' }),
     region: await getFieldDistinctsValues({ name: 'region' }),
     location: await getFieldDistinctsValues({ name: 'location' })
   };
 
   let suggestions: string[] = [];
 
-  if (filters.theme) {
+  if (filters.theme?.length && false) {
     const { results: allServices }: SearchResponses<unknown> = await search({
       query: '',
       page: 0,
@@ -40,13 +44,13 @@ const ServicesPage = async ({
       allServices[0]?.hits.reduce((all: [], suggestion: IResult) => {
         return [...all, ...suggestion?.tags?.split(TAGSPLITTER)];
       }, [])
-    );
+    ).slice(0, 20) as string[];
   }
 
   const defaultValues: Filters = {
     region: null,
     location: null,
-    theme: null,
+    theme: themes,
     query: '',
     organic: false,
     economic: false,

@@ -15,22 +15,22 @@ const ExamplesSection = async () => {
       </Title>
       <Group justify="flex-start">
         <Example
-          link={`/services?filters={"theme":"transports", "region":"31", "query": "vélo"}`}
+          link={`/services?filters={"theme":["transports"], "region":"31", "query": "vélo"}`}
           Icon={PersonSimpleBike}
           text={t('example_bike')}
         />
         <Example
-          link={`/services?filters={"theme":"foods", "season": true, "local": true, "organic":true}`}
+          link={`/services?filters={"theme":["foods"], "season": true, "local": true, "organic":true}`}
           Icon={Carrot}
           text={t('example_food')}
         />
         <Example
-          link={`/services?filters={"theme":"transports", "query":"train"}`}
+          link={`/services?filters={"theme":["transports"], "query":"train"}`}
           Icon={Train}
           text={t('example_train')}
         />
         <Example
-          link={`/services?filters={"theme":"goods", "query":"Electronique Électroménager", "location": "online"}`}
+          link={`/services?filters={"theme":["goods"], "query":"Electronique Électroménager", "location": "online"}`}
           Icon={WashingMachine}
           text={t('example_phone')}
         />

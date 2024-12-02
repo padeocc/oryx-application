@@ -11,7 +11,7 @@ const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[
   return (
     await fetchServices({
       filters: {
-        theme,
+        theme: [theme],
         tags: [],
         sort: 'updatedAt:desc',
         limit: 4

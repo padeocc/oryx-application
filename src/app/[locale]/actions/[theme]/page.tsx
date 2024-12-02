@@ -14,9 +14,9 @@ const transformParams = (
     sort: '',
     populate: '',
     filters: {
-      theme: 'transports'
+      theme: ['transports']
     },
-    theme: 'transports'
+    theme: 'transports' as Theme
   };
 
   Object.keys(params).forEach(key => {

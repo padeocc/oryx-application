@@ -41,7 +41,7 @@ export const imagesMapping: { [key: string]: string } = {
   vélos: 'bikes'
 };
 
-export const getActionFilters = (themes?: Theme[]): ActionFilters => {
+export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionFilters => {
   let actions = {};
   if (!themes || themes.includes('foods')) {
     actions = {

@@ -1,8 +1,7 @@
 'use client';
 
 import { cleanFiltersValues } from '@/app/components/content/utils';
-import { getIconFromTheme } from '@/app/components/content/utils-ui';
-import { getActionFilters, Theme, themesColors } from '@/config';
+import { getActionFilters, themes, themesColors, themesIcons } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
 import {
   Alert,
@@ -11,7 +10,6 @@ import {
   Collapse,
   ComboboxData,
   Divider,
-  Flex,
   Grid,
   GridCol,
   Group,
@@ -25,13 +23,13 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
+import { CurrencyEur, MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import ThemesSelector from './ThemesSelector';
+import BadgeSelector from './components/BadgeSelector';
 
 const Form = ({
   initialValues,
@@ -47,13 +45,14 @@ const Form = ({
   suggestions?: string[];
 }) => {
   const t = useTranslations('services');
+  const tThemes = useTranslations('themes');
   const tFilters = useTranslations('filters_component');
   const [openedDrawer, { toggle, close }] = useDisclosure(false);
-  const [actions, setActions] = useState<ActionFilters>(getActionFilters());
+  const [actions, setActions] = useState<ActionFilters>(getActionFilters({}));
   const typingTimeoutRef = useRef(null);
 
   useEffect(() => {
-    setActions(getActionFilters(initialValues.theme ? [initialValues.theme] : undefined));
+    setActions(getActionFilters({ themes: initialValues?.theme || undefined }));
     form.setValues(initialValues);
   }, [initialValues]);
 
@@ -99,7 +98,7 @@ const Form = ({
     return all;
   }, []);
 
-  const selectedFilters = ['theme', 'query', 'region', 'location'].reduce((all: string[], key: string) => {
+  const selectedFilters = ['query', 'region', 'location'].reduce((all: string[], key: string) => {
     /*@ts-ignore*/
     const value = values?.[key];
     if (value) {
@@ -107,6 +106,8 @@ const Form = ({
     }
     return all;
   }, []);
+
+  const IsEconomicSelected = selectedActions.includes('economic');
 
   return (
     <Stack pos="relative">
@@ -122,12 +123,47 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
-          <ThemesSelector
-            selectedThemes={values.theme ? [values.theme] : []}
-            handleClick={(theme?: Theme) => {
-              form.setFieldValue('theme', values.theme === theme ? null : theme);
-            }}
-          />
+          <Alert>
+            <Group justify="flex-start">
+              {themes.map(theme => {
+                const Icon = themesIcons[theme];
+                const selected = !!values.theme?.includes(theme);
+                return (
+                  <BadgeSelector
+                    isLoading={isLoading}
+                    key={`badge-selector-${theme}`}
+                    label={tThemes(theme)}
+                    selected={selected}
+                    Icon={Icon}
+                    handleClick={_isSelected => {
+                      const newSelectedThemes = values.theme?.includes(theme)
+                        ? values.theme.filter(t => t !== theme)
+                        : [...(values?.theme || []), theme];
+                      form.setFieldValue('theme', newSelectedThemes);
+                      handleSubmit(form.getValues());
+                    }}
+                    bg={selected ? themesColors[theme] : 'white'}
+                    c={selected ? 'white' : themesColors[theme]}
+                    bd={`1px solid ${themesColors[theme]}`}
+                  />
+                );
+              })}
+              <BadgeSelector
+                isLoading={isLoading}
+                key={`badge-selector-economic`}
+                label={t(`action-economic-label`)}
+                selected={IsEconomicSelected}
+                Icon={CurrencyEur}
+                handleClick={value => {
+                  form.setFieldValue('economic', value);
+                  handleSubmit(form.getValues());
+                }}
+                bg={IsEconomicSelected ? 'orange' : 'white'}
+                c={IsEconomicSelected ? 'white' : 'orange'}
+                bd={`1px solid orange`}
+              />
+            </Group>
+          </Alert>
           <TextInput
             size="md"
             withAsterisk
@@ -150,67 +186,6 @@ const Form = ({
               }, 1500);
             }}
           />
-          <SimpleGrid cols={{ base: 1, sm: 3 }}>
-            <Select
-              value={initialValues.theme}
-              defaultValue={initialValues.theme}
-              disabled={isLoading}
-              size={'sm'}
-              placeholder={t('filter-theme-label')}
-              name="theme"
-              {...form.getInputProps('theme')}
-              data={getFilters(distinctValues.theme, 'theme')}
-              miw={'35%'}
-              maxLength={10}
-              renderOption={({ option }) => {
-                const color = themesColors[option.value];
-                const themeIcon = getIconFromTheme({
-                  theme: option.value as Theme,
-                  size: 20,
-                  selected: true,
-                  color
-                });
-                return (
-                  <Flex gap="sm" justify="center" align="center" direction="row" wrap="nowrap" c={color}>
-                    {themeIcon ? themeIcon : null}
-                    {option.label}
-                  </Flex>
-                );
-              }}
-              onChange={theme => {
-                const fieldsToReset = getActionFilters(values?.theme ? [values?.theme] : undefined);
-                Object.keys(fieldsToReset).forEach(field => {
-                  form.setFieldValue(field, null);
-                });
-                form.setFieldValue('theme', (theme as Theme) || null);
-                handleSubmit(form.getValues());
-              }}
-            />
-            <Select
-              disabled={isLoading}
-              size={'sm'}
-              placeholder={t('filter-region-label')}
-              name="region"
-              {...form.getInputProps('region')}
-              data={getFilters(distinctValues.region, 'region', ';')}
-              onChange={value => {
-                form.setFieldValue('region', value || null);
-                handleSubmit(form.getValues());
-              }}
-            />
-            <Select
-              disabled={isLoading}
-              size={'sm'}
-              placeholder={t('filter-location-label')}
-              name="location"
-              {...form.getInputProps('location')}
-              data={getFilters(distinctValues.location, 'location')}
-              onChange={value => {
-                form.setFieldValue('location', value || null);
-                handleSubmit(form.getValues());
-              }}
-            />
-          </SimpleGrid>
 
           <Grid justify="space-between">
             <GridCol span={{ base: 12, md: 7, lg: 8 }}>
@@ -242,11 +217,9 @@ const Form = ({
             </GridCol>
             <GridCol span={{ base: 12, md: 5, lg: 4 }}>
               <Group align="end" justify="end">
-                {Object.keys(actions)?.length ? (
-                  <Button onClick={toggle} variant="transparent" disabled={isLoading}>
-                    {t('form-drawer-label', { count: selectedActions.length })}
-                  </Button>
-                ) : null}
+                <Button onClick={toggle} variant="outline" disabled={isLoading}>
+                  {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
+                </Button>
                 <Button
                   variant="transparent"
                   disabled={isLoading}
@@ -264,9 +237,28 @@ const Form = ({
               <Collapse in={openedDrawer} transitionDuration={300} transitionTimingFunction="linear">
                 <Alert>
                   <Stack>
+                    <SimpleGrid cols={{ base: 1, sm: 3 }}>
+                      <Select
+                        disabled={isLoading}
+                        size={'sm'}
+                        placeholder={t('filter-region-label')}
+                        name="region"
+                        {...form.getInputProps('region')}
+                        data={getFilters(distinctValues.region, 'region', ';')}
+                      />
+                      <Select
+                        disabled={isLoading}
+                        size={'sm'}
+                        placeholder={t('filter-location-label')}
+                        name="location"
+                        {...form.getInputProps('location')}
+                        data={getFilters(distinctValues.location, 'location')}
+                      />
+                    </SimpleGrid>
                     <Group>
                       {Object.keys(actions)
                         .sort((a, b) => (a > b ? 1 : -1))
+                        .filter(action => action !== 'economic')
                         .map(action => {
                           return (
                             <Checkbox
@@ -275,7 +267,6 @@ const Form = ({
                               size="sm"
                               key={`chip_${action}`}
                               name={action}
-                              defaultChecked={selectedActions.includes(action)}
                               checked={selectedActions.includes(action)}
                               {...form.getInputProps(action)}
                             />

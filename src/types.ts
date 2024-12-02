@@ -113,7 +113,7 @@ export type Filters = {
   sort?: string;
   limit?: number;
   start?: number;
-  theme?: Theme | null;
+  theme?: Theme[] | null;
   tags?: string[];
   codes?: (string | null)[];
   region?: Region | null;
@@ -140,7 +140,7 @@ export type Filters = {
 };
 
 export type DistinctFilters = {
-  [key in 'theme' | 'region' | 'location']: FacetHits[];
+  [key in 'region' | 'location']: FacetHits[];
 };
 
 export type APIFilters = {

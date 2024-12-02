@@ -3,11 +3,12 @@
 import { PAGINATION_LIMIT } from '@/config';
 import { Filters } from '@/types';
 import { algoliasearch, FacetFilters, FacetHits, SearchForFacetValuesProps, SearchResponses } from 'algoliasearch';
+import { isArray } from 'lodash';
 
 export const search = async ({
   query,
   limit = PAGINATION_LIMIT,
-  sort = 'label',
+  sort = 'updatedAt',
   filters = {},
   page = 1
 }: {
@@ -17,18 +18,26 @@ export const search = async ({
   filters?: Filters;
   page: number;
 }): Promise<SearchResponses<unknown>> => {
-  const facetFilters: FacetFilters = Object.keys(filters).map((filterKey: string) => {
+  const facetFilters: FacetFilters = Object.keys(filters).reduce((all: any, filterKey: string) => {
     /*@ts-ignore*/
-    const value: string = filters?.[filterKey] || '';
-    return [`${filterKey}:${value}`];
-  });
+    const value: string | string[] = filters?.[filterKey] || '';
+    if (['string', 'boolean'].includes(typeof value)) {
+      return [...all, `${filterKey}:${value}`];
+    } else {
+      if (isArray(value) && value.length) {
+        return [...all, value.map(subValue => `${filterKey}:${subValue}`)];
+      }
+    }
+
+    return all;
+  }, []);
 
   const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
   const results = await client.search(
     {
       requests: [
         {
-          indexName: 'code',
+          indexName: process?.env?.ALGOLIA_INDEXNAME || '',
           query,
           ignorePlurals: 'true',
           facetFilters,
@@ -45,7 +54,7 @@ export const search = async ({
 
 export const getFieldDistinctsValues = async ({ name: facetName }: { name: string }): Promise<FacetHits[]> => {
   const params: SearchForFacetValuesProps = {
-    indexName: 'code',
+    indexName: process?.env?.ALGOLIA_INDEXNAME || '',
     facetName,
     searchForFacetValuesRequest: { maxFacetHits: 100 }
   };
