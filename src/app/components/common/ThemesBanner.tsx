@@ -9,12 +9,14 @@ const ThemesBanner = async ({ theme }: { theme?: Theme }) => {
     <Group justify="flex-start">
       {themes.map(theme => {
         return (
-          <Example
-            link={`/services?filters={"theme":"${theme}"}`}
-            Icon={themesIcons[theme]}
-            text={t(theme)}
-            gradient={{ from: themesColors[theme], to: themesColors[theme], deg: 90 }}
-          />
+          <div key={`theme-banner-${theme}`}>
+            <Example
+              link={`/services?filters={"theme":"${theme}"}`}
+              Icon={themesIcons[theme]}
+              text={t(theme)}
+              gradient={{ from: themesColors[theme], to: themesColors[theme], deg: 90 }}
+            />
+          </div>
         );
       })}
     </Group>
