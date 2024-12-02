@@ -52,7 +52,8 @@ const Form = ({
   const typingTimeoutRef = useRef(null);
 
   useEffect(() => {
-    setActions(getActionFilters({ themes: initialValues?.theme || undefined }));
+    const newActions = getActionFilters({ themes: initialValues?.theme || undefined });
+    setActions(newActions);
     form.setValues(initialValues);
     /*@ts-ignore*/
   }, [initialValues]);

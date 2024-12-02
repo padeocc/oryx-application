@@ -1,4 +1,4 @@
-import { Container, Flex, Group, Stack, Title } from '@mantine/core';
+import { Container, Flex, Group, Image, Stack, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import HeaderMenuDesktop from './HeaderMenuDesktop';
@@ -15,7 +15,7 @@ const HeaderMenu = async () => {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <Stack gap="0">
               <Title c="green_oryx" order={1} fw={'bolder'}>
-                OryxChange
+                <Image src="/images/logo.png" maw={'14rem'} />
               </Title>
               <Title c="dark" fz="sm" fw={'bold'} order={2}>
                 {t('welcome')}

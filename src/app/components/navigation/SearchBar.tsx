@@ -25,7 +25,7 @@ const SearchBar = () => {
       <TextInput
         size="sm"
         label={''}
-        w={{ base: 'auto', lg: '20rem', xl: '25rem' }}
+        w={{ base: 'auto', md: '12rem', lg: '20rem', xl: '25rem' }}
         placeholder={t('query-placeholder')}
         name="query"
         {...form.getInputProps('query')}
