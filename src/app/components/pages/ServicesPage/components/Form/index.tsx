@@ -54,6 +54,7 @@ const Form = ({
   useEffect(() => {
     setActions(getActionFilters({ themes: initialValues?.theme || undefined }));
     form.setValues(initialValues);
+    /*@ts-ignore*/
   }, [initialValues]);
 
   const getFilters = (facet: FacetHits[], name: string, splitter?: string): ComboboxData => {
