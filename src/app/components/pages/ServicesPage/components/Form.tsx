@@ -125,7 +125,7 @@ const Form = ({
           <ThemesSelector
             selectedThemes={values.theme ? [values.theme] : []}
             handleClick={(theme?: Theme) => {
-              form.setFieldValue('theme', theme);
+              form.setFieldValue('theme', values.theme === theme ? null : theme);
             }}
           />
           <TextInput

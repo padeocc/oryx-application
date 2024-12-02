@@ -31,7 +31,7 @@ const HomePage = async ({}: {}) => {
   return (
     <Stack gap={'xl'} pt="xl">
       <ExamplesSection />
-      <Text fz="2rem" c="green_oryx" fw="bold">
+      <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
         {t('explore_themes_label')}
       </Text>
       <ThemesBanner />
