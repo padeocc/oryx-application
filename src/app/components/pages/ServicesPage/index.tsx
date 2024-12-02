@@ -32,7 +32,7 @@ const ServicesPage = async ({
 
   let suggestions: string[] = [];
 
-  if (filters.theme?.length && false) {
+  if (filters.theme?.length) {
     const { results: allServices }: SearchResponses<unknown> = await search({
       query: '',
       page: 0,
