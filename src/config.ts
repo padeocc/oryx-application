@@ -18,10 +18,10 @@ export const themesIcons: { [key: string]: Icon } = {
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {
   transports: 'blue.9',
-  foods: 'blue.5',
-  goods: 'blue.7',
-  events: 'green.5',
-  services: 'green.7',
+  foods: 'blue.7',
+  goods: 'blue.8',
+  events: 'green.7',
+  services: 'green.8',
   accommodations: 'green.9'
 };
 

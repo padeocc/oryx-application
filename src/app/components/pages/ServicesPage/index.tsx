@@ -1,6 +1,6 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
-import { TAGSPLITTER, themes } from '@/config';
+import { TAGSPLITTER } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
@@ -50,7 +50,7 @@ const ServicesPage = async ({
   const defaultValues: Filters = {
     region: null,
     location: null,
-    theme: themes,
+    theme: [],
     query: '',
     organic: false,
     economic: false,
