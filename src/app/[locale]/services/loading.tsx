@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <Content
       filters={{}}
-      distinctValues={{ location: [], region: [], theme: [] }}
+      distinctValues={{ location: [], region: [] }}
       hits={[]}
       pagesCount={0}
       page={0}

@@ -1,5 +1,6 @@
 'use client';
 
+import { cleanFiltersValues } from '@/app/components/content/utils';
 import { Filters } from '@/types';
 import { Pagination } from '@mantine/core';
 import { useRouter } from 'next/navigation';
@@ -12,7 +13,7 @@ const PaginationComponent = ({ page, total, filters }: { page: number; total: nu
       value={Number(page + 1)}
       total={total}
       size={'md'}
-      onChange={(pageNumber: number) => router.push(`?filters=${JSON.stringify(filters)}&page=${pageNumber}`)}
+      onChange={(pageNumber: number) => router.push(`?filters=${cleanFiltersValues(filters)}&page=${pageNumber}`)}
     />
   );
 };

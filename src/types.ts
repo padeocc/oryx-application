@@ -110,14 +110,14 @@ export type ActionFilters = {
 
 export type Filters = {
   query?: string;
-  sortBy?: string;
+  sort?: string;
   limit?: number;
   start?: number;
-  theme?: Theme | '';
-  tags?: string[] | undefined;
-  codes?: (string | undefined)[];
-  region?: Region;
-  location?: string;
+  theme?: Theme[] | null;
+  tags?: string[];
+  codes?: (string | null)[];
+  region?: Region | null;
+  location?: string | null;
   organic?: boolean;
   economic?: boolean;
   local?: boolean;
@@ -140,11 +140,11 @@ export type Filters = {
 };
 
 export type DistinctFilters = {
-  [key in 'theme' | 'region' | 'location']: FacetHits[];
+  [key in 'region' | 'location']: FacetHits[];
 };
 
 export type APIFilters = {
-  sortBy?: string;
+  sort?: string;
   pagination: { start?: number; limit?: number };
   filters: any;
   populate?: string | string[];
@@ -160,7 +160,7 @@ export type RequestParameters = {
     start: number;
     limit: number;
   };
-  sortBy: string;
+  sort: string;
   populate: string;
   filters: Filters;
   theme: Theme;

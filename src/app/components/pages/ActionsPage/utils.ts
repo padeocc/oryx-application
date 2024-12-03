@@ -4,7 +4,7 @@ import { merge, uniq } from 'lodash';
 import qs from 'qs';
 
 const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
-  const { sortBy, limit = -1, start = 0, theme, region, location, tags = [], ...actions } = filters;
+  const { sort, limit = -1, start = 0, theme, region, location, tags = [], ...actions } = filters;
 
   const tagsFilters = tags.length ? { $or: tags.map(tag => ({ tags: { $containsi: tag } })) } : {};
   // Workaround https://github.com/Zaydme/strapi-plugin-multi-select/issues/27
@@ -14,7 +14,7 @@ const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
     : {};
 
   return qs.stringify({
-    sortBy,
+    sort,
     pagination: {
       start,
       limit

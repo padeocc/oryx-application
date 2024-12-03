@@ -1,8 +1,7 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Button, Group, Stack, Title } from '@mantine/core';
+import { Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import ThemesBanner from '../../common/ThemesBanner';
 import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
@@ -12,9 +11,9 @@ const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[
   return (
     await fetchServices({
       filters: {
-        theme,
+        theme: [theme],
         tags: [],
-        sortBy: 'updatedAt:desc',
+        sort: 'updatedAt:desc',
         limit: 4
       }
     })
@@ -30,22 +29,13 @@ const HomePage = async ({}: {}) => {
     })
   );
   return (
-    <Stack gap={'xl'}>
-      <Stack gap={'2.5rem'} pt="2rem">
-        <Stack gap="md">
-          <ExamplesSection />
-          <Group key="header-group-mobile" w="100%" align="center" justify="center">
-            <Button component={Link} href="/services" size="xl">
-              {t('search_label')}
-            </Button>
-          </Group>
-        </Stack>
-        <Stack gap="sm">
-          <Title order={3}>{t('explore_themes_label')}</Title>
-          <ThemesBanner coloredByDefault />
-        </Stack>
-        {themesSections}
-      </Stack>
+    <Stack gap={'xl'} pt="xl">
+      <ExamplesSection />
+      <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
+        {t('explore_themes_label')}
+      </Text>
+      <ThemesBanner />
+      {themesSections}
     </Stack>
   );
 };

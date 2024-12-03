@@ -2,7 +2,7 @@
 
 import { IResult } from '@/algolia/types';
 import { DistinctFilters, Filters } from '@/types';
-import { Divider, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import Form from './Form';
 import Results from './Results';
@@ -14,7 +14,9 @@ const Content = ({
   pagesCount,
   page,
   totalNumberOfResults,
-  asLoader = false
+  asLoader = false,
+  suggestions,
+  tags
 }: {
   filters: Filters;
   distinctValues: DistinctFilters;
@@ -23,6 +25,8 @@ const Content = ({
   page: number;
   totalNumberOfResults: number;
   asLoader?: boolean;
+  suggestions?: string[];
+  tags?: string[];
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -35,10 +39,10 @@ const Content = ({
       <Form
         initialValues={filters}
         distinctValues={distinctValues}
-        isLoading={isLoading || asLoader}
+        isLoading={asLoader}
         setIsLoading={setIsLoading}
+        suggestions={suggestions}
       />
-      <Divider />
       <Results
         filters={filters}
         data={hits as IResult[]}

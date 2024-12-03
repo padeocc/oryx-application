@@ -11,12 +11,12 @@ const transformParams = (
       start: 0,
       limit: -1
     },
-    sortBy: '',
+    sort: '',
     populate: '',
     filters: {
-      theme: 'transports'
+      theme: ['transports']
     },
-    theme: 'transports'
+    theme: 'transports' as Theme
   };
 
   Object.keys(params).forEach(key => {
@@ -28,12 +28,10 @@ const transformParams = (
   return result;
 };
 
-export default async function ActionsTheme(
-  props: {
-    params: Promise<{ theme: Theme }>;
-    searchParams?: Promise<{ [key: string]: string | string[] | undefined } | undefined>;
-  }
-) {
+export default async function ActionsTheme(props: {
+  params: Promise<{ theme: Theme }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined } | undefined>;
+}) {
   const searchParams = await props.searchParams;
   const params = await props.params;
   const parameters: RequestParameters = transformParams(searchParams);

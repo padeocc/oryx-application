@@ -5,6 +5,7 @@ import NotFound from '@/app/components/navigation/NotFound';
 import { Theme, getActionFilters } from '@/config';
 import { Service } from '@/types';
 import {
+  Badge,
   Card,
   CardSection,
   DefaultMantineColor,
@@ -21,6 +22,7 @@ import {
   TitleOrder
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import Description from './components/Description';
 import Links from './components/Links';
@@ -29,7 +31,6 @@ import style from './server-card.module.css';
 
 const ServiceCard = ({
   service,
-  noImage = false,
   backgroundColor,
   theme,
   color,
@@ -37,7 +38,6 @@ const ServiceCard = ({
   asLoader
 }: {
   service?: Service;
-  noImage?: boolean;
   backgroundColor?: StyleProp<DefaultMantineColor>;
   theme?: Theme;
   color: string;
@@ -66,7 +66,7 @@ const ServiceCard = ({
     return <NotFound />;
   }
 
-  const fields = Object.keys(getActionFilters([theme]))
+  const fields = Object.keys(getActionFilters({ themes: [theme] }))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
@@ -79,13 +79,11 @@ const ServiceCard = ({
       onMouseEnter={open}
       onMouseLeave={close}
       className={style['card']}>
-      {!noImage ? (
-        <CardSection>
-          <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
-        </CardSection>
-      ) : null}
+      <CardSection>
+        <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
+      </CardSection>
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
-        <Stack pt={noImage ? '0' : 'md'} justify="space-between" h={'100%'}>
+        <Stack pt={'md'} justify="space-between" h={'100%'}>
           <Stack>
             <Grid>
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
@@ -94,6 +92,25 @@ const ServiceCard = ({
                     tags={[...(service?.tags || []), ...fields]}
                     color={color}
                     basekey={`${theme}-${service.name}`}
+                    firstTag={
+                      service.economic ? (
+                        <Badge
+                          variant="gradient"
+                          gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+                          radius="md"
+                          style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
+                          styles={{
+                            root: {
+                              textTransform: 'capitalize'
+                            }
+                          }}
+                          pl="xs"
+                          pr="xs"
+                          leftSection={<CurrencyEur weight="fill" fontSize={'1.2rem'} />}>
+                          {tFilters('economic-label')}
+                        </Badge>
+                      ) : undefined
+                    }
                   />
                 </Group>
               </GridCol>

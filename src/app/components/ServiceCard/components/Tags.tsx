@@ -2,11 +2,38 @@
 
 import { Badge, Collapse, Group, Stack } from '@mantine/core';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const Tags = ({ tags, color, basekey }: { tags: string[]; color: string; basekey: string }) => {
+const Tags = ({
+  tags,
+  color,
+  basekey,
+  firstTag: originalFirstTag
+}: {
+  tags: string[];
+  color: string;
+  basekey: string;
+  firstTag?: string | React.ReactNode;
+}) => {
   const [opened, setOpen] = useState(false);
-  const [firstTag, ...otherTags] = tags;
+
+  let firstTag = originalFirstTag;
+  let otherTags = tags;
+
+  if (!firstTag) {
+    const [first, ...others] = tags;
+    firstTag = first;
+    otherTags = others;
+  }
+
+  if (typeof firstTag === 'string') {
+    firstTag = (
+      <Badge key={`tag-${basekey}-${firstTag}`} variant="outline" color={color} bg="white" size="xs">
+        {firstTag}
+      </Badge>
+    );
+  }
+
   const t = useTranslations('services');
   return tags?.length > 1 ? (
     <Group
@@ -19,9 +46,7 @@ const Tags = ({ tags, color, basekey }: { tags: string[]; color: string; basekey
       w="100%">
       <Stack w="100%">
         <Group justify="space-between">
-          <Badge key={`tag-${basekey}-${firstTag}`} variant="outline" color={color} bg="white" size="xs">
-            {firstTag}
-          </Badge>
+          {firstTag}
           <Badge color={color} size="xs">
             {opened
               ? t('tags-others-opened-label', { count: tags.length })
@@ -40,9 +65,7 @@ const Tags = ({ tags, color, basekey }: { tags: string[]; color: string; basekey
       </Stack>
     </Group>
   ) : (
-    <Badge key={`tag-${basekey}-${firstTag}`} size="sm" variant="outline" color={color} bg="white">
-      {firstTag}
-    </Badge>
+    firstTag
   );
 };
 

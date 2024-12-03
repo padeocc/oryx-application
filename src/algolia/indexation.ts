@@ -1,7 +1,7 @@
 'use server';
 
 import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
-import { Theme } from '@/config';
+import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 
 export const runIndexation = async () => {
@@ -9,73 +9,73 @@ export const runIndexation = async () => {
     (
       await fetchServices({
         filters: {
-          theme: 'transports',
+          theme: ['transports'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'transports' }));
+  )?.map(service => ({ ...service, theme: ['transports'] }));
 
   const goods = (
     (
       await fetchServices({
         filters: {
-          theme: 'goods',
+          theme: ['goods'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'goods' }));
+  )?.map(service => ({ ...service, theme: ['goods'] }));
 
   const foods = (
     (
       await fetchServices({
         filters: {
-          theme: 'foods',
+          theme: ['foods'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'foods' }));
+  )?.map(service => ({ ...service, theme: ['foods'] }));
 
   const events = (
     (
       await fetchServices({
         filters: {
-          theme: 'events',
+          theme: ['events'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'events' }));
+  )?.map(service => ({ ...service, theme: ['events'] }));
 
   const services = (
     (
       await fetchServices({
         filters: {
-          theme: 'services',
+          theme: ['services'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'services' }));
+  )?.map(service => ({ ...service, theme: ['services'] }));
 
   const accommodations = (
     (
       await fetchServices({
         filters: {
-          theme: 'accommodations',
+          theme: ['accommodations'],
           tags: [],
-          sortBy: 'updatedAt:desc'
+          sort: 'updatedAt:desc'
         }
       })
     )?.services || []
-  )?.map(service => ({ ...service, theme: 'accommodations' }));
+  )?.map(service => ({ ...service, theme: ['accommodations'] }));
 
   const all: Record<string, unknown>[] = [
     ...accommodations,
@@ -85,17 +85,17 @@ export const runIndexation = async () => {
     ...goods,
     ...transports
   ].map(service => {
-    /*@ts-ignore*/
-    const logo = service?.logo?.data?.attributes?.url || '';
-
     return {
       description: service.description,
       label: service.name,
       url: service.url,
-      logo: logo ? `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
+      logo: service?.logo,
       id: service.code,
-      theme: service.theme as Theme,
-      tags: (service?.tags || []).join(', '),
+      theme: service.theme,
+      tags: (service?.tags || [])
+        .map(t => t.trim())
+        .filter(t => !!t)
+        .join(TAGSPLITTER),
       objectID: service.code,
       region: service.region,
       type: service.type,
@@ -123,7 +123,7 @@ export const runIndexation = async () => {
     };
   });
 
-  const parameters: SaveObjectsOptions = { indexName: 'code', objects: all };
+  const parameters: SaveObjectsOptions = { indexName: process?.env?.ALGOLIA_INDEXNAME || '', objects: all };
 
   const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
   return client.saveObjects(parameters);

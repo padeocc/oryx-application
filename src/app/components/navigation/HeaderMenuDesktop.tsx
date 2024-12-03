@@ -3,6 +3,7 @@ import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getFooterLinks, getNavigationItems } from './items';
+import SearchBar from './SearchBar';
 
 const HeaderMenuDesktop = async () => {
   const t = await getTranslations('navigation_items');
@@ -59,10 +60,8 @@ const HeaderMenuDesktop = async () => {
   );
 
   return (
-    <Group gap={'lg'}>
-      <Button component={Link} href="/services">
-        {t('actions_label')}
-      </Button>
+    <Group gap={'lg'} align="center" justify="flex-end">
+      <SearchBar />
       {elements} {more}
     </Group>
   );

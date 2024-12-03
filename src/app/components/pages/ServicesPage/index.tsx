@@ -1,8 +1,10 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
+import { TAGSPLITTER } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
+import { uniq } from 'lodash';
 import Content from './components/Content';
 
 const ServicesPage = async ({
@@ -13,20 +15,42 @@ const ServicesPage = async ({
   const filters: Filters = (filtersParam && JSON.parse(filtersParam)) || {};
   const pageParameter: number = Number(pageParam) || 1;
   const { query = '', ...others } = filters;
-  const { results }: SearchResponses<unknown> = await search({ query, filters: others, page: pageParameter - 1 });
+
+  const { results }: SearchResponses<unknown> = await search({
+    query,
+    filters: others,
+    page: pageParameter - 1
+  });
   /*@ts-ignore*/
-  const { hits, nbHits, page = pageParameter, nbPages } = results[0] || {};
+  const { hits: hitsResults, nbHits, page = pageParameter, nbPages } = results[0] || {};
+  const hits = hitsResults as IResult[];
 
   const distinctValues: DistinctFilters = {
-    theme: await getFieldDistinctsValues({ name: 'theme' }),
     region: await getFieldDistinctsValues({ name: 'region' }),
     location: await getFieldDistinctsValues({ name: 'location' })
   };
 
+  let suggestions: string[] = [];
+
+  if (filters.theme?.length) {
+    const { results: allServices }: SearchResponses<unknown> = await search({
+      query: '',
+      page: 0,
+      limit: 1000,
+      filters: { theme: filters.theme }
+    });
+    suggestions = uniq(
+      /*@ts-ignore*/
+      allServices[0]?.hits.reduce((all: [], suggestion: IResult) => {
+        return [...all, ...suggestion?.tags?.split(TAGSPLITTER)];
+      }, [])
+    ).slice(0, 20) as string[];
+  }
+
   const defaultValues: Filters = {
-    region: '',
-    location: '',
-    theme: '',
+    region: null,
+    location: null,
+    theme: [],
     query: '',
     organic: false,
     economic: false,
@@ -57,7 +81,7 @@ const ServicesPage = async ({
       if (value) {
         return { ...all, [key]: value };
       }
-      return { ...all, [key]: undefined };
+      return { ...all, [key]: null };
     }, {})
   };
 
@@ -66,10 +90,11 @@ const ServicesPage = async ({
       <Content
         filters={cleanedFilters}
         distinctValues={distinctValues}
-        hits={hits as IResult[]}
+        hits={hits}
         pagesCount={nbPages}
         page={page}
         totalNumberOfResults={nbHits}
+        suggestions={suggestions}
       />
     </Stack>
   );
