@@ -42,7 +42,7 @@ export const imagesMapping: { [key: string]: string } = {
 };
 
 export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionFilters => {
-  let actions = {};
+  let actions: ActionFilters = { economic: 'boolean' };
   if (!themes || themes.includes('foods')) {
     actions = {
       ...actions,
@@ -53,8 +53,7 @@ export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionF
         shortcircuit: 'boolean',
         wastereducer: 'boolean',
         foodwastereducer: 'boolean',
-        cookmore: 'boolean',
-        economic: 'boolean'
+        cookmore: 'boolean'
       }
     };
   }
@@ -69,7 +68,6 @@ export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionF
         ecobuilt: 'boolean',
         local: 'boolean',
         organic: 'boolean',
-        economic: 'boolean',
         lowtech: 'boolean',
         recycled: 'boolean',
         reused: 'boolean',

@@ -109,8 +109,9 @@ const Form = ({
     return all;
   }, []);
 
-  const IsEconomicSelected = selectedActions.includes('economic');
+  const isEconomicSelected = selectedActions.includes('economic');
 
+  console.log({ isEconomicSelected, actions });
   return (
     <Stack pos="relative">
       <LoadingOverlay
@@ -154,14 +155,14 @@ const Form = ({
                 isLoading={isLoading}
                 key={`badge-selector-economic`}
                 label={t(`action-economic-label`)}
-                selected={IsEconomicSelected}
+                selected={isEconomicSelected}
                 Icon={CurrencyEur}
                 handleClick={value => {
                   form.setFieldValue('economic', value);
                   handleSubmit(form.getValues());
                 }}
-                bg={IsEconomicSelected ? 'orange' : 'white'}
-                c={IsEconomicSelected ? 'white' : 'orange'}
+                bg={isEconomicSelected ? 'orange' : 'white'}
+                c={isEconomicSelected ? 'white' : 'orange'}
                 bd={`1px solid orange`}
               />
             </Group>
