@@ -1,18 +1,18 @@
 import { MantineColorsTuple, MantineThemeOverride } from '@mantine/core';
 
 const green_oryx: MantineColorsTuple = [
-  '#f1f9f8',
-  '#e4efee',
-  '#c4dfda',
-  '#a0cdc6',
-  '#83bfb6',
-  '#70b6ab',
-  '#65b3a5',
-  '#549c90',
-  '#478c80',
-  '#34796e'
+  '#FFFFFF', // White
+  '#E1F3F3', // Lighter light blue
+  '#C3E5E5', // Lighter turquoise
+  '#A4D7D7', // Light pastel turquoise
+  '#86C9C9', // Light teal
+  '#68BBBB', // Soft teal
+  '#4AA5A5', // Light greenish-blue
+  '#3498A2', // Lighter shade of #027F8B
+  '#2B7A7A', // Lighter version of somber green
+  '#1F5D5D', // Lighter somber green
+  '#004040' // Somber green
 ];
-
 export const theme: MantineThemeOverride = {
   fontFamily: 'Comfortaa,Arial,Helvetica,sans-serif',
   fontSizes: {
