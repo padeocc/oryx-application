@@ -9,7 +9,7 @@ const BackItem = ({ theme }: { theme: Theme }) => {
   const router = useRouter();
   return (
     <Link
-      href={`/services?filters={"theme":"${theme}"}`}
+      href={`/services?filters={"theme":["${theme}"]}`}
       onClick={() => {
         router.back();
       }}>

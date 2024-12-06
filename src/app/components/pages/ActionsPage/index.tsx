@@ -7,7 +7,7 @@ const ActionsPage = async ({ theme, parameters }: { theme: Theme; parameters?: R
   if (!theme) {
     return <NotFound />;
   }
-  permanentRedirect(`/services?filters={"theme":"${theme}"}`);
+  permanentRedirect(`/services?filters={"theme":["${theme}"]}`);
 };
 
 export default ActionsPage;

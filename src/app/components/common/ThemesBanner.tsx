@@ -11,7 +11,7 @@ const ThemesBanner = async ({ theme }: { theme?: Theme }) => {
         return (
           <div key={`theme-banner-${theme}`}>
             <Example
-              link={`/services?filters={"theme":"${theme}"}`}
+              link={`/services?filters={"theme":["${theme}"]}`}
               Icon={themesIcons[theme]}
               text={t(theme)}
               gradient={{ from: themesColors[theme], to: themesColors[theme], deg: 90 }}

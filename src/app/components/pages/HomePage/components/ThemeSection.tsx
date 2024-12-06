@@ -19,7 +19,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     c: color,
     size: 'lg',
     component: Link,
-    href: `/services?filters={"theme":"${theme}"}`,
+    href: `/services?filters={"theme":["${theme}"]}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
   };
 

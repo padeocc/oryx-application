@@ -3,6 +3,7 @@
 import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
+import { difference } from 'lodash';
 
 export const runIndexation = async () => {
   const transports = (
@@ -124,7 +125,14 @@ export const runIndexation = async () => {
   });
 
   const parameters: SaveObjectsOptions = { indexName: process?.env?.ALGOLIA_INDEXNAME || '', objects: all };
-
   const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
+
+  const allAlgoliaObjectIds = (await client.browse({ indexName: process?.env?.ALGOLIA_INDEXNAME || '' }))?.hits?.map(
+    item => item.objectID
+  );
+  const allCMSObjectIds = all.map(item => item.objectID);
+
+  const delta: string[] = difference(allAlgoliaObjectIds, allCMSObjectIds) as string[];
+  client.deleteObjects({ indexName: process?.env?.ALGOLIA_INDEXNAME || '', objectIDs: delta });
   return client.saveObjects(parameters);
 };
