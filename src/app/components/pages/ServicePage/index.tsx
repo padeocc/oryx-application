@@ -5,10 +5,10 @@ import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import BackItem from '../../common/BackItem';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
-import { fetchService } from '../ActionsPage/utils';
-import BackItem from './components/BackItem';
+import { fetchService } from '../ServicesPage/utils';
 
 const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');

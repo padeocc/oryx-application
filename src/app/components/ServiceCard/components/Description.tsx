@@ -30,7 +30,7 @@ const Description = ({ service, theme }: { service: Service; theme: Theme }) => 
         </Text>
       </PopoverTarget>
       <PopoverDropdown style={{ pointerEvents: 'none' }}>
-        <Link href={`/action/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+        <Link href={`/service/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
           <Text fz="sm" size="sm">
             {service.description}
           </Text>

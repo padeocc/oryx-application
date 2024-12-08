@@ -13,7 +13,7 @@ const Links = ({ service, theme, hover }: { service: Service; theme: Theme; hove
     <>
       <Group justify="space-between" p="md" fz="sm" visibleFrom="md">
         <Link
-          href={`/action/${theme}/${service.code}`}
+          href={`/service/${theme}/${service.code}`}
           style={{ color: 'inherit', textDecoration: 'none', display: hover ? 'inline-block' : 'none' }}>
           {tServices('details-label')}
         </Link>
@@ -27,7 +27,7 @@ const Links = ({ service, theme, hover }: { service: Service; theme: Theme; hove
         </Tooltip>
       </Group>
       <Group justify="space-between" p="md" fz="sm" hiddenFrom="md">
-        <Link href={`/action/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+        <Link href={`/service/${theme}/${service.code}`} style={{ color: 'inherit', textDecoration: 'none' }}>
           {tServices('details-label')}
         </Link>
         <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">

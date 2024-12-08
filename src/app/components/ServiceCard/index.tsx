@@ -24,6 +24,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import Description from './components/Description';
 import Links from './components/Links';
 import Tags from './components/Tags';
@@ -71,6 +72,7 @@ const ServiceCard = ({
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
 
+  const router = useRouter();
   return (
     <Card
       h={'100%'}
@@ -78,7 +80,10 @@ const ServiceCard = ({
       color={color}
       onMouseEnter={open}
       onMouseLeave={close}
-      className={style['card']}>
+      className={style['card']}
+      onClick={() => {
+        router.push(`/service/${theme}/${service.code}`);
+      }}>
       <CardSection>
         <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
       </CardSection>

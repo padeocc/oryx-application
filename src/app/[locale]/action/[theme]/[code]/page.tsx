@@ -1,13 +1,16 @@
-import ActionPage from '@/app/components/pages/ActionPage';
+import NotFound from '@/app/components/navigation/NotFound';
 import { Theme } from '@/config';
+import { permanentRedirect } from 'next/navigation';
+
+// Legacy page
 
 export default async function Action(props: { params: Promise<{ code: string; theme: Theme }> }) {
   const params = await props.params;
   const code = params.code;
   const theme = params.theme;
-  return (
-    <main>
-      <ActionPage code={code} theme={theme} />
-    </main>
-  );
+
+  if (!theme) {
+    return <NotFound />;
+  }
+  permanentRedirect(`/service/${theme}/${code}`);
 }

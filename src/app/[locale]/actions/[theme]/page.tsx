@@ -1,43 +1,15 @@
-import ActionsPage from '@/app/components/pages/ActionsPage';
+import NotFound from '@/app/components/navigation/NotFound';
 import { Theme } from '@/config';
-import { RequestParameters } from '@/types';
-import { set } from 'lodash';
+import { permanentRedirect } from 'next/navigation';
 
-const transformParams = (
-  params: { [key: string]: string | string[] | undefined } | undefined = {}
-): RequestParameters => {
-  const result: RequestParameters = {
-    pagination: {
-      start: 0,
-      limit: -1
-    },
-    sort: '',
-    populate: '',
-    filters: {
-      theme: ['transports']
-    },
-    theme: 'transports' as Theme
-  };
+// Legacy page
 
-  Object.keys(params).forEach(key => {
-    const value = params[key];
-    const transformedKey = key.replace(/\[(\w+)\]/g, '.$1');
-    set(result, transformedKey, value);
-  });
-
-  return result;
-};
-
-export default async function ActionsTheme(props: {
-  params: Promise<{ theme: Theme }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined } | undefined>;
-}) {
-  const searchParams = await props.searchParams;
+export default async function ActionsTheme(props: { params: Promise<{ theme: Theme }> }) {
   const params = await props.params;
-  const parameters: RequestParameters = transformParams(searchParams);
-  return (
-    <main>
-      <ActionsPage theme={params.theme} parameters={parameters} />
-    </main>
-  );
+
+  if (!params.theme) {
+    return <NotFound />;
+  }
+
+  permanentRedirect(`/services?filters={"theme":["${params.theme}"]}`);
 }

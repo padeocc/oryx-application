@@ -3,7 +3,7 @@ import { Service } from '@/types';
 import { Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import ThemesBanner from '../../common/ThemesBanner';
-import { fetchServices } from '../ActionsPage/utils';
+import { fetchServices } from '../ServicesPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
 
