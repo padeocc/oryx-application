@@ -287,7 +287,8 @@
   "navigation_items": {
     "contact_label": "Nous contacter",
     "donate_label": "Faire un don",
-    "query-placeholder": "Faites une recherche !"
+    "query-placeholder": "Faites une recherche !",
+    "service_addition_label": "Ajouter un service !"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",
@@ -302,6 +303,28 @@
   },
   "reset_password_page": {
     "reset_password_title": "Réinitialiser son mot de passe"
+  },
+  "service-add": {
+    "filter-location-label": "Type de magasin",
+    "filter-region-label": "Région où le service est disponible (si applicable)",
+    "form-description": "Vous connaissez un service qui mérite sa place sur OryxChange ? Que ce soit une activité locale, une entreprise engagée ou un projet innovant, participez à enrichir cette plateforme !",
+    "form-description-label": "Description du service",
+    "form-description-placeholder": "Entrez une description détaillée du service",
+    "form-label-label": "Nom du service",
+    "form-label-placeholder": "Nom du service, par exemple \"Blablacar\"",
+    "form-location-label": "Sélectionnez le type de magasin ou service",
+    "form-region-label": "Sélectionnez une ou plusieurs régions",
+    "form-submit-label": "Soumettre",
+    "form-themes-label": "Sélectionnez le ou les thèmes de ce service ! Il faut en sélectionner au moins un.",
+    "form-title": "Proposez un service sur OryxChange !",
+    "form-url-label": "Site internet",
+    "form-url-placeholder": "https://www.site.fr",
+    "form-firststep-label": "Le service",
+    "form-firststep-description": "",
+    "form-secondstep-label": "Décrivez le service",
+    "form-secondstep-description": "",
+    "form-thirdstep-label": "Information avancés",
+    "form-thirdstep-description": ""
   },
   "services": {
     "access-label": "Site internet",

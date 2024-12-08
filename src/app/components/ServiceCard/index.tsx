@@ -36,7 +36,8 @@ const ServiceCard = ({
   theme,
   color,
   titleOrder = 3,
-  asLoader
+  asLoader,
+  asPreview
 }: {
   service?: Service;
   backgroundColor?: StyleProp<DefaultMantineColor>;
@@ -44,6 +45,7 @@ const ServiceCard = ({
   color: string;
   titleOrder?: TitleOrder;
   asLoader?: boolean;
+  asPreview?: boolean;
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
@@ -128,9 +130,11 @@ const ServiceCard = ({
             <Description service={service} theme={theme} />
           </Stack>
         </Stack>
-        <CardSection c={color}>
-          <Links service={service} theme={theme} hover={hover} />
-        </CardSection>
+        {asPreview ? null : (
+          <CardSection c={color}>
+            <Links service={service} theme={theme} hover={hover} />
+          </CardSection>
+        )}
       </Flex>
     </Card>
   );
