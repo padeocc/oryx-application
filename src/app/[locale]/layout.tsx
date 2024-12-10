@@ -15,7 +15,7 @@ const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
 
 const authors: Author[] = [
   { name: 'Padeo', url: 'https://www.padeo.fr' },
-  { name: 'Oryx', url }
+  { name: 'OryxChange', url }
 ];
 
 export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
@@ -41,7 +41,7 @@ export const generateMetadata = async (props: { params: Promise<{ locale: string
       canonical: '/'
     },
     authors,
-    publisher: 'Oryx',
+    publisher: 'OryxChange',
     robots: 'index, follow'
   };
   return metadataTags;

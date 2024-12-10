@@ -33,6 +33,7 @@ const ServicesPage = async ({
   let suggestions: string[] = [];
 
   if (filters.theme?.length) {
+    // TODO SORT BY HITS NUMBER
     const { results: allServices }: SearchResponses<unknown> = await search({
       query: '',
       page: 0,

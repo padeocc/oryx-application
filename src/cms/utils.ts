@@ -1,6 +1,8 @@
+'use server';
+
 import { Theme } from '@/config';
 import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
-import { merge, uniq } from 'lodash';
+import { merge } from 'lodash';
 import qs from 'qs';
 
 const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
@@ -54,12 +56,6 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
   return { services, meta: solutions.meta };
 };
 
-export const getTagsFromServices = (services: Service[]) =>
-  uniq(services.flatMap(service => service?.tags || [])).sort((a, b) => (a > b ? 1 : -1));
-
-export const getRegionsfromServices = (services: Service[]) =>
-  uniq(services.flatMap(service => (service?.region && [service.region]) || [])).sort((a, b) => (a > b ? 1 : -1));
-
 export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
@@ -69,5 +65,43 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   });
   const solution = await response.json();
   const item = solution?.data?.[0];
+  return { ...item?.attributes, id: item?.id };
+};
+
+const generateUniqueCode = (name: string) => {
+  // Normalize the name by removing spaces and converting to uppercase
+  const uniqueCode = name.replace(/\s+/g, '').toLowerCase();
+  const random = Math.floor(Math.random() * 1001);
+  return `${uniqueCode}-${random}`;
+};
+
+export const addService = async (formData: FormData): Promise<{ errors?: { [key: string]: string } }> => {
+  const theme = formData.getAll('theme');
+  const tags = formData.getAll('tags');
+  const url = formData.get('url');
+  const name = formData.get('label')?.toString() || '';
+  const region = formData.getAll('region').join(',');
+  const location = formData.get('location');
+  const options = formData.getAll('options');
+  const code = generateUniqueCode(name);
+
+  const body = JSON.stringify({
+    data: { publishedAt: null, code, theme, tags, url, name, region, location, options }
+  });
+
+  const cmsUrl = process?.env?.STRAPI_API_ENDPOINT || '';
+
+  const response = await fetch(`${cmsUrl}/${theme?.[0]}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process?.env?.STRAPI_SECRET_POSTER_TOKEN || ''}`
+    },
+    body
+  });
+
+  const solution = await response.json();
+  const item = solution?.data;
   return { ...item?.attributes, id: item?.id };
 };

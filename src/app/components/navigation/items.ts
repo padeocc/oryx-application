@@ -6,13 +6,13 @@ export const getNavigationItems = ({
   t: any;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
   const menu = [
-    [
-      {
-        name: t('contact_label'),
-        href: '/contact',
-        isExternal: false
-      }
-    ],
+    // [
+    //   {
+    //     name: t('contact_label'),
+    //     href: '/contact',
+    //     isExternal: false
+    //   }
+    // ],
     [
       {
         name: t('service_addition_label'),

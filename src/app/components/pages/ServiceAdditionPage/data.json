@@ -1,0 +1,126 @@
+{
+  "foods": {
+    "Inspiration": ["Inspiration"],
+    "Déchets": ["Réduire ses déchets", "Réduire ses déchets Organiques"],
+    "Origine et qualité des produits": ["Consommer Bio", "Consommer de saison", "Provilégier le circuit court"],
+    "Régime Alimentaire": [
+      "Diversifier sa consommation de protéines (insectes, simili, algues)",
+      "Remplacer les protéines animales",
+      "Remplacer les poduits laitiers"
+    ]
+  },
+  "accommodations": {
+    "Source \"2 tonnes\" et inspiration": ["Source \"2 tonnes\" et inspiration"],
+    "Comparateur énergies vertes": [],
+    "Construire décarboné": [],
+    "Économiser la chaleur": [],
+    "Économiser l'électricité": [],
+    "Rénover son logement": ["Les artisans", "Conseils", "les matériaux"],
+    "Système énergétique": [
+      "Acheter une pompe à chaleur",
+      "Se chauffer au bois ou granulés",
+      "Installer des panneaux voltaïques"
+    ]
+  },
+  "goods": {
+    "Source \"Fresque de l'économie circulaire\"": ["Source \"le bon coin\""],
+    "Acheter/vendre d'occasion ou reconditionné - les généralistes": [],
+    "Acheter/vendre d'occasion ou reconditionné - les spécialistes": [
+      "Animaux",
+      "Art de la table",
+      "Electroménager",
+      "Electronique",
+      "Famille, enfant, bébé",
+      "Hygiene,santé,beauté",
+      "Informatique",
+      "Internet",
+      "Loisirs, sport et culture, jeux jouets",
+      "Maison & jardin",
+      "Mode",
+      "Mode,bijoux,lunettes",
+      "Véhicule"
+    ],
+    "Eco-concevoir": [],
+    "Faire soi-même (DIY)": [],
+    "Louer": [],
+    "Mutualiser": [],
+    "Réduire ses déchets": [],
+    "Relocaliser": [],
+    "Réparer": [],
+    "Réutiliser": [],
+    "Acheter eco-construits/biosourcé": [
+      "Art de la table",
+      "Electroménager",
+      "Electronique",
+      "Famille, enfant, bébé",
+      "Hygiene,santé,beauté",
+      "Informatique",
+      "Internet",
+      "Loisirs, sport et culture, jeux jouets",
+      "Maison & jardin",
+      "Mode",
+      "Mode,bijoux,lunettes",
+      "Véhicule"
+    ]
+  },
+  "services": {
+    "Source \"2 tonnes\" et inspiration": ["Inspiration"],
+    "Les Comparateurs de banques": [],
+    "Les aides financières": [
+      "Les aides financières publiques",
+      "Aides financières des associations",
+      "Aides financières des entreprises à destination des particuliers"
+    ],
+    "Les restaurants": [],
+    "les sorties": [],
+    "les loisirs": [],
+    "les vacances": []
+  },
+  "events": {
+    "Inspiration": ["Inspiration"],
+    "Ateliers": [],
+    "Ateliers de sensibilisation": ["Les généralistes"],
+    "": ["les thématiques", "Les opérationnels"],
+    "Conférences": [],
+    "Forum, journées pour les particulier": [],
+    "Marchés": []
+  },
+  "transports": {
+    "Inspiration": ["Inspiration"],
+    "Télétravailler": [],
+    "Co-working": [],
+    "Voyager - Se déplacer": [
+      "Augmenter le taux de remplissage",
+      "Autopartager",
+      "Co-voiturer",
+      "Marcher",
+      "Utiliser le Bateau - Cargo - Voile - Ferry",
+      "Utiliser le Train",
+      "Utiliser les transports publics"
+    ],
+    "Monoroue": [],
+    "Petits moyens de transport": [],
+    "Triporteur": [],
+    "Trotinette": [],
+    "Vélo": [
+      "Les associations autour du vélo",
+      "Equipement Vélo & cycliste",
+      "Réparer",
+      "Triporteur",
+      "Vélos cargos",
+      "Vélos neufs",
+      "Vélos reconditionnés",
+      "Voyager à vélo"
+    ],
+    "Voiture": [
+      "Diesel",
+      "Électrique",
+      "Essence",
+      "GPL",
+      "Hydrogène",
+      "Hybride",
+      "Sans permis",
+      "Les comparateurs de motorisation"
+    ]
+  }
+}

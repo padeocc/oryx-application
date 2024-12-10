@@ -185,9 +185,4 @@ export const REGIONS = [
   '976'
 ];
 
-export const LOCATIONS = [
-  'location_online_label',
-  'location_online-store_label',
-  'location_store_label',
-  'location_store-and-online_label'
-];
+export const LOCATIONS = ['online', 'online-store', 'store', 'store-and-online'];
