@@ -207,9 +207,6 @@ const Form = ({
               />
             ) : null}
           </Stack>
-
-          <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
-
           <TextInput
             label={t('form-email-label')}
             placeholder={t('form-email-placeholder')}
@@ -217,6 +214,8 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
+
+          <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
 
           <Button type="submit" loading={isSending}>
             {t('form-submit-label')}
