@@ -10,7 +10,6 @@
     ]
   },
   "accommodations": {
-    "Source \"2 tonnes\" et inspiration": ["Source \"2 tonnes\" et inspiration"],
     "Comparateur énergies vertes": [],
     "Construire décarboné": [],
     "Économiser la chaleur": [],
@@ -23,7 +22,6 @@
     ]
   },
   "goods": {
-    "Source \"Fresque de l'économie circulaire\"": ["Source \"le bon coin\""],
     "Acheter/vendre d'occasion ou reconditionné - les généralistes": [],
     "Acheter/vendre d'occasion ou reconditionné - les spécialistes": [
       "Animaux",
@@ -31,7 +29,7 @@
       "Electroménager",
       "Electronique",
       "Famille, enfant, bébé",
-      "Hygiene,santé,beauté",
+      "Hygiène, santé, beauté",
       "Informatique",
       "Internet",
       "Loisirs, sport et culture, jeux jouets",
@@ -53,18 +51,17 @@
       "Electroménager",
       "Electronique",
       "Famille, enfant, bébé",
-      "Hygiene,santé,beauté",
+      "Hygiene, santé,beauté",
       "Informatique",
       "Internet",
       "Loisirs, sport et culture, jeux jouets",
       "Maison & jardin",
       "Mode",
-      "Mode,bijoux,lunettes",
+      "Mode, bijoux, lunettes",
       "Véhicule"
     ]
   },
   "services": {
-    "Source \"2 tonnes\" et inspiration": ["Inspiration"],
     "Les Comparateurs de banques": [],
     "Les aides financières": [
       "Les aides financières publiques",
@@ -77,7 +74,6 @@
     "les vacances": []
   },
   "events": {
-    "Inspiration": ["Inspiration"],
     "Ateliers": [],
     "Ateliers de sensibilisation": ["Les généralistes"],
     "": ["les thématiques", "Les opérationnels"],
@@ -86,7 +82,6 @@
     "Marchés": []
   },
   "transports": {
-    "Inspiration": ["Inspiration"],
     "Télétravailler": [],
     "Co-working": [],
     "Voyager - Se déplacer": [

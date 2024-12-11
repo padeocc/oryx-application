@@ -69,28 +69,31 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
 };
 
 const generateUniqueCode = (name: string) => {
-  // Normalize the name by removing spaces and converting to uppercase
   const uniqueCode = name.replace(/\s+/g, '').toLowerCase();
   const random = Math.floor(Math.random() * 1001);
   return `${uniqueCode}-${random}`;
 };
 
-export const addService = async (formData: FormData): Promise<{ errors?: { [key: string]: string } }> => {
-  const theme = formData.getAll('theme');
-  const tags = formData.getAll('tags');
-  const url = formData.get('url');
-  const name = formData.get('label')?.toString() || '';
-  const region = formData.getAll('region').join(',');
-  const location = formData.get('location');
-  const options = formData.getAll('options');
+export const addService = async (data: { [key: string]: any }): Promise<{ errors?: { [key: string]: string } }> => {
+  const { theme, tags, url, label: name, region, location, options, email: sender } = data;
   const code = generateUniqueCode(name);
 
   const body = JSON.stringify({
-    data: { publishedAt: null, code, theme, tags, url, name, region, location, options }
+    data: {
+      publishedAt: null,
+      code,
+      theme,
+      form_tags: tags,
+      url,
+      name,
+      region: region.join(','),
+      location,
+      form_options: options,
+      sender
+    }
   });
 
   const cmsUrl = process?.env?.STRAPI_API_ENDPOINT || '';
-
   const response = await fetch(`${cmsUrl}/${theme?.[0]}`, {
     method: 'POST',
     headers: {
@@ -103,5 +106,5 @@ export const addService = async (formData: FormData): Promise<{ errors?: { [key:
 
   const solution = await response.json();
   const item = solution?.data;
-  return { ...item?.attributes, id: item?.id };
+  return { ...item?.attributes, id: item?.id, theme };
 };

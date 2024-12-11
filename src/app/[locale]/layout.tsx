@@ -2,11 +2,14 @@ import HeaderMenu from '@/components/navigation/HeaderMenu';
 import { theme } from '@/theme';
 import { AppShell, AppShellMain, ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 import { Inter } from 'next/font/google';
+
 import GDPRConsent from '../components/navigation/GDPRConsent';
 import '../globals.css';
 
@@ -88,6 +91,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
                 <GDPRConsent />
               </AppShellMain>
             </AppShell>
+            <Notifications />
           </MantineProvider>
         </NextIntlClientProvider>
       </body>

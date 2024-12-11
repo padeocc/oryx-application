@@ -310,7 +310,7 @@
     "error-region-field": "Le champ région est requis",
     "error-tags-field": "Les mots-clés sont requis",
     "error-theme-field": "Le champ thème est requis",
-    "error-url-field": "L'URL est requise",
+    "error-url-field": "L'URL est requise au format : www.site.fr",
     "filter-location-label": "Type de magasin",
     "filter-region-label": "Région où le  produit ou service est disponible (si applicable)",
     "form-description": "Vous connaissez un  produit ou service qui mérite sa place sur OryxChange ? Que ce soit une activité locale, une entreprise engagée ou un projet innovant, participez à enrichir cette plateforme !",
@@ -338,7 +338,11 @@
     "filter-location-placeholder": "Sélectionner",
     "filter-region-placeholder": "Sélectionner",
     "form-validation-ok-title": "Merci de votre contribution ! ",
-    "form-validation-ok-description": "Les bénévoles de oryxchange vont maintenant vérifier la conformité de l'offre avec la charte. Si cette offre respecte la charte, elle sera immédiatement visible."
+    "form-validation-ok-description": "Les bénévoles de oryxchange vont maintenant vérifier la conformité de l'offre avec la charte. Si cette offre respecte la charte, elle sera immédiatement visible.",
+    "form-validation-ko-title": "Une erreur est survenue",
+    "form-validation-ko-description": "Merci de réessayer un peu plus tard",
+    "form-email-label": "Votre adresse email (Optionnel)",
+    "form-email-placeholder": "nom@site.fr"
   },
   "services": {
     "access-label": "Site internet",

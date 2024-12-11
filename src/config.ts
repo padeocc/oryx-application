@@ -185,4 +185,4 @@ export const REGIONS = [
   '976'
 ];
 
-export const LOCATIONS = ['online', 'online-store', 'store', 'store-and-online'];
+export const LOCATIONS = ['online', 'store', 'store-and-online'];

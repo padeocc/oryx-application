@@ -2,28 +2,34 @@
 
 import BadgeSelector from '@/app/components/pages/ServicesPage/components/Form/components/BadgeSelector';
 import { LOCATIONS, REGIONS, Theme, themes, themesColors, themesIcons } from '@/config';
-import { Button, Group, InputLabel, MultiSelect, Select, Stack, TextInput } from '@mantine/core';
-import { isNotEmpty, useForm } from '@mantine/form';
+import { Service } from '@/types';
+import { Button, Group, InputLabel, MultiSelect, Select, Stack, Text, TextInput } from '@mantine/core';
+import { isNotEmpty, matches, useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { useTranslations } from 'next-intl';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { redirect } from 'next/navigation';
+import { RefObject, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { getOptionsFromThemes, getTagsFromThemes } from '../utils';
+
+const urlRegexString =
+  '^(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+const URLREGEX = new RegExp(urlRegexString, 'i');
 
 const Form = ({
   handleSubmit,
   sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
 }: {
   sitekey?: string;
-  handleSubmit: (formData: FormData) => Promise<{
+  handleSubmit: (data: { [key: string]: any }) => Promise<{
     sent: boolean;
+    service?: Service;
     errors?: { [key: string]: string };
   }>;
 }) => {
   const t = useTranslations('service-add');
   const tThemes = useTranslations('themes');
   const tFilters = useTranslations('filters_component');
-  const [okNotification, setOkNotification] = useState<boolean>(false);
-  const [koNotification, setKoNotification] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const recaptcha: RefObject<ReCAPTCHA | null> = useRef(null);
 
@@ -37,22 +43,6 @@ const Form = ({
     value: location
   }));
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setOkNotification(false);
-    }, 10000);
-
-    return () => clearTimeout(timeoutId);
-  }, [okNotification]);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setKoNotification(false);
-    }, 5000);
-
-    return () => clearTimeout(timeoutId);
-  }, [koNotification]);
-
   const form = useForm({
     initialValues: {
       label: '',
@@ -61,15 +51,15 @@ const Form = ({
       theme: [],
       region: [],
       location: '',
-      options: []
+      options: [],
+      email: ''
     },
     validate: {
       label: isNotEmpty(t('error-label-field')),
-      url: isNotEmpty(t('error-url-field')),
+      url: matches(URLREGEX, t('error-url-field')),
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
-      theme: isNotEmpty(t('error-theme-field')),
-      region: isNotEmpty(t('error-region-field'))
+      theme: isNotEmpty(t('error-theme-field'))
     }
   });
 
@@ -87,26 +77,36 @@ const Form = ({
         onSubmit={() => {
           setIsSending(true);
         }}
-        action={async (formValues: FormData) => {
-          /* action submit formdata does not have theme*/
-          /*@ts-ignore*/
-          formValues.set('theme', values?.theme || []);
-          const { sent, errors = {} } = await handleSubmit(formValues);
-
-          if (sent === true) {
-            //form.reset();
-            setOkNotification(true);
-            recaptcha?.current?.reset();
-          } else {
-            const errorKeys = Object.keys(errors);
-            const translatedErrors = errorKeys.reduce(
-              (all, errorKey) => ({ ...all, [errorKey]: t(`form-error-${errors[errorKey]}`) }),
-              {}
-            );
-            form.setErrors(translatedErrors);
-            setKoNotification(true);
+        action={async (_formValues: FormData) => {
+          const validation = form.validate();
+          if (validation.hasErrors) {
+            setIsSending(false);
+            return;
           }
-          setIsSending(false);
+          const { sent, service } = await handleSubmit(values);
+
+          if (sent === true || !!service?.code) {
+            recaptcha?.current?.reset();
+            notifications.show({
+              title: t('form-validation-ok-title'),
+              message: t('form-validation-ok-description'),
+              position: 'top-center',
+              autoClose: 10000
+            });
+            setTimeout(() => {
+              redirect('/');
+            }, 10000);
+          } else {
+            notifications.show({
+              title: t('form-validation-ko-title'),
+              message: t('form-validation-ko-description'),
+              color: 'red',
+              position: 'top-center',
+              fz: 'xl',
+              autoClose: 10000
+            });
+            setIsSending(false);
+          }
         }}>
         <Stack gap={'xl'}>
           <Stack gap={'lg'}>
@@ -124,8 +124,11 @@ const Form = ({
               placeholder={t('form-url-placeholder')}
               name="url"
               disabled={isSending}
+              leftSection={<Text fz="0.5rem">https://</Text>}
               {...form.getInputProps('url')}
             />
+          </Stack>
+          <Stack gap={'lg'}>
             <Stack gap="0">
               <InputLabel>{t('form-themes-label')}</InputLabel>
               <Group justify="flex-start">
@@ -160,8 +163,11 @@ const Form = ({
               name="tags"
               label={t('form-tags-label')}
               {...form.getInputProps('tags')}
-              multiple
               data={tags}
+              onChange={(value: string[]) => {
+                form.setFieldValue('options', []);
+                form.setFieldValue('tags', value as never[]);
+              }}
               searchable
             />
 
@@ -172,11 +178,11 @@ const Form = ({
               name="options"
               label={t('form-options-label')}
               {...form.getInputProps('options')}
-              multiple
               data={options}
               searchable
             />
-
+          </Stack>
+          <Stack gap={'lg'}>
             <Select
               disabled={isSending}
               size={'sm'}
@@ -187,7 +193,6 @@ const Form = ({
               data={locations}
               withAsterisk
             />
-
             {needsRegion ? (
               <MultiSelect
                 disabled={isSending}
@@ -203,7 +208,15 @@ const Form = ({
             ) : null}
           </Stack>
 
-          {/* <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} /> */}
+          <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
+
+          <TextInput
+            label={t('form-email-label')}
+            placeholder={t('form-email-placeholder')}
+            name="email"
+            disabled={isSending}
+            {...form.getInputProps('email')}
+          />
 
           <Button type="submit" loading={isSending}>
             {t('form-submit-label')}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@mantine/core": "^7.14.1",
     "@mantine/form": "^7.14.1",
+    "@mantine/notifications": "^7.15.0",
     "@mantine/spotlight": "^7.14.1",
     "@phosphor-icons/react": "^2.1.7",
     "algoliasearch": "^5.15.0",

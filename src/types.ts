@@ -80,6 +80,9 @@ export type Service = {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
+  sender?: string;
+  form_tags: string[];
+  form_options: string[];
 };
 
 export type ActionFilters = {
