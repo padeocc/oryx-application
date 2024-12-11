@@ -19,7 +19,7 @@ const ServiceAdditionPage = async () => {
             const recaptchaResponse = await (
               await fetch(
                 `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${
-                  data.get('recaptcha')?.toString() || undefined
+                  data?.recaptcha?.toString() || undefined
                 }`
               )
             ).json();
