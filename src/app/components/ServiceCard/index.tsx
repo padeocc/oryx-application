@@ -49,6 +49,7 @@ const ServiceCard = ({
 }) => {
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
+  const router = useRouter();
 
   if (asLoader) {
     return (
@@ -74,7 +75,6 @@ const ServiceCard = ({
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`));
 
-  const router = useRouter();
   return (
     <Card
       h={'100%'}
