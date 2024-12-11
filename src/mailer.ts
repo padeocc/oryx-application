@@ -36,7 +36,7 @@ export const sendContactEmail = async (
     ).json();
 
     if (!recaptchaResponse?.success) {
-      throw Error('recaptcha');
+      return { sent: false, errors: { error: 'recaptcha' } };
     }
 
     await sendContactEmailSchema.validate({ email, company, message, name }, { abortEarly: false });
@@ -60,6 +60,7 @@ export const sendContactEmail = async (
     );
 
     const emailMessage = {
+      from: process.env.MAILER_USER,
       to: process.env.MAILER_CONTACT_TO,
       subject: `[DEPUIS ORYX] ${message?.substring(1, 30)}`,
       text: `${email} - ${name} - ${company} - ${message?.toString()}`,
@@ -104,17 +105,20 @@ export const sendServiceAdditionEmail = async (
     const { theme, form_tags, form_options, name, url, region, location, sender } = service;
 
     const htmlContent = `<div>
+    Nouveau service ajouté sur le CMS en brouillon :
+    <br/><br/> 
     <b>Theme :</b> ${theme?.[0]} <br/><br/> 
-    <b>Tags :</b> ${form_tags?.join(', ')} <br/><br/> 
     <b>Nom :</b> ${name} <br/><br/>
     <b>Url :</b> ${url} <br/><br/> 
     <b>Region :</b> ${region} <br/><br/> 
     <b>Type :</b> ${location} <br/><br/> 
-    <b>Options :</b> ${JSON.stringify(form_options)} <br/><br/> 
+    <b>Tags :</b> ${form_tags?.join(', ')} <br/><br/> 
+    <b>Options :</b> ${form_options?.join(', ')} <br/><br/> 
     <b>Visiteur :</b> ${sender} <br/><br/> 
     </div>`;
 
     const emailMessage = {
+      from: process.env.MAILER_USER,
       to: process.env.MAILER_CONTACT_TO,
       subject: `[ORYX][AJOUT SERVICE][${theme?.[0]}] ${name}`,
       html: htmlContent

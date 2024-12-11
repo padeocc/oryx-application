@@ -1,7 +1,7 @@
 {
   "foods": {
     "Déchets": ["Réduire ses déchets", "Réduire ses déchets Organiques"],
-    "Origine et qualité des produits": ["Consommer Bio", "Consommer de saison", "Provilégier le circuit court"],
+    "Origine et qualité des produits": ["Consommer Bio", "Consommer de saison", "Privilégier le circuit court"],
     "Régime Alimentaire": [
       "Diversifier sa consommation de protéines (insectes, simili, algues)",
       "Remplacer les protéines animales",
@@ -28,7 +28,6 @@
       "Electroménager",
       "Electronique",
       "Famille, enfant, bébé",
-      "Hygiène, santé, beauté",
       "Informatique",
       "Internet",
       "Loisirs, sport et culture, jeux jouets",
@@ -93,8 +92,6 @@
       "Utiliser les transports publics"
     ],
     "Monoroue": [],
-    "Petits moyens de transport": [],
-    "Triporteur": [],
     "Trotinette": [],
     "Vélo": [
       "Les associations autour du vélo",

@@ -42,6 +42,15 @@ export const getFooterLinks = async () => {
         isExternal: true
       },
       {
+        name: t('contact_label'),
+        href: '/contact'
+      },
+      {
+        name: t('poll_label'),
+        href: 'https://framaforms.org/venez-tester-wwworyxchangecom-1732871595',
+        isExternal: true
+      },
+      {
         name: 'LinkedIn',
         href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
         isExternal: true
