@@ -78,7 +78,7 @@
     "location-online-store-label": "En ligne et en magasin",
     "location-store-and-online-label": "En magasin et en ligne",
     "location-store-label": "En magasin seulement",
-    "quicksearch-contact-us": "Il n'y a pas d'offre correspondant à ces critères pour l'instant sur Oryx; si vous avez des suggestions, contactez-nous !",
+    "quicksearch-contact-us": "Il n'y a pas d'offre correspondant à ces critères pour l'instant sur OryxChange; si vous avez des suggestions, contactez-nous !",
     "quicksearch-no-results": "Pas de résultat",
     "quicksearch-placeholder": "Entrer un ou plusieurs mots-clés (par exemples \"vélo\", \"voyage\", \"cuisine\", ...)",
     "region_01_label": "Ain",
@@ -184,7 +184,7 @@
     "region_976_label": "Mayotte",
     "reset-action-label": "Réinitialiser tous les filtres",
     "reset-filter-label": "Réinitialiser ce filtre",
-    "suggestions-title": "Suggestions :",
+    "suggestions-title": "Mots-clés les plus utilisés :",
     "theme_accommodations_label": "Bâtiment et logement",
     "theme_events_label": "Evénements",
     "theme_foods_label": "Alimentation",
@@ -203,6 +203,7 @@
     "actions_label": "Trouver un service",
     "chart_label": "Charte de l'application",
     "contact_label": "Nous contacter",
+    "poll_label": "Aidez-nous en répondant au questionnaire",
     "donate_label": "Faire un don",
     "legal_label": "Page légale (CGU)",
     "oryx_history_label": "Génèse de l'application",
@@ -217,7 +218,7 @@
     "example_food": "Consommer local, de saison, et bio ?",
     "example_phone": "Acheter des produits électronique d'occasion en ligne ?",
     "example_train": "Partir à Rome en train depuis chez moi ?",
-    "examples_title": "Que peut faire Oryx pour vous ?",
+    "examples_title": "Que peut faire OryxChange pour vous ?",
     "explore_themes_label": "Explorer par thèmes",
     "find_inspiration": "Trouver un service !",
     "find_others_inspiration": "Chercher selon vos envies !",
@@ -247,8 +248,8 @@
       },
       "modifications": "PADEO se réserve le droit de modifier les présentes CGU à tout moment. Les modifications seront notifiées aux Utilisateurs par tout moyen approprié. L'utilisation continue de la Plateforme après modification des CGU vaut acceptation des modifications par l'Utilisateur.",
       "personalData": "En conformité avec le Règlement Général sur la Protection des Données (RGPD), PADEO s'engage à protéger les données personnelles des Utilisateurs. Responsable du traitement : PADEO\nAdresse : 34 Avenue Jules Julien - 31400 Toulouse - France\nEmail : contact@padeo.fr\nFinalités du traitement : Les données collectées sont utilisées pour :\n- Gérer les comptes Utilisateur\n- Fournir les services de la Plateforme\n- Améliorer l'expérience Utilisateur\n- Envoyer des informations relatives aux services de PADEO et de ses partenaires, sous réserve du consentement de l'Utilisateur\nDroits des Utilisateurs : Conformément à la réglementation en vigueur, l'Utilisateur dispose des droits suivants sur ses données :\n- Droit d'accès\n- Droit de rectification\n- Droit à l'effacement\n- Droit à la limitation du traitement\n- Droit d'opposition\n- Droit à la portabilité\nPour exercer ces droits, l'Utilisateur peut contacter PADEO par email à contact@padeo.fr ou par courrier à l'adresse suivante : 34 Avenue Jules Julien - 31400 Toulouse - France.",
-      "platformPurpose": "La Plateforme Oryx a pour but de permettre à ses Utilisateurs de trouver des services éco-responsables afin de favoriser l'adoption de pratiques durables et respectueuses de l'environnement.",
-      "preamble": "Les présentes conditions générales d'utilisation (ci-après \"CGU\") ont pour objet de définir les modalités et conditions dans lesquelles l'association PADEO (ci-après \"PADEO\"), dont le siège social est situé 34 Avenue Jules Julien - 31400 Toulouse - France, met à disposition des utilisateurs (ci-après \"Utilisateur(s)\") sa plateforme en ligne Oryx (ci-après \"la Plateforme\"), accessible à l'adresse oryxchange.com (ci-après \"le Site\"). En accédant et en utilisant la Plateforme, l'Utilisateur accepte sans réserve les présentes CGU.",
+      "platformPurpose": "La Plateforme OryxChange a pour but de permettre à ses Utilisateurs de trouver des services éco-responsables afin de favoriser l'adoption de pratiques durables et respectueuses de l'environnement.",
+      "preamble": "Les présentes conditions générales d'utilisation (ci-après \"CGU\") ont pour objet de définir les modalités et conditions dans lesquelles l'association PADEO (ci-après \"PADEO\"), dont le siège social est situé 34 Avenue Jules Julien - 31400 Toulouse - France, met à disposition des utilisateurs (ci-après \"Utilisateur(s)\") sa plateforme en ligne OryxChange (ci-après \"la Plateforme\"), accessible à l'adresse oryxchange.com (ci-après \"le Site\"). En accédant et en utilisant la Plateforme, l'Utilisateur accepte sans réserve les présentes CGU.",
       "responsibilities": "PADEO s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur la Plateforme. Cependant, PADEO ne peut garantir que les informations sont complètes, exactes, et à jour en toutes circonstances. L'Utilisateur utilise la Plateforme à ses propres risques. PADEO ne saurait être tenu responsable des dommages directs ou indirects résultant de l'accès ou de l'utilisation de la Plateforme.",
       "userAccount": "L'inscription sur la Plateforme est facultative pour accéder à certaines fonctionnalités. Pour s'inscrire, l'Utilisateur doit fournir des informations exactes et à jour. L'Utilisateur s'engage à ne pas divulguer ses identifiants de connexion et à informer immédiatement PADEO de toute utilisation non autorisée de son compte."
     },
@@ -266,7 +267,7 @@
       "responsibilities": "Responsabilités",
       "userAccount": "Inscription et compte Utilisateur"
     },
-    "title": "Conditions Générales d'Utilisation de la plateforme Oryx"
+    "title": "Conditions Générales d'Utilisation de la plateforme OryxChange"
   },
   "login_form_page": {
     "email_address": "Adresse email",
@@ -282,12 +283,13 @@
   "metadata": {
     "description": "Trouver des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
     "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
-    "title": "Oryx, le compagnon des initiatives écoresponsables !"
+    "title": "OryxChange, le compagnon des initiatives écoresponsables !"
   },
   "navigation_items": {
     "contact_label": "Nous contacter",
     "donate_label": "Faire un don",
-    "query-placeholder": "Faites une recherche !"
+    "query-placeholder": "Faites une recherche !",
+    "service_addition_label": "Proposer un service"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",
@@ -302,6 +304,46 @@
   },
   "reset_password_page": {
     "reset_password_title": "Réinitialiser son mot de passe"
+  },
+  "service-add": {
+    "error-label-field": "Le champ étiquette est requis",
+    "error-location-field": "Le champ emplacement est requis",
+    "error-region-field": "Le champ région est requis",
+    "error-tags-field": "Les mots-clés sont requis",
+    "error-theme-field": "Le champ thème est requis",
+    "error-url-field": "L'URL est requise au format : www.site.fr",
+    "filter-location-label": "Type de magasin",
+    "filter-region-label": "Région où le  produit ou service est disponible (si applicable)",
+    "form-description": "Vous connaissez un  produit ou service qui mérite sa place sur OryxChange ? Que ce soit une activité locale, une entreprise engagée ou un projet innovant, participez à enrichir cette plateforme !",
+    "form-description-label": "Description du  produit ou service",
+    "form-description-placeholder": "Entrez une description détaillée du  produit ou service",
+    "form-firststep-description": "",
+    "form-firststep-label": "Quel  produit ou service ?",
+    "form-label-label": "Quel est le nom du  produit ou service ?",
+    "form-label-placeholder": "Nom du  produit ou service, par exemple \"Blablacar\"",
+    "form-location-label": "Sélectionner le type de magasin",
+    "form-region-label": "Sélectionner une ou plusieurs régions",
+    "form-secondstep-description": "",
+    "form-secondstep-label": "Description",
+    "form-submit-label": "Soumettre",
+    "form-themes-label": "Sélectionner le thème principal auquel se réfère ce  produit ou service",
+    "form-thirdstep-description": "",
+    "form-thirdstep-label": "Informations",
+    "form-title": "Proposez un  produit ou service sur OryxChange !",
+    "form-url-label": "Quelle est l’URL du site ?",
+    "form-url-placeholder": "www.site.fr",
+    "form-tags-label": "Choisir les catégories",
+    "form-options-label": "Choisir les sous-catégories",
+    "filter-options-placeholder": "Sélectionner",
+    "filter-tags-placeholder": "Sélectionner",
+    "filter-location-placeholder": "Sélectionner",
+    "filter-region-placeholder": "Sélectionner",
+    "form-validation-ok-title": "Merci de votre contribution ! ",
+    "form-validation-ok-description": "Les bénévoles de oryxchange vont maintenant vérifier la conformité de l'offre avec la charte. Si cette offre respecte la charte, elle sera immédiatement visible.",
+    "form-validation-ko-title": "Une erreur est survenue",
+    "form-validation-ko-description": "Merci de réessayer un peu plus tard",
+    "form-email-label": "Votre adresse email (Optionnel)",
+    "form-email-placeholder": "nom@site.fr"
   },
   "services": {
     "access-label": "Site internet",

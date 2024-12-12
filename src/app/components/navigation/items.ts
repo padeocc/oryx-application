@@ -6,10 +6,17 @@ export const getNavigationItems = ({
   t: any;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
   const menu = [
+    // [
+    //   {
+    //     name: t('contact_label'),
+    //     href: '/contact',
+    //     isExternal: false
+    //   }
+    // ],
     [
       {
-        name: t('contact_label'),
-        href: '/contact',
+        name: t('service_addition_label'),
+        href: '/service/add',
         isExternal: false
       }
     ],
@@ -32,6 +39,15 @@ export const getFooterLinks = async () => {
       {
         name: t('whoarewe_label'),
         href: 'https://www.padeo.fr',
+        isExternal: true
+      },
+      {
+        name: t('contact_label'),
+        href: '/contact'
+      },
+      {
+        name: t('poll_label'),
+        href: 'https://framaforms.org/venez-tester-wwworyxchangecom-1732871595',
         isExternal: true
       },
       {

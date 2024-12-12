@@ -28,7 +28,13 @@ const Tags = ({
 
   if (typeof firstTag === 'string') {
     firstTag = (
-      <Badge key={`tag-${basekey}-${firstTag}`} variant="outline" color={color} bg="white" size="xs">
+      <Badge
+        key={`tag-${basekey}-${firstTag}`}
+        variant="outline"
+        color={color}
+        bg="white"
+        size="xs"
+        style={{ cursor: 'pointer' }}>
         {firstTag}
       </Badge>
     );
@@ -37,7 +43,6 @@ const Tags = ({
   const t = useTranslations('services');
   return tags?.length > 1 ? (
     <Group
-      style={{ cursor: 'pointer' }}
       onClick={e => {
         e.preventDefault();
         e.stopPropagation();
@@ -47,7 +52,7 @@ const Tags = ({
       <Stack w="100%">
         <Group justify="space-between">
           {firstTag}
-          <Badge color={color} size="xs">
+          <Badge color={color} size="xs" style={{ cursor: 'pointer' }}>
             {opened
               ? t('tags-others-opened-label', { count: tags.length })
               : t('tags-others-closed-label', { count: tags.length })}
@@ -56,7 +61,13 @@ const Tags = ({
         <Collapse in={opened}>
           <Group gap={'sm'}>
             {otherTags?.map(tag => (
-              <Badge key={`tag-${basekey}-${tag}`} size="sm" variant="outline" color={color} bg="white">
+              <Badge
+                key={`tag-${basekey}-${tag}`}
+                size="sm"
+                variant="outline"
+                color={color}
+                bg="white"
+                style={{ cursor: 'pointer' }}>
                 {tag}
               </Badge>
             ))}

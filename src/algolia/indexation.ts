@@ -1,6 +1,6 @@
 'use server';
 
-import { fetchServices } from '@/app/components/pages/ActionsPage/utils';
+import { fetchServices } from '@/cms/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 import { difference } from 'lodash';

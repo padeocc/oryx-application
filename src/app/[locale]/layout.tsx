@@ -2,11 +2,14 @@ import HeaderMenu from '@/components/navigation/HeaderMenu';
 import { theme } from '@/theme';
 import { AppShell, AppShellMain, ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 import { Inter } from 'next/font/google';
+
 import GDPRConsent from '../components/navigation/GDPRConsent';
 import '../globals.css';
 
@@ -15,7 +18,7 @@ const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
 
 const authors: Author[] = [
   { name: 'Padeo', url: 'https://www.padeo.fr' },
-  { name: 'Oryx', url }
+  { name: 'OryxChange', url }
 ];
 
 export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
@@ -41,7 +44,7 @@ export const generateMetadata = async (props: { params: Promise<{ locale: string
       canonical: '/'
     },
     authors,
-    publisher: 'Oryx',
+    publisher: 'OryxChange',
     robots: 'index, follow'
   };
   return metadataTags;
@@ -88,6 +91,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
                 <GDPRConsent />
               </AppShellMain>
             </AppShell>
+            <Notifications />
           </MantineProvider>
         </NextIntlClientProvider>
       </body>

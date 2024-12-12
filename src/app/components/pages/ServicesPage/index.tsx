@@ -4,7 +4,7 @@ import { TAGSPLITTER } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
-import { uniq } from 'lodash';
+import { countBy } from 'lodash';
 import Content from './components/Content';
 
 const ServicesPage = async ({
@@ -39,12 +39,15 @@ const ServicesPage = async ({
       limit: 1000,
       filters: { theme: filters.theme }
     });
-    suggestions = uniq(
-      /*@ts-ignore*/
-      allServices[0]?.hits.reduce((all: [], suggestion: IResult) => {
-        return [...all, ...suggestion?.tags?.split(TAGSPLITTER)];
-      }, [])
-    ).slice(0, 20) as string[];
+
+    /*@ts-ignore*/
+    const allTags = allServices[0]?.hits.flatMap((suggestion: IResult) => suggestion?.tags?.split(TAGSPLITTER) || []);
+    const tagCounts = countBy(allTags);
+    const topTags = Object.entries(tagCounts)
+      .map(([tag, count]) => ({ tag, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
+    suggestions = topTags.map(({ tag, count }) => `${tag} (${count})`);
   }
 
   const defaultValues: Filters = {

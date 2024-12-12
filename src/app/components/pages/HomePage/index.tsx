@@ -2,8 +2,8 @@ import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
 import { Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
+import { fetchServices } from '../../../../cms/utils';
 import ThemesBanner from '../../common/ThemesBanner';
-import { fetchServices } from '../ActionsPage/utils';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
 

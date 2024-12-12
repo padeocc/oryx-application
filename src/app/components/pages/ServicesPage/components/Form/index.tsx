@@ -193,26 +193,24 @@ const Form = ({
               {suggestions?.length ? (
                 <Group gap={'xs'}>
                   <Text fz="sm">{tFilters('suggestions-title')}</Text>
-                  {suggestions
-                    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
-                    .map(suggestion => {
-                      const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
-                      return (
-                        <div
-                          key={`sugg-${suggestion}`}
-                          onClick={() => {
-                            setIsLoading(true);
-                          }}>
-                          <Text
-                            fz="xs"
-                            component={Link}
-                            href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
-                            styles={{ root: { textDecoration: 'underline' } }}>
-                            {suggestion}
-                          </Text>
-                        </div>
-                      );
-                    })}
+                  {suggestions.map(suggestion => {
+                    const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
+                    return (
+                      <div
+                        key={`sugg-${suggestion}`}
+                        onClick={() => {
+                          setIsLoading(true);
+                        }}>
+                        <Text
+                          fz="xs"
+                          component={Link}
+                          href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
+                          styles={{ root: { textDecoration: 'underline' } }}>
+                          {suggestion}
+                        </Text>
+                      </div>
+                    );
+                  })}
                 </Group>
               ) : null}
             </GridCol>
