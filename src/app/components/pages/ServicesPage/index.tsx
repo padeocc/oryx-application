@@ -47,7 +47,7 @@ const ServicesPage = async ({
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
-    suggestions = topTags.map(({ tag, count }) => `${tag} (${count})`);
+    suggestions = topTags.map(({ tag, count }) => `${tag}`);
   }
 
   const defaultValues: Filters = {

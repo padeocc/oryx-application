@@ -10,7 +10,7 @@ import BackItem from '../../common/BackItem';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 
-const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
+const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');
   const tFilters = await getTranslations('filters_component');
   const tUtils = await getTranslations('utils');
@@ -21,7 +21,7 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   }
 
   // @ts-ignore
-  const fields = Object.keys(getActionFilters([theme])).filter((f: string) => !!service?.[f]);
+  const fields = Object.keys(getActionFilters({ themes: [theme] })).filter((f: string) => !!service?.[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
@@ -104,4 +104,4 @@ const ActionPage = async ({ code, theme }: { code: string; theme: Theme }) => {
   );
 };
 
-export default ActionPage;
+export default ServicePage;

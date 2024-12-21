@@ -78,6 +78,7 @@ export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionF
       }
     };
   }
+
   return actions;
 };
 

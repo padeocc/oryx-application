@@ -9,8 +9,9 @@ const BackItem = ({ theme }: { theme: Theme }) => {
   const router = useRouter();
   return (
     <Link
-      href={`/services?filters={"theme":["${theme}"]}`}
-      onClick={() => {
+      href={`#`}
+      onClick={e => {
+        e.preventDefault();
         router.back();
       }}>
       <ArrowLeft color="black" />

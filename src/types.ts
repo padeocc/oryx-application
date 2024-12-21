@@ -59,7 +59,7 @@ export type Service = {
   region: Region;
   location: string;
   country: string;
-  theme: Theme;
+  theme: Theme[];
   logo?: { data: ImageData } | string;
   organic?: boolean;
   economic?: boolean;

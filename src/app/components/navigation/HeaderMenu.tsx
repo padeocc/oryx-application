@@ -15,7 +15,7 @@ const HeaderMenu = async () => {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <Stack gap="0">
               <Title c="green_oryx" order={1} fw={'bolder'}>
-                <Image src="/images/logo4.png" maw={'11rem'} />
+                <Image src="/images/logo.png" maw={'11rem'} />
               </Title>
               <Title c="dark" fz="sm" fw={'bold'} order={2}>
                 {t('welcome')}
