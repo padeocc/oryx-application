@@ -304,6 +304,7 @@ const Form = ({
                       key={`action-pill-${filter}`}
                       withRemoveButton
                       disabled={isLoading}
+                      size="lg"
                       onRemove={() => {
                         const values = form.getValues();
                         const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {

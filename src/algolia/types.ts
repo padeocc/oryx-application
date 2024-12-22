@@ -29,4 +29,6 @@ export interface IResult {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
+  premium?: boolean;
+  content?: any;
 }

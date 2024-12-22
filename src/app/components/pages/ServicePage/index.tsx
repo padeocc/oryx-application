@@ -1,6 +1,20 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
 import { Service } from '@/types';
-import { Alert, Badge, Button, Group, Image, Stack, Text, Title } from '@mantine/core';
+import {
+  Alert,
+  Badge,
+  Blockquote,
+  Box,
+  Button,
+  Group,
+  Image,
+  List,
+  ListItem,
+  Space,
+  Stack,
+  Text,
+  Title
+} from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
@@ -9,6 +23,60 @@ import { fetchService } from '../../../../cms/utils';
 import BackItem from '../../common/BackItem';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
+
+const displayContentElement = (node: any): React.ReactElement | undefined => {
+  const { type, children } = node;
+  switch (type) {
+    case 'paragraph':
+      return (
+        <Box>
+          <Text>{children.map(displayContentElement)}</Text>
+        </Box>
+      );
+    case 'text':
+      let props = {};
+
+      if (node.bold) {
+        props = { ...props, fw: 'bold' };
+      }
+
+      if (node.strikethrough) {
+        props = { ...props, td: 'line-through' };
+      }
+
+      if (node.underline) {
+        props = { ...props, td: 'underline' };
+      }
+
+      if (node.italic) {
+        props = { ...props, fs: 'italic' };
+      }
+
+      return (
+        <Text component="span" {...props}>
+          {node.text}
+        </Text>
+      );
+    case 'link':
+      return <Link href={`${node.url}`}>{children.map(displayContentElement)}</Link>;
+    case 'image':
+      return <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} />;
+    case 'list':
+      const listTag = node.format === 'unordered' ? 'ul' : 'ol';
+      return <List c={listTag}>{node.children.map(displayContentElement)}</List>;
+    case 'list-item':
+      return <ListItem>{node.children.map(displayContentElement)}</ListItem>;
+    case 'quote':
+      return (
+        <>
+          <Space h="md" />
+          <Blockquote>{children.map(displayContentElement)}</Blockquote>
+        </>
+      );
+    default:
+      return <Space h="md" />;
+  }
+};
 
 const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const t = await getTranslations('services');
@@ -61,7 +129,6 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
               {tFilters(`location-${service.location}-label`)}
             </Badge>
           ) : null}
-
           {labelRegion ? (
             <Badge
               key={`tag-${theme}-${service.name}-${service.region}`}
@@ -72,7 +139,6 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
               {labelRegion}
             </Badge>
           ) : null}
-
           {tags.map(tag => (
             <Badge key={`tag-${theme}-${service.name}-${tag}`} size="sm" variant="outline" color={'white'} bg={color}>
               {tag}
@@ -95,7 +161,13 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
           {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day')) })}
         </Text>
         <Image src={getLogoImage({ service, theme })} alt={name} w="auto" fit="contain" mah={'20rem'} />
-        <Alert>{description}</Alert>
+        {!service.premium ? (
+          <Alert>{description}</Alert>
+        ) : (
+          <Stack bg="green_oryx.2" p="md">
+            {service?.content?.map(displayContentElement)}
+          </Stack>
+        )}
         <Button size="xl" component={Link} href={url} target="_blank" color={color}>
           {url}
         </Button>

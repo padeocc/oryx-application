@@ -121,6 +121,8 @@ export const runIndexation = async () => {
       diy: service?.diy,
       comparer: service?.comparer,
       relocating: service?.relocating
+      // premium: !!service?.premium,
+      // content: service?.content,
     };
   });
 

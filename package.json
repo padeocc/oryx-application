@@ -10,6 +10,7 @@
     "algolia": "tsx src/algolia/indexation.ts"
   },
   "dependencies": {
+    "@contentstack/json-rte-serializer": "^2.0.12",
     "@mantine/core": "^7.14.1",
     "@mantine/form": "^7.14.1",
     "@mantine/notifications": "^7.15.0",

@@ -83,6 +83,8 @@ export type Service = {
   sender?: string;
   form_tags?: string[];
   form_options?: string[];
+  premium?: boolean;
+  content?: any;
 };
 
 export type ActionFilters = {
