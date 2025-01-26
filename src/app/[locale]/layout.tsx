@@ -9,9 +9,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 import { Inter } from 'next/font/google';
-
 import GDPRConsent from '../components/navigation/GDPRConsent';
 import '../globals.css';
+import Footer from '../components/navigation/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
@@ -90,6 +90,11 @@ export default async function RootLayout(props: { children: React.ReactNode; par
                 </Container>
                 <GDPRConsent />
               </AppShellMain>
+              <footer style={{ backgroundColor: 'var(--mantine-primary-color-2)' }}>
+                <Container maw={'1280px'} p="md">
+                  <Footer />
+                </Container>
+              </footer>
             </AppShell>
             <Notifications />
           </MantineProvider>

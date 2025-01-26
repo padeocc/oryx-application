@@ -6,23 +6,26 @@ import {
   Blockquote,
   Box,
   Button,
+  Grid,
+  GridCol,
   Group,
   Image,
   List,
   ListItem,
   Space,
   Stack,
-  Text,
-  Title
+  Text
 } from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { fetchService } from '../../../../cms/utils';
-import BackItem from '../../common/BackItem';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
+import { fr } from 'date-fns/locale'; // Import the locales you need
+import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
+import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 
 const displayContentElement = (node: any): React.ReactElement | undefined => {
   const { type, children } = node;
@@ -58,7 +61,11 @@ const displayContentElement = (node: any): React.ReactElement | undefined => {
         </Text>
       );
     case 'link':
-      return <Link href={`${node.url}`}>{children.map(displayContentElement)}</Link>;
+      return (
+        <Link href={`${node.url}`} target="_blank">
+          {children.map(displayContentElement)}
+        </Link>
+      );
     case 'image':
       return <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} />;
     case 'list':
@@ -76,6 +83,16 @@ const displayContentElement = (node: any): React.ReactElement | undefined => {
     default:
       return <Space h="md" />;
   }
+};
+
+const displayUrl = (url: string): string => {
+  let newUrl = url.replace(/^(https?:\/\/)/, '');
+
+  if (newUrl.endsWith('/')) {
+    newUrl = newUrl.slice(0, -1);
+  }
+
+  return newUrl;
 };
 
 const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
@@ -101,13 +118,11 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
 
   return (
     <Stack>
-      <Group>
-        <BackItem theme={theme} />
-        <Title order={3} c={color}>
-          {name}
-        </Title>
-      </Group>
-      <Stack gap={'lg'} ml={'xl'} mr={'xl'}>
+      <ProductBreadcrumbs theme={theme} name={name} />
+      <Stack gap={'lg'}>
+        <Text fz="sm">
+          {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day'), { locale: fr }) })}
+        </Text>
         <Group gap={'xs'}>
           {type && (
             <Badge
@@ -144,33 +159,44 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
               {tag}
             </Badge>
           ))}
-          {fields.map(field => {
-            return (
-              <Badge
-                key={`tag-${theme}-${service.name}-${field}`}
-                size="sm"
-                variant="outline"
-                color="var(--mantine-color-dark-outline)"
-                bg="white">
-                {tFilters(`filter-${field}-label`)}
-              </Badge>
-            );
-          })}
+          {fields.map(field => (
+            <Badge
+              key={`tag-${theme}-${service.name}-${field}`}
+              size="sm"
+              variant="outline"
+              color="var(--mantine-color-dark-outline)"
+              bg="white">
+              {tFilters(`filter-${field}-label`)}
+            </Badge>
+          ))}
         </Group>
-        <Text fz="sm">
-          {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day')) })}
-        </Text>
-        <Image src={getLogoImage({ service, theme })} alt={name} w="auto" fit="contain" mah={'20rem'} />
-        {!service.premium ? (
-          <Alert>{description}</Alert>
+        <Grid>
+          <GridCol span={{ base: 12, sm: 7 }}>
+            <Image
+              src={getLogoImage({ service, theme })}
+              alt={name}
+              layout="intrinsic"
+              objectfit="contain"
+              style={{ maxHeight: '20rem' }}
+            />
+          </GridCol>
+          <GridCol span={{ base: 12, sm: 5 }}>
+            <Stack>
+              <Button size="xl" component={Link} href={url} target="_blank" color={color} leftSection={<LinkIcon />}>
+                {displayUrl(url)}
+              </Button>
+              <Alert>{description}</Alert>
+            </Stack>
+          </GridCol>
+        </Grid>
+        {service.premium ? (
+          <Stack p="md">{service?.content?.map(displayContentElement)}</Stack>
         ) : (
-          <Stack bg="green_oryx.2" p="md">
-            {service?.content?.map(displayContentElement)}
-          </Stack>
+          <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+            {t('go-premium-label')}
+            <Link href={'/contact'}>{t('go-premium-cta-label')}</Link>
+          </Group>
         )}
-        <Button size="xl" component={Link} href={url} target="_blank" color={color}>
-          {url}
-        </Button>
       </Stack>
     </Stack>
   );

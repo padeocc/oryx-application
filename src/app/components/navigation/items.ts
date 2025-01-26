@@ -37,9 +37,18 @@ export const getFooterLinks = async () => {
   return [
     [
       {
-        name: t('whoarewe_label'),
-        href: 'https://www.padeo.fr',
+        name: t('donate_label'),
+        href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/2',
         isExternal: true
+      },
+      {
+        name: t('service_addition_label'),
+        href: '/service/add'
+      },
+      {
+        name: t('features_to_come_label'),
+        isExternal: true,
+        href: 'https://docs.google.com/presentation/d/1INNPnHduNqaov9PWFr3UDLfFYp8ve5e7/edit?usp=drive_link&ouid=115775379044450692924&rtpof=true&sd=true'
       },
       {
         name: t('contact_label'),
@@ -54,14 +63,14 @@ export const getFooterLinks = async () => {
         name: 'LinkedIn',
         href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
         isExternal: true
-      },
-      {
-        name: t('sourcecode_label'),
-        href: 'https://github.com/padeocc/oryx-application',
-        isExternal: true
       }
     ],
     [
+      {
+        name: t('whoarewe_label'),
+        href: 'https://www.padeo.fr',
+        isExternal: true
+      },
       {
         name: t('oryx_history_label'),
         href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
@@ -71,13 +80,16 @@ export const getFooterLinks = async () => {
         name: t('chart_label'),
         href: 'https://docs.google.com/document/d/10AFQddEf68BSCenJ6aDNBDk3R9Lac8U2',
         isExternal: true
-      }
-    ],
-    [
+      },
       {
         name: t('legal_label'),
         href: '/legal',
         isExternal: false
+      },
+      {
+        name: t('sourcecode_label'),
+        href: 'https://github.com/padeocc/oryx-application',
+        isExternal: true
       }
     ]
   ];

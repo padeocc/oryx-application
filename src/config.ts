@@ -17,12 +17,12 @@ export const themesIcons: { [key: string]: Icon } = {
 };
 
 export const themesColors: { [key: string]: DefaultMantineColor } = {
-  transports: 'blue.9',
+  transports: 'blue.7',
   foods: 'blue.7',
-  goods: 'blue.8',
-  events: 'green.7',
-  services: 'green.8',
-  accommodations: 'green.9'
+  goods: 'blue.7',
+  events: 'blue.7',
+  services: 'blue.7',
+  accommodations: 'blue.7'
 };
 
 export const themes: Theme[] = ['foods', 'goods', 'transports', 'events', 'services', 'accommodations'];
