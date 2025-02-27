@@ -14,7 +14,8 @@ import {
   ListItem,
   Space,
   Stack,
-  Text
+  Text,
+  Title
 } from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
@@ -30,6 +31,15 @@ import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 const displayContentElement = (node: any): React.ReactElement | undefined => {
   const { type, children } = node;
   switch (type) {
+    case 'heading':
+      return (
+        <Title
+          order={node.level}
+          fw={node.level === 1 ? 'bolder' : node.level === 2 ? 'bold' : node.level === 3 ? 'bold' : 'normal'}
+          fz={node.level === 1 ? '1.6rem' : node.level === 2 ? '1.4rem' : node.level === 3 ? '1.2rem' : '1rem'}>
+          {children.map(displayContentElement)}
+        </Title>
+      );
     case 'paragraph':
       return (
         <Box>
@@ -101,7 +111,7 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
   const tUtils = await getTranslations('utils');
   const service: Service | undefined = await fetchService({ code, theme });
 
-  if (!service) {
+  if (!service?.name) {
     return <NotFound message={`${code} - ${theme}`} />;
   }
 
@@ -120,9 +130,11 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
     <Stack>
       <ProductBreadcrumbs theme={theme} name={name} />
       <Stack gap={'lg'}>
-        <Text fz="sm">
-          {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day'), { locale: fr }) })}
-        </Text>
+        {updatedAt ? (
+          <Text fz="sm">
+            {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day'), { locale: fr }) })}
+          </Text>
+        ) : null}
         <Group gap={'xs'}>
           {type && (
             <Badge
@@ -185,7 +197,11 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
               <Button size="xl" component={Link} href={url} target="_blank" color={color} leftSection={<LinkIcon />}>
                 {displayUrl(url)}
               </Button>
-              <Alert>{description}</Alert>
+              <Alert>
+                <Title order={2} c={color}>
+                  {description}
+                </Title>
+              </Alert>
             </Stack>
           </GridCol>
         </Grid>

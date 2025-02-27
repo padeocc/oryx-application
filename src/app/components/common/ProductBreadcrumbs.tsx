@@ -14,7 +14,7 @@ const ProductBreadcrumbs = ({ theme, name }: { theme: Theme; name: string }) => 
           {t(theme)}
         </Title>
       </Link>
-      <Title order={2} c={color}>
+      <Title order={1} c={color}>
         {name}
       </Title>
     </Breadcrumbs>
