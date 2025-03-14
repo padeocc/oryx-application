@@ -62,7 +62,7 @@ const Form = ({
     const list = facet.map(({ value, count }) => {
       let label = '';
       if (splitter) {
-        const pieces = value.split(splitter);
+        const pieces = value?.split(splitter);
         label = pieces
           .map(piece => {
             const cleanedPiece = piece.trim();

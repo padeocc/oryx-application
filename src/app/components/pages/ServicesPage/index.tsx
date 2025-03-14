@@ -41,7 +41,9 @@ const ServicesPage = async ({
     });
 
     /*@ts-ignore*/
-    const allTags = allServices[0]?.hits.flatMap((suggestion: IResult) => suggestion?.tags?.split(TAGSPLITTER) || []);
+    const allTags = allServices[0]?.hits?.flatMap(
+      (suggestion: IResult) => suggestion?.tags?.split?.(TAGSPLITTER) || []
+    );
     const tagCounts = countBy(allTags);
     const topTags = Object.entries(tagCounts)
       .map(([tag, count]) => ({ tag, count }))

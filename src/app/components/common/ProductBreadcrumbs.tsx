@@ -1,9 +1,10 @@
 import { Theme, themesColors } from '@/config';
-import { Breadcrumbs, Title } from '@mantine/core';
+import { Breadcrumbs, Group, Title } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import ScoreBanner from './ScoreBanner';
 
-const ProductBreadcrumbs = ({ theme, name }: { theme: Theme; name: string }) => {
+const ProductBreadcrumbs = ({ theme, name, score }: { theme: Theme; name: string; score?: number }) => {
   const color = themesColors[theme];
   const t = useTranslations('themes');
 
@@ -15,7 +16,10 @@ const ProductBreadcrumbs = ({ theme, name }: { theme: Theme; name: string }) => 
         </Title>
       </Link>
       <Title order={1} c={color}>
-        {name}
+        <Group>
+          {name}
+          {score ? <ScoreBanner score={score} /> : null}
+        </Group>
       </Title>
     </Breadcrumbs>
   );

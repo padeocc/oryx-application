@@ -4,6 +4,7 @@ import { fetchServices } from '@/cms/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 import { difference } from 'lodash';
+import { calculateMeanScore } from './utils';
 
 export const runIndexation = async () => {
   const transports = (
@@ -85,7 +86,9 @@ export const runIndexation = async () => {
     ...foods,
     ...goods,
     ...transports
-  ].map(service => {
+  ]?.map(service => {
+    const score = calculateMeanScore(service?.tags || []) || 0;
+
     return {
       description: service.description,
       label: service.name,
@@ -93,10 +96,11 @@ export const runIndexation = async () => {
       logo: service?.logo,
       id: service.code,
       theme: service.theme,
-      tags: (service?.tags || [])
-        .map(t => t.trim())
-        .filter(t => !!t)
-        .join(TAGSPLITTER),
+      tags:
+        (service?.tags || [])
+          ?.map(t => t.trim())
+          ?.filter(t => !!t)
+          ?.join(TAGSPLITTER) || [],
       objectID: service.code,
       region: service.region,
       type: service.type,
@@ -120,8 +124,9 @@ export const runIndexation = async () => {
       reused: service?.reused,
       diy: service?.diy,
       comparer: service?.comparer,
-      relocating: service?.relocating
-      // premium: !!service?.premium,
+      relocating: service?.relocating,
+      premium: !!service?.premium,
+      score
       // content: service?.content,
     };
   });
@@ -132,9 +137,10 @@ export const runIndexation = async () => {
   const allAlgoliaObjectIds = (await client.browse({ indexName: process?.env?.ALGOLIA_INDEXNAME || '' }))?.hits?.map(
     item => item.objectID
   );
-  const allCMSObjectIds = all.map(item => item.objectID);
+  const allCMSObjectIds = all?.map(item => item.objectID);
 
   const delta: string[] = difference(allAlgoliaObjectIds, allCMSObjectIds) as string[];
   client.deleteObjects({ indexName: process?.env?.ALGOLIA_INDEXNAME || '', objectIDs: delta });
+
   return client.saveObjects(parameters);
 };

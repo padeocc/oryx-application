@@ -27,6 +27,7 @@ import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
+import { calculateMeanScore } from '@/algolia/utils';
 
 const displayContentElement = (node: any): React.ReactElement | undefined => {
   const { type, children } = node;
@@ -115,6 +116,8 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
     return <NotFound message={`${code} - ${theme}`} />;
   }
 
+  const score = calculateMeanScore(service?.tags);
+
   // @ts-ignore
   const fields = Object.keys(getActionFilters({ themes: [theme] })).filter((f: string) => !!service?.[f]);
   const { name, tags = [], description, updatedAt, url, type } = service;
@@ -128,7 +131,7 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
 
   return (
     <Stack>
-      <ProductBreadcrumbs theme={theme} name={name} />
+      <ProductBreadcrumbs theme={theme} name={name} score={score} />
       <Stack gap={'lg'}>
         {updatedAt ? (
           <Text fz="sm">

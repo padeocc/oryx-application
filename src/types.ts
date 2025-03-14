@@ -47,6 +47,7 @@ interface ImageData {
 }
 
 export type Service = {
+  score: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;

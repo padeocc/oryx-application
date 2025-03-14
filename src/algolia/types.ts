@@ -31,4 +31,5 @@ export interface IResult {
   relocating?: boolean;
   premium?: boolean;
   content?: any;
+  score?: number;
 }
