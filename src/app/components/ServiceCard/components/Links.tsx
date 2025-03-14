@@ -20,6 +20,7 @@ const Links = ({ service, theme, hover }: { service: Service; theme: Theme; hove
         <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">
           <Link
             href={service.url}
+            onClick={e => e.stopPropagation()}
             target="_blank"
             style={{ color: 'inherit', visibility: hover ? 'visible' : 'hidden' }}>
             {tServices('access-label')}
@@ -31,7 +32,12 @@ const Links = ({ service, theme, hover }: { service: Service; theme: Theme; hove
           {tServices('details-label')}
         </Link>
         <Tooltip label={service.url} color="var(--mantine-color-dark-outline)">
-          <Link href={service.url} target="_blank" style={{ color: 'inherit' }}>
+          <Link
+            href={service.url}
+            target="_blank"
+            style={{ color: 'inherit' }}
+            onClick={e => e.stopPropagation()}
+          >
             {tServices('access-label')}
           </Link>
         </Tooltip>
