@@ -4,7 +4,6 @@ import { fetchServices } from '@/cms/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 import { difference } from 'lodash';
-import { calculateMeanScore } from './utils';
 
 export const runIndexation = async () => {
   const transports = (
@@ -87,7 +86,7 @@ export const runIndexation = async () => {
     ...goods,
     ...transports
   ]?.map(service => {
-    const score = calculateMeanScore(service?.tags || []) || 0;
+    //const score = calculateMeanScore(service?.tags || []) || 0;
 
     return {
       description: service.description,
@@ -125,8 +124,8 @@ export const runIndexation = async () => {
       diy: service?.diy,
       comparer: service?.comparer,
       relocating: service?.relocating,
-      premium: !!service?.premium,
-      score
+      premium: !!service?.premium
+      //score
       // content: service?.content,
     };
   });

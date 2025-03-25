@@ -1,6 +1,5 @@
 'use server';
 
-import { calculateMeanScore } from '@/algolia/utils';
 import { Theme } from '@/config';
 import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
 import { merge } from 'lodash';
@@ -50,8 +49,8 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
       const logo = solution?.attributes?.logo?.data?.attributes?.url;
       return {
         ...solution.attributes,
-        logo: logo ? `${process?.env?.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined,
-        score: calculateMeanScore(solution?.attributes?.tags)
+        logo: logo ? `${process?.env?.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined
+        //score: calculateMeanScore(solution?.attributes?.tags)
       };
     }) || [];
 
