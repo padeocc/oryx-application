@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@contentstack/json-rte-serializer": "^3.0.0",
-    "@mantine/core": "^7.17.2",
-    "@mantine/form": "^7.17.2",
-    "@mantine/notifications": "^7.17.2",
-    "@mantine/spotlight": "^7.17.2",
+    "@mantine/core": "7.14.1",
+    "@mantine/form": "7.14.1",
+    "@mantine/notifications": "7.14.1",
+    "@mantine/spotlight": "7.14.1",
     "@phosphor-icons/react": "^2.1.7",
     "algoliasearch": "^5.22.0",
     "date-fns": "^4.1.0",
@@ -34,16 +34,11 @@
     "@types/node": "^22",
     "@types/nodemailer": "^6.4.17",
     "@types/qs": "^6.9.18",
-    "@types/react": "npm:types-react@19.0.0-alpha.3",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3",
+    "@types/react": "^19.0.12",
     "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "tsx": "^4.19.3",
     "typescript": "^5"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@19.0.0-alpha.3",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3"
   }
 }

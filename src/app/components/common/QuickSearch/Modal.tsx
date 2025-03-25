@@ -69,7 +69,7 @@ const Modal = ({
     component: 'a',
     href: result.url,
     label: result.label,
-    group: tThemes(result.theme),
+    group: tThemes(result.theme.toString()),
     description: `${result.description.slice(0, 200)}...`,
     leftSection: result.logo ? <Image src={result.logo} w={30} height={30} alt="" /> : null,
     rightSection: (
