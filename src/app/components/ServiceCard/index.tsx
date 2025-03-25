@@ -29,6 +29,7 @@ import Description from './components/Description';
 import Links from './components/Links';
 import Tags from './components/Tags';
 import style from './server-card.module.css';
+import ScoreBanner from '../common/ScoreBanner';
 
 const ServiceCard = ({
   service,
@@ -69,6 +70,8 @@ const ServiceCard = ({
   if (!service || !theme) {
     return <NotFound />;
   }
+
+  const score = service?.score;
 
   const fields = Object.keys(getActionFilters({ themes: [theme] }))
     //@ts-ignore
@@ -122,9 +125,12 @@ const ServiceCard = ({
                 </Group>
               </GridCol>
               <GridCol span={{ base: 12 }}>
-                <Title order={titleOrder} c={color}>
-                  {service.name}
-                </Title>
+                <Group justify="space-between">
+                  <Title order={titleOrder} c={color}>
+                    {service.name}
+                  </Title>
+                  {score ? <ScoreBanner score={service.score} /> : null}
+                </Group>
               </GridCol>
             </Grid>
             <Description service={service} theme={theme} />

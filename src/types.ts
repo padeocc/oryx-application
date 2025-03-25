@@ -47,6 +47,7 @@ interface ImageData {
 }
 
 export type Service = {
+  score: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
@@ -59,7 +60,7 @@ export type Service = {
   region: Region;
   location: string;
   country: string;
-  theme: Theme;
+  theme: Theme[];
   logo?: { data: ImageData } | string;
   organic?: boolean;
   economic?: boolean;
@@ -83,6 +84,8 @@ export type Service = {
   sender?: string;
   form_tags?: string[];
   form_options?: string[];
+  premium?: boolean;
+  content?: any;
 };
 
 export type ActionFilters = {

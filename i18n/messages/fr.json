@@ -209,7 +209,9 @@
     "oryx_history_label": "Génèse de l'application",
     "roadmap_label": "Futures fonctionnalités",
     "sourcecode_label": "Code source",
-    "whoarewe_label": "Qui sommes-nous ?"
+    "whoarewe_label": "Qui sommes-nous ?",
+    "service_addition_label": "Proposer un service",
+    "features_to_come_label": "Fonctionnalités à venir"
   },
   "home_page": {
     "discover_actions": "Les derniers services ajoutés",
@@ -389,7 +391,9 @@
     "type-school-label": "Ecole",
     "type-scic-label": "SCIC",
     "type-scop-label": "SCOP",
-    "updatedat_label": "Date de dernière mise à jour : {date}"
+    "updatedat_label": "Date de dernière mise à jour : {date}",
+    "go-premium-label": "Ceci est votre page et vous souhaitez la compléter ?",
+    "go-premium-cta-label": "Contactez-nous"
   },
   "signup_form_page": {
     "email_label": "Adresse email",

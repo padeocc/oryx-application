@@ -62,7 +62,7 @@ const Form = ({
     const list = facet.map(({ value, count }) => {
       let label = '';
       if (splitter) {
-        const pieces = value.split(splitter);
+        const pieces = value?.split(splitter);
         label = pieces
           .map(piece => {
             const cleanedPiece = piece.trim();
@@ -304,6 +304,7 @@ const Form = ({
                       key={`action-pill-${filter}`}
                       withRemoveButton
                       disabled={isLoading}
+                      size="lg"
                       onRemove={() => {
                         const values = form.getValues();
                         const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {

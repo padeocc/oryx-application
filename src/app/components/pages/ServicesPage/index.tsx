@@ -41,13 +41,15 @@ const ServicesPage = async ({
     });
 
     /*@ts-ignore*/
-    const allTags = allServices[0]?.hits.flatMap((suggestion: IResult) => suggestion?.tags?.split(TAGSPLITTER) || []);
+    const allTags = allServices[0]?.hits?.flatMap(
+      (suggestion: IResult) => suggestion?.tags?.split?.(TAGSPLITTER) || []
+    );
     const tagCounts = countBy(allTags);
     const topTags = Object.entries(tagCounts)
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
-    suggestions = topTags.map(({ tag, count }) => `${tag} (${count})`);
+    suggestions = topTags.map(({ tag, count }) => `${tag}`);
   }
 
   const defaultValues: Filters = {

@@ -50,6 +50,7 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
       return {
         ...solution.attributes,
         logo: logo ? `${process?.env?.NEXT_PUBLIC_STRAPI_ENDPOINT}${logo}` : undefined
+        //score: calculateMeanScore(solution?.attributes?.tags)
       };
     }) || [];
 
