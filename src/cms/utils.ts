@@ -1,11 +1,10 @@
 'use server';
 
-import { search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
 import { transformServicesFromResults } from '@/algolia/utils';
 import { Theme } from '@/config';
 import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
-import { SearchResponses } from 'algoliasearch';
+import { algoliasearch } from 'algoliasearch';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -62,15 +61,12 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
 };
 
 export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
-  const { results }: SearchResponses<unknown> = await search({
-    query: '',
-    page: 0,
-    limit: 1,
-    filters: { id: code }
+  const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_WRITE_AUTH_KEY || '');
+  const solution = await client.getObject({
+    indexName: process?.env?.ALGOLIA_INDEXNAME || '',
+    objectID: code
   });
-  /* @ts-ignore */
-  const solution = transformServicesFromResults({ results: results[0].hits as IResult[] })[0] as unknown as Service;
-  return solution;
+  return transformServicesFromResults({ results: [solution as unknown as IResult] })[0];
 };
 
 const generateUniqueCode = (name: string) => {
