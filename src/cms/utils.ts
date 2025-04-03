@@ -1,7 +1,11 @@
 'use server';
 
+import { search } from '@/algolia/search';
+import { IResult } from '@/algolia/types';
+import { transformServicesFromResults } from '@/algolia/utils';
 import { Theme } from '@/config';
 import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
+import { SearchResponses } from 'algoliasearch';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -58,15 +62,15 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
 };
 
 export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
-  const url = process?.env?.STRAPI_API_ENDPOINT || '';
-  const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
-  const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    next: { tags: ['cms'] }
+  const { results }: SearchResponses<unknown> = await search({
+    query: '',
+    page: 0,
+    limit: 1,
+    filters: { id: code }
   });
-  const solution = await response.json();
-  const item = solution?.data?.[0];
-  return { ...item?.attributes, id: item?.id };
+  /* @ts-ignore */
+  const solution = transformServicesFromResults({ results: results[0].hits as IResult[] })[0] as unknown as Service;
+  return solution;
 };
 
 const generateUniqueCode = (name: string) => {
