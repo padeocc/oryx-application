@@ -1,5 +1,5 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
-import { Service } from '@/types';
+import { Gateway, Service } from '@/types';
 import {
   Alert,
   Badge,
@@ -21,12 +21,17 @@ import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { fetchService } from '../../../../cms/utils';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
+
+type PageParams = {
+  code: string
+  theme: Theme
+  serviceGateway: Gateway
+};
 
 const displayContentElement = (node: any): React.ReactElement | undefined => {
   const { type, children } = node;
@@ -105,11 +110,11 @@ const displayUrl = (url: string): string => {
   return newUrl;
 };
 
-const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
+const ServicePage = async ({ code, theme, serviceGateway }: PageParams) => {
   const t = await getTranslations('services');
   const tFilters = await getTranslations('filters_component');
   const tUtils = await getTranslations('utils');
-  const service: Service | undefined = await fetchService({ code, theme });
+  const service: Service | undefined = await serviceGateway.fetch({ code, theme });
 
   if (!service?.name) {
     return <NotFound message={`${code} - ${theme}`} />;

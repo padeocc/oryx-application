@@ -172,3 +172,14 @@ export type RequestParameters = {
   filters: Filters;
   theme: Theme;
 };
+
+type FetchService = ({ code }: { code: string, theme: Theme }) => Promise<Service>
+type FetchAll = ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>
+type PostService = (data: { [key: string]: any }) => Promise<{ errors?: { [key: string]: string } }>
+
+
+export type Gateway = {
+  fetch: FetchService
+  fetchAll: FetchAll
+  post: PostService
+};
