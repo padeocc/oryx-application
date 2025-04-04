@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
   if (clean) {
     /* Removing next.js cache */
     revalidateTag('cms');
+    revalidateTag('landing-page');
     /* Reindexing Algolia */
     const data = await runIndexation();
     return Response.json({ data });
