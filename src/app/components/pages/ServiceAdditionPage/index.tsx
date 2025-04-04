@@ -1,4 +1,4 @@
-import { addService } from '@/cms/utils';
+import { gateway } from '@/cms/utils';
 import { sendServiceAdditionEmail } from '@/mailer';
 import { Service } from '@/types';
 import { Alert, Stack } from '@mantine/core';
@@ -28,7 +28,7 @@ const ServiceAdditionPage = async () => {
               return { sent: false, errors: { validation: 'recaptcha' } };
             }
 
-            const service = (await addService(data)) as Service;
+            const service = (await gateway.post(data)) as Service;
             const { sent } = await sendServiceAdditionEmail(service);
             return { sent, service };
           }}

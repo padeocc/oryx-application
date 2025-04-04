@@ -1,7 +1,5 @@
-'use server';
-
 import { Theme } from '@/config';
-import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
+import { APIFilters, FetchServicesResponse, Filters, Gateway, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -26,7 +24,7 @@ const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
   } as APIFilters);
 };
 
-export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
+const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
   const theme = filters?.theme;
 
@@ -57,25 +55,13 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
   return { services, meta: solutions.meta };
 };
 
-export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
-  const url = process?.env?.STRAPI_API_ENDPOINT || '';
-  const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
-  const response = await fetch(`${url}/${theme}?${filtersString}`, {
-    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    next: { tags: ['cms'] }
-  });
-  const solution = await response.json();
-  const item = solution?.data?.[0];
-  return { ...item?.attributes, id: item?.id };
-};
-
 const generateUniqueCode = (name: string) => {
   const uniqueCode = name.replace(/\s+/g, '').toLowerCase();
   const random = Math.floor(Math.random() * 1001);
   return `${uniqueCode}-${random}`;
 };
 
-export const addService = async (data: { [key: string]: any }): Promise<{ errors?: { [key: string]: string } }> => {
+const addService = async (data: { [key: string]: any }): Promise<{ errors?: { [key: string]: string } }> => {
   const { theme, tags, url, label: name, region, location, options, email: sender } = data;
   const code = generateUniqueCode(name);
 
@@ -109,3 +95,24 @@ export const addService = async (data: { [key: string]: any }): Promise<{ errors
   const item = solution?.data;
   return { ...item?.attributes, id: item?.id, theme };
 };
+
+/**
+ * @deprecated use algolia gateway instead
+ */
+const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
+  const url = process?.env?.STRAPI_API_ENDPOINT || '';
+    const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
+    const response = await fetch(`${url}/${theme}?${filtersString}`, {
+      headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+      next: { tags: ['cms'] }
+    });
+    const solution = await response.json();
+    const item = solution?.data?.[0];
+    return { ...item?.attributes, id: item?.id };
+}
+
+export const gateway: Gateway = {
+  fetch: fetchService,
+  fetchAll: fetchServices,
+  post: addService
+}
