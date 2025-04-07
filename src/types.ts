@@ -173,13 +173,6 @@ export type RequestParameters = {
   theme: Theme;
 };
 
-type FetchService = ({ code }: { code: string, theme: Theme }) => Promise<Service>
-type FetchAll = ({ filters }: { filters: Filters }) => Promise<FetchServicesResponse>
-type PostService = (data: { [key: string]: any }) => Promise<{ errors?: { [key: string]: string } }>
-
-
-export type Gateway = {
-  fetch: FetchService
-  fetchAll: FetchAll
-  post: PostService
-};
+export type FetchService = (args: { code: string, theme: Theme }) => Promise<Service>
+export type FetchServices = (args: { filters: Filters }) => Promise<FetchServicesResponse>
+export type PostService = (data: { [key: string]: any }) => Promise<{ errors?: { [key: string]: string } }>

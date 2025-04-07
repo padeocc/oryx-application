@@ -1,6 +1,6 @@
 'use server';
 
-import { gateway } from '@/cms/utils';
+import { fetchServices } from '@/cms/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 import { difference } from 'lodash';
@@ -8,7 +8,7 @@ import { difference } from 'lodash';
 export const runIndexation = async () => {
   const transports = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['transports'],
           tags: [],
@@ -20,7 +20,7 @@ export const runIndexation = async () => {
 
   const goods = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['goods'],
           tags: [],
@@ -32,7 +32,7 @@ export const runIndexation = async () => {
 
   const foods = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['foods'],
           tags: [],
@@ -44,7 +44,7 @@ export const runIndexation = async () => {
 
   const events = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['events'],
           tags: [],
@@ -56,7 +56,7 @@ export const runIndexation = async () => {
 
   const services = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['services'],
           tags: [],
@@ -68,7 +68,7 @@ export const runIndexation = async () => {
 
   const accommodations = (
     (
-      await gateway.fetchAll({
+      await fetchServices({
         filters: {
           theme: ['accommodations'],
           tags: [],

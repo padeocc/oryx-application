@@ -1,5 +1,5 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
-import { Gateway, Service } from '@/types';
+import { FetchService, Service } from '@/types';
 import {
   Alert,
   Badge,
@@ -30,7 +30,7 @@ import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 type PageParams = {
   code: string
   theme: Theme
-  serviceGateway: Gateway
+  fetchService: FetchService
 };
 
 const displayContentElement = (node: any): React.ReactElement | undefined => {
@@ -110,11 +110,11 @@ const displayUrl = (url: string): string => {
   return newUrl;
 };
 
-const ServicePage = async ({ code, theme, serviceGateway }: PageParams) => {
+const ServicePage = async ({ code, theme, fetchService }: PageParams) => {
   const t = await getTranslations('services');
   const tFilters = await getTranslations('filters_component');
   const tUtils = await getTranslations('utils');
-  const service: Service | undefined = await serviceGateway.fetch({ code, theme });
+  const service: Service | undefined = await fetchService({ code, theme });
 
   if (!service?.name) {
     return <NotFound message={`${code} - ${theme}`} />;

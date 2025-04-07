@@ -1,5 +1,5 @@
 import { TAGSPLITTER } from '@/config';
-import { FetchServicesResponse, Filters, Gateway, Service } from '@/types';
+import { FetchService, Service } from '@/types';
 import { IResult } from './types';
 import { algoliasearch } from 'algoliasearch';
 
@@ -99,7 +99,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
   });
 };
 
-const fetch = async ({ code }: { code: string; }): Promise<Service> => {
+export const fetchService: FetchService = async ({ code }) => {
   const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
 
   const solution = await client.getObject({
@@ -108,14 +108,4 @@ const fetch = async ({ code }: { code: string; }): Promise<Service> => {
   });
 
   return transformServicesFromResults({ results: [solution as unknown as IResult] })[0];
-}
-
-export const gateway: Gateway = {
-  fetch,
-  fetchAll: function ({ filters }: { filters: Filters; }): Promise<FetchServicesResponse> {
-    throw new Error("Bad action");
-  },
-  post: function (data: { [key: string]: any; }): Promise<{ errors?: { [key: string]: string; }; }> {
-    throw new Error("Bad action");
-  }
 }
