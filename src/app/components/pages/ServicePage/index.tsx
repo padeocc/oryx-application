@@ -1,22 +1,6 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
 import { Service } from '@/types';
-import {
-  Alert,
-  Badge,
-  Blockquote,
-  Box,
-  Button,
-  Grid,
-  GridCol,
-  Group,
-  Image,
-  List,
-  ListItem,
-  Space,
-  Stack,
-  Text,
-  Title
-} from '@mantine/core';
+import { Alert, Badge, Button, Grid, GridCol, Group, Image, Stack, Text, Title } from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
@@ -27,73 +11,7 @@ import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
-
-const displayContentElement = (node: any): React.ReactElement | undefined => {
-  const { type, children } = node;
-  switch (type) {
-    case 'heading':
-      return (
-        <Title
-          order={node.level}
-          fw={node.level === 1 ? 'bolder' : node.level === 2 ? 'bold' : node.level === 3 ? 'bold' : 'normal'}
-          fz={node.level === 1 ? '1.6rem' : node.level === 2 ? '1.4rem' : node.level === 3 ? '1.2rem' : '1rem'}>
-          {children.map(displayContentElement)}
-        </Title>
-      );
-    case 'paragraph':
-      return (
-        <Box>
-          <Text>{children.map(displayContentElement)}</Text>
-        </Box>
-      );
-    case 'text':
-      let props = {};
-
-      if (node.bold) {
-        props = { ...props, fw: 'bold' };
-      }
-
-      if (node.strikethrough) {
-        props = { ...props, td: 'line-through' };
-      }
-
-      if (node.underline) {
-        props = { ...props, td: 'underline' };
-      }
-
-      if (node.italic) {
-        props = { ...props, fs: 'italic' };
-      }
-
-      return (
-        <Text component="span" {...props}>
-          {node.text}
-        </Text>
-      );
-    case 'link':
-      return (
-        <Link href={`${node.url}`} target="_blank">
-          {children.map(displayContentElement)}
-        </Link>
-      );
-    case 'image':
-      return <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} />;
-    case 'list':
-      const listTag = node.format === 'unordered' ? 'ul' : 'ol';
-      return <List c={listTag}>{node.children.map(displayContentElement)}</List>;
-    case 'list-item':
-      return <ListItem>{node.children.map(displayContentElement)}</ListItem>;
-    case 'quote':
-      return (
-        <>
-          <Space h="md" />
-          <Blockquote>{children.map(displayContentElement)}</Blockquote>
-        </>
-      );
-    default:
-      return <Space h="md" />;
-  }
-};
+import { displayContentElementFromBlocks } from '../../content/utils-ui';
 
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)/, '');
@@ -208,7 +126,7 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
           </GridCol>
         </Grid>
         {service.premium ? (
-          <Stack p="md">{service?.content?.map(displayContentElement)}</Stack>
+          <Stack p="md">{service?.content?.map(displayContentElementFromBlocks)}</Stack>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}

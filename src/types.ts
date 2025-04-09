@@ -171,3 +171,10 @@ export type RequestParameters = {
   filters: Filters;
   theme: Theme;
 };
+
+export type LandingPage = {
+  content: object[]
+  keywords: string[]
+  metaDescription: string
+  title: string
+}
