@@ -1,9 +1,10 @@
 import ServicePage from '@/app/components/pages/ServicePage';
 import { Theme } from '@/config';
 import { Metadata } from 'next';
-
 import { Service as ServiceType } from '@/types';
-import { fetchService } from '@/algolia/utils';
+/*import { fetchService } from '@/algolia/utils';*/
+/* TODO still need to use CMS as premium features are not indexed in algolia */
+import { fetchService } from '@/cms/utils';
 
 export const generateMetadata = async (props: { params: Promise<{ code: string; theme: Theme }> }) => {
   const params = await props.params;

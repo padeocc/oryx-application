@@ -1,4 +1,3 @@
-import { Theme } from '@/config';
 import { APIFilters, FetchService, FetchServices, Filters, PostService, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
@@ -60,15 +59,15 @@ export const fetchServices: FetchServices = async ({ filters }: { filters: Filte
  */
 export const fetchService: FetchService = async ({ code, theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
-    const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
-    const response = await fetch(`${url}/${theme}?${filtersString}`, {
-      headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-      next: { tags: ['cms'] }
-    });
-    const solution = await response.json();
-    const item = solution?.data?.[0];
-    return { ...item?.attributes, id: item?.id };
-}
+  const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
+  const response = await fetch(`${url}/${theme}?${filtersString}`, {
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { tags: ['cms'] }
+  });
+  const solution = await response.json();
+  const item = solution?.data?.[0];
+  return { ...item?.attributes, id: item?.id };
+};
 
 const generateUniqueCode = (name: string) => {
   const uniqueCode = name.replace(/\s+/g, '').toLowerCase();
@@ -76,7 +75,7 @@ const generateUniqueCode = (name: string) => {
   return `${uniqueCode}-${random}`;
 };
 
-export const addService: PostService = async (data) => {
+export const addService: PostService = async data => {
   const { theme, tags, url, label: name, region, location, options, email: sender } = data;
   const code = generateUniqueCode(name);
 
