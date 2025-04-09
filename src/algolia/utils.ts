@@ -1,6 +1,7 @@
 import { TAGSPLITTER } from '@/config';
-import { Service } from '@/types';
+import { FetchService, Service } from '@/types';
 import { IResult } from './types';
+import { algoliasearch } from 'algoliasearch';
 
 const scoreIndexes: Record<string, number> = {
   'remplacer les protéines animales': 8,
@@ -97,3 +98,14 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
     return service;
   });
 };
+
+export const fetchService: FetchService = async ({ code }) => {
+  const client = algoliasearch(process?.env?.ALGOLIA_KEY || '', process?.env?.ALGOLIA_SEARCH_AUTH_KEY || '');
+
+  const solution = await client.getObject({
+    indexName: process?.env?.ALGOLIA_INDEXNAME || '',
+    objectID: code
+  });
+
+  return transformServicesFromResults({ results: [solution as unknown as IResult] })[0];
+}

@@ -143,6 +143,7 @@ export type Filters = {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
+  id?: string;
 };
 
 export type DistinctFilters = {
@@ -171,3 +172,7 @@ export type RequestParameters = {
   filters: Filters;
   theme: Theme;
 };
+
+export type FetchService = (args: { code: string, theme: Theme }) => Promise<Service>
+export type FetchServices = (args: { filters: Filters }) => Promise<FetchServicesResponse>
+export type PostService = (data: { [key: string]: any }) => Promise<{ errors?: { [key: string]: string } }>

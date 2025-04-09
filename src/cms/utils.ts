@@ -1,7 +1,4 @@
-'use server';
-
-import { Theme } from '@/config';
-import { APIFilters, FetchServicesResponse, Filters, Service } from '@/types';
+import { APIFilters, FetchService, FetchServices, Filters, PostService, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -26,7 +23,7 @@ const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
   } as APIFilters);
 };
 
-export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
+export const fetchServices: FetchServices = async ({ filters }: { filters: Filters }) => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
   const theme = filters?.theme;
 
@@ -57,7 +54,10 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
   return { services, meta: solutions.meta };
 };
 
-export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
+/**
+ * @deprecated use algolia fetchService util instead
+ */
+export const fetchService: FetchService = async ({ code, theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
@@ -75,7 +75,7 @@ const generateUniqueCode = (name: string) => {
   return `${uniqueCode}-${random}`;
 };
 
-export const addService = async (data: { [key: string]: any }): Promise<{ errors?: { [key: string]: string } }> => {
+export const addService: PostService = async data => {
   const { theme, tags, url, label: name, region, location, options, email: sender } = data;
   const code = generateUniqueCode(name);
 
