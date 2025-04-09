@@ -29,7 +29,7 @@ export const getIconFromTheme = ({
 /**
  * Transforms cms blocks to jsx
  */
-export const displayContentElementFromBlocs = (node: any, index: number): React.ReactElement | undefined => {
+export const displayContentElementFromBlocks = (node: any, index: number): React.ReactElement | undefined => {
   const { type, children } = node;
   switch (type) {
     case 'heading':
@@ -39,13 +39,13 @@ export const displayContentElementFromBlocs = (node: any, index: number): React.
           order={node.level}
           fw={node.level === 1 ? 'bolder' : node.level === 2 ? 'bold' : node.level === 3 ? 'bold' : 'normal'}
           fz={node.level === 1 ? '1.6rem' : node.level === 2 ? '1.4rem' : node.level === 3 ? '1.2rem' : '1rem'}>
-          {children.map(displayContentElementFromBlocs)}
+          {children.map(displayContentElementFromBlocks)}
         </Title>
       );
     case 'paragraph':
       return (
         <Box key={index}>
-          <Text>{children.map(displayContentElementFromBlocs)}</Text>
+          <Text>{children.map(displayContentElementFromBlocks)}</Text>
         </Box>
       );
     case 'text':
@@ -75,21 +75,23 @@ export const displayContentElementFromBlocs = (node: any, index: number): React.
     case 'link':
       return (
         <Link href={`${node.url}`} target="_blank" key={index}>
-          {children.map(displayContentElementFromBlocs)}
+          {children.map(displayContentElementFromBlocks)}
         </Link>
       );
     case 'image':
-      return <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} key={index} />;
+      return (
+        <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} key={index} />
+      );
     case 'list':
       const listTag = node.format === 'unordered' ? 'ul' : 'ol';
-      return <List c={listTag}>{node.children.map(displayContentElementFromBlocs)}</List>;
+      return <List c={listTag}>{node.children.map(displayContentElementFromBlocks)}</List>;
     case 'list-item':
-      return <ListItem>{node.children.map(displayContentElementFromBlocs)}</ListItem>;
+      return <ListItem>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
     case 'quote':
       return (
         <>
           <Space h="md" />
-          <Blockquote>{children.map(displayContentElementFromBlocs)}</Blockquote>
+          <Blockquote>{children.map(displayContentElementFromBlocks)}</Blockquote>
         </>
       );
     default:

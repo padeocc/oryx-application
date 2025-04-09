@@ -1,27 +1,22 @@
-import LandingTransportPage from "@/app/components/pages/LandingTransportPage";
-import { fetchLandingPage } from "@/cms/utils";
+import LandingTransportPage from '@/app/components/pages/LandingTransportPage';
+import { fetchLandingPage } from '@/cms/utils';
 import { Theme } from '@/config';
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await fetchLandingPage('landing-page-transport');
-
+  const { title, metaDescription: description, keywords } = await fetchLandingPage('landing-page-transport');
   return {
-    title: page.title,
-    description: page.metaDescription,
-    keywords: page.keywords,
+    title,
+    description,
+    keywords
   };
-};
+}
 
- export default async function Page(props: {
-  params: Promise<{ theme: Theme }>;
-}) {
+export default async function Page(props: { params: Promise<{ theme: Theme }> }) {
   const page = await fetchLandingPage('landing-page-transport');
-  const params = await props.params;
-
   return (
     <main>
-      <LandingTransportPage page={page} theme={params.theme} />
+      <LandingTransportPage page={page} />
     </main>
   );
 }

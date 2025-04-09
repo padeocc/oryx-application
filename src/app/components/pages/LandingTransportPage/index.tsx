@@ -1,19 +1,18 @@
-import { Theme, themesColors } from "@/config";
-import { LandingPage } from "@/types";
-import { Alert, Blockquote, Box, Image, List, ListItem, Space, Stack, Text, Title } from "@mantine/core";
-import Link from "next/link";
-import { displayContentElementFromBlocs } from "../../content/utils-ui";
+import { LandingPage } from '@/types';
+import { Stack, Title } from '@mantine/core';
+import { displayContentElementFromBlocks } from '../../content/utils-ui';
 
-type PageParams = { page: LandingPage, theme: Theme };
+type PageParams = { page: LandingPage };
 
-const LandingTransportPage = async ({ page, theme }: PageParams) => {
-  const color = themesColors[theme];
-
+const LandingTransportPage = async ({ page }: PageParams) => {
   return (
     <Stack>
-      <Stack p="md">{page?.content?.map(displayContentElementFromBlocs)}</Stack>
+      <Stack p="md">
+        <Title order={1}>{page?.title}</Title>
+        <Stack gap="lg">{page?.content?.map(displayContentElementFromBlocks)}</Stack>
+      </Stack>
     </Stack>
   );
-}
+};
 
 export default LandingTransportPage;

@@ -1,17 +1,6 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
 import { Service } from '@/types';
-import {
-  Alert,
-  Badge,
-  Button,
-  Grid,
-  GridCol,
-  Group,
-  Image,
-  Stack,
-  Text,
-  Title
-} from '@mantine/core';
+import { Alert, Badge, Button, Grid, GridCol, Group, Image, Stack, Text, Title } from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
@@ -22,7 +11,7 @@ import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
-import { displayContentElementFromBlocs } from '../../content/utils-ui';
+import { displayContentElementFromBlocks } from '../../content/utils-ui';
 
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)/, '');
@@ -137,7 +126,7 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
           </GridCol>
         </Grid>
         {service.premium ? (
-          <Stack p="md">{service?.content?.map(displayContentElementFromBlocs)}</Stack>
+          <Stack p="md">{service?.content?.map(displayContentElementFromBlocks)}</Stack>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
