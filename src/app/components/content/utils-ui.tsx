@@ -84,9 +84,9 @@ export const displayContentElementFromBlocks = (node: any, index: number): React
       );
     case 'list':
       const listTag = node.format === 'unordered' ? 'ul' : 'ol';
-      return <List c={listTag}>{node.children.map(displayContentElementFromBlocks)}</List>;
+      return <List c={listTag} key={index}>{node.children.map(displayContentElementFromBlocks)}</List>;
     case 'list-item':
-      return <ListItem>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
+      return <ListItem key={index}>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
     case 'quote':
       return (
         <>
