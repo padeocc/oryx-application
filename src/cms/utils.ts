@@ -1,3 +1,5 @@
+'use server';
+
 import { APIFilters, FetchService, FetchServices, Filters, PostService, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
@@ -67,6 +69,25 @@ export const fetchService: FetchService = async ({ code, theme }) => {
   const solution = await response.json();
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
+};
+
+export const fetchLandingPage = async (singularId: string): Promise<LandingPage> => {
+  const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
+  
+  const response = await fetch(`${baseUrl}/${singularId}`, {
+    headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
+    next: { tags: ['landing-page'] }
+  });
+
+  const responseData = await response.json();
+  const page = responseData?.data?.attributes;
+
+  return {
+    content: page.content,
+    keywords: page.keywords.split(','),
+    metaDescription: page.meta_description,
+    title: page.title,
+  };
 };
 
 const generateUniqueCode = (name: string) => {

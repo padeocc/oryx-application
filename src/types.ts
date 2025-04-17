@@ -176,3 +176,10 @@ export type RequestParameters = {
 export type FetchService = (args: { code: string, theme: Theme }) => Promise<Service>
 export type FetchServices = (args: { filters: Filters }) => Promise<FetchServicesResponse>
 export type PostService = (data: { [key: string]: any }) => Promise<{ errors?: { [key: string]: string } }>
+
+export type LandingPage = {
+  content: object[]
+  keywords: string[]
+  metaDescription: string
+  title: string
+}
