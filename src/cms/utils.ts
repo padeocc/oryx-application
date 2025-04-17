@@ -1,6 +1,6 @@
 'use server';
 
-import { APIFilters, FetchService, FetchServices, Filters, PostService, Service } from '@/types';
+import { APIFilters, FetchService, FetchServiceContent, FetchServices, Filters, LandingPage, PostService, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -70,6 +70,20 @@ export const fetchService: FetchService = async ({ code, theme }) => {
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
 };
+
+/**
+ * The content field cannot be indexed in algolia for now.
+ * We need to fetch it from the CSM.
+ */
+export const fetchServiceContent: FetchServiceContent = async ({ code, theme }) => {
+  return await fetchService({code, theme})
+    .then(service => {
+      return service.content
+    })
+    .catch(e => {
+      throw e
+    })
+}
 
 export const fetchLandingPage = async (singularId: string): Promise<LandingPage> => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';

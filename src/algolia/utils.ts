@@ -93,6 +93,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       publishedAt: new Date(),
       type: [],
       country: '',
+      premium: result?.premium,
       score: result?.score || 0
     };
     return service;

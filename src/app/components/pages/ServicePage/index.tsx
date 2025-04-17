@@ -1,5 +1,5 @@
 import { Theme, getActionFilters, themesColors } from '@/config';
-import { FetchService, Service } from '@/types';
+import { FetchService, FetchServiceContent, Service } from '@/types';
 import {
   Alert,
   Badge,
@@ -28,6 +28,13 @@ import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
 
+type PageParams = {
+  code: string
+  theme: Theme
+  fetchService: FetchService
+  fetchServiceContent: FetchServiceContent
+};
+
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)/, '');
 
@@ -38,7 +45,7 @@ const displayUrl = (url: string): string => {
   return newUrl;
 };
 
-const ServicePage = async ({ code, theme, fetchService }: PageParams) => {
+const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: PageParams) => {
   const t = await getTranslations('services');
   const tFilters = await getTranslations('filters_component');
   const tUtils = await getTranslations('utils');
@@ -47,6 +54,15 @@ const ServicePage = async ({ code, theme, fetchService }: PageParams) => {
   if (!service?.name) {
     return <NotFound message={`${code} - ${theme}`} />;
   }
+
+  let premiumContent: Array<any> = [];
+  let premiumContentError = false;
+
+  await fetchServiceContent({code, theme})
+    .then(res => {
+      premiumContent = res
+    })
+    .catch(() => premiumContentError = true);
 
   //const score = calculateMeanScore(service?.tags);
 
@@ -140,8 +156,13 @@ const ServicePage = async ({ code, theme, fetchService }: PageParams) => {
             </Stack>
           </GridCol>
         </Grid>
-        {service.premium ? (
-          <Stack p="md">{service?.content?.map(displayContentElementFromBlocks)}</Stack>
+        {premiumContentError ? (
+          <Alert variant="light" color="blue">
+            {t('error-fetch-premium')}
+          </Alert>
+        ) : null}
+        {service.premium && Array.isArray(premiumContent) ? (
+          <Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
