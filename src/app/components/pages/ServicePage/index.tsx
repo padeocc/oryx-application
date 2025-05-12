@@ -115,10 +115,13 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
           <GridCol span={{ base: 12, sm: 5 }}>
             <Stack>
               <Button size="xl" component={Link} href={url} target="_blank" color={color} leftSection={<LinkIcon />}>
-                {displayUrl(url)}
+                {name}
               </Button>
               <Alert>
                 <Title order={2} c={color}>
+                  <Text fz="sm" c="dimmed">
+                    {displayUrl(url)}
+                  </Text>
                   {description}
                 </Title>
               </Alert>
