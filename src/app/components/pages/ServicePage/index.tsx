@@ -14,7 +14,7 @@ import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
 
 const displayUrl = (url: string): string => {
-  let newUrl = url.replace(/^(https?:\/\/)/, '');
+  let newUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
 
   if (newUrl.endsWith('/')) {
     newUrl = newUrl.slice(0, -1);
@@ -115,13 +115,13 @@ const ServicePage = async ({ code, theme }: { code: string; theme: Theme }) => {
           <GridCol span={{ base: 12, sm: 5 }}>
             <Stack>
               <Button size="xl" component={Link} href={url} target="_blank" color={color} leftSection={<LinkIcon />}>
-                {name}
+                <Stack gap={4} align="start">
+                  {name}
+                  <Text fz="xs">{displayUrl(url)}</Text>
+                </Stack>
               </Button>
               <Alert>
                 <Title order={2} c={color}>
-                  <Text fz="sm" c="dimmed">
-                    {displayUrl(url)}
-                  </Text>
                   {description}
                 </Title>
               </Alert>
