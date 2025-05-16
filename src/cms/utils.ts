@@ -1,7 +1,6 @@
 'use server';
 
-import { Theme } from '@/config';
-import { APIFilters, FetchServicesResponse, Filters, LandingPage, Service } from '@/types';
+import { APIFilters, FetchService, FetchServiceContent, FetchServices, Filters, LandingPage, PostService, Service } from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -26,7 +25,7 @@ const generateAPIUrl = ({ filters }: { filters: Filters }): string => {
   } as APIFilters);
 };
 
-export const fetchServices = async ({ filters }: { filters: Filters }): Promise<FetchServicesResponse> => {
+export const fetchServices: FetchServices = async ({ filters }: { filters: Filters }) => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
   const theme = filters?.theme;
 
@@ -57,7 +56,10 @@ export const fetchServices = async ({ filters }: { filters: Filters }): Promise<
   return { services, meta: solutions.meta };
 };
 
-export const fetchService = async ({ code, theme }: { code: string; theme: Theme }) => {
+/**
+ * @deprecated use algolia fetchService util instead
+ */
+export const fetchService: FetchService = async ({ code, theme }) => {
   const url = process?.env?.STRAPI_API_ENDPOINT || '';
   const filtersString = `${qs.stringify({ populate: 'logo', filters: { code: { $eq: code } } })}`;
   const response = await fetch(`${url}/${theme}?${filtersString}`, {
@@ -68,6 +70,20 @@ export const fetchService = async ({ code, theme }: { code: string; theme: Theme
   const item = solution?.data?.[0];
   return { ...item?.attributes, id: item?.id };
 };
+
+/**
+ * The content field cannot be indexed in algolia for now.
+ * We need to fetch it from the CSM.
+ */
+export const fetchServiceContent: FetchServiceContent = async ({ code, theme }) => {
+  return await fetchService({code, theme})
+    .then(service => {
+      return service.content
+    })
+    .catch(e => {
+      throw e
+    })
+}
 
 export const fetchLandingPage = async (singularId: string): Promise<LandingPage> => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
@@ -94,7 +110,7 @@ const generateUniqueCode = (name: string) => {
   return `${uniqueCode}-${random}`;
 };
 
-export const addService = async (data: { [key: string]: any }): Promise<{ errors?: { [key: string]: string } }> => {
+export const addService: PostService = async data => {
   const { theme, tags, url, label: name, region, location, options, email: sender } = data;
   const code = generateUniqueCode(name);
 

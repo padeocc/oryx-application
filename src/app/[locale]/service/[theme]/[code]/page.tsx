@@ -1,14 +1,13 @@
 import ServicePage from '@/app/components/pages/ServicePage';
-import { fetchService } from '@/cms/utils';
 import { Theme } from '@/config';
 import { Metadata } from 'next';
-
 import { Service as ServiceType } from '@/types';
+import { fetchService } from '@/algolia/utils';
+import { fetchServiceContent } from '@/cms/utils';
 
 export const generateMetadata = async (props: { params: Promise<{ code: string; theme: Theme }> }) => {
   const params = await props.params;
-  const code = params.code;
-  const theme = params.theme;
+  const { code, theme } = params;
   const service: ServiceType | undefined = await fetchService({ code, theme });
   const metadataTags: Metadata = {
     title: `${service?.name} - OryxChange`,
@@ -36,7 +35,12 @@ export default async function Service(props: { params: Promise<{ code: string; t
   const theme = params.theme;
   return (
     <main>
-      <ServicePage code={code} theme={theme} />
+      <ServicePage 
+        code={code}
+        theme={theme}
+        fetchService={fetchService}
+        fetchServiceContent={fetchServiceContent}
+      />
     </main>
   );
 }
