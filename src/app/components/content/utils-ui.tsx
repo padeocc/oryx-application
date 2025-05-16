@@ -33,13 +33,21 @@ export const displayContentElementFromBlocks = (node: any, index: number): React
   const { type, children } = node;
   switch (type) {
     case 'heading':
+      let titleContent;
+
+      // Prevent title theme overrides from insered Span components
+      if (children.length === 1 && children[0].type === "text"){
+          titleContent = children[0].text
+      } else {
+          titleContent = children.map(displayContentElementFromBlocks)
+      }
       return (
         <Title
           key={index}
           order={node.level}
           fw={node.level === 1 ? 'bolder' : node.level === 2 ? 'bold' : node.level === 3 ? 'bold' : 'normal'}
           fz={node.level === 1 ? '1.6rem' : node.level === 2 ? '1.4rem' : node.level === 3 ? '1.2rem' : '1rem'}>
-          {children.map(displayContentElementFromBlocks)}
+          {titleContent}
         </Title>
       );
     case 'paragraph':
@@ -84,9 +92,9 @@ export const displayContentElementFromBlocks = (node: any, index: number): React
       );
     case 'list':
       const listTag = node.format === 'unordered' ? 'ul' : 'ol';
-      return <List c={listTag}>{node.children.map(displayContentElementFromBlocks)}</List>;
+      return <List c={listTag} key={index}>{node.children.map(displayContentElementFromBlocks)}</List>;
     case 'list-item':
-      return <ListItem>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
+      return <ListItem key={index}>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
     case 'quote':
       return (
         <>

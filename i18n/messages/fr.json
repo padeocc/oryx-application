@@ -393,7 +393,8 @@
     "type-scop-label": "SCOP",
     "updatedat_label": "Date de dernière mise à jour : {date}",
     "go-premium-label": "Ceci est votre page et vous souhaitez la compléter ?",
-    "go-premium-cta-label": "Contactez-nous"
+    "go-premium-cta-label": "Contactez-nous",
+    "error-fetch-premium": "Nous ne pouvons pas afficher ce contenu pour le moment. Veuillez réessayer plus tard."
   },
   "signup_form_page": {
     "email_label": "Adresse email",

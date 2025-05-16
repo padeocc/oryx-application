@@ -1,23 +1,25 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Stack, Text } from '@mantine/core';
+import { Group, Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import { fetchServices } from '../../../../cms/utils';
 import ThemesBanner from '../../common/ThemesBanner';
 import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
+import { SearchResponses } from 'algoliasearch';
+import { search } from '@/algolia/search';
+import { transformServicesFromResults } from '@/algolia/utils';
+import { IResult } from '@/algolia/types';
+import SearchBar from '../../navigation/SearchBar';
 
 const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
-  return (
-    await fetchServices({
-      filters: {
-        theme: [theme],
-        tags: [],
-        sort: 'updatedAt:desc',
-        limit: 4
-      }
-    })
-  ).services;
+  const { results }: SearchResponses<unknown> = await search({
+    query: '',
+    page: 0,
+    limit: 4,
+    filters: { theme: [theme] }
+  });
+  /* @ts-ignore */
+  return transformServicesFromResults({ results: results[0].hits as IResult[] });
 };
 
 const HomePage = async ({}: {}) => {
@@ -30,6 +32,9 @@ const HomePage = async ({}: {}) => {
   );
   return (
     <Stack gap={'xl'} pt="xl">
+      <Group hiddenFrom="md" grow>
+        <SearchBar />
+      </Group>
       <ExamplesSection />
       <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
         {t('explore_themes_label')}
