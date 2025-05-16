@@ -36,7 +36,7 @@ type PageParams = {
 };
 
 const displayUrl = (url: string): string => {
-  let newUrl = url.replace(/^(https?:\/\/)/, '');
+  let newUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
 
   if (newUrl.endsWith('/')) {
     newUrl = newUrl.slice(0, -1);
@@ -146,7 +146,10 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
           <GridCol span={{ base: 12, sm: 5 }}>
             <Stack>
               <Button size="xl" component={Link} href={url} target="_blank" color={color} leftSection={<LinkIcon />}>
-                {displayUrl(url)}
+                <Stack gap={4} align="start">
+                  {name}
+                  <Text fz="xs">{displayUrl(url)}</Text>
+                </Stack>
               </Button>
               <Alert>
                 <Title order={2} c={color}>
