@@ -6,7 +6,7 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
     (service?.tags || [])?.map?.(t => t.toLowerCase()).includes(tag)
   );
   const tag = tagKey ? imagesMapping?.[tagKey] : undefined;
-  const defaultImage = tag ? `/images/default-${tag}-tag-image.png` : `/images/default-${theme}-image.png`;
+  const defaultImage = tag ? `/images/default-${tag}-tag-image.svg` : `/images/default-${theme}-image.svg`;
 
   /*@ts-ignore*/
   const imageFromCMS = service?.logo?.data?.attributes?.url;
