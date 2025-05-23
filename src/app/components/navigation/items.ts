@@ -61,7 +61,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: 'LinkedIn',
-        href: 'https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/',
+        href: 'https://www.linkedin.com/company/oryxchange/posts/?feedView=all',
         isExternal: true
       }
     ],
