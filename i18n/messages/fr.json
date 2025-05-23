@@ -213,6 +213,9 @@
     "service_addition_label": "Proposer un service",
     "features_to_come_label": "Fonctionnalités à venir"
   },
+  "header": {
+    "tagline": "Trouver une action plus responsable instantanément, pour accélérer son mouvement"
+  },
   "home_page": {
     "discover_actions": "Les derniers services ajoutés",
     "example_bike": " Trouver les ateliers vélos en Haute Garonne ?",
@@ -220,14 +223,14 @@
     "example_food": "Consommer local, de saison, et bio ?",
     "example_phone": "Acheter des produits électronique d'occasion en ligne ?",
     "example_train": "Partir à Rome en train depuis chez moi ?",
-    "examples_title": "Que peut faire OryxChange pour vous ?",
+    "examples_title": "Rechercher une action plus responsable",
     "explore_themes_label": "Explorer par thèmes",
     "find_inspiration": "Trouver un service !",
     "find_others_inspiration": "Chercher selon vos envies !",
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
     "search_label": "Rechercher par mots clés !",
-    "welcome": "Trouver une action plus responsable instantanément, pour accélérer son mouvement"
+    "welcome": "OryxChange : trouver une action plus responsable instantanément."
   },
   "legal": {
     "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",

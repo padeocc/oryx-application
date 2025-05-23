@@ -1,4 +1,4 @@
-import { Container, Flex, Group, Image, Stack, Title } from '@mantine/core';
+import { Container, Flex, Group, Image, Stack, Text } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import HeaderMenuDesktop from './HeaderMenuDesktop';
@@ -6,7 +6,7 @@ import HeaderMenuMobile from './HeaderMenuMobile';
 import styles from './header-menu.module.css';
 
 const HeaderMenu = async () => {
-  const t = await getTranslations('home_page');
+  const t = await getTranslations('header');
 
   return (
     <Container className={styles.container} fluid h={{ base: 120 }}>
@@ -14,12 +14,10 @@ const HeaderMenu = async () => {
         <Group w="auto">
           <Link href="/" style={{ textDecoration: 'none' }}>
             <Stack gap="0">
-              <Title c="green_oryx" order={1} fw={'bolder'}>
-                <Image src="/images/logo.png" maw={'11rem'} />
-              </Title>
-              <Title c="dark" fz="sm" fw={'bold'} order={2}>
-                {t('welcome')}
-              </Title>
+              <Image src="/images/logo.png" maw={'11rem'} />
+              <Text c="dark" fz="sm" fw={'bold'} order={2}>
+                {t('tagline')}
+              </Text>
             </Stack>
           </Link>
         </Group>

@@ -1,6 +1,6 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Group, Stack, Text } from '@mantine/core';
+import { Group, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import ThemesBanner from '../../common/ThemesBanner';
 import ExamplesSection from './components/ExamplesSection';
@@ -32,13 +32,19 @@ const HomePage = async ({}: {}) => {
   );
   return (
     <Stack gap={'xl'} pt="xl">
+      <Title c="green_oryx" fw={'bold'} order={1}>
+        {t('welcome')}
+      </Title>
       <Group hiddenFrom="md" grow>
         <SearchBar />
       </Group>
       <ExamplesSection />
-      <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
-        {t('explore_themes_label')}
-      </Text>
+      <Title order={2}>
+        <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
+          {t('explore_themes_label')}
+        </Text>
+      </Title>
+
       <ThemesBanner />
       {themesSections}
     </Stack>
