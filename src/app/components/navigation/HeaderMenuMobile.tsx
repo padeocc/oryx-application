@@ -2,7 +2,7 @@ import { Container, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { getFooterLinks, getNavigationItems } from './items';
+import { getBurgerMenuLinks, getNavigationItems } from './items';
 
 const HeaderMenuMobile = async () => {
   const t = await getTranslations('navigation_items');
@@ -32,13 +32,11 @@ const HeaderMenuMobile = async () => {
                 </MenuItem>
               );
             })}
-            {itemgroupindex < itemsGroup.length ? <MenuDivider /> : null}
+            {itemgroupindex <= itemsGroup.length ? <MenuDivider /> : null}
           </div>
         ))}
-        <MenuDivider />
 
-        <MenuDivider />
-        {(await getFooterLinks()).map((itemsGroup, itemgroupindex) => (
+        {(await getBurgerMenuLinks()).map((itemsGroup, itemgroupindex) => (
           <div key={`group-mobile-bottom-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
               const others = isExternal ? { target: '_blank' } : {};

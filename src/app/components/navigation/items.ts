@@ -32,6 +32,28 @@ export const getNavigationItems = ({
   return menu;
 };
 
+export const getBurgerMenuLinks = async () => {
+  const t = await getTranslations('footer');
+  return [
+    [
+      {
+        name: t('whoarewe_label'),
+        href: 'https://www.padeo.fr/association/',
+        isExternal: true
+      },
+      {
+        name: t('oryx_history_label'),
+        href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
+        isExternal: true
+      },
+      {
+        name: t('chart_label'),
+        href: 'https://1drv.ms/b/c/2b525df775df0f5d/EQd8-MszE69BvTBTJvNUgDcBtA1TxFbPRZ6wWSvORAfeLQ?e=zHccWn',
+        isExternal: true
+      }
+    ]
+  ];
+};
 export const getFooterLinks = async () => {
   const t = await getTranslations('footer');
   return [
@@ -78,7 +100,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: t('chart_label'),
-        href: 'https://docs.google.com/document/d/10AFQddEf68BSCenJ6aDNBDk3R9Lac8U2',
+        href: 'https://1drv.ms/b/c/2b525df775df0f5d/EQd8-MszE69BvTBTJvNUgDcBtA1TxFbPRZ6wWSvORAfeLQ?e=zHccWn',
         isExternal: true
       },
       {
