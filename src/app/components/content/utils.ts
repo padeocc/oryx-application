@@ -6,7 +6,19 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
     (service?.tags || [])?.map?.(t => t.toLowerCase()).includes(tag)
   );
   const tag = tagKey ? imagesMapping?.[tagKey] : undefined;
-  const defaultImage = tag ? `/images/default-${tag}-tag-image.svg` : `/images/default-${theme}-image.svg`;
+  const folderByTheme: Record<Theme, string> = {
+    foods: 'foods',
+    goods: 'goods',
+    services: 'services',
+    events: 'events',
+    accommodations: 'accommodations',
+    transports: 'transports',
+  };
+
+  const folder = folderByTheme[theme] || 'default';
+  const defaultImage = tag
+    ? `/images/${folder}/default-${tag}-tag-image.svg`
+    : `/images/${folder}/default-${theme}-image.svg`;
 
   /*@ts-ignore*/
   const imageFromCMS = service?.logo?.data?.attributes?.url;
