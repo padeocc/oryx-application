@@ -210,6 +210,7 @@
     "roadmap_label": "Futures fonctionnalités",
     "sourcecode_label": "Code source",
     "whoarewe_label": "L'association - LE FORUM PADEO",
+    "team_label": "L'équipe",
     "service_addition_label": "Proposer un service",
     "features_to_come_label": "Fonctionnalités à venir"
   },
@@ -433,6 +434,9 @@
     "goods": "Biens, mode, maison, électronique",
     "services": "Services",
     "transports": "Transport"
+  },
+  "team_page": {
+    "title": "L'équipe OryxChange"
   },
   "user_actions": {
     "coming_soon": "Bientôt disponible !",
