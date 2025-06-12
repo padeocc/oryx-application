@@ -90,8 +90,13 @@ export const getFooterLinks = async () => {
     [
       {
         name: t('whoarewe_label'),
-        href: 'https://www.padeo.fr',
+        href: 'https://www.padeo.fr/association/',
         isExternal: true
+      },
+      {
+        name: t('team_label'),
+        href: '/team',
+        isExternal: false
       },
       {
         name: t('oryx_history_label'),
