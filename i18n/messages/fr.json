@@ -211,7 +211,7 @@
     "sourcecode_label": "Code source",
     "whoarewe_label": "L'association - LE FORUM PADEO",
     "team_label": "L'équipe",
-    "service_addition_label": "Proposer un service",
+    "service_addition_label": "Une offre à proposer ?",
     "features_to_come_label": "Fonctionnalités à venir"
   },
   "header": {
@@ -295,7 +295,7 @@
     "contact_label": "Nous contacter",
     "donate_label": "Faire un don",
     "query-placeholder": "Faites une recherche !",
-    "service_addition_label": "Proposer un service"
+    "service_addition_label": "Une offre à proposer ?"
   },
   "password_reminder_page": {
     "email_address": "Adresse email",
