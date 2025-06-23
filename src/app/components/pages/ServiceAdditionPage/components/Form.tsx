@@ -110,25 +110,6 @@ const Form = ({
         }}>
         <Stack gap={'xl'}>
           <Stack gap={'lg'}>
-            <TextInput
-              withAsterisk
-              label={t('form-label-label')}
-              placeholder={t('form-label-placeholder')}
-              name="label"
-              disabled={isSending}
-              {...form.getInputProps('label')}
-            />
-            <TextInput
-              withAsterisk
-              label={t('form-url-label')}
-              placeholder={t('form-url-placeholder')}
-              name="url"
-              disabled={isSending}
-              leftSection={<Text fz="0.5rem">https://</Text>}
-              {...form.getInputProps('url')}
-            />
-          </Stack>
-          <Stack gap={'lg'}>
             <Stack gap="0">
               <InputLabel>{t('form-themes-label')}</InputLabel>
               <Group justify="flex-start">
@@ -180,6 +161,25 @@ const Form = ({
               {...form.getInputProps('options')}
               data={options}
               searchable
+            />
+          </Stack>
+          <Stack gap={'lg'}>
+            <TextInput
+              withAsterisk
+              label={t('form-label-label')}
+              placeholder={t('form-label-placeholder')}
+              name="label"
+              disabled={isSending}
+              {...form.getInputProps('label')}
+            />
+            <TextInput
+              withAsterisk
+              label={t('form-url-label')}
+              placeholder={t('form-url-placeholder')}
+              name="url"
+              disabled={isSending}
+              leftSection={<Text fz="0.5rem">https://</Text>}
+              {...form.getInputProps('url')}
             />
           </Stack>
           <Stack gap={'lg'}>
