@@ -35,6 +35,7 @@ const HomePage = async ({}: {}) => {
       <Title c="green_oryx" fw={'bold'} order={1}>
         {t('welcome')}
       </Title>
+
       <Group hiddenFrom="md" grow>
         <SearchBar />
       </Group>
