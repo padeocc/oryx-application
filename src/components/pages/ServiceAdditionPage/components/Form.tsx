@@ -3,7 +3,19 @@
 import BadgeSelector from '@/components/pages/ServicesPage/components/Form/components/BadgeSelector';
 import { LOCATIONS, REGIONS, Theme, themes, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Button, Group, InputLabel, MultiSelect, Select, Stack, Text, TextInput } from '@mantine/core';
+import {
+  Button,
+  Fieldset,
+  Grid,
+  GridCol,
+  Group,
+  InputLabel,
+  MultiSelect,
+  Select,
+  Stack,
+  Text,
+  TextInput
+} from '@mantine/core';
 import { isNotEmpty, matches, useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { useTranslations } from 'next-intl';
@@ -11,6 +23,7 @@ import { redirect } from 'next/navigation';
 import { RefObject, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { getOptionsFromThemes, getTagsFromThemes } from '../utils';
+import { Placeholder } from '@phosphor-icons/react';
 
 const urlRegexString =
   '^(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
@@ -53,14 +66,18 @@ const Form = ({
       location: '',
       options: [],
       email: '',
-      structure: ''
+      structure:'',
+      shopadress: '',
+      shopcity: '',
+      shoppostalcode: ''
     },
     validate: {
       label: isNotEmpty(t('error-label-field')),
       url: matches(URLREGEX, t('error-url-field')),
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
-      theme: isNotEmpty(t('error-theme-field'))
+      theme: isNotEmpty(t('error-theme-field')),
+      shoppostalcode: value => (value.length !== 5 ? t('Veuillez saisir un code postal valide.') : null)
     }
   });
 
@@ -78,7 +95,6 @@ const Form = ({
     { value: 'ngo', label: t('form-structure-ngo') },
     { value: 'other', label: t('form-structure-other') }
   ];
-
 
   return (
     <>
@@ -232,6 +248,38 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
+          <Fieldset variant="unstyled">
+            <Grid>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopadress-label')}
+                  placeholder={t('form-shopadress-placeholder')}
+                  name="shopadress"
+                  disabled={isSending}
+                  {...form.getInputProps('shopadress')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopcity-label')}
+                  placeholder={t('form-shopcity-placeholder')}
+                  name="shopcity"
+                  disabled={isSending}
+                  {...form.getInputProps('shopcity')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shoppostalcode-label')}
+                  placeholder={t('form-shoppostalcode-placeholder')}
+                  name="shoppostalcode"
+                  type="number"
+                  disabled={isSending}
+                  {...form.getInputProps('shoppostalcode')}
+                />
+              </GridCol>
+            </Grid>
+          </Fieldset>
 
           <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
 
