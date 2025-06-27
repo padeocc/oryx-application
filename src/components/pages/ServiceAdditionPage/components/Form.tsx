@@ -3,7 +3,19 @@
 import BadgeSelector from '@/components/pages/ServicesPage/components/Form/components/BadgeSelector';
 import { LOCATIONS, REGIONS, Theme, themes, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Button, Grid, GridCol, Group, InputLabel, MultiSelect, Select, Stack, Text, TextInput } from '@mantine/core';
+import {
+  Button,
+  Fieldset,
+  Grid,
+  GridCol,
+  Group,
+  InputLabel,
+  MultiSelect,
+  Select,
+  Stack,
+  Text,
+  TextInput
+} from '@mantine/core';
 import { isNotEmpty, matches, useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { useTranslations } from 'next-intl';
@@ -53,14 +65,19 @@ const Form = ({
       location: '',
       options: [],
       email: '',
-      structure: ''
+      structure: '',
+      adresseRegion:'',
+      adresseDepartment:'',
+      adresse:'',
+      postalCode:''
     },
     validate: {
       label: isNotEmpty(t('error-label-field')),
       url: matches(URLREGEX, t('error-url-field')),
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
-      theme: isNotEmpty(t('error-theme-field'))
+      theme: isNotEmpty(t('error-theme-field')),
+      postalCode: (value) => value.length !==5 ? t('Veuillez saisir un code postal valide.'): null,
     }
   });
 
@@ -232,44 +249,37 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
-          <Grid>
-            <Grid.Col span={3}>
-              <TextInput
-                label={t('form-region-label')}
-                placeholder={t('form-region-placeholder')}
-                name="region"
-                disabled={isSending}
-                {...form.getInputProps('region')}
-              />
-            </Grid.Col>
-            <Grid.Col span={3}>
-              <TextInput
-                label={t('form-departement-label')}
-                placeholder={t('form-department-placeholder')}
-                name="department"
-                disabled={isSending}
-                {...form.getInputProps('department')}
-              />
-            </Grid.Col>
-            <Grid.Col span={3}>
-              <TextInput
-                label={t('form-adresse-label')}
-                placeholder={t('form-adresse-label')}
-                name="adresse"
-                disabled={isSending}
-                {...form.getInputProps('adresse')}
-              />
-            </Grid.Col>
-            <Grid.Col span={3}>
-              <TextInput
-                label={t('form-postal-code-label')}
-                placeholder={t('form-postal-code-placeholder')}
-                name="postalCode"
-                disabled={isSending}
-                {...form.getInputProps('postalCode')}
-              />
-            </Grid.Col>
-          </Grid>
+          <Fieldset legend={t('fieldset-legend-text')}>
+            <TextInput
+              label={t('form-adresse-region-label')}
+              placeholder={t('form-adresse-region-placeholder')}
+              name="adresseRegion"
+              disabled={isSending}
+              {...form.getInputProps('adresseRegion')}
+            />
+            <TextInput
+              label={t('form-departement-label')}
+              placeholder={t('form-department-placeholder')}
+              name="adresseDepartment"
+              disabled={isSending}
+              {...form.getInputProps('adresseDepartment')}
+            />
+            <TextInput
+              label={t('form-adresse-label')}
+              placeholder={t('form-adresse-placeholder')}
+              name="adresse"
+              disabled={isSending}
+              {...form.getInputProps('adresse')}
+            />
+
+            <TextInput
+              label={t('form-postal-code-label')}
+              placeholder={t('form-postal-code-placeholder')}
+              name="postalCode"
+              disabled={isSending}
+              {...form.getInputProps('postalCode')}
+            />
+          </Fieldset>
 
           <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
 
