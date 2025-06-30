@@ -76,7 +76,7 @@ const Form = ({
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
       theme: isNotEmpty(t('error-theme-field')),
-      postalCode: (value) => value.length !==5 ? t('Veuillez saisir un code postal valide.'): null,
+      postalCode: value => (value.length !== 5 ? t('Veuillez saisir un code postal valide.') : null)
     }
   });
 
