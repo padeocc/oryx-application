@@ -1,0 +1,97 @@
+name: oryx-application-dev
+services:
+  oryx-nextjs:
+    container_name: '${COMPOSE_PROJECT_NAME}-oryx-nextjs'
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+      target: dev
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Enable polling for file changes
+      - WATCHPACK_POLLING=true     # Fixes live reload issues
+    # volumes:
+    #   - .:/app
+    develop:
+      watch:
+        - action: sync+restart
+          path: ../../src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+    networks:
+      - app_network
+  
+  postgres:
+    image: 'postgres:latest'
+    container_name: '${COMPOSE_PROJECT_NAME}-postgresdb-dev'
+    env_file:
+      ../../.env.development
+    environment:
+      POSTGRES_USER: myadmin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: supertokens
+      # POSTGRES_USER: ${POSTGRES_USER} 
+      # POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+      - ../config/postgres-dev-init.sql:/docker-entrypoint-initdb.d/init.sql # will setup dev database
+    ports:
+      - 5432:5432
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'admin', '-d', 'supertokens']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    container_name: '${COMPOSE_PROJECT_NAME}-pgadmin'
+    image: dpage/pgadmin4:latest
+    env_file:
+      ../../.env.development
+    # environment:
+    #   - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
+    #   - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
+    ports:
+      - "5050:80"
+    restart: always
+    networks:
+      - app_network
+    depends_on:
+      - postgres
+  
+  supertokens:
+    container_name: '${COMPOSE_PROJECT_NAME}-supertokens'
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 3567:3567
+    env_file:
+      ../../.env.development
+    environment:
+      - API_KEYS='F-7VvC1Y-6ano4cpY=0-5B8k2=-o=U'
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: >
+        bash -c 'exec 3<>/dev/tcp/127.0.0.1/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 127.0.0.1:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+networks:
+  app_network:
+    driver: bridge
+volumes:
+  postgres_volume:
