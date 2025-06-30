@@ -77,7 +77,7 @@ const Form = ({
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
       theme: isNotEmpty(t('error-theme-field')),
-      postalCode: (value) => value.length !==5 ? t('Veuillez saisir un code postal valide.'): null,
+      postalCode: value => (value.length !== 5 ? t('Veuillez saisir un code postal valide.') : null)
     }
   });
 
@@ -249,36 +249,46 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
-          <Fieldset legend={t('fieldset-legend-text')}>
-            <TextInput
-              label={t('form-adresse-region-label')}
-              placeholder={t('form-adresse-region-placeholder')}
-              name="adresseRegion"
-              disabled={isSending}
-              {...form.getInputProps('adresseRegion')}
-            />
-            <TextInput
-              label={t('form-departement-label')}
-              placeholder={t('form-department-placeholder')}
-              name="adresseDepartment"
-              disabled={isSending}
-              {...form.getInputProps('adresseDepartment')}
-            />
-            <TextInput
-              label={t('form-adresse-label')}
-              placeholder={t('form-adresse-placeholder')}
-              name="adresse"
-              disabled={isSending}
-              {...form.getInputProps('adresse')}
-            />
-
-            <TextInput
-              label={t('form-postal-code-label')}
-              placeholder={t('form-postal-code-placeholder')}
-              name="postalCode"
-              disabled={isSending}
-              {...form.getInputProps('postalCode')}
-            />
+          <Fieldset
+            legend={t('fieldset-legend-text')}>
+            <Grid>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-adresse-region-label')}
+                  placeholder={t('form-adresse-region-placeholder')}
+                  name="adresseRegion"
+                  disabled={isSending}
+                  {...form.getInputProps('adresseRegion')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-departement-label')}
+                  placeholder={t('form-department-placeholder')}
+                  name="adresseDepartment"
+                  disabled={isSending}
+                  {...form.getInputProps('adresseDepartment')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-adresse-label')}
+                  placeholder={t('form-adresse-placeholder')}
+                  name="adresse"
+                  disabled={isSending}
+                  {...form.getInputProps('adresse')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-postal-code-label')}
+                  placeholder={t('form-postal-code-placeholder')}
+                  name="postalCode"
+                  disabled={isSending}
+                  {...form.getInputProps('postalCode')}
+                />
+              </GridCol>
+            </Grid>
           </Fieldset>
 
           <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
