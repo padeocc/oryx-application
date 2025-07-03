@@ -168,8 +168,8 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
             <><Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
             <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('report-offer-label')}
-           <Link href="/contact?report=true">{t('report-offer-cta-label')}</Link>
-          </Group></>
+              <Link href={`/contact?report=${code}`}>{t('report-offer-cta-label')}</Link>
+            </Group></>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
@@ -180,5 +180,20 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
     </Stack>
   );
 };
+
+export function generateReportMessage(code: string) {
+  return `Bonjour,
+
+Je souhaite signaler un problème concernant l’offre intitulée "${code}".
+
+Merci de vérifier et corriger cette fiche si nécessaire.
+
+Détails du problème constaté :
+[Décrivez ici le problème : l’offre n’existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]
+
+Merci d’avance pour votre aide et votre retour.
+
+Bien cordialement,`;
+}
 
 export default ServicePage;

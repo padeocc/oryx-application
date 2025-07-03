@@ -10,13 +10,17 @@ import { useSearchParams } from 'next/navigation';
 
 const Form = ({
   sendContactEmail,
-  sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
+  sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
+  defaultMessage = '',
+  report = false
 }: {
   sitekey?: string;
   sendContactEmail: (formData: FormData) => Promise<{
     sent: boolean;
     errors?: { [key: string]: string };
   }>;
+  defaultMessage?: string;
+  report?: boolean;
 }) => {
   const t = useTranslations('contact');
   const [okNotification, setOkNotification] = useState<boolean>(false);
@@ -25,11 +29,8 @@ const Form = ({
   const recaptcha: RefObject<ReCAPTCHA | null> = useRef(null);
 
   const searchParams = useSearchParams();
-  const report = searchParams.get('report');
+  const reportParam = searchParams.get('report');
 
-  const defaultMessage = report
-    ? 'Bonjour,\n\nJe souhaite signaler une offre présente sur le site Oryxchange.\nVoici le contexte de ma demande :\n- Le contenu de la fiche semble incomplet ou erroné.\n- L’offre n’existe plus ou le service n’est plus disponible.\n- Le lien fourni ne fonctionne pas.\n\nMerci de vérifier et mettre à jour la fiche concernée.\n\nCordialement,'
-    : '';
       
   useEffect(() => {
     const timeoutId = setTimeout(() => {
