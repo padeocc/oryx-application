@@ -279,6 +279,38 @@ const Form = ({
               </GridCol>
             </Grid>
           </Fieldset>
+          <Fieldset legend={t('shopadress-fieldset-legend-text')} variant="unstyled">
+            <Grid>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopadress-label')}
+                  placeholder={t('form-shopadress-placeholder')}
+                  name="shopadress"
+                  disabled={isSending}
+                  {...form.getInputProps('shopadress')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopcity-label')}
+                  placeholder={t('form-shopcity-placeholder')}
+                  name="shopcity"
+                  disabled={isSending}
+                  {...form.getInputProps('shopcity')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shoppostalcode-label')}
+                  placeholder={t('form-shoppostalcode-placeholder')}
+                  name="shoppostalcode"
+                  type="number"
+                  disabled={isSending}
+                  {...form.getInputProps('shoppostalcode')}
+                />
+              </GridCol>
+            </Grid>
+          </Fieldset>
 
           <ReCAPTCHA sitekey={sitekey} ref={recaptcha} {...form.getInputProps('recaptcha')} />
 
