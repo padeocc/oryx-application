@@ -27,10 +27,6 @@ const Form = ({
   const [koNotification, setKoNotification] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const recaptcha: RefObject<ReCAPTCHA | null> = useRef(null);
-
-  const searchParams = useSearchParams();
-  const reportParam = searchParams.get('report');
-
       
   useEffect(() => {
     const timeoutId = setTimeout(() => {

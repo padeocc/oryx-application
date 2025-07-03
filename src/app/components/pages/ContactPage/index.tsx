@@ -3,10 +3,6 @@ import { Alert, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
 import Form from './components/Form';
 import {generateReportMessage} from "../ServicePage"
-async function fetchService(code: string) {
-  return { name: `Service ${code}` };
-}
-
 
 const ContactPage = async ({ searchParams }: { searchParams: Promise<{ report?: string }> }) => {
   const t = await getTranslations('contact');
@@ -21,7 +17,7 @@ const ContactPage = async ({ searchParams }: { searchParams: Promise<{ report?: 
         <Form
           sendContactEmail={sendContactEmail}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          defaultMessage={code ? generateReportMessage(code) : ''}
+          defaultMessage={code ? await generateReportMessage(code) : ''}
           report={!!code}
         />
       </Alert>

@@ -27,6 +27,7 @@ import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
+import { fetchService } from '@/algolia/utils'; // ou l'import adapté
 
 type PageParams = {
   code: string
@@ -181,19 +182,24 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   );
 };
 
-export function generateReportMessage(code: string) {
-  return `Bonjour,
+export async function generateReportMessage(code: string) {
+  const service = await fetchService({ code, theme: 'default' as Theme });
+  const name = service?.name || code;
 
-Je souhaite signaler un problème concernant l’offre intitulée "${code}".
+  const message = `Bonjour,
+
+Je souhaite signaler un problème concernant l'offre intitulée "${name}".
 
 Merci de vérifier et corriger cette fiche si nécessaire.
 
 Détails du problème constaté :
-[Décrivez ici le problème : l’offre n’existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]
+[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]
 
-Merci d’avance pour votre aide et votre retour.
+Merci d'avance pour votre aide et votre retour.
 
 Bien cordialement,`;
+
+  return message;
 }
 
 export default ServicePage;
