@@ -398,6 +398,8 @@
     "updatedat_label": "Date de dernière mise à jour : {date}",
     "go-premium-label": "Ceci est votre page et vous souhaitez la compléter ?",
     "go-premium-cta-label": "Contactez-nous",
+    "report-offer-label": "Vous constatez une erreur ? ( l’offre n’existe pas, le contenu est incomplet, l’URL ne fonctionne pas…) ",
+    "report-offer-cta-label": "Signaler cette offre",
     "error-fetch-premium": "Nous ne pouvons pas afficher ce contenu pour le moment. Veuillez réessayer plus tard."
   },
   "signup_form_page": {

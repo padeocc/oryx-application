@@ -164,8 +164,12 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
             {t('error-fetch-premium')}
           </Alert>
         ) : null}
-        {service.premium && Array.isArray(premiumContent) ? (
-          <Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
+        {service.premium && Array.isArray(premiumContent) && premiumContent.length > 0 ? (
+            <><Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
+            <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+            {t('report-offer-label')}
+           <Link href="/contact?report=true">{t('report-offer-cta-label')}</Link>
+          </Group></>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
