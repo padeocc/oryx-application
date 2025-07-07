@@ -27,6 +27,7 @@ import { fr } from 'date-fns/locale'; // Import the locales you need
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
+import { fetchService } from '@/algolia/utils'; // ou l'import adapté
 
 type PageParams = {
   code: string
@@ -164,8 +165,12 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
             {t('error-fetch-premium')}
           </Alert>
         ) : null}
-        {service.premium && Array.isArray(premiumContent) ? (
-          <Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
+        {service.premium && Array.isArray(premiumContent) && premiumContent.length > 0 ? (
+            <><Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
+            <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+            {t('report-offer-label')}
+              <Link href={`/contact?report=${code}`}>{t('report-offer-cta-label')}</Link>
+            </Group></>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
@@ -176,5 +181,17 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
     </Stack>
   );
 };
+
+export async function generateReportMessage(code: string) {
+  const service = await fetchService({ code, theme: 'default' as Theme });
+  const name = service?.name || code;
+
+  const message = `Bonjour,
+Je souhaite signaler un problème concernant l'offre intitulée "${name}".
+[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]
+Bien cordialement,`;
+
+  return message;
+}
 
 export default ServicePage;
