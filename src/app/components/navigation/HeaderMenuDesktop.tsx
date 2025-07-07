@@ -4,9 +4,11 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getBurgerMenuLinks, getNavigationItems } from './items';
 import SearchBar from './SearchBar';
+import UserAvatar from '../auth/userAvatar';
 
 const HeaderMenuDesktop = async () => {
   const t = await getTranslations('navigation_items');
+  const t_auth = await getTranslations('auth_button');
   const elements = getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
     <Group key={`group-desktop-${itemgroupindex}`} justify="space-between">
       {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
@@ -52,6 +54,13 @@ const HeaderMenuDesktop = async () => {
                 </MenuItem>
               );
             })}
+          <MenuItem
+            component={UserAvatar}
+            fz={'lg'}
+            color="white"
+            translations={{signin: t_auth('login.connect'),signout: t_auth('login.disconnect')}}
+          >
+          </MenuItem>
           </div>
         ))}
       </MenuDropdown>

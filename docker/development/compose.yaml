@@ -1,42 +1,10 @@
 name: oryx-application-dev
 services:
-  oryx-nextjs:
-    container_name: '${COMPOSE_PROJECT_NAME}-oryx-nextjs'
-    build:
-      context: ../../
-      dockerfile: docker/development/Dockerfile
-      target: dev
-    ports:
-      - "3000:3000"
-    environment:
-      - CHOKIDAR_USEPOLLING=true  # Enable polling for file changes
-      - WATCHPACK_POLLING=true     # Fixes live reload issues
-    # volumes:
-    #   - .:/app
-    develop:
-      watch:
-        - action: sync+restart
-          path: ../../src
-          target: /app/src
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
-    networks:
-      - app_network
-  
   postgres:
     image: 'postgres:latest'
     container_name: '${COMPOSE_PROJECT_NAME}-postgresdb-dev'
     env_file:
       ../../.env.development
-    environment:
-      POSTGRES_USER: myadmin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: supertokens
-      # POSTGRES_USER: ${POSTGRES_USER} 
-      # POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      # POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_volume:/var/lib/postgresql/data
       - ../config/postgres-dev-init.sql:/docker-entrypoint-initdb.d/init.sql # will setup dev database
@@ -56,9 +24,6 @@ services:
     image: dpage/pgadmin4:latest
     env_file:
       ../../.env.development
-    # environment:
-    #   - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-    #   - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
     ports:
       - "5050:80"
     restart: always
@@ -77,8 +42,6 @@ services:
       - 3567:3567
     env_file:
       ../../.env.development
-    environment:
-      - API_KEYS='F-7VvC1Y-6ano4cpY=0-5B8k2=-o=U'
     networks:
       - app_network
     restart: unless-stopped
@@ -89,9 +52,12 @@ services:
       timeout: 5s
       retries: 5
 
-
 networks:
   app_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1
 volumes:
   postgres_volume:

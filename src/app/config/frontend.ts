@@ -19,7 +19,17 @@ export const frontendConfig = (): SuperTokensConfig => {
   return {
     appInfo,
     recipeList: [
-      EmailPasswordReact.init(),
+      EmailPasswordReact.init({
+        signInAndUpFeature: {
+                signUpForm: {
+                    formFields: [{
+                        id: "pseudo",
+                        label: "Pseudo",
+                        placeholder: "Choose a pseudo"
+                    }]
+                }
+            }
+      }),
       SessionReact.init(),
     ],
     windowHandler: (original) => ({

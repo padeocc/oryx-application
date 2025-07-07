@@ -42,7 +42,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
 COPY .env.development .env.production
-# RUN npm run build
+RUN npm run build
 
 # 3. Production image, copy all the files and run next
 FROM base AS runner
@@ -51,6 +51,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PRIVATE_STANDALONE=true
 ENV CHOKIDAR_USEPOLLING=true
 ENV WATCHPACK_POLLING=true
 RUN addgroup -g 1001 -S nodejs
@@ -63,8 +64,8 @@ COPY .env.development .env.production
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-# COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 
 USER nextjs
@@ -73,4 +74,4 @@ EXPOSE 3000
 
 ENV PORT=3000
 
-CMD HOSTNAME="0.0.0.0" next start
+CMD HOSTNAME="0.0.0.0" node server.js
