@@ -65,10 +65,6 @@ const Form = ({
       location: '',
       options: [],
       email: '',
-      adresseRegion: '',
-      adresseDepartment: '',
-      adresse: '',
-      postalCode: '',
       shopadress: '',
       shopcity: '',
       shoppostalcode: ''
@@ -79,7 +75,7 @@ const Form = ({
       location: isNotEmpty(t('error-location-field')),
       tags: isNotEmpty(t('error-tags-field')),
       theme: isNotEmpty(t('error-theme-field')),
-      postalCode: value => (value.length !== 5 ? t('Veuillez saisir un code postal valide.') : null)
+      shoppostalcode: value => (value.length !== 5 ? t('Veuillez saisir un code postal valide.') : null)
     }
   });
 
@@ -234,48 +230,7 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
-          <Fieldset legend={t('fieldset-legend-text')} variant="unstyled">
-            <Grid>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <TextInput
-                  label={t('form-adresse-region-label')}
-                  placeholder={t('form-adresse-region-placeholder')}
-                  name="adresseRegion"
-                  disabled={isSending}
-                  {...form.getInputProps('adresseRegion')}
-                />
-              </GridCol>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <TextInput
-                  label={t('form-departement-label')}
-                  placeholder={t('form-department-placeholder')}
-                  name="adresseDepartment"
-                  disabled={isSending}
-                  {...form.getInputProps('adresseDepartment')}
-                />
-              </GridCol>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <TextInput
-                  label={t('form-adresse-label')}
-                  placeholder={t('form-adresse-placeholder')}
-                  name="adresse"
-                  disabled={isSending}
-                  {...form.getInputProps('adresse')}
-                />
-              </GridCol>
-              <GridCol span={{ base: 12, md: 6 }}>
-                <TextInput
-                  label={t('form-postal-code-label')}
-                  placeholder={t('form-postal-code-placeholder')}
-                  name="postalCode"
-                  type="number"
-                  disabled={isSending}
-                  {...form.getInputProps('postalCode')}
-                />
-              </GridCol>
-            </Grid>
-          </Fieldset>
-          <Fieldset legend={t('shopadress-fieldset-legend-text')} variant="unstyled">
+          <Fieldset variant="unstyled">
             <Grid>
               <GridCol span={{ base: 12, md: 6 }}>
                 <TextInput
