@@ -136,10 +136,6 @@ export const addService: PostService = async data => {
     location,
     options,
     email: sender,
-    adresseRegion,
-    adresseDepartment,
-    adresse,
-    postalCode,
     shopadress,
     shopcity,
     shoppostalcode
@@ -158,10 +154,6 @@ export const addService: PostService = async data => {
       location,
       form_options: options,
       sender,
-      adresse_region: adresseRegion,
-      adresse_department: adresseDepartment,
-      adresse: adresse,
-      postal_code: postalCode,
       shop_adress: shopadress,
       shop_city: shopcity,
       shop_postal_code: shoppostalcode
