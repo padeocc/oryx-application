@@ -1,6 +1,15 @@
 'use server';
 
-import { APIFilters, FetchService, FetchServiceContent, FetchServices, Filters, LandingPage, PostService, Service } from '@/types';
+import {
+  APIFilters,
+  FetchService,
+  FetchServiceContent,
+  FetchServices,
+  Filters,
+  LandingPage,
+  PostService,
+  Service
+} from '@/types';
 import { merge } from 'lodash';
 import qs from 'qs';
 
@@ -76,18 +85,18 @@ export const fetchService: FetchService = async ({ code, theme }) => {
  * We need to fetch it from the CSM.
  */
 export const fetchServiceContent: FetchServiceContent = async ({ code, theme }) => {
-  return await fetchService({code, theme})
+  return await fetchService({ code, theme })
     .then(service => {
-      return service.content
+      return service.content;
     })
     .catch(e => {
-      throw e
-    })
-}
+      throw e;
+    });
+};
 
 export const fetchLandingPage = async (singularId: string): Promise<LandingPage> => {
   const baseUrl = process?.env?.STRAPI_API_ENDPOINT || '';
-  
+
   const response = await fetch(`${baseUrl}/${singularId}`, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
     next: { tags: ['landing-page'] }
@@ -100,7 +109,7 @@ export const fetchLandingPage = async (singularId: string): Promise<LandingPage>
     content: page.content,
     keywords: page.keywords.split(','),
     metaDescription: page.meta_description,
-    title: page.title,
+    title: page.title
   };
 };
 
@@ -111,7 +120,19 @@ const generateUniqueCode = (name: string) => {
 };
 
 export const addService: PostService = async data => {
-  const { theme, tags, url, label: name, region, location, options, email: sender } = data;
+  const {
+    theme,
+    tags,
+    url,
+    label: name,
+    region,
+    location,
+    options,
+    email: sender,
+    shopadress,
+    shopcity,
+    shoppostalcode
+  } = data;
   const code = generateUniqueCode(name);
 
   const body = JSON.stringify({
@@ -125,7 +146,10 @@ export const addService: PostService = async data => {
       region: region.join(','),
       location,
       form_options: options,
-      sender
+      sender,
+      shop_adress: shopadress,
+      shop_city: shopcity,
+      shop_postal_code: shoppostalcode
     }
   });
 

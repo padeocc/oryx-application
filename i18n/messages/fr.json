@@ -349,7 +349,13 @@
     "form-validation-ko-title": "Une erreur est survenue",
     "form-validation-ko-description": "Merci de réessayer un peu plus tard",
     "form-email-label": "Votre adresse email (Optionnel)",
-    "form-email-placeholder": "nom@site.fr"
+    "form-email-placeholder": "nom@site.fr",
+    "form-shopadress-label":"Adresse complète (Optionnel)",
+    "form-shopadress-placeholder": "Veuillez entrer l'adresse exacte du magasin",
+    "form-shopcity-label":"Ville",
+    "form-shopcity-placeholder":"Veuillez entrer la ville du magasin",
+    "form-shoppostalcode-label":"Code postal",
+    "form-shoppostalcode-placeholder":"Veuillez entrer le code postal"
   },
   "services": {
     "access-label": "Site internet",
