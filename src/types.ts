@@ -183,4 +183,5 @@ export type LandingPage = {
   keywords: string[]
   metaDescription: string
   title: string
+  lastModified: Date
 }

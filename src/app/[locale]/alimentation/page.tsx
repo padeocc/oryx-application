@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, metaDescription: description, keywords } = await fetchLandingPage('landing-page-transport');
+  const { title, metaDescription: description, keywords } = await fetchLandingPage('landing-page-alimentation');
   return {
     title,
     description,
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page(props: { params: Promise<{ theme: Theme }> }) {
     try {
-        const page = await fetchLandingPage('landing-page-transport');
+        const page = await fetchLandingPage('landing-page-alimentation');
         return (
             <main>
             <LangingPage page={page} />
