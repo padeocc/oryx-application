@@ -451,5 +451,9 @@
   },
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"
+  },
+  
+  "servicePage": {
+    "reportMessage": "Bonjour,\nJe souhaite signaler un problème concernant l'offre intitulée \"{name}\".\n[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]\nBien cordialement,"
   }
 }

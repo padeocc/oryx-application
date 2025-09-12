@@ -186,12 +186,8 @@ export async function generateReportMessage(code: string) {
   const service = await fetchService({ code, theme: 'default' as Theme });
   const name = service?.name || code;
 
-  const message = `Bonjour,
-Je souhaite signaler un problème concernant l'offre intitulée "${name}".
-[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]
-Bien cordialement,`;
-
-  return message;
+  const t = await getTranslations('servicePage');
+  return t('reportMessage', { name });
 }
 
 export default ServicePage;
