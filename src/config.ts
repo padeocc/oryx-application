@@ -153,8 +153,9 @@ export const imagesMapping: { [key: string]: string } = {
   vélo: 'bikes',
   voiture: 'cars',
   'voiture sans permis': 'cars',
-  'voyager - se déplacer': 'transports',
+  'voyager - se déplacer': 'travel',
   voyages: 'transports'
+  
 };
 
 export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionFilters => {
