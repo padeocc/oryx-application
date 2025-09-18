@@ -90,10 +90,16 @@ export const fetchLandingPage = async (singularId: string): Promise<LandingPage>
   
   const response = await fetch(`${baseUrl}/${singularId}`, {
     headers: { Authorization: `Bearer ${process?.env?.STRAPI_SECRET_TOKEN || ''}` },
-    next: { tags: ['landing-page'] }
+    next: { tags: [`landing-page-${singularId}`] }
   });
 
   const responseData = await response.json();
+
+  // Handle unpublished content in the CMS (status: 404)
+  if (responseData?.error) {
+    throw 'Cannot fetch the page content';
+  }
+
   const page = responseData?.data?.attributes;
 
   return {
@@ -101,6 +107,7 @@ export const fetchLandingPage = async (singularId: string): Promise<LandingPage>
     keywords: page.keywords.split(','),
     metaDescription: page.meta_description,
     title: page.title,
+    lastModified: new Date(page.updatedAt)
   };
 };
 

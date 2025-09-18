@@ -9,7 +9,10 @@ export async function GET(request: NextRequest) {
   if (clean) {
     /* Removing next.js cache */
     revalidateTag('cms');
-    revalidateTag('landing-page');
+    revalidateTag('landing-page-alimentation');
+    revalidateTag('landing-page-batiment');
+    revalidateTag('landing-page-bien');
+    revalidateTag('landing-page-transport');
     /* Reindexing Algolia */
     const data = await runIndexation();
     return Response.json({ data });
