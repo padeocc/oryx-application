@@ -18,6 +18,7 @@
   },
   "contact": {
     "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
+    "description-report": "Vous souhaitez signaler une erreur sur cette offre ? Merci de remplir le formulaire ci-dessous pour que nous puissions corriger cela rapidement.",
     "form-company-label": "Entreprise ou association",
     "form-company-placeholder": "",
     "form-email-label": "Email",
@@ -398,6 +399,8 @@
     "updatedat_label": "Date de dernière mise à jour : {date}",
     "go-premium-label": "Ceci est votre page et vous souhaitez la compléter ?",
     "go-premium-cta-label": "Contactez-nous",
+    "report-offer-label": "Vous constatez une erreur ? ( l’offre n’existe pas, le contenu est incomplet, l’URL ne fonctionne pas…) ",
+    "report-offer-cta-label": "Signaler cette offre",
     "error-fetch-premium": "Nous ne pouvons pas afficher ce contenu pour le moment. Veuillez réessayer plus tard."
   },
   "signup_form_page": {
@@ -448,5 +451,9 @@
   },
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"
+  },
+  
+  "servicePage": {
+    "reportMessage": "Bonjour,\nJe souhaite signaler un problème concernant l'offre intitulée \"{name}\".\n[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]\nBien cordialement,"
   }
 }
