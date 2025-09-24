@@ -7,34 +7,43 @@ const Example = ({
   Icon,
   text,
   gradient = { from: 'green_oryx.8', to: 'green_oryx.4', deg: 90 },
-  fz = 'sm'
+  fz = 'sm',
+  onClick,
+  style
 }: {
   link: string;
   Icon?: Icon;
   text: string;
   gradient?: MantineGradient;
   fz?: MantineSize;
+  onClick?: () => void;
+  style?: React.CSSProperties;
 }) => {
-  return (
-    <Link href={link}>
-      <Badge
-        radius={'lg'}
-        variant="gradient"
-        gradient={gradient}
-        styles={{
-          root: {
-            textTransform: 'none',
-            cursor: 'pointer'
-          }
-        }}
-        fz={fz}
-        p="sm"
-        h="auto"
-        leftSection={Icon ? <Icon weight="fill" fontSize={'1.4rem'} /> : null}>
-        {text}
-      </Badge>
-    </Link>
+  const isCustomStyle = style && (style.backgroundColor === 'white' || style.border);
+  const variant = isCustomStyle ? 'outline' : 'gradient';
+  
+  const BadgeComponent = (
+    <Badge
+      radius={'lg'}
+      variant={variant}
+      gradient={isCustomStyle ? undefined : gradient}
+      styles={{
+        root: {
+          textTransform: 'none',
+          cursor: 'pointer',
+          ...style
+        }
+      }}
+      fz={fz}
+      onClick={onClick}
+      p="sm"
+      h="auto"
+      leftSection={Icon ? <Icon weight="fill" fontSize={'1.4rem'} /> : null}>
+      {text}
+    </Badge>
   );
+
+  return onClick ? BadgeComponent : <Link href={link}>{BadgeComponent}</Link>;
 };
 
 export default Example;
