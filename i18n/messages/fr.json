@@ -349,7 +349,13 @@
     "form-validation-ko-title": "Une erreur est survenue",
     "form-validation-ko-description": "Merci de réessayer un peu plus tard",
     "form-email-label": "Votre adresse email (Optionnel)",
-    "form-email-placeholder": "nom@site.fr"
+    "form-email-placeholder": "nom@site.fr",
+    "form-structure-label": "Sélectionner la structure (Optionnel)",
+    "form-structure-placeholder": "Choisissez la structure",
+    "form-structure-company": "Entreprise",
+    "form-structure-school": "École",
+    "form-structure-ngo": "ESS (asso, SCIC, SCOP, agrément ESUS)",
+    "form-structure-other": "Service public"
   },
   "services": {
     "access-label": "Site internet",
