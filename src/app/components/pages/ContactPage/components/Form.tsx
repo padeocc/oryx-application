@@ -6,23 +6,28 @@ import { Check, Warning } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { RefObject, useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useSearchParams } from 'next/navigation';
 
 const Form = ({
   sendContactEmail,
-  sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
+  sitekey = process?.env?.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
+  defaultMessage = '',
+  report = false
 }: {
   sitekey?: string;
   sendContactEmail: (formData: FormData) => Promise<{
     sent: boolean;
     errors?: { [key: string]: string };
   }>;
+  defaultMessage?: string;
+  report?: boolean;
 }) => {
   const t = useTranslations('contact');
   const [okNotification, setOkNotification] = useState<boolean>(false);
   const [koNotification, setKoNotification] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const recaptcha: RefObject<ReCAPTCHA | null> = useRef(null);
-
+      
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setOkNotification(false);
@@ -43,7 +48,7 @@ const Form = ({
     initialValues: {
       email: '',
       company: '',
-      message: '',
+      message: defaultMessage,
       name: '',
       recaptcha: '',
       url: ''
@@ -82,13 +87,15 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('name')}
           />
-          <TextInput
-            label={t('form-company-label')}
-            placeholder={t('form-company-placeholder')}
-            name="company"
-            disabled={isSending}
-            {...form.getInputProps('company')}
-          />
+          {!report && (
+            <TextInput
+              label={t('form-company-label')}
+              placeholder={t('form-company-placeholder')}
+              name="company"
+              disabled={isSending}
+              {...form.getInputProps('company')}
+            />
+          )}
           <TextInput
             type="email"
             withAsterisk
@@ -98,7 +105,14 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
-          <TextInput label={t('form-url-label')} name="url" disabled={isSending} {...form.getInputProps('url')} />
+          {!report && (
+            <TextInput
+              label={t('form-url-label')}
+              name="url"
+              disabled={isSending}
+              {...form.getInputProps('url')}
+            />
+          )}
           <Textarea
             {...form.getInputProps('message')}
             label={t('form-message-label')}
