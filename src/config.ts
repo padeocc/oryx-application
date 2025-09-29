@@ -6,6 +6,12 @@ import { ActionFilters } from './types';
 export const SEARCH_RESULT_LIFETIME = 86400;
 export const PAGINATION_LIMIT = 48;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
+export const landingPagesUrl = new Map<Theme, string>([
+  ['accommodations', '/logement'],
+  ['foods', '/alimentation'],
+  ['goods', '/mes-achats'],
+  ['transports', '/transport-responsable'],
+]);
 export const TAGSPLITTER = '|||';
 
 export const themesIcons: { [key: string]: Icon } = {
