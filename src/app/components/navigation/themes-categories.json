@@ -1,0 +1,56 @@
+{
+  "foods": {
+    "Consommer Bio": [],
+    "Consommer de saison": [],
+    "Privilégier le circuit court": [],
+    "Réduire ses déchets": [],
+    "Remplacer les protéines animales": []
+  },
+  "accommodations": {
+    "Construire décarboné": [],
+    "Économiser la chaleur": [],
+    "Économiser l'électricité": [],
+    "Produire de l'énergie renouvelable": [],
+    "Rénover son logement": [],
+    "Système énergétique": []
+  },
+  "goods": {
+    "Acheter/vendre d'occasion ou reconditionné": [],
+    "Acheter eco-construits/biosourcé": [],
+    "Eco-concevoir": [],
+    "Faire soi-même (DIY)": [],
+    "Louer": [],
+    "Mutualiser": [],
+    "Réduire les déchets": [],
+    "Réparer": [],
+    "Relocaliser": [],
+    "Réutiliser": []
+  },
+  "transports": {
+    "Télétravailler": [],
+    "Co-working": [],
+    "Voyager - Se déplacer": [],
+    "Petits moyens de transport": [],
+    "Vélo": [],
+    "Voiture": [],
+    "Moto - Scooter": [],
+    "Entretenir": []
+  },
+  "events": {
+    "Ateliers": [],
+    "Ateliers de sensibilisation": [],
+    "Conférences": [],
+    "Forum, journées pour les particuliers": [],
+    "Marchés": []
+  },
+  "services": {
+    "Comparateurs de banques": [],
+    "Comparateur énergies vertes": [],
+    "Voiture : comparateurs de motorisation": [],
+    "Les aides financières": [],
+    "Les restaurants": [],
+    "Les sorties": [],
+    "Les loisirs": [],
+    "Les vacances": []
+  }
+}

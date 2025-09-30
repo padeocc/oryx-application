@@ -5,9 +5,9 @@ import { Alert, Box, Group, Paper, Stack, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState, useRef } from 'react';
-import Example from './Example';
+import Example from '../common/Example';
 import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
-import data from '../pages/ServiceAdditionPage/data.json';
+import data from './themes-categories.json';
 
 interface ThemesBannerProps {
   onThemeClick?: (theme: Theme) => void;
@@ -100,16 +100,20 @@ const ThemesBannerWithHover = ({
         <Box 
           hiddenFrom="md"
           style={{ 
-            width: '70%', overflowX: 'auto', overflowY: 'hidden', 
-            WebkitOverflowScrolling: 'touch', padding: '8px 0',
-            scrollbarWidth: 'none', msOverflowStyle: 'none'
+            width: '100%', 
+            padding: '12px 0',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
           }}
-          sx={{ '&::-webkit-scrollbar': { display: 'none' } }}
         >
-          <div style={{ display: 'flex', gap: '12px', width: 'max-content', minWidth: '195%' }}>
-            {themes.map(theme => renderButton('theme', theme, true))}
+          <Group justify="center" gap="xs" wrap="wrap">
+            {themes.slice(0, 4).map(theme => renderButton('theme', theme, true))}
+          </Group>
+          <Group justify="center" gap="xs" wrap="wrap">
+            {themes.slice(4).map(theme => renderButton('theme', theme, true))}
             {renderButton('economic', undefined, true)}
-          </div>
+          </Group>
         </Box>
       </div>
       
