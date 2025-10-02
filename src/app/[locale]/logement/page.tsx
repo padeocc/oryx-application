@@ -1,4 +1,4 @@
-import LangingPage from '@/app/components/pages/LangingPage';
+import LangingPage from '@/components/pages/LangingPage';
 import { fetchLandingPage } from '@/cms/utils';
 import { Theme } from '@/config';
 import { Metadata } from 'next';

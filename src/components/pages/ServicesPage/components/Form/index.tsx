@@ -1,6 +1,6 @@
 'use client';
 
-import { cleanFiltersValues } from '@/app/components/content/utils';
+import { cleanFiltersValues } from '@/components/content/utils';
 import { getActionFilters, themes, themesColors, themesIcons } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
 import {

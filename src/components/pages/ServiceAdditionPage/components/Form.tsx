@@ -1,6 +1,6 @@
 'use client';
 
-import BadgeSelector from '@/app/components/pages/ServicesPage/components/Form/components/BadgeSelector';
+import BadgeSelector from '@/components/pages/ServicesPage/components/Form/components/BadgeSelector';
 import { LOCATIONS, REGIONS, Theme, themes, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
 import { Button, Group, InputLabel, MultiSelect, Select, Stack, Text, TextInput } from '@mantine/core';

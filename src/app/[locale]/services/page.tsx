@@ -1,4 +1,4 @@
-import ServicesPage from '@/app/components/pages/ServicesPage';
+import ServicesPage from '@/components/pages/ServicesPage';
 import { Theme } from '@/config';
 import { set } from 'lodash';
 
