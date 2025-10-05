@@ -52,7 +52,8 @@ const Form = ({
       region: [],
       location: '',
       options: [],
-      email: ''
+      email: '',
+      structure: ''
     },
     validate: {
       label: isNotEmpty(t('error-label-field')),
@@ -70,6 +71,14 @@ const Form = ({
     value: option,
     label: option
   }));
+
+  const structureOptions = [
+    { value: 'company', label: t('form-structure-company') },
+    { value: 'school', label: t('form-structure-school') },
+    { value: 'ngo', label: t('form-structure-ngo') },
+    { value: 'other', label: t('form-structure-other') }
+  ];
+
 
   return (
     <>
@@ -206,6 +215,15 @@ const Form = ({
                 searchable
               />
             ) : null}
+            <Select
+              disabled={isSending}
+              size={'sm'}
+              placeholder={t('form-structure-placeholder')}
+              name="structure"
+              label={t('form-structure-label')}
+              {...form.getInputProps('structure')}
+              data={structureOptions}
+            />
           </Stack>
           <TextInput
             label={t('form-email-label')}
