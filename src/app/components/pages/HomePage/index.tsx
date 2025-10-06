@@ -1,14 +1,14 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Stack } from '@mantine/core';
+import { Box, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
-import ThemesBannerWithHover from '../../common/ThemesBannerWithHover';
 import { SearchResponses } from 'algoliasearch';
 import { search } from '@/algolia/search';
 import { transformServicesFromResults } from '@/algolia/utils';
 import { IResult } from '@/algolia/types';
+import SearchBar from '../../navigation/SearchBar';
+import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
 
 const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
   const { results }: SearchResponses<unknown> = await search({
@@ -30,24 +30,23 @@ const HomePage = async ({}: {}) => {
     })
   );
   return (
-    <Stack gap={'xl'}  style={{ overflow: 'visible' }}>
-     {/* <Title c="green_oryx" fw={'bold'} order={1}>
-        {t('welcome')}
-      </Title>
-
-      <Group hiddenFrom="md" grow>
+    <Stack gap={0}>
+      <Box hiddenFrom="md" style={{ backgroundColor: 'var(--mantine-primary-color-1)' }}>
         <SearchBar />
-      </Group>
-      <ExamplesSection /> 
-      <Title order={2}>
-        <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
-          {t('explore_themes_label')}
-        </Text>
-      </Title>
-*/}
-      
+      </Box>
+
       <ThemesBannerWithHover />
-      {themesSections}
+
+      <Stack gap="xl" mt="xl">
+        <Title order={2}>
+          <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
+            {t('welcome')}
+          </Text>
+        </Title>
+        <Stack gap="xl">
+          {themesSections}
+        </Stack>
+      </Stack>
     </Stack>
   );
 };

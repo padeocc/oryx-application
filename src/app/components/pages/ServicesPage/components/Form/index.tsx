@@ -29,7 +29,6 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import ThemesBannerWithHover from '../../../../common/ThemesBannerWithHover';
 
 const Form = ({
   initialValues,
@@ -137,15 +136,6 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
-          <ThemesBannerWithHover 
-            onThemeClick={handleThemeClick}
-            onEconomicClick={handleEconomicClick}
-            disableHover={true}
-            baseUrl="/services"
-            selectedThemes={values.theme || []}
-            isEconomicSelected={selectedActions.includes('economic')}
-            showSelectionState={true}
-          />
           <TextInput
             size="md"
             withAsterisk

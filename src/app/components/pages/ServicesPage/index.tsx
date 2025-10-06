@@ -6,6 +6,7 @@ import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
 import { countBy } from 'lodash';
 import Content from './components/Content';
+import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
 
 const ServicesPage = async ({
   parameters: { filters: filtersParam, page: pageParam = '1' }
@@ -91,16 +92,25 @@ const ServicesPage = async ({
   };
 
   return (
-    <Stack gap="xl">
-      <Content
-        filters={cleanedFilters}
-        distinctValues={distinctValues}
-        hits={hits}
-        pagesCount={nbPages}
-        page={page}
-        totalNumberOfResults={nbHits}
-        suggestions={suggestions}
+    <Stack gap={0}>
+      <ThemesBannerWithHover 
+        selectedThemes={cleanedFilters.theme || []}
+        isEconomicSelected={cleanedFilters.economic || false}
+        showSelectionState={true}
+        disableHover={true}
       />
+      
+      <Stack gap="xl">
+        <Content
+          filters={cleanedFilters}
+          distinctValues={distinctValues}
+          hits={hits}
+          pagesCount={nbPages}
+          page={page}
+          totalNumberOfResults={nbHits}
+          suggestions={suggestions}
+        />
+      </Stack>
     </Stack>
   );
 };

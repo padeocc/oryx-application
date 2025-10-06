@@ -31,9 +31,9 @@ const SearchBar = () => {
         {...form.getInputProps('query')}
         rightSection={
           <Button
-            variant="gradient"
+            variant="filled"
             size="sm"
-            gradient={{ from: 'cyan', to: 'teal', deg: 81 }}
+            color="green_oryx.7"
             type="submit"
             component={ActionIcon}>
             <MagnifyingGlass />

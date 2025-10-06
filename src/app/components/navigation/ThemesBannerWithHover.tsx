@@ -1,13 +1,14 @@
 'use client';
 
 import { Theme, themes, themesColors, themesIcons } from '@/config';
-import { Alert, Box, Group, Paper, Stack, Text } from '@mantine/core';
+import { Box, Group, Paper, Stack, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState, useRef } from 'react';
 import Example from '../common/Example';
 import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
 import data from './themes-categories.json';
+import styles from './themes-banner.module.css';
 
 interface ThemesBannerProps {
   onThemeClick?: (theme: Theme) => void;
@@ -31,25 +32,40 @@ const ThemesBannerWithHover = ({
   const t = useTranslations('themes');
   const tServices = useTranslations('services');
   const [hoveredTheme, setHoveredTheme] = useState<Theme | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [mobileModalOpen, setMobileModalOpen] = useState<Theme | null>(null);
+  const [mobileSelectedCategory, setMobileSelectedCategory] = useState<string | null>(null);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const getCategories = (theme: Theme) => Object.keys(data[theme] || {});
   
+  const getSubCategories = (theme: Theme, category: string): string[] => {
+    const themeData: any = data[theme] || {};
+    const subCats = themeData[category];
+    return Array.isArray(subCats) ? subCats : [];
+  };
+  
   const handleMouseEnter = (theme: Theme) => {
     const element = buttonRefs.current[theme];
     if (element) {
       const rect = element.getBoundingClientRect();
-      setMenuPosition({ top: rect.bottom + window.scrollY, left: rect.left + window.scrollX });
+      setMenuPosition({ top: rect.bottom, left: rect.left });
     }
     setHoveredTheme(theme);
+    setHoveredCategory(null);
+  };
+
+  const handleMobileClick = (theme: Theme) => {
+    setMobileModalOpen(theme);
+    setMobileSelectedCategory(null);
   };
 
   const renderButton = (type: 'theme' | 'economic', theme?: Theme, isMobile = false) => {
     const isTheme = type === 'theme';
     const key = isTheme ? theme : 'economic';
     const isSelected = showSelectionState && (isTheme ? selectedThemes.includes(theme!) : isEconomicSelected);
-    const color = isTheme ? themesColors[theme!] : 'orange';
+    const color = isTheme ? 'green_oryx.7' : 'orange';
     const Icon = isTheme ? themesIcons[theme!] : CurrencyEur;
     const text = isTheme ? t(theme!) : tServices('action-economic-label');
     const onClick = isTheme ? (onThemeClick ? () => onThemeClick(theme!) : undefined) : onEconomicClick;
@@ -61,11 +77,19 @@ const ThemesBannerWithHover = ({
         { from: color, to: color, deg: 90 };
     
     const style = isSelected ? {} : showSelectionState ? { 
-      border: `1px solid ${color}`,
-      color,
+      border: '1px solid var(--mantine-color-green_oryx-7)',
+      color: 'var(--mantine-color-green_oryx-7)',
       backgroundColor: 'white'
     } : {};
     
+    const handleClick = () => {
+      if (onClick) {
+        onClick();
+      } else if (isMobile && isTheme && !disableHover) {
+        handleMobileClick(theme!);
+      }
+    };
+
     return (
       <div
         key={`${key}-${isMobile ? 'mobile' : 'desktop'}`}
@@ -75,12 +99,12 @@ const ThemesBannerWithHover = ({
         style={{ position: 'relative', ...(isMobile && { flexShrink: 0 }) }}
       >
         <Example
-          link={onClick ? '#' : `${baseUrl}?filters={${isTheme ? `"theme":["${theme}"]` : `"economic": true`}}`}
+          link={onClick || (isMobile && isTheme && !disableHover) ? '#' : `${baseUrl}?filters={${isTheme ? `"theme":["${theme}"]` : `"economic": true`}}`}
           Icon={Icon}
           text={text}
           gradient={gradient}
           fz="xs"
-          onClick={onClick}
+          onClick={handleClick}
           style={style}
         />
       </div>
@@ -88,64 +112,261 @@ const ThemesBannerWithHover = ({
   };
 
   return (
-    <Alert>
-      <div style={{ position: 'relative' }}>
-        {/* Desktop */}
+    <Box
+      style={{
+        backgroundColor: 'var(--mantine-primary-color-1)',
+        width: '100%'
+      }}
+    >
+      <div style={{ position: 'relative', maxWidth: '1280px', margin: '0 auto', padding: '8px 1px' }}>
         <Group justify="flex-start" visibleFrom="md" style={{ overflow: 'visible' }}>
           {themes.map(theme => renderButton('theme', theme))}
           {renderButton('economic')}
         </Group>
 
-        {/* Mobile */}
         <Box 
           hiddenFrom="md"
+          className={styles.mobileScroll}
           style={{ 
-            width: '100%', 
-            padding: '12px 0',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
+            width: '100%',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            scrollBehavior: 'smooth',
+            WebkitOverflowScrolling: 'touch'
           }}
         >
-          <Group justify="center" gap="xs" wrap="wrap">
-            {themes.slice(0, 4).map(theme => renderButton('theme', theme, true))}
-          </Group>
-          <Group justify="center" gap="xs" wrap="wrap">
-            {themes.slice(4).map(theme => renderButton('theme', theme, true))}
+          <Group gap="xs" wrap="nowrap" style={{ flexWrap: 'nowrap', minWidth: 'min-content' }}>
+            {themes.map(theme => renderButton('theme', theme, true))}
             {renderButton('economic', undefined, true)}
           </Group>
         </Box>
       </div>
       
-      {/* Dropdown */}
       {!disableHover && hoveredTheme && (
-        <Paper
-          shadow="lg" radius="md" p="md"
+        <div
+          className={styles.desktopDropdown}
           style={{
-            position: 'fixed', top: menuPosition.top, left: menuPosition.left,
-            zIndex: 9999, minWidth: '300px', maxWidth: '500px',
-            backgroundColor: 'white', border: '1px solid #e9ecef'
+            top: menuPosition.top,
+            left: menuPosition.left
           }}
           onMouseEnter={() => setHoveredTheme(hoveredTheme)}
-          onMouseLeave={() => setHoveredTheme(null)}
+          onMouseLeave={() => {
+            setHoveredTheme(null);
+            setHoveredCategory(null);
+          }}
         >
-          <Stack gap="xs">
-            {getCategories(hoveredTheme).map(category => (
-              <Link key={category} href={`/services?filters={"theme":["${hoveredTheme}"], "query": "${category}"}`} style={{ textDecoration: 'none' }}>
-                <Text
-                  size="sm" c="gray.7"
-                  style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: '4px', transition: 'background-color 0.2s', display: 'block' }}
-                  onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.backgroundColor = '#f8f9fa'}
-                  onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => e.currentTarget.style.backgroundColor = 'transparent'}
-                >
-                  {category}
-                </Text>
-              </Link>
-            ))}
-          </Stack>
-        </Paper>
+          <div className={styles.dropdownContent}>
+            <div className={`${styles.dropdownGrid} ${hoveredCategory ? styles.dropdownGridWithSub : styles.dropdownGridNoSub}`}>
+              <Stack gap={4}>
+                {getCategories(hoveredTheme).map(category => {
+                  const subCategories = getSubCategories(hoveredTheme, category);
+                  const hasSubCategories = subCategories.length > 0;
+                  const isHovered = hoveredCategory === category;
+                  
+                  return (
+                    <Link 
+                      key={category}
+                      href={`/services?filters={"theme":["${hoveredTheme}"], "query": "${category}"}`} 
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div
+                        className={styles.categoryItem}
+                        onMouseEnter={() => setHoveredCategory(category)}
+                      >
+                        <Text
+                          size="sm"
+                          fw={isHovered ? 600 : 500}
+                          c={isHovered ? 'green_oryx.7' : 'gray.8'}
+                          className={styles.comfortaaFont}
+                        >
+                          {category}
+                        </Text>
+                        {hasSubCategories && (
+                          <div className={styles.categoryArrow}>
+                            <Text c={isHovered ? 'white' : 'green_oryx.7'} size="xs" fw={700}>›</Text>
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </Stack>
+
+              {hoveredCategory && getSubCategories(hoveredTheme, hoveredCategory).length > 0 && (
+                <div className={styles.subCategoriesGrid}>
+                  {getSubCategories(hoveredTheme, hoveredCategory).map((subCat: string) => (
+                    <Link 
+                      key={subCat}
+                      href={`/services?filters={"theme":["${hoveredTheme}"], "query": "${subCat}"}`} 
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className={styles.subCategoryItem}>
+                        <Text
+                          size="xs"
+                          c="gray.7"
+                          className={styles.comfortaaFont}
+                        >
+                          {subCat}
+                        </Text>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
-    </Alert>
+
+      {mobileModalOpen && (
+        <>
+          <div
+            className={styles.mobileOverlay}
+            onClick={() => {
+              setMobileModalOpen(null);
+              setMobileSelectedCategory(null);
+            }}
+          />
+          <div
+            className={`${styles.mobileModal} ${mobileSelectedCategory ? styles.mobileModalSlideRight : styles.mobileModalSlideUp}`}
+          >
+            <div className={styles.mobileModalContent}>
+              <div className={styles.mobileHeader}>
+                <div className={styles.mobileHeaderLeft}>
+                  {mobileSelectedCategory && (
+                    <div
+                      onClick={() => setMobileSelectedCategory(null)}
+                      className={styles.mobileBackButton}
+                    >
+                      <Text size="xl" c="gray.7">‹</Text>
+                    </div>
+                  )}
+                  <div className={styles.mobileHeaderTitle}>
+                    <Text size="lg" fw={700} c="green_oryx.7" className={styles.comfortaaFont}>
+                      {t(mobileModalOpen)}
+                    </Text>
+                    {mobileSelectedCategory && (
+                      <Text size="xs" c="gray.6" className={styles.comfortaaFont}>
+                        {mobileSelectedCategory}
+                      </Text>
+                    )}
+                  </div>
+                </div>
+                <div
+                  onClick={() => {
+                    setMobileModalOpen(null);
+                    setMobileSelectedCategory(null);
+                  }}
+                  className={styles.mobileCloseButton}
+                >
+                  <Text size="xl" c="gray.7">×</Text>
+                </div>
+              </div>
+
+              <Stack gap={12}>
+                {mobileSelectedCategory ? (
+                  getSubCategories(mobileModalOpen, mobileSelectedCategory).map((subCat: string) => (
+                    <Link 
+                      key={subCat}
+                      href={`/services?filters={"theme":["${mobileModalOpen}"], "query": "${subCat}"}`} 
+                      style={{ textDecoration: 'none' }}
+                      onClick={() => {
+                        setMobileModalOpen(null);
+                        setMobileSelectedCategory(null);
+                      }}
+                    >
+                      <div
+                        className={styles.mobileCategoryItem}
+                        onTouchStart={(e) => {
+                          e.currentTarget.style.backgroundColor = '#E1F3F3';
+                          e.currentTarget.style.borderColor = '#3498A2';
+                        }}
+                        onTouchEnd={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.borderColor = '#E1F3F3';
+                        }}
+                      >
+                        <Text
+                          size="sm"
+                          fw={600}
+                          c="gray.8"
+                          className={styles.comfortaaFont}
+                        >
+                          {subCat}
+                        </Text>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  getCategories(mobileModalOpen).map(category => {
+                    const hasSubCategories = getSubCategories(mobileModalOpen, category).length > 0;
+                    
+                    return hasSubCategories ? (
+                      <div
+                        key={category}
+                        onClick={() => setMobileSelectedCategory(category)}
+                        className={styles.mobileCategoryItem}
+                        onTouchStart={(e) => {
+                          e.currentTarget.style.backgroundColor = '#E1F3F3';
+                          e.currentTarget.style.borderColor = '#3498A2';
+                        }}
+                        onTouchEnd={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.borderColor = '#E1F3F3';
+                        }}
+                      >
+                        <Text
+                          size="sm"
+                          fw={600}
+                          c="gray.8"
+                          className={styles.comfortaaFont}
+                        >
+                          {category}
+                        </Text>
+                        <div className={styles.mobileCategoryArrow}>
+                          <Text c="green_oryx.7" size="lg" fw={700}>›</Text>
+                        </div>
+                      </div>
+                    ) : (
+                      <Link 
+                        key={category}
+                        href={`/services?filters={"theme":["${mobileModalOpen}"], "query": "${category}"}`} 
+                        style={{ textDecoration: 'none' }}
+                        onClick={() => {
+                          setMobileModalOpen(null);
+                          setMobileSelectedCategory(null);
+                        }}
+                      >
+                        <div
+                          className={styles.mobileCategoryItem}
+                          onTouchStart={(e) => {
+                            e.currentTarget.style.backgroundColor = '#E1F3F3';
+                            e.currentTarget.style.borderColor = '#3498A2';
+                          }}
+                          onTouchEnd={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.borderColor = '#E1F3F3';
+                          }}
+                        >
+                          <Text
+                            size="sm"
+                            fw={600}
+                            c="gray.8"
+                            className={styles.comfortaaFont}
+                          >
+                            {category}
+                          </Text>
+                        </div>
+                      </Link>
+                    );
+                  })
+                )}
+              </Stack>
+            </div>
+          </div>
+        </>
+      )}
+    </Box>
   );
 };
 

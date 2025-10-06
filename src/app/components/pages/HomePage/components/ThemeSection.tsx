@@ -2,7 +2,7 @@
 
 import { Theme, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
+import { Box, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -43,9 +43,35 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
           {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
         </Text>
       </Group>
-      <Grid justify="stretch" c={color}>
+      <Box
+        hiddenFrom="sm"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, calc(70% - 6px))',
+          gap: '12px',
+          overflowX: 'auto',
+          scrollBehavior: 'smooth',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
+        className="mobile-scroll"
+      >
         {items.map((service, index) => (
-          <GridCol span={{ base: 12, xs: 6, md: 3 }} key={`action-${service.theme}-${service.name}-${index}`}>
+          <ServiceCard
+            key={`action-${service.theme}-${service.name}-${index}`}
+            service={service}
+            backgroundColor={'var(--mantine-primary-color-2)'}
+            theme={theme}
+            color={color}
+            titleOrder={4}
+          />
+        ))}
+      </Box>
+
+      <Grid visibleFrom="sm" justify="stretch" align="stretch" c={color} gutter="sm">
+        {items.map((service, index) => (
+          <GridCol span={{ sm: 6, md: 4, xl: 3 }} key={`action-desktop-${service.theme}-${service.name}-${index}`}>
             <ServiceCard
               service={service}
               backgroundColor={'var(--mantine-primary-color-2)'}
@@ -56,6 +82,12 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
           </GridCol>
         ))}
       </Grid>
+      
+      <style jsx global>{`
+        .mobile-scroll::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </Stack>
   );
 };

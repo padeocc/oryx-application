@@ -128,7 +128,7 @@ const Form = ({
           </Button>
         </Stack>
       </form>
-      <Container style={{ position: 'fixed', top: '5em', right: 0 }}>
+      <Container style={{ top: '5em', right: 0 }}>
         <Modal
           opened={okNotification}
           p="0"
