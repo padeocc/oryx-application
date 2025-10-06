@@ -1,4 +1,4 @@
-import ContactPage from '@/app/components/pages/ContactPage';
+import ContactPage from '@/components/pages/ContactPage';
 
 export default async function Contact({
   searchParams,

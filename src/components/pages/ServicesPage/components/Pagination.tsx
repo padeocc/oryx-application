@@ -1,6 +1,6 @@
 'use client';
 
-import { cleanFiltersValues } from '@/app/components/content/utils';
+import { cleanFiltersValues } from '@/components/content/utils';
 import { Filters } from '@/types';
 import { Pagination } from '@mantine/core';
 import { useRouter } from 'next/navigation';

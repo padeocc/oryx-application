@@ -1,4 +1,4 @@
-import Content from '@/app/components/pages/ServicesPage/components/Content';
+import Content from '@/components/pages/ServicesPage/components/Content';
 
 const Loading = () => {
   return (

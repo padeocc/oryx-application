@@ -1,11 +1,51 @@
 'use server';
 
-import { PAGINATION_LIMIT } from '@/config';
+import { PAGINATION_LIMIT, SEARCH_RESULT_LIFETIME } from '@/config';
 import { Filters } from '@/types';
 import { algoliasearch, FacetFilters, FacetHits, SearchForFacetValuesProps, SearchResponses } from 'algoliasearch';
 import { isArray } from 'lodash';
 
+/**
+ * search fetches to our API for better cache handing
+ */
 export const search = async ({
+  query,
+  limit = PAGINATION_LIMIT,
+  sort = 'updatedAt',
+  filters = {},
+  page = 1
+}: {
+  query: string;
+  sort?: string;
+  limit?: number;
+  filters?: Filters;
+  page: number;
+}): Promise<SearchResponses<unknown>> => {
+  const searchParams = new URLSearchParams({
+    query,
+    sort,
+    limit: limit.toString(),
+    filters: JSON.stringify(filters),
+    page: page.toString(),
+    search: 'true',
+  });
+
+  const baseURL = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+  const url = `${baseURL}/api/search?${searchParams}`;
+  const res = await fetch(url, {
+    next: {
+      revalidate: SEARCH_RESULT_LIFETIME,
+      tags: ['search'],
+    },
+  });
+
+  return res.json()
+}
+
+/**
+ * algoliaSearch fetches data from algolia without cache
+ */
+export const algoliaSearch = async ({
   query,
   limit = PAGINATION_LIMIT,
   sort = 'updatedAt',

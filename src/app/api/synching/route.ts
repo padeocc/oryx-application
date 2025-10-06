@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     revalidateTag('landing-page-batiment');
     revalidateTag('landing-page-bien');
     revalidateTag('landing-page-transport');
+    revalidateTag('search');
     /* Reindexing Algolia */
     const data = await runIndexation();
     return Response.json({ data });
