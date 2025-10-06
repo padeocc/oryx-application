@@ -1,7 +1,7 @@
 'use client';
 
-import { getLogoImage } from '@/app/components/content/utils';
-import NotFound from '@/app/components/navigation/NotFound';
+import { getLogoImage } from '@/components/content/utils';
+import NotFound from '@/components/navigation/NotFound';
 import { Theme, getActionFilters } from '@/config';
 import { Service } from '@/types';
 import {

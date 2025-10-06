@@ -1,6 +1,6 @@
 import { IResult } from '@/algolia/types';
 import { transformServicesFromResults } from '@/algolia/utils';
-import ServiceCard from '@/app/components/ServiceCard';
+import ServiceCard from '@/components/ServiceCard';
 import { themesColors } from '@/config';
 import { Filters, Service } from '@/types';
 import { Alert, Grid, GridCol, Group, Stack, Title } from '@mantine/core';

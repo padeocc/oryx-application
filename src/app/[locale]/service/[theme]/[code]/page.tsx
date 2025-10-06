@@ -1,4 +1,4 @@
-import ServicePage from '@/app/components/pages/ServicePage';
+import ServicePage from '@/components/pages/ServicePage';
 import { Theme } from '@/config';
 import { Metadata } from 'next';
 import { Service as ServiceType } from '@/types';

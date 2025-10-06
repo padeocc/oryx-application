@@ -1,4 +1,4 @@
-import TeamPage from '@/app/components/pages/TeamPage';
+import TeamPage from '@/components/pages/TeamPage';
 
 const Team = () => {
   return (

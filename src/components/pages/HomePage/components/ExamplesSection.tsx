@@ -1,4 +1,4 @@
-import Example from '@/app/components/common/Example';
+import Example from '@/components/common/Example';
 import { Button, Group, Space, Stack, Text, Title } from '@mantine/core';
 import { Carrot, CurrencyEur, PersonSimpleBike, Train, WashingMachine } from '@phosphor-icons/react/dist/ssr';
 import { getTranslations } from 'next-intl/server';

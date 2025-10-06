@@ -1,4 +1,4 @@
-import NotFound from '@/app/components/navigation/NotFound';
+import NotFound from '@/components/navigation/NotFound';
 import { Theme } from '@/config';
 import { permanentRedirect } from 'next/navigation';
 

@@ -9,9 +9,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 import { Inter } from 'next/font/google';
-import GDPRConsent from '../components/navigation/GDPRConsent';
+import GDPRConsent from '@/components/navigation/GDPRConsent';
 import '../globals.css';
-import Footer from '../components/navigation/Footer';
+import Footer from '@/components/navigation/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
