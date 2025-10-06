@@ -65,11 +65,13 @@ const Form = ({
       location: '',
       options: [],
       email: '',
-      structure: '',
-      adresseRegion:'',
-      adresseDepartment:'',
-      adresse:'',
-      postalCode:''
+      adresseRegion: '',
+      adresseDepartment: '',
+      adresse: '',
+      postalCode: '',
+      shopadress: '',
+      shopcity: '',
+      shoppostalcode: ''
     },
     validate: {
       label: isNotEmpty(t('error-label-field')),
@@ -249,8 +251,7 @@ const Form = ({
             disabled={isSending}
             {...form.getInputProps('email')}
           />
-          <Fieldset
-            legend={t('fieldset-legend-text')}>
+          <Fieldset legend={t('fieldset-legend-text')} variant="unstyled">
             <Grid>
               <GridCol span={{ base: 12, md: 6 }}>
                 <TextInput
@@ -284,8 +285,41 @@ const Form = ({
                   label={t('form-postal-code-label')}
                   placeholder={t('form-postal-code-placeholder')}
                   name="postalCode"
+                  type="number"
                   disabled={isSending}
                   {...form.getInputProps('postalCode')}
+                />
+              </GridCol>
+            </Grid>
+          </Fieldset>
+          <Fieldset legend={t('shopadress-fieldset-legend-text')} variant="unstyled">
+            <Grid>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopadress-label')}
+                  placeholder={t('form-shopadress-placeholder')}
+                  name="shopadress"
+                  disabled={isSending}
+                  {...form.getInputProps('shopadress')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shopcity-label')}
+                  placeholder={t('form-shopcity-placeholder')}
+                  name="shopcity"
+                  disabled={isSending}
+                  {...form.getInputProps('shopcity')}
+                />
+              </GridCol>
+              <GridCol span={{ base: 12, md: 6 }}>
+                <TextInput
+                  label={t('form-shoppostalcode-label')}
+                  placeholder={t('form-shoppostalcode-placeholder')}
+                  name="shoppostalcode"
+                  type="number"
+                  disabled={isSending}
+                  {...form.getInputProps('shoppostalcode')}
                 />
               </GridCol>
             </Grid>
