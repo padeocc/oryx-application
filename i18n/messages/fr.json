@@ -184,6 +184,7 @@
     "region_973_label": "Guyane",
     "region_974_label": "La Réunion",
     "region_976_label": "Mayotte",
+    "region_National_label": "National",
     "reset-action-label": "Réinitialiser tous les filtres",
     "reset-filter-label": "Réinitialiser ce filtre",
     "suggestions-title": "Mots-clés les plus utilisés :",
@@ -408,7 +409,8 @@
     "go-premium-cta-label": "Contactez-nous",
     "report-offer-label": "Vous constatez une erreur ? ( l’offre n’existe pas, le contenu est incomplet, l’URL ne fonctionne pas…) ",
     "report-offer-cta-label": "Signaler cette offre",
-    "error-fetch-premium": "Nous ne pouvons pas afficher ce contenu pour le moment. Veuillez réessayer plus tard."
+    "error-fetch-premium": "Nous ne pouvons pas afficher ce contenu pour le moment. Veuillez réessayer plus tard.",
+    "landing-page-cta-label": "En savoir plus sur le theme: {value}"
   },
   "signup_form_page": {
     "email_label": "Adresse email",
