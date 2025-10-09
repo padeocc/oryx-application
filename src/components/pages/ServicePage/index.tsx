@@ -28,6 +28,7 @@ import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
 import { fetchService } from '@/algolia/utils'; // ou l'import adapté
+import ProductLandingPageBanner from '@/components/common/ProductLandingPageBanner';
 
 type PageParams = {
   code: string
@@ -177,6 +178,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
             <Link href={'/contact'}>{t('go-premium-cta-label')}</Link>
           </Group>
         )}
+        <ProductLandingPageBanner theme={theme} />
       </Stack>
     </Stack>
   );
