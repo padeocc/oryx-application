@@ -1,4 +1,4 @@
-import ServiceAdditionPage from '@/app/components/pages/ServiceAdditionPage';
+import ServiceAdditionPage from '@/components/pages/ServiceAdditionPage';
 
 export default async function Add() {
   return (

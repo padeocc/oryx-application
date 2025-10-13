@@ -1,4 +1,4 @@
-import LegalPage from '@/app/components/pages/LegalPage';
+import LegalPage from '@/components/pages/LegalPage';
 
 const Legal = () => {
   return (

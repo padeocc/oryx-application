@@ -1,9 +1,13 @@
-import ContactPage from '@/app/components/pages/ContactPage';
+import ContactPage from '@/components/pages/ContactPage';
 
-export default function Contact({}: {}) {
+export default async function Contact({
+  searchParams,
+}: {
+  searchParams: Promise<{ report?: string }>;
+}) {
   return (
     <main>
-      <ContactPage />
+      <ContactPage searchParams={searchParams} />
     </main>
   );
 }
