@@ -12,7 +12,7 @@ import { Inter } from 'next/font/google';
 import GDPRConsent from '@/components/navigation/GDPRConsent';
 import '../globals.css';
 import Footer from '@/components/navigation/Footer';
-import { SuperTokensProvider } from '../components/supertokensProvider';
+import { SuperTokensProvider } from '@/components/supertokensProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';

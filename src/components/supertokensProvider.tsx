@@ -2,7 +2,7 @@
 import React from 'react';
 import { SuperTokensWrapper } from 'supertokens-auth-react';
 import SuperTokensReact from 'supertokens-auth-react';
-import { frontendConfig, setRouter } from '../config/frontend';
+import { frontendConfig, setRouter } from '../app/config/frontend';
 import { usePathname, useRouter } from 'next/navigation';
 import { EmailPasswordComponentsOverrideProvider } from 'supertokens-auth-react/recipe/emailpassword';
 
