@@ -31,18 +31,32 @@ const HomePage = async ({}: {}) => {
   );
   return (
     <Stack gap={0}>
+      {/* Titre H1 - affiché en premier sur mobile */}
+      <Box hiddenFrom="md">
+        <Title order={1}>
+          <Text fz={{ base: '1.3rem', sm: '2rem' }} c="green_oryx" fw="bold">
+            {t('welcome')}
+          </Text>
+        </Title>
+      </Box>
+
+      {/* Barre de recherche mobile */}
       <Box hiddenFrom="md" style={{ backgroundColor: 'var(--mantine-primary-color-1)' }}>
         <SearchBar />
       </Box>
 
+      {/* Filtres thèmes */}
       <ThemesBannerWithHover />
 
+      {/* Titre H1 - affiché sur desktop */}
       <Stack gap="xl" mt="xl">
-        <Title order={2}>
-          <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
-            {t('welcome')}
-          </Text>
-        </Title>
+        <Box visibleFrom="md">
+          <Title order={1}>
+            <Text fz={{ base: '1.3rem', sm: '2rem' }} c="green_oryx" fw="bold">
+              {t('welcome')}
+            </Text>
+          </Title>
+        </Box>
         <Stack gap="xl">
           {themesSections}
         </Stack>

@@ -65,7 +65,7 @@
   position: fixed;
   z-index: 9999;
   background-color: white;
-  border-radius: 14px;
+  border-radius: 8px;
   box-shadow: 0 6px 24px rgba(52, 152, 162, 0.18);
   border: 2px solid #E1F3F3;
   max-width: 720px;
@@ -96,7 +96,7 @@
 .categoryItem {
   cursor: pointer;
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   justify-content: space-between;
@@ -168,8 +168,8 @@
   right: 0;
   z-index: 10001;
   background-color: white;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   max-height: 85vh;
   overflow: auto;
   box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.15);
@@ -219,7 +219,7 @@
 
 .mobileCategoryItem {
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 2px solid #E1F3F3;
   transition: all 0.2s ease;
   display: flex;
