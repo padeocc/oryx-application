@@ -1,0 +1,43 @@
+
+import { defaultTranslationsCommon } from "./defaultTranslationsCommon";
+
+export const defaultTranslationsEmailVerification = {
+    en: {
+        ...defaultTranslationsCommon.en,
+        EMAIL_VERIFICATION_RESEND_SUCCESS: "Email resent",
+        EMAIL_VERIFICATION_SEND_TITLE: "Verify your email!",
+        EMAIL_VERIFICATION_SEND_DESC_START: "",
+        EMAIL_VERIFICATION_SEND_DESC_STRONG: "Please click on the link",
+        EMAIL_VERIFICATION_SEND_DESC_END: " in the email we just sent you to confirm your email address.",
+        EMAIL_VERIFICATION_RESEND_BTN: "Resend Email",
+        EMAIL_VERIFICATION_LOGOUT: "Logout ",
+        EMAIL_VERIFICATION_SUCCESS: "Email verification successful!",
+        EMAIL_VERIFICATION_CONTINUE_BTN: "CONTINUE",
+        EMAIL_VERIFICATION_CONTINUE_LINK: "Continue",
+        EMAIL_VERIFICATION_EXPIRED: "The email verification link has expired",
+        EMAIL_VERIFICATION_ERROR_TITLE: "Something went wrong",
+        EMAIL_VERIFICATION_ERROR_DESC: "We encountered an unexpected error. Please contact support for assistance",
+        EMAIL_VERIFICATION_LINK_CLICKED_HEADER: "Verify your email address",
+        EMAIL_VERIFICATION_LINK_CLICKED_DESC: "Please click on the button below to verify your email address",
+        EMAIL_VERIFICATION_LINK_CLICKED_CONTINUE_BUTTON: "CONTINUE",
+    },
+    fr: {
+        ...defaultTranslationsCommon.fr,
+        EMAIL_VERIFICATION_RESEND_SUCCESS: "E-mail renvoyé",
+        EMAIL_VERIFICATION_SEND_TITLE: "Vérifiez votre adresse e-mail!",
+        EMAIL_VERIFICATION_SEND_DESC_START: "",
+        EMAIL_VERIFICATION_SEND_DESC_STRONG: "Veuillez cliquer sur le lien",
+        EMAIL_VERIFICATION_SEND_DESC_END: " dans l'e-mail que nous venons de vous envoyer pour confirmer votre adresse e-mail.",
+        EMAIL_VERIFICATION_RESEND_BTN: "Renvoyer l'e-mail",
+        EMAIL_VERIFICATION_LOGOUT: "Déconnexion",
+        EMAIL_VERIFICATION_SUCCESS: "Vérification de l'e-mail réussie!",
+        EMAIL_VERIFICATION_CONTINUE_BTN: "CONTINUER",
+        EMAIL_VERIFICATION_CONTINUE_LINK: "Continuer",
+        EMAIL_VERIFICATION_EXPIRED: "Le lien de vérification de l'e-mail a expiré",
+        EMAIL_VERIFICATION_ERROR_TITLE: "Une erreur s'est produite",
+        EMAIL_VERIFICATION_ERROR_DESC: "Une erreur inattendue s'est produite. Veuillez contacter le support pour obtenir de l'aide",
+        EMAIL_VERIFICATION_LINK_CLICKED_HEADER: "Vérifiez votre adresse e-mail",
+        EMAIL_VERIFICATION_LINK_CLICKED_DESC: "Veuillez cliquer sur le bouton ci-dessous pour vérifier votre adresse e-mail",
+        EMAIL_VERIFICATION_LINK_CLICKED_CONTINUE_BUTTON: "CONTINUER",
+    },
+};
