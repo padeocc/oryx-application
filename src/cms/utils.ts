@@ -154,9 +154,9 @@ export const addService: PostService = async data => {
       location,
       form_options: options,
       sender,
-      shop_adress: shopadress,
-      shop_city: shopcity,
-      shop_postal_code: shoppostalcode
+      shopaddress: shopadress,
+      shopcity,
+      shoppostalcode
     }
   });
 
