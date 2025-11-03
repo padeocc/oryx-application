@@ -33,4 +33,5 @@ export interface IResult {
   premium?: boolean;
   content?: any;
   score?: number;
+  updatedAt?: string;
 }

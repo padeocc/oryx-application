@@ -90,7 +90,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       relocating: result?.relocating,
       // Rest is empty for now
       createdAt: new Date(),
-      updatedAt: new Date(),
+      updatedAt: result?.updatedAt ? new Date(result.updatedAt) : new Date(),
       publishedAt: new Date(),
       type: [],
       country: '',
