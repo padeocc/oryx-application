@@ -1,0 +1,245 @@
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0.8;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile scroll */
+.mobileScroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobileScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop dropdown */
+.desktopDropdown {
+  position: fixed;
+  z-index: 9999;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(52, 152, 162, 0.18);
+  border: 2px solid #E1F3F3;
+  max-width: 720px;
+  min-width: 480px;
+  animation: slideDown 0.25s ease-out;
+  overflow: hidden;
+}
+
+.dropdownContent {
+  padding: 20px;
+}
+
+.dropdownGrid {
+  display: grid;
+  gap: 24px;
+  transition: grid-template-columns 0.3s ease;
+}
+
+.dropdownGridWithSub {
+  grid-template-columns: 220px 1fr;
+}
+
+.dropdownGridNoSub {
+  grid-template-columns: 220px;
+}
+
+/* Categories */
+.categoryItem {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.categoryItem:hover {
+  background-color: #E1F3F3;
+  border-color: #3498A2;
+}
+
+.categoryArrow {
+  background-color: #E1F3F3;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.categoryItem:hover .categoryArrow {
+  background-color: #3498A2;
+}
+
+/* Sub-categories */
+.subCategoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  align-content: start;
+  animation: fadeInRight 0.25s ease-out;
+}
+
+.subCategoryItem {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #E1F3F3;
+  background-color: white;
+}
+
+.subCategoryItem:hover {
+  background-color: #E1F3F3;
+  border-color: #3498A2;
+  transform: scale(1.02);
+}
+
+/* Mobile modal */
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.mobileModal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10001;
+  background-color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-height: 85vh;
+  overflow: auto;
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.15);
+}
+
+.mobileModalSlideUp {
+  animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mobileModalSlideRight {
+  animation: slideInFromRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mobileModalContent {
+  padding: 24px 20px;
+}
+
+.mobileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.mobileHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.mobileHeaderTitle {
+  overflow: hidden;
+}
+
+.mobileBackButton, .mobileCloseButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #F1F3F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mobileCategoryItem {
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid #E1F3F3;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mobileCategoryArrow {
+  background-color: #E1F3F3;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text styles */
+.comfortaaFont {
+  font-family: Comfortaa, sans-serif;
+}
+

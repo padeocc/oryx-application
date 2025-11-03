@@ -1,15 +1,14 @@
 import { Theme, themesIcons } from '@/config';
 import { Service } from '@/types';
-import { Group, Stack, Text, Title } from '@mantine/core';
+import { Box, Stack, Text, Title } from '@mantine/core';
 import { getTranslations } from 'next-intl/server';
-import ThemesBanner from '../../common/ThemesBanner';
-import ExamplesSection from './components/ExamplesSection';
 import ThemeSection from './components/ThemeSection';
 import { SearchResponses } from 'algoliasearch';
 import { search } from '@/algolia/search';
 import { transformServicesFromResults } from '@/algolia/utils';
 import { IResult } from '@/algolia/types';
 import SearchBar from '../../navigation/SearchBar';
+import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
 
 const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
   const { results }: SearchResponses<unknown> = await search({
@@ -31,23 +30,37 @@ const HomePage = async ({}: {}) => {
     })
   );
   return (
-    <Stack gap={'xl'} pt="xl">
-      <Title c="green_oryx" fw={'bold'} order={1}>
-        {t('welcome')}
-      </Title>
+    <Stack gap={0}>
+      {/* Titre H1 - affiché en premier sur mobile */}
+      <Box hiddenFrom="md">
+        <Title order={1}>
+          <Text fz={{ base: '1.3rem', sm: '2rem' }} c="green_oryx" fw="bold">
+            {t('welcome')}
+          </Text>
+        </Title>
+      </Box>
 
-      <Group hiddenFrom="md" grow>
+      {/* Barre de recherche mobile */}
+      <Box hiddenFrom="md" style={{ backgroundColor: 'var(--mantine-primary-color-1)' }}>
         <SearchBar />
-      </Group>
-      <ExamplesSection />
-      <Title order={2}>
-        <Text fz={{ base: '1.2rem', sm: '2rem' }} c="green_oryx" fw="bold">
-          {t('explore_themes_label')}
-        </Text>
-      </Title>
+      </Box>
 
-      <ThemesBanner />
-      {themesSections}
+      {/* Filtres thèmes */}
+      <ThemesBannerWithHover />
+
+      {/* Titre H1 - affiché sur desktop */}
+      <Stack gap="xl" mt="xl">
+        <Box visibleFrom="md">
+          <Title order={1}>
+            <Text fz={{ base: '1.3rem', sm: '2rem' }} c="green_oryx" fw="bold">
+              {t('welcome')}
+            </Text>
+          </Title>
+        </Box>
+        <Stack gap="xl">
+          {themesSections}
+        </Stack>
+      </Stack>
     </Stack>
   );
 };

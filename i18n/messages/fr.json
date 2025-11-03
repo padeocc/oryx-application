@@ -15,7 +15,7 @@
   "common": {
     "read_more": "En savoir +",
     "see_more": "Voir plus",
-    "see_more_theme": "Voir plus de propositions sur ce thème"
+    "see_more_theme": "Voir plus d'offres"
   },
   "contact": {
     "description": "Vous avez une offre à nous soumettre ? Une demande de changement de contenu sur le portail ? Une volonté de venir nous aider à travailler sur cette application ? Une suggestion sur son évolution ?",
@@ -48,6 +48,7 @@
   "filters_component": {
     "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
     "economic-label": "Economique",
+    "filter-all-label": "Voir tout",
     "filter-comparer-label": "Comparer",
     "filter-cookmore-label": "Pour cuisiner plus",
     "filter-diy-label": "Faire soi-même",
@@ -233,7 +234,7 @@
     "guide": "Vous serez guidé-e selon vos centres d'intérêts vers des services et des actions que vous pourrez vous approprier.",
     "save_actions": "",
     "search_label": "Rechercher par mots clés !",
-    "welcome": "OryxChange : trouver une action plus responsable instantanément."
+    "welcome": "Trouver une action plus responsable instantanément."
   },
   "legal": {
     "consent_access_legal_page_label": "Voir les Conditions Générales d'Utilisation",

@@ -1,6 +1,6 @@
 import HeaderMenu from '@/components/navigation/HeaderMenu';
 import { theme } from '@/theme';
-import { AppShell, AppShellMain, ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
+import { ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { Notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
@@ -12,6 +12,7 @@ import { Inter } from 'next/font/google';
 import GDPRConsent from '@/components/navigation/GDPRConsent';
 import '../globals.css';
 import Footer from '@/components/navigation/Footer';
+import ScrollToTop from '@/components/common/ScrollToTop';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
@@ -80,22 +81,23 @@ export default async function RootLayout(props: { children: React.ReactNode; par
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ColorSchemeScript defaultColorScheme="light" />
           <MantineProvider defaultColorScheme="light" theme={theme}>
-            <AppShell bg="var(--mantine-primary-color-1)">
+            <div style={{ backgroundColor: 'var(--mantine-primary-color-1)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
               <header>
                 <HeaderMenu />
               </header>
-              <AppShellMain>
-                <Container maw={'1280px'} p="md">
+              <main style={{ flex: 1 }}>
+                <Container maw={'1280px'} p={{ base: 'xs', sm: 'sm' }}>
                   {children}
                 </Container>
                 <GDPRConsent />
-              </AppShellMain>
+              </main>
               <footer style={{ backgroundColor: 'var(--mantine-primary-color-2)' }}>
                 <Container maw={'1280px'} p="md">
                   <Footer />
                 </Container>
               </footer>
-            </AppShell>
+            </div>
+            <ScrollToTop />
             <Notifications />
           </MantineProvider>
         </NextIntlClientProvider>

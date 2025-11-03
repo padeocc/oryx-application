@@ -1,0 +1,89 @@
+{
+  "foods": {
+    "Consommer Bio": [],
+    "Consommer de saison": [],
+    "Privilégier le circuit court": [],
+    "Réduire ses déchets": [],
+    "Remplacer les protéines animales": []
+  },
+  "accommodations": {
+    "Construire décarboné": [],
+    "Économiser la chaleur": [],
+    "Économiser l'électricité": [],
+    "Rénover son logement": ["Les artisans", "Les conseils", "les matériaux"],
+    "Système énergétique": [
+      "Acheter une pompe à chaleur",
+      "Installer des panneaux voltaïques / Chauffe-eau solaire",
+      "Se chauffer au bois ou granulés"
+    ]
+  },
+  "goods": {
+    "Acheter/vendre d'occasion ou reconditionné": [],
+    "Acheter eco-construits/biosourcé": [],
+    "Eco-concevoir (biens)": [],
+    "Faire soi-même (DIY)": [],
+    "Louer": [],
+    "Mutualiser": [],
+    "Réduire les déchets (biens)": [],
+    "Réparer": [],
+    "Relocaliser": [],
+    "Réutiliser": []
+  },
+  "transports": {
+    "Télétravailler": [],
+    "Co-working": [],
+    "Voyager - Se déplacer": [
+      "Autopartager - Covoiturer",
+      "Marcher",
+      "Relocaliser le voyage",
+      "Utiliser le Bateau - Cargo - Voile - Ferry",
+      "Utiliser le Train - bus",
+      "Utiliser les transports publics",
+      "Se déplacer-voyager  à vélo",
+      "Véhicule intermédiaire"
+    ],
+    "Petits moyens de transport": [
+      "Monoroue",
+      "Trotinette"
+    ],
+    "Vélo": [
+      "Les associations autour du vélo",
+      "Équipement Vélo et cycliste",
+      "Triporteur",
+      "Vélos cargos",
+      "Vélos neufs",
+      "Vélos reconditionnés"
+    ],
+    "Voiture": [
+      "Diesel",
+      "Électrique",
+      "Essence",
+      "GPL",
+      "Hybride",
+      "Sans permis à essence"
+    ],
+    "Moto - Scooter": [],
+    "Entretenir": []
+  },
+  "events": {
+      "Ateliers": [],
+      "Ateliers de sensibilisation": ["Les généralistes", "Les thématiques", "Les opérationnels"],
+      "Conférences": [],
+      "Forum, journées pour les particuliers": [],
+      "Marchés": []
+  },
+  "services": {
+    "Comparateurs de banques": [],
+    "Comparateur énergies vertes": [],
+    "Voiture : comparateurs de motorisation": [],
+    "Les aides financières": [
+      "Aides financières publiques",
+      "Aides financières des associations",
+      "Aides financières des entreprises à destination des particuliers"
+    ],
+    "Les restaurants": [],
+    "Les sorties": [],
+    "Les loisirs": [],
+    "Les vacances": []
+  }
+}

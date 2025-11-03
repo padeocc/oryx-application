@@ -29,9 +29,9 @@ const Results = ({
   if (isLoading) {
     return (
       <Stack>
-        <Grid justify="flex-start" align="top" mt="lg">
+        <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'xs', sm: 'sm' }}>
           {[...Array(12)].map((_item, index) => (
-            <GridCol span={{ base: 12, xs: 6, md: 4, xl: 3 }} key={`skel-${index}`}>
+            <GridCol span={{ base: 12, sm: 4, md: 3 }} key={`skel-${index}`}>
               <ServiceCard
                 color={'var(--mantine-primary-color-7)'}
                 asLoader
@@ -47,7 +47,7 @@ const Results = ({
   return (
     <Stack>
       {data.length === 0 ? (
-        <Grid justify="flex-start" align="top" mt="lg">
+        <Grid justify="flex-start" align="stretch" mt="lg">
           <GridCol span={{ base: 12 }} key={`action-empty`}>
             <Alert variant="outline" color="orange" title={t('no_results')} icon={<SmileyMeh size={30} />}>
               <Link href={'/service/add'}>{t('contact_us')}</Link>
@@ -60,10 +60,10 @@ const Results = ({
             <Title order={2}>{t(`total-results-label`, { count: totalNumberOfResults })}</Title>
             {total > 1 ? <Pagination page={activePage} total={total} filters={filters} /> : null}
           </Group>
-          <Grid justify="flex-start" align="top" mt="lg">
+          <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'xs', sm: 'sm' }}>
             {transformServicesFromResults({ results: data }).map((service: Service, index: number) => (
               <GridCol
-                span={{ base: 12, xs: 6, md: 4, xl: 3 }}
+                span={{ base: 12, sm: 4, md: 3 }}
                 key={`action-${service.theme}-${service.name}-${index}`}>
                 <ServiceCard
                   service={service}
