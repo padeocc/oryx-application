@@ -1,7 +1,7 @@
 'use client';
 
 import { cleanFiltersValues } from '@/components/content/utils';
-import { getActionFilters, themes, themesColors, themesIcons } from '@/config';
+import { getActionFilters, Theme, themes, themesColors, themesIcons } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
 import {
   Alert,
@@ -29,7 +29,6 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import BadgeSelector from './components/BadgeSelector';
 
 const Form = ({
   initialValues,
@@ -91,6 +90,14 @@ const Form = ({
 
   const values = form.getValues();
 
+  const handleThemeClick = (theme: Theme) => {
+    const newSelectedThemes = values.theme?.includes(theme)
+      ? values.theme.filter(t => t !== theme)
+      : [...(values?.theme || []), theme];
+    form.setFieldValue('theme', newSelectedThemes);
+    handleSubmit(form.getValues());
+  };
+
   const selectedActions = Object.keys(actions).reduce((all: string[], actionKey: string) => {
     /*@ts-ignore*/
     const value = values?.[actionKey];
@@ -99,6 +106,12 @@ const Form = ({
     }
     return all;
   }, []);
+
+  const handleEconomicClick = () => {
+    const isEconomicSelected = selectedActions.includes('economic');
+    form.setFieldValue('economic', !isEconomicSelected);
+    handleSubmit(form.getValues());
+  };
 
   const selectedFilters = ['query', 'region', 'location'].reduce((all: string[], key: string) => {
     /*@ts-ignore*/
@@ -109,7 +122,6 @@ const Form = ({
     return all;
   }, []);
 
-  const isEconomicSelected = selectedActions.includes('economic');
   return (
     <Stack pos="relative">
       <LoadingOverlay
@@ -124,47 +136,6 @@ const Form = ({
           e.stopPropagation();
         }}>
         <Stack>
-          <Alert>
-            <Group justify="flex-start">
-              {themes.map(theme => {
-                const Icon = themesIcons[theme];
-                const selected = !!values.theme?.includes(theme);
-                return (
-                  <BadgeSelector
-                    isLoading={isLoading}
-                    key={`badge-selector-${theme}`}
-                    label={tThemes(theme)}
-                    selected={selected}
-                    Icon={Icon}
-                    handleClick={_isSelected => {
-                      const newSelectedThemes = values.theme?.includes(theme)
-                        ? values.theme.filter(t => t !== theme)
-                        : [...(values?.theme || []), theme];
-                      form.setFieldValue('theme', newSelectedThemes);
-                      handleSubmit(form.getValues());
-                    }}
-                    bg={selected ? themesColors[theme] : 'white'}
-                    c={selected ? 'white' : themesColors[theme]}
-                    bd={`1px solid ${themesColors[theme]}`}
-                  />
-                );
-              })}
-              <BadgeSelector
-                isLoading={isLoading}
-                key={`badge-selector-economic`}
-                label={t(`action-economic-label`)}
-                selected={isEconomicSelected}
-                Icon={CurrencyEur}
-                handleClick={value => {
-                  form.setFieldValue('economic', value);
-                  handleSubmit(form.getValues());
-                }}
-                bg={isEconomicSelected ? 'orange' : 'white'}
-                c={isEconomicSelected ? 'white' : 'orange'}
-                bd={`1px solid orange`}
-              />
-            </Group>
-          </Alert>
           <TextInput
             size="md"
             withAsterisk
