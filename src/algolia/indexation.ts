@@ -95,6 +95,12 @@ export const runIndexation = async () => {
       logo: service?.logo,
       id: service.code,
       theme: service.theme,
+      productstructure:
+        (service?.productstructure || [])
+          ?.map(ps => ps.trim())
+          ?.filter(ps => !!ps)
+          ?.join(TAGSPLITTER) || [],
+      // deprecated use productStructure instead
       tags:
         (service?.tags || [])
           ?.map(t => t.trim())

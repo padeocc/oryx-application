@@ -63,6 +63,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       description: result.description,
       name: result.label,
       logo: result.logo,
+      productstructure: result.productstructure.split(TAGSPLITTER) || [],
       tags: result?.tags?.split?.(TAGSPLITTER),
       url: result.url,
       region: result.region,

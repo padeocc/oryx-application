@@ -55,6 +55,7 @@ export type Service = {
   description: string;
   url: string;
   tags: string[];
+  productstructure: string[];
   type: string[];
   code: string;
   region: Region;

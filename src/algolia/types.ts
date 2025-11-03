@@ -8,6 +8,7 @@ export interface IResult {
   logo?: string;
   id: string;
   theme: Theme[];
+  productstructure: string;
   tags: string;
   region: string;
   location: string;
