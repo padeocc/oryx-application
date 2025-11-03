@@ -1,23 +1,52 @@
+import { search } from '@/algolia/search';
+import { IResult } from '@/algolia/types';
 import { fetchLandingPage } from '@/cms/utils';
-import type { MetadataRoute } from 'next'
+import { Theme } from '@/config';
+import type { MetadataRoute } from 'next';
 
-const CMSlandingPages: { path: string, apiId: string }[] = [
-  { path: '/fr/mes-achats', apiId: 'landing-page-bien' },
-  { path: '/fr/logement', apiId: 'landing-page-batiment' },
-  { path: '/fr/alimentation', apiId: 'landing-page-alimentation' },
-  { path: '/fr/transport-responsable', apiId: 'landing-page-transport' },
+type ThemePage = {
+  theme: Theme;
+  actionPage: string;
+  landingPage: LandingPageData | null;
+};
+
+type LandingPageData = { path: string; apiId: string };
+
+const regularPages: string[] = ['/fr/contact', '/fr/legal'];
+
+const themePages: Array<ThemePage> = [
+  {
+    theme: 'foods',
+    actionPage: '/fr/actions/foods',
+    landingPage: { path: '/fr/alimentation', apiId: 'landing-page-alimentation' }
+  },
+  {
+    theme: 'goods',
+    actionPage: '/fr/actions/goods',
+    landingPage: { path: '/fr/mes-achats', apiId: 'landing-page-bien' }
+  },
+  {
+    theme: 'transports',
+    actionPage: '/fr/actions/transports',
+    landingPage: { path: '/fr/transport-responsable', apiId: 'landing-page-transport' }
+  },
+  {
+    theme: 'events',
+    actionPage: '/fr/actions/events',
+    landingPage: null
+  },
+  {
+    theme: 'services',
+    actionPage: '/fr/actions/services',
+    landingPage: null
+  },
+  {
+    theme: 'accommodations',
+    actionPage: '/fr/actions/accomodations',
+    landingPage: { path: '/fr/logement', apiId: 'landing-page-batiment' }
+  }
 ];
 
-const actionPages: string[] = [
-  '/fr/actions/transports',
-  '/fr/actions/foods',
-  '/fr/actions/goods',
-  '/fr/actions/events',
-  '/fr/actions/services',
-  '/fr/contact',
-  '/fr/legal',
-]
- 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
 
@@ -25,39 +54,60 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url,
       changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: url + '/fr/contact',
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
-    {
-      url: url + '/fr/legal',
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    },
+      priority: 1
+    }
   ];
 
-  for (const actionPage of actionPages) {
+  for (const page of regularPages) {
     pages.push({
-      url: url + actionPage,
-      priority: 0.8,
-      changeFrequency: 'daily'
-    })
+      url: url + page,
+      priority: 0.4,
+      changeFrequency: 'yearly'
+    });
   }
 
-  for (const page of CMSlandingPages) {
-    await fetchLandingPage(page.apiId)
-      .then((data) => {
-        pages.push({
-          url: url + page.path,
-          changeFrequency: 'monthly',
-          priority: 0.8,
-          lastModified: data.lastModified
+  for (const theme of themePages) {
+    if (theme.landingPage) {
+      await fetchLandingPage(theme.landingPage.apiId)
+        .then(data => {
+          pages.push({
+            url: url + theme.landingPage!.path,
+            changeFrequency: 'monthly',
+            priority: 0.8,
+            lastModified: data.lastModified
+          });
         })
+        .catch((e) => {
+          console.error(`Error fetching landing page ${theme.landingPage?.apiId}:`, e);
+        });
+    }
+
+    pages.push({
+      url: url + theme.actionPage,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    });
+
+    const services = await search({
+      query: '',
+      limit: 900,
+      filters: {
+        theme: [theme.theme],
+      },
+      page: 0,
+    });
+
+    /*@ts-ignore*/
+    const hits = services.results[0].hits;
+
+    for (const hit of hits) {
+      pages.push({
+        url: url + '/fr/service/' + theme.theme + '/' + hit.id, 
+        changeFrequency: 'yearly',
+        priority: 1,
+        lastModified: hit.updatedAt
       })
-      .catch(() => {});
+    }
   }
 
   return pages;
