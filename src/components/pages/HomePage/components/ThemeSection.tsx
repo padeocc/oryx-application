@@ -22,7 +22,6 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     href: `/services?filters={"theme":["${theme}"]}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
   };
-console.log(landingPagesUrl.get('events'));
 
   return (
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
