@@ -137,6 +137,13 @@ export const defaultTranslationsEmailPassword = {
     ERROR_CONFIRM_PASSWORD_NO_MATCH: 'Le mot de passe de confirmation ne correspond pas',
 
     ERROR_NON_OPTIONAL: "Ce champ n'est pas facultatif",
+
+    FIRSTNAME_LABEL: "Prénom",
+    FIRSTNAME_PLACEHOLDER: "Choisissez un prénom",
+    LASTNAME_LABEL: "Nom",
+    LASTNAME_PLACEHOLDER: "Choisissez un nom",
+    PSEUDO_LABEL: "Pseudo",
+    PSEUDO_PLACEHOLDER: "Choisissez un pseudo",
     /*
      * Voici les messages d'erreur de notre SDK backend.
      * Ils sont renvoyés sous forme de messages complets pour la compatibilité du conservateur, mais ils fonctionnent comme les clés ci-dessus. * Ils sont affichés tels quels par défaut (la valeur "undefined" affichera la clé de traduction brute).

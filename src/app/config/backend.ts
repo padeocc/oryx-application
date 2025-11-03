@@ -2,12 +2,28 @@ import SuperTokens from 'supertokens-node';
 import EmailPasswordNode from 'supertokens-node/recipe/emailpassword';
 import SessionNode from 'supertokens-node/recipe/session';
 import Dashboard from 'supertokens-node/recipe/dashboard';
-import UserMetadata from "supertokens-node/recipe/usermetadata";
+import UserMetadata from 'supertokens-node/recipe/usermetadata';
 import EmailVerification from 'supertokens-node/recipe/emailverification';
 import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
-
+import { getDBConnection } from '../../db/connection';
+import { User } from '../../db/entities/User';
 export const backendConfig = (): TypeInput => {
+  async function addUser(dto: any) {
+    const dataSource = await getDBConnection();
+    return Promise.resolve(dataSource)
+      .then(async () => {
+        const user = new User();
+        user.uuid = dto.uuid;
+        user.pseudo = dto.pseudo;
+        user.email = dto.email;
+
+        await dataSource.manager.save(user);
+        console.log('User has been saved: ', user);
+      })
+      .catch(error => console.log('Error: ', error));
+  }
+
   return {
     framework: 'custom',
     supertokens: {
@@ -21,6 +37,12 @@ export const backendConfig = (): TypeInput => {
           formFields: [
             {
               id: 'pseudo'
+            },
+            {
+              id: 'firstname'
+            },
+            {
+              id: 'lastname'
             }
           ]
         },
@@ -31,14 +53,16 @@ export const backendConfig = (): TypeInput => {
               let response = await original.signUpPOST!(input);
               if (response.status === 'OK') {
                 // Extract custom fields
-                const firstName = input.formFields.find(f => f.id === 'first_name')?.value?.toString() ||'';
-                const lastName = input.formFields.find(f => f.id === 'last_name')?.value?.toString() ||'';
-                const pseudo = input.formFields.find(f => f.id === 'pseudo')?.value?.toString() ||'';
-
+                const firstname = input.formFields.find(f => f.id === 'first_name')?.value?.toString() || '';
+                const lastname = input.formFields.find(f => f.id === 'last_name')?.value?.toString() || '';
+                const pseudo = input.formFields.find(f => f.id === 'pseudo')?.value?.toString() || '';
+                const email = input.formFields.find(f => f.id === 'email')?.value?.toString() || '';
+                const dto = {uuid:response.user.id, pseudo, email,firstname,lastname}
+                await addUser(dto)
                 // Store in user metadata
                 await UserMetadata.updateUserMetadata(response.user.id, {
-                  first_name: firstName,
-                  last_name: lastName,
+                  first_name: firstname,
+                  last_name: lastname,
                   pseudo: pseudo
                 });
               }

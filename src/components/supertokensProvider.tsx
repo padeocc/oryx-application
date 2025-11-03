@@ -24,6 +24,8 @@ export const SuperTokensProvider: React.FC<React.PropsWithChildren<{}>> = ({ chi
                 {...props}
                 formFields={[
                   props.formFields.find(({ id }) => id === 'pseudo')!,
+                  props.formFields.find(({ id }) => id === 'firstname')!,
+                  props.formFields.find(({ id }) => id === 'lastname')!,
                   props.formFields.find(({ id }) => id === 'email')!,
                   props.formFields.find(({ id }) => id === 'password')!
                 ]}
@@ -35,6 +37,4 @@ export const SuperTokensProvider: React.FC<React.PropsWithChildren<{}>> = ({ chi
       </EmailPasswordComponentsOverrideProvider>
     </SuperTokensWrapper>
   );
-
-  return <SuperTokensWrapper>{children}</SuperTokensWrapper>;
 };

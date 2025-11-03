@@ -4,7 +4,6 @@ import { appInfo } from './appInfo'
 import { useRouter } from "next/navigation";
 import { SuperTokensConfig } from 'supertokens-auth-react/lib/build/types'
 import { defaultTranslationsEmailPassword } from './translations/defaultTranslationsEmailPassword';
-
 const routerInfo: { router?: ReturnType<typeof useRouter>; pathName?: string } =
   {};
 
@@ -29,8 +28,16 @@ export const frontendConfig = (): SuperTokensConfig => {
                 signUpForm: {
                     formFields: [{
                         id: "pseudo",
-                        label: "Pseudo",
-                        placeholder: "Choose a pseudo"
+                        label: "PSEUDO_LABEL",
+                        placeholder: "PSEUDO_PLACEHOLDER"
+                    },{
+                        id: "firstname",
+                        label: "FIRSTNAME_LABEL",
+                        placeholder: "FIRSTNAME_PLACEHOLDER"
+                    },{
+                        id: "lastname",
+                        label: "LASTNAME_LABEL",
+                        placeholder: "LASTNAME_PLACEHOLDER"
                     }]
                 }
             }
