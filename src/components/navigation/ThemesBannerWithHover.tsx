@@ -12,6 +12,27 @@ import styles from './themes-banner.module.css';
 import { Filters } from '@/types';
 import { cleanFiltersValues } from '../content/utils';
 
+const ALL_ACTION_FILTERS = {
+  organic: false,
+  local: false,
+  season: false,
+  shortcircuit: false,
+  wastereducer: false,
+  foodwastereducer: false,
+  cookmore: false,
+  used: false,
+  rent: false,
+  mutualise: false,
+  repair: false,
+  ecobuilt: false,
+  lowtech: false,
+  recycled: false,
+  reused: false,
+  diy: false,
+  comparer: false,
+  relocating: false
+};
+
 interface ThemesBannerProps {
   onThemeClick?: (theme: Theme) => void;
   onEconomicClick?: () => void;
@@ -37,25 +58,33 @@ const ThemesBannerWithHover = ({
   const tServices = useTranslations('services');
   const tCommon = useTranslations('common');
   
-  // Fonction pour générer le lien avec toggle du thème
   const getThemeLink = (theme: Theme) => {
     if (!currentFilters) {
-      return `${baseUrl}?filters={"theme":["${theme}"]}`;
+      return `${baseUrl}?filters=${cleanFiltersValues({ theme: [theme] })}`;
     }
     const currentThemes = currentFilters.theme || [];
     const newThemes = currentThemes.includes(theme)
       ? currentThemes.filter(t => t !== theme)
       : [...currentThemes, theme];
-    const updatedFilters = { ...currentFilters, theme: newThemes };
+
+    const updatedFilters = { 
+      ...currentFilters, 
+      ...ALL_ACTION_FILTERS,
+      theme: newThemes,
+      economic: false
+    };
     return `${baseUrl}?filters=${cleanFiltersValues(updatedFilters)}`;
   };
   
-  // Fonction pour générer le lien avec toggle du filtre économique
   const getEconomicLink = () => {
     if (!currentFilters) {
-      return `${baseUrl}?filters={"economic":true}`;
+      return `${baseUrl}?filters=${cleanFiltersValues({ economic: true })}`;
     }
-    const updatedFilters = { ...currentFilters, economic: !currentFilters.economic };
+    const updatedFilters = { 
+      ...currentFilters, 
+      ...ALL_ACTION_FILTERS,
+      economic: !currentFilters.economic
+    };
     return `${baseUrl}?filters=${cleanFiltersValues(updatedFilters)}`;
   };
   const [hoveredTheme, setHoveredTheme] = useState<Theme | null>(null);
@@ -110,19 +139,17 @@ const ThemesBannerWithHover = ({
     } : {};
     
     const handleClick = () => {
-      if (onClick) {
-        onClick();
-      } else if (isMobile && isTheme && !disableHover) {
-        handleMobileClick(theme!);
-      }
+      if (onClick) onClick();
+      else if (isMobile && isTheme && !disableHover) handleMobileClick(theme!);
     };
     
-    // Génère le lien approprié
-    const link = onClick || (isMobile && isTheme && !disableHover) 
+    const link = onClick && isTheme 
       ? '#' 
       : isTheme 
         ? getThemeLink(theme!) 
         : getEconomicLink();
+    
+    const effectiveOnClick = !isTheme ? undefined : handleClick;
 
     return (
       <div
@@ -138,7 +165,7 @@ const ThemesBannerWithHover = ({
           text={text}
           gradient={gradient}
           fz="xs"
-          onClick={handleClick}
+          onClick={effectiveOnClick}
           style={style}
         />
       </div>
@@ -193,7 +220,7 @@ const ThemesBannerWithHover = ({
             <div className={`${styles.dropdownGrid} ${hoveredCategory ? styles.dropdownGridWithSub : styles.dropdownGridNoSub}`}>
               <Stack gap={4}>
                 <Link 
-                  href={`/services?filters={"theme":["${hoveredTheme}"]}`} 
+                  href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme] })}`} 
                   style={{ textDecoration: 'none' }}
                 >
                   <div
@@ -219,7 +246,7 @@ const ThemesBannerWithHover = ({
                   return (
                     <Link 
                       key={category}
-                      href={`/services?filters={"theme":["${hoveredTheme}"], "query": "${category}"}`} 
+                      href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme], query: category })}`} 
                       style={{ textDecoration: 'none' }}
                     >
                       <div
@@ -250,7 +277,7 @@ const ThemesBannerWithHover = ({
                   {getSubCategories(hoveredTheme, hoveredCategory).map((subCat: string) => (
                     <Link 
                       key={subCat}
-                      href={`/services?filters={"theme":["${hoveredTheme}"], "query": "${subCat}"}`} 
+                      href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme], query: subCat })}`} 
                       style={{ textDecoration: 'none' }}
                     >
                       <div className={styles.subCategoryItem}>
@@ -321,7 +348,7 @@ const ThemesBannerWithHover = ({
                   getSubCategories(mobileModalOpen, mobileSelectedCategory).map((subCat: string) => (
                     <Link 
                       key={subCat}
-                      href={`/services?filters={"theme":["${mobileModalOpen}"], "query": "${subCat}"}`} 
+                      href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: subCat })}`} 
                       style={{ textDecoration: 'none' }}
                       onClick={() => {
                         setMobileModalOpen(null);
@@ -353,7 +380,7 @@ const ThemesBannerWithHover = ({
                 ) : (
                   <>
                     <Link 
-                      href={`/services?filters={"theme":["${mobileModalOpen}"]}`} 
+                      href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen] })}`} 
                       style={{ textDecoration: 'none' }}
                       onClick={() => {
                         setMobileModalOpen(null);
@@ -414,7 +441,7 @@ const ThemesBannerWithHover = ({
                     ) : (
                       <Link 
                         key={category}
-                        href={`/services?filters={"theme":["${mobileModalOpen}"], "query": "${category}"}`} 
+                        href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: category })}`} 
                         style={{ textDecoration: 'none' }}
                         onClick={() => {
                           setMobileModalOpen(null);
