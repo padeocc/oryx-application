@@ -3,7 +3,7 @@ import { Icon } from '@phosphor-icons/react';
 import { BowlFood, BuildingApartment, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 import { ActionFilters } from './types';
 
-export const SEARCH_RESULT_LIFETIME = 86400;
+export const SEARCH_RESULT_LIFETIME = 2_592_000; // 30 days
 export const PAGINATION_LIMIT = 48;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 export const landingPagesUrl = new Map<Theme, string>([
