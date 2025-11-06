@@ -30,6 +30,7 @@ import Links from './components/Links';
 import Tags from './components/Tags';
 import style from './server-card.module.css';
 import ScoreBanner from '../common/ScoreBanner';
+import FavoriteButton from './components/FavoriteButton';
 
 const ServiceCard = ({
   service,
@@ -85,11 +86,10 @@ const ServiceCard = ({
       color={color}
       onMouseEnter={open}
       onMouseLeave={close}
-      className={style['card']}
-      onClick={() => {
+      className={style['card']}>
+      <CardSection onClick={() => {
         router.push(`/service/${theme}/${service.code}`);
       }}>
-      <CardSection>
         <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
       </CardSection>
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
@@ -136,6 +136,9 @@ const ServiceCard = ({
             <Description service={service} theme={theme} />
           </Stack>
         </Stack>
+        <CardSection c={color} p={'sm'}>
+          <FavoriteButton serviceCode={service?.code||''} isServiceFavorite={service.isFavorite||false}/>
+        </CardSection>
         {asPreview ? null : (
           <CardSection c={color}>
             <Links service={service} theme={theme} hover={hover} />
