@@ -8,6 +8,7 @@ import { search } from '@/algolia/search';
 import { transformServicesFromResults } from '@/algolia/utils';
 import { IResult } from '@/algolia/types';
 import SearchBar from '../../navigation/SearchBar';
+import Partners from '@/components/partners';
 import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
 
 const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
@@ -61,7 +62,9 @@ const HomePage = async ({}: {}) => {
           {themesSections}
         </Stack>
       </Stack>
+      <Partners/>
     </Stack>
+    
   );
 };
 
