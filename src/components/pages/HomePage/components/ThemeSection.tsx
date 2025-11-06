@@ -8,7 +8,17 @@ import Link from 'next/link';
 import { useState } from 'react';
 import ServiceCard from '../../../ServiceCard';
 import style from './theme-section.module.css';
+import { useCurrentUser } from '@/app/context/CurrentUserContext';
 
+const mapServicesWithFavorite = (items: Service[]) => {
+  const currentUser = useCurrentUser();
+  return items.map((service: Service) => {
+    if (currentUser.user?.favorites.filter(favorite => favorite.serviceCode === service.code).length) {
+      service.isFavorite = true;
+    }
+    return service;
+  });
+};
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const Icon = themesIcons[theme];
   const color = themesColors[theme];
@@ -22,8 +32,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     href: `/services?filters={"theme":["${theme}"]}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
   };
-console.log(landingPagesUrl.get('events'));
-
+  items = mapServicesWithFavorite(items);
   return (
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
       <Group w="100%" grow preventGrowOverflow={false}>
@@ -48,9 +57,9 @@ console.log(landingPagesUrl.get('events'));
         <Group justify="end" align="right">
           {landingPagesUrl.get(theme) ? (
             <Button variant="filled">
-                <Anchor c="white" href={landingPagesUrl.get(theme)}>
-                    {tCommon('read_more')}
-                </Anchor>
+              <Anchor c="white" href={landingPagesUrl.get(theme)}>
+                {tCommon('read_more')}
+              </Anchor>
             </Button>
           ) : null}
         </Group>
