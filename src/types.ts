@@ -86,7 +86,22 @@ export type Service = {
   form_options?: string[];
   premium?: boolean;
   content?: any;
+  isFavorite?: boolean;
 };
+export type User = {
+  id: number,
+  uuid: string,
+  pseudo: string,
+  firstname: string,
+  lastname: string,
+  email: string,
+  favorites: Favorite[]
+}
+export type Favorite = {
+  id: number,
+  serviceCode: string,
+  user?: User
+}
 
 export type ActionFilters = {
   [key in
@@ -160,6 +175,9 @@ export type APIFilters = {
 export type FetchServicesResponse = {
   services: Service[];
   meta: { pagination: { start: number; limit: number; total: number } };
+};
+export type FetchUserResponse = {
+  user: User;
 };
 
 export type RequestParameters = {

@@ -13,6 +13,7 @@ import GDPRConsent from '@/components/navigation/GDPRConsent';
 import '../globals.css';
 import Footer from '@/components/navigation/Footer';
 import { SuperTokensProvider } from '@/components/supertokensProvider';
+import { CurrentUserProvider } from '../context/CurrentUserContext';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
@@ -77,32 +78,34 @@ export default async function RootLayout(props: { children: React.ReactNode; par
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
           {umamiComponent}
         </head>
-      <SuperTokensProvider>
-        <body className={inter.className}>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <ColorSchemeScript defaultColorScheme="light" />
-            <MantineProvider defaultColorScheme="light" theme={theme}>
-              <AppShell bg="var(--mantine-primary-color-1)">
-                <header>
-                  <HeaderMenu />
-                </header>
-                <AppShellMain>
-                  <Container maw={'1280px'} p="md">
-                    {children}
-                  </Container>
-                  <GDPRConsent />
-                </AppShellMain>
-                <footer style={{ backgroundColor: 'var(--mantine-primary-color-2)' }}>
-                  <Container maw={'1280px'} p="md">
-                    <Footer />
-                  </Container>
-                </footer>
-              </AppShell>
-              <Notifications />
-            </MantineProvider>
-          </NextIntlClientProvider>
-        </body>
-      </SuperTokensProvider>
+      <CurrentUserProvider>
+        <SuperTokensProvider >
+            <body className={inter.className}>
+              <NextIntlClientProvider locale={locale} messages={messages}>
+                <ColorSchemeScript defaultColorScheme="light" />
+                <MantineProvider defaultColorScheme="light" theme={theme}>
+                  <AppShell bg="var(--mantine-primary-color-1)">
+                    <header>
+                      <HeaderMenu />
+                    </header>
+                    <AppShellMain>
+                      <Container maw={'1280px'} p="md">
+                        {children}
+                      </Container>
+                      <GDPRConsent />
+                    </AppShellMain>
+                    <footer style={{ backgroundColor: 'var(--mantine-primary-color-2)' }}>
+                      <Container maw={'1280px'} p="md">
+                        <Footer />
+                      </Container>
+                    </footer>
+                  </AppShell>
+                  <Notifications />
+                </MantineProvider>
+              </NextIntlClientProvider>
+            </body>
+        </SuperTokensProvider>
+      </CurrentUserProvider>
     </html>
   );
 }
