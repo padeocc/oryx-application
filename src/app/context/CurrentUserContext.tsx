@@ -6,16 +6,7 @@ interface State {
    user?: User
 };
 
-const initialUser = {
-  id: -1,
-  uuid: '',
-  pseudo: '',
-  firstname: '',
-  lastname: '',
-  email: '',
-  favorites: []
-} as User;
-const initialState: State = { user: initialUser };
+const initialState: State = { user: undefined };
 const CurrentUserContext = createContext(initialState);
 
 const CurrentUserDispatchContext = createContext<Dispatch<Actions>>(() => null)
@@ -49,7 +40,7 @@ function currentUserReducer(state: State, action:Actions) : State {
       return {...state, user: action.user}
     }
     case 'removeUser': {
-      return {...state}
+      return {...state, user: undefined}
     }
     default: {
       throw new Error("Unknown action");
