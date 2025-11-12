@@ -2,7 +2,12 @@ import { DefaultMantineColor } from '@mantine/core';
 import { Icon } from '@phosphor-icons/react';
 import { BowlFood, BuildingApartment, CalendarCheck, CallBell, Scooter, TShirt } from '@phosphor-icons/react/dist/ssr';
 import { ActionFilters } from './types';
+import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 
+export const metaAuthors: Author[] = [
+  { name: 'Padeo', url: 'https://www.padeo.fr' },
+  { name: 'OryxChange', url: process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '' }
+];
 export const SEARCH_RESULT_LIFETIME = 2_592_000; // 30 days
 export const PAGINATION_LIMIT = 48;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';

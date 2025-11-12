@@ -7,20 +7,15 @@ import '@mantine/notifications/styles.css';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 import { Inter } from 'next/font/google';
 import GDPRConsent from '@/components/navigation/GDPRConsent';
 import '../globals.css';
 import Footer from '@/components/navigation/Footer';
 import ScrollToTop from '@/components/common/ScrollToTop';
+import { metaAuthors } from '@/config';
 
 const inter = Inter({ subsets: ['latin'] });
 const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
-
-const authors: Author[] = [
-  { name: 'Padeo', url: 'https://www.padeo.fr' },
-  { name: 'OryxChange', url }
-];
 
 export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
   const params = await props.params;
@@ -44,7 +39,7 @@ export const generateMetadata = async (props: { params: Promise<{ locale: string
     alternates: {
       canonical: '/'
     },
-    authors,
+    authors: metaAuthors,
     publisher: 'OryxChange',
     robots: 'index, follow'
   };
