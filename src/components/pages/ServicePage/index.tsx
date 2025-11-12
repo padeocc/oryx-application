@@ -36,11 +36,9 @@ type PageParams = {
 
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
-
   if (newUrl.endsWith('/')) {
     newUrl = newUrl.slice(0, -1);
   }
-
   return newUrl;
 };
 
@@ -68,8 +66,10 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
-  let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
-  labelRegion = labelRegion.includes(`region_${service.region}_label`) ? service.region : labelRegion;
+  const rawRegion = service?.region || "";
+  const regionClean = rawRegion.replace(/^Région\s*:\s*/i, '').trim();
+  let labelRegion = regionClean ? tFilters(`region_${regionClean}_label`) : '';
+  labelRegion = labelRegion.includes(`region_${regionClean}_label`) ? regionClean : labelRegion;
 
   //TODO refacto type on CMS
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';
@@ -106,7 +106,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
           ) : null}
           {labelRegion ? (
             <Badge
-              key={`tag-${theme}-${service.name}-${service.region}`}
+              key={`tag-${theme}-${service.name}-${regionClean}`}
               size="sm"
               variant="outline"
               color="var(--mantine-color-dark-outline)"
