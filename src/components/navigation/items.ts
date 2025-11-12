@@ -16,7 +16,7 @@ export const getNavigationItems = ({
     [
       {
         name: t('service_addition_label'),
-        href: '/service/add',
+        href: '/fr/service/add',
         isExternal: false
       }
     ],
@@ -65,7 +65,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: t('service_addition_label'),
-        href: '/service/add'
+        href: '/fr/service/add'
       },
       {
         name: t('features_to_come_label'),
@@ -74,7 +74,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: t('contact_label'),
-        href: '/contact'
+        href: '/fr/contact'
       },
       {
         name: t('poll_label'),
@@ -95,7 +95,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: t('team_label'),
-        href: '/team',
+        href: '/fr/team',
         isExternal: false
       },
       {
@@ -110,7 +110,7 @@ export const getFooterLinks = async () => {
       },
       {
         name: t('legal_label'),
-        href: '/legal',
+        href: '/fr/legal',
         isExternal: false
       },
       {

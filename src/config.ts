@@ -7,10 +7,10 @@ export const SEARCH_RESULT_LIFETIME = 2_592_000; // 30 days
 export const PAGINATION_LIMIT = 48;
 export type Theme = 'foods' | 'goods' | 'transports' | 'events' | 'services' | 'accommodations';
 export const landingPagesUrl = new Map<Theme, string>([
-  ['accommodations', '/logement'],
-  ['foods', '/alimentation'],
-  ['goods', '/mes-achats'],
-  ['transports', '/transport-responsable'],
+  ['accommodations', '/fr/logement'],
+  ['foods', '/fr/alimentation'],
+  ['goods', '/fr/mes-achats'],
+  ['transports', '/fr/transport-responsable'],
 ]);
 export const TAGSPLITTER = '|||';
 
