@@ -2,6 +2,7 @@ import { Theme, themesIcons } from '@/config';
 import { Blockquote, Box, Image, List, ListItem, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 
+
 export const getIconFromTheme = ({
   theme,
   selected = false,
@@ -35,7 +36,7 @@ export const displayContentElementFromBlocks = (node: any, index: number): React
     case 'heading':
       let titleContent;
 
-      // Prevent title theme overrides from insered Span components
+      // Prevent title theme overrides from inserted Span components
       if (children.length === 1 && children[0].type === "text"){
           titleContent = children[0].text
       } else {
@@ -106,3 +107,82 @@ export const displayContentElementFromBlocks = (node: any, index: number): React
       return <Space h="md" />;
   }
 };
+
+/**
+ * Groups content by H2 headings and returns sections
+ */
+export const groupContentBySections = (content: any[]): Array<{ title: string; content: any[] }> => {
+  const sections: Array<{ title: string; content: any[] }> = [];
+  let currentSection: { title: string; content: any[] } | null = null;
+
+  content.forEach((node) => {
+    if (node.type === 'heading' && node.level === 2) {
+      // Save previous section if exists
+      if (currentSection) {
+        sections.push(currentSection);
+      }
+      
+      // Extract title text
+      const titleText = node.children.length === 1 && node.children[0].type === "text"
+        ? node.children[0].text
+        : node.children.map((child: any) => child.text || '').join('');
+      
+      // Start new section
+      currentSection = {
+        title: titleText,
+        content: []
+      };
+    } else if (currentSection) {
+      // Add content to current section
+      currentSection.content.push(node);
+    } else {
+      // Content before first H2 - create default section
+      if (sections.length === 0) {
+        currentSection = {
+          title: '',
+          content: [node]
+        };
+      }
+    }
+  });
+
+  // Add last section
+  if (currentSection) {
+    sections.push(currentSection);
+  }
+
+  return sections;
+};
+
+/**
+ * Extracts preview text from content (first 2 lines or ~150 characters)
+ */
+export const getContentPreview = (content: any[]): string => {
+  let preview = '';
+  let charCount = 0;
+  const maxChars = 150;
+
+  for (const node of content) {
+    if (charCount >= maxChars) break;
+
+    if (node.type === 'paragraph' && node.children) {
+      for (const child of node.children) {
+        if (child.type === 'text' && child.text) {
+          const remainingChars = maxChars - charCount;
+          const textToAdd = child.text.substring(0, remainingChars);
+          preview += textToAdd;
+          charCount += textToAdd.length;
+          
+          if (charCount >= maxChars) {
+            preview += '...';
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  return preview ;
+};
+
+// Note: This will be imported from ContentAccordion.tsx

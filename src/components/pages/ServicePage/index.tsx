@@ -3,15 +3,12 @@ import { FetchService, FetchServiceContent, Service } from '@/types';
 import {
   Alert,
   Badge,
-  Blockquote,
   Box,
   Button,
   Grid,
   GridCol,
   Group,
   Image,
-  List,
-  ListItem,
   Space,
   Stack,
   Text,
@@ -23,11 +20,11 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
-import { fr } from 'date-fns/locale'; // Import the locales you need
+import { fr } from 'date-fns/locale';
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
-import { displayContentElementFromBlocks } from '../../content/utils-ui';
-import { fetchService } from '@/algolia/utils'; // ou l'import adapté
+import { ContentAccordion } from '../../content/ContentAccordion';
+import { fetchService } from '@/algolia/utils';
 import ProductLandingPageBanner from '@/components/common/ProductLandingPageBanner';
 
 type PageParams = {
@@ -65,8 +62,6 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
       premiumContent = res
     })
     .catch(() => premiumContentError = true);
-
-  //const score = calculateMeanScore(service?.tags);
 
   // @ts-ignore
   const fields = Object.keys(getActionFilters({ themes: [theme] })).filter((f: string) => !!service?.[f]);
@@ -167,11 +162,13 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
           </Alert>
         ) : null}
         {service.premium && Array.isArray(premiumContent) && premiumContent.length > 0 ? (
-            <><Stack p="md">{premiumContent.map(displayContentElementFromBlocks)}</Stack>
-            <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
-            {t('report-offer-label')}
-              <Link href={`/contact?report=${code}`}>{t('report-offer-cta-label')}</Link>
-            </Group></>
+            <>
+              <ContentAccordion content={premiumContent} />
+              <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+                {t('report-offer-label')}
+                <Link href={`/contact?report=${code}`}>{t('report-offer-cta-label')}</Link>
+              </Group>
+            </>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
             {t('go-premium-label')}
