@@ -60,16 +60,15 @@
     ]
   },
   "services": {
-    "Les Comparateurs de banques": [],
+    "Comparateurs": [],
+    "Comparateurs de banques": [],
+    "Comparateur énergies vertes": [],
+    "Comparateurs de motorisation (voiture)": [],
     "Les aides financières": [
       "Les aides financières publiques",
       "Aides financières des associations",
       "Aides financières des entreprises à destination des particuliers"
-    ],
-    "Les restaurants": [],
-    "les sorties": [],
-    "les loisirs": [],
-    "les vacances": []
+    ]
   },
   "events": {
     "Ateliers": [],

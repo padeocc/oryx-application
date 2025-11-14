@@ -84,6 +84,12 @@ const ServicesPage = async ({
     ...Object.keys(filters).reduce((all: {}, key: string) => {
       /*@ts-ignore*/
       const value = filters?.[key];
+      if (typeof value === 'boolean') {
+        return { ...all, [key]: value };
+      }
+      if (Array.isArray(value)) {
+        return { ...all, [key]: value };
+      }
       if (value) {
         return { ...all, [key]: value };
       }

@@ -31,11 +31,19 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
 
 export const cleanFiltersValues = (values: Filters) => {
   const possibleActions: ActionFilters = getActionFilters({ themes: values?.theme || undefined });
-  const possibleFields = [...Object.keys(possibleActions), 'region', 'theme', 'location', 'query'];
+  const allActionFilters = Object.keys(getActionFilters({}));
+  const possibleFields = [...new Set([...Object.keys(possibleActions), ...allActionFilters, 'region', 'theme', 'location', 'query'])];
 
   const cleanedValues: Filters = Object.keys(values).reduce((all, valueKey) => {
     /* @ts-ignore */
     const value = values?.[valueKey];
+    /* @ts-ignore */
+    const isBooleanFilter = allActionFilters.includes(valueKey);
+
+    if (isBooleanFilter) {
+      return { ...all, [valueKey]: value };
+    }
+    
     if (!value || !possibleFields.includes(valueKey)) {
       return all;
     }

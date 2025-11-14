@@ -73,17 +73,14 @@
       "Marchés": []
   },
   "services": {
+    "Comparateurs": [],
     "Comparateurs de banques": [],
     "Comparateur énergies vertes": [],
-    "Voiture : comparateurs de motorisation": [],
+    "Comparateurs de motorisation (voiture)": [],
     "Les aides financières": [
       "Aides financières publiques",
       "Aides financières des associations",
       "Aides financières des entreprises à destination des particuliers"
-    ],
-    "Les restaurants": [],
-    "Les sorties": [],
-    "Les loisirs": [],
-    "Les vacances": []
+    ]
   }
 }
