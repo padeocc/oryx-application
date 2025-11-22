@@ -69,7 +69,8 @@
   box-shadow: 0 6px 24px rgba(52, 152, 162, 0.18);
   border: 2px solid #E1F3F3;
   max-width: 720px;
-  min-width: 480px;
+  min-width: auto;
+  width: fit-content;
   animation: slideDown 0.25s ease-out;
   overflow: hidden;
 }
@@ -85,7 +86,7 @@
 }
 
 .dropdownGridWithSub {
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px 250px;
 }
 
 .dropdownGridNoSub {
@@ -127,8 +128,8 @@
 
 /* Sub-categories */
 .subCategoriesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   align-content: start;
   animation: fadeInRight 0.25s ease-out;
