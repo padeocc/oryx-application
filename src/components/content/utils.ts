@@ -29,6 +29,9 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
   );
 };
 
+export const sortAlphabetically = (a: string, b: string): number => 
+  a.localeCompare(b, 'fr', { sensitivity: 'base' });
+
 export const cleanFiltersValues = (values: Filters) => {
   const possibleActions: ActionFilters = getActionFilters({ themes: values?.theme || undefined });
   const allActionFilters = Object.keys(getActionFilters({}));

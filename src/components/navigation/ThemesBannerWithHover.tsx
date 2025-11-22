@@ -10,7 +10,7 @@ import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
 import data from './themes-categories.json';
 import styles from './themes-banner.module.css';
 import { Filters } from '@/types';
-import { cleanFiltersValues } from '../content/utils';
+import { cleanFiltersValues, sortAlphabetically } from '../content/utils';
 
 const ALL_ACTION_FILTERS = {
   organic: false,
@@ -94,12 +94,17 @@ const ThemesBannerWithHover = ({
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const getCategories = (theme: Theme) => Object.keys(data[theme] || {});
+  const getCategories = (theme: Theme) => {
+    const categories = Object.keys(data[theme] || {});
+    return categories.sort(sortAlphabetically);
+  };
   
   const getSubCategories = (theme: Theme, category: string): string[] => {
     const themeData: any = data[theme] || {};
     const subCats = themeData[category];
-    return Array.isArray(subCats) ? subCats : [];
+    return Array.isArray(subCats) 
+      ? subCats.sort(sortAlphabetically)
+      : [];
   };
   
   const handleMouseEnter = (theme: Theme) => {
@@ -181,7 +186,7 @@ const ThemesBannerWithHover = ({
     >
       <div style={{ position: 'relative', maxWidth: '1280px', margin: '0 auto', padding: '8px 1px' }}>
         <Group justify="flex-start" visibleFrom="md" style={{ overflow: 'visible' }}>
-          {themes.map(theme => renderButton('theme', theme))}
+          {themes.sort((a, b) => sortAlphabetically(t(a), t(b))).map(theme => renderButton('theme', theme))}
           {renderButton('economic')}
         </Group>
 
@@ -197,7 +202,7 @@ const ThemesBannerWithHover = ({
           }}
         >
           <Group gap="xs" wrap="nowrap" style={{ flexWrap: 'nowrap', minWidth: 'min-content' }}>
-            {themes.map(theme => renderButton('theme', theme, true))}
+            {themes.sort((a, b) => sortAlphabetically(t(a), t(b))).map(theme => renderButton('theme', theme, true))}
             {renderButton('economic', undefined, true)}
           </Group>
         </Box>
