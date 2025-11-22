@@ -29,7 +29,7 @@ const Results = ({
   if (isLoading) {
     return (
       <Stack>
-        <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'xs', sm: 'sm' }}>
+        <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'md', sm: 'lg' }}>
           {[...Array(12)].map((_item, index) => (
             <GridCol span={{ base: 12, sm: 4, md: 3 }} key={`skel-${index}`}>
               <ServiceCard
@@ -60,7 +60,7 @@ const Results = ({
             <Title order={2}>{t(`total-results-label`, { count: totalNumberOfResults })}</Title>
             {total > 1 ? <Pagination page={activePage} total={total} filters={filters} /> : null}
           </Group>
-          <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'xs', sm: 'sm' }}>
+          <Grid justify="flex-start" align="stretch" mt="lg" gutter={{ base: 'md', sm: 'lg' }}>
             {transformServicesFromResults({ results: data }).map((service: Service, index: number) => (
               <GridCol
                 span={{ base: 12, sm: 4, md: 3 }}

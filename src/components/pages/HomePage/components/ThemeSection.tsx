@@ -80,7 +80,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
         ))}
       </Box>
 
-      <Grid visibleFrom="sm" justify="stretch" align="stretch" c={color} gutter="sm">
+      <Grid visibleFrom="sm" justify="stretch" align="stretch" c={color} gutter="lg">
         {items.map((service, index) => (
           <GridCol span={{ sm: 6, md: 4, xl: 3 }} key={`action-desktop-${service.theme}-${service.name}-${index}`}>
             <ServiceCard

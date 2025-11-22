@@ -117,6 +117,11 @@ const ThemesBannerWithHover = ({
     setMobileSelectedCategory(null);
   };
 
+  const handleTouchFeedback = (e: React.TouchEvent<HTMLDivElement>, isActive: boolean) => {
+    e.currentTarget.style.backgroundColor = isActive ? '#E1F3F3' : 'transparent';
+    e.currentTarget.style.borderColor = isActive ? '#3498A2' : '#E1F3F3';
+  };
+
   const renderButton = (type: 'theme' | 'economic', theme?: Theme, isMobile = false) => {
     const isTheme = type === 'theme';
     const key = isTheme ? theme : 'economic';
@@ -411,37 +416,65 @@ const ThemesBannerWithHover = ({
                     <Divider my={4} />
                     {getCategories(mobileModalOpen).map(category => {
                     const hasSubCategories = getSubCategories(mobileModalOpen, category).length > 0;
+                    const categoryUrl = `/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: category })}`;
                     
                     return hasSubCategories ? (
                       <div
                         key={category}
-                        onClick={() => setMobileSelectedCategory(category)}
                         className={styles.mobileCategoryItem}
-                        onTouchStart={(e) => {
-                          e.currentTarget.style.backgroundColor = '#E1F3F3';
-                          e.currentTarget.style.borderColor = '#3498A2';
-                        }}
-                        onTouchEnd={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.borderColor = '#E1F3F3';
-                        }}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                       >
-                        <Text
-                          size="sm"
-                          fw={600}
-                          c="gray.8"
-                          className={styles.comfortaaFont}
+                        <Link
+                          href={categoryUrl}
+                          style={{ 
+                            textDecoration: 'none', 
+                            flex: 1,
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                          onClick={() => {
+                            setMobileModalOpen(null);
+                            setMobileSelectedCategory(null);
+                          }}
                         >
-                          {category}
-                        </Text>
-                        <div className={styles.mobileCategoryArrow}>
+                          <div
+                            style={{ flex: 1 }}
+                            onTouchStart={(e) => handleTouchFeedback(e, true)}
+                            onTouchEnd={(e) => handleTouchFeedback(e, false)}
+                          >
+                            <Text
+                              size="sm"
+                              fw={600}
+                              c="gray.8"
+                              className={styles.comfortaaFont}
+                            >
+                              {category}
+                            </Text>
+                          </div>
+                        </Link>
+                        <div
+                          className={styles.mobileCategoryArrow}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setMobileSelectedCategory(category);
+                          }}
+                          onTouchStart={(e) => {
+                            e.stopPropagation();
+                            handleTouchFeedback(e, true);
+                          }}
+                          onTouchEnd={(e) => {
+                            e.stopPropagation();
+                            handleTouchFeedback(e, false);
+                          }}
+                          style={{ cursor: 'pointer', padding: '8px', marginLeft: '8px' }}
+                        >
                           <Text c="green_oryx.7" size="lg" fw={700}>›</Text>
                         </div>
                       </div>
                     ) : (
                       <Link 
                         key={category}
-                        href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: category })}`} 
+                        href={categoryUrl}
                         style={{ textDecoration: 'none' }}
                         onClick={() => {
                           setMobileModalOpen(null);
