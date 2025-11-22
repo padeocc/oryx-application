@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { getLogoImage } from '../../content/utils';
+import { getLogoImage, sortAlphabetically } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale';
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
@@ -74,6 +74,10 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   //TODO refacto type on CMS
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';
 
+  const sortedFields = [...fields].sort((a, b) => 
+    sortAlphabetically(tFilters(`filter-${a}-label`), tFilters(`filter-${b}-label`))
+  );
+
   return (
     <Stack>
       <ProductBreadcrumbs theme={theme} name={name} />
@@ -119,7 +123,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
               {tag}
             </Badge>
           ))}
-          {fields.map(field => (
+          {sortedFields.map(field => (
             <Badge
               key={`tag-${theme}-${service.name}-${field}`}
               size="sm"

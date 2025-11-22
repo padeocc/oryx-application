@@ -10,6 +10,7 @@ import { IResult } from '@/algolia/types';
 import SearchBar from '../../navigation/SearchBar';
 import Partners from '@/components/partners';
 import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
+import { sortAlphabetically } from '@/components/content/utils';
 
 const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[]> => {
   const { results }: SearchResponses<unknown> = await search({
@@ -24,11 +25,14 @@ const fetchThemeServices = async ({ theme }: { theme: Theme }): Promise<Service[
 
 const HomePage = async ({}: {}) => {
   const t = await getTranslations('home_page');
+  const tThemes = await getTranslations('themes');
   const themesSections = await Promise.all(
-    Object.keys(themesIcons).map(async theme => {
-      const services = await fetchThemeServices({ theme: theme as Theme });
-      return <ThemeSection items={services} theme={theme as Theme} key={`theme-${theme}`} />;
-    })
+    Object.keys(themesIcons)
+      .sort((a, b) => sortAlphabetically(tThemes(a), tThemes(b)))
+      .map(async theme => {
+        const services = await fetchThemeServices({ theme: theme as Theme });
+        return <ThemeSection items={services} theme={theme as Theme} key={`theme-${theme}`} />;
+      })
   );
   return (
     <Stack gap={0}>

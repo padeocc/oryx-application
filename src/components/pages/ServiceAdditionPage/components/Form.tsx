@@ -1,6 +1,7 @@
 'use client';
 
 import BadgeSelector from '@/components/pages/ServicesPage/components/Form/components/BadgeSelector';
+import { sortAlphabetically } from '@/components/content/utils';
 import { LOCATIONS, REGIONS, Theme, themes, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
 import {
@@ -83,11 +84,15 @@ const Form = ({
 
   const values = form.getValues();
   const needsRegion = ['store', 'store-and-online'].includes(values.location);
-  const tags = getTagsFromThemes(values.theme).map((tag: string) => ({ value: tag, label: tag }));
-  const options = getOptionsFromThemes(values.theme, values.tags).map((option: string) => ({
-    value: option,
-    label: option
-  }));
+  const tags = getTagsFromThemes(values.theme)
+    .sort(sortAlphabetically)
+    .map((tag: string) => ({ value: tag, label: tag }));
+  const options = getOptionsFromThemes(values.theme, values.tags)
+    .sort(sortAlphabetically)
+    .map((option: string) => ({
+      value: option,
+      label: option
+    }));
 
   const structureOptions = [
     { value: 'company', label: t('form-structure-company') },
