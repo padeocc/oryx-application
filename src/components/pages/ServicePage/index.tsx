@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { getLogoImage, getCategoryFromTags } from '../../content/utils';
+import { getLogoImage, getCategoryFromTags, sortAlphabetically } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale';
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
@@ -83,6 +83,10 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
     activeCategoryTag.toLowerCase().includes(tag.toLowerCase())
   ) : null;
 
+  const sortedFields = [...fields].sort((a, b) => 
+    sortAlphabetically(tFilters(`filter-${a}-label`), tFilters(`filter-${b}-label`))
+  );
+
   return (
     <Stack>
       <ProductBreadcrumbs theme={theme} name={name} tags={tags} />
@@ -137,7 +141,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
               </Badge>
             );
           })}
-          {fields.map(field => (
+          {sortedFields.map(field => (
             <Badge
               key={`tag-${theme}-${service.name}-${field}`}
               size="sm"

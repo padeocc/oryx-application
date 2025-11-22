@@ -29,6 +29,9 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
   );
 };
 
+export const sortAlphabetically = (a: string, b: string): number => 
+  a.localeCompare(b, 'fr', { sensitivity: 'base' });
+
 export const getCategoryFromTags = (theme: Theme, tags: string[], categoriesData: any): string | null => {
   const themeCategories = categoriesData[theme] || {};
   const categoryKeys = Object.keys(themeCategories);

@@ -1,6 +1,6 @@
 'use client';
 
-import { getLogoImage } from '@/components/content/utils';
+import { getLogoImage, sortAlphabetically } from '@/components/content/utils';
 import NotFound from '@/components/navigation/NotFound';
 import { Theme, getActionFilters } from '@/config';
 import { Service } from '@/types';
@@ -76,7 +76,10 @@ const ServiceCard = ({
   const fields = Object.keys(getActionFilters({ themes: [theme] }))
     //@ts-ignore
     .filter(f => !!service[f])
-    .map(field => tFilters(`filter-${field}-label`));
+    .map(field => tFilters(`filter-${field}-label`))
+    .sort(sortAlphabetically);
+
+  const allTags = [...(service?.tags || []), ...fields];
 
   return (
     <Card
@@ -99,7 +102,7 @@ const ServiceCard = ({
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
                   <Tags
-                    tags={[...(service?.tags || []), ...fields]}
+                    tags={allTags}
                     color={color}
                     basekey={`${theme}-${service.name}`}
                     firstTag={
