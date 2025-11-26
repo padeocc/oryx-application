@@ -73,7 +73,12 @@ const TeamPage = async ({}: {}) => {
       name: 'Brahmjot KAUR',
       jobs: ['UX design'],
       imageLink: '/images/team_Brahmjot_K.jpg'
-    }
+    },
+    {
+      name: 'Naima TOURAGHE',
+      jobs: ['Dev full stack'],
+      imageLink: '/images/team_Naima_T.jpg'
+    },
   ];
   const cards = team.map(member => (
     <Card key={member.name} p="md" radius="md" component="a">
