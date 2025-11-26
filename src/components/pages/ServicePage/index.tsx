@@ -34,13 +34,17 @@ type PageParams = {
   fetchServiceContent: FetchServiceContent
 };
 
+const getRegionTranslationKey = (rawRegion: string | null | undefined): string => {
+  if (!rawRegion) return '';
+  const regionClean = rawRegion.replace(/^Région\s*:\s*/i, '').trim();
+  return `region_${regionClean}_label`;
+};
+
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
-
   if (newUrl.endsWith('/')) {
     newUrl = newUrl.slice(0, -1);
   }
-
   return newUrl;
 };
 
@@ -68,8 +72,11 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   const { name, tags = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
-  let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
-  labelRegion = labelRegion.includes(`region_${service.region}_label`) ? service.region : labelRegion;
+  const regionKey = getRegionTranslationKey(service?.region);
+  let labelRegion = regionKey ? tFilters(regionKey) : '';
+  if (!labelRegion || labelRegion === regionKey) {
+    labelRegion = service?.region ?? '';
+  }
 
   //TODO refacto type on CMS
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';

@@ -1,7 +1,24 @@
 import { Theme, themesIcons } from '@/config';
 import { Blockquote, Box, Image, List, ListItem, Space, Text, Title } from '@mantine/core';
 import Link from 'next/link';
+import React from 'react';
 
+export type BlockNode = {
+  type?: string;
+  text?: string;
+  children?: BlockNode[];
+  url?: string;
+  bold?: boolean;
+  strikethrough?: boolean;
+  underline?: boolean;
+  italic?: boolean;
+  image?: {
+    url?: string;
+    alternativeText?: string;
+  };
+  format?: string;
+  level?: number;
+};
 
 export const getIconFromTheme = ({
   theme,
@@ -26,163 +43,155 @@ export const getIconFromTheme = ({
     </Text>
   );
 };
-
-/**
- * Transforms cms blocks to jsx
- */
-export const displayContentElementFromBlocks = (node: any, index: number): React.ReactElement | undefined => {
-  const { type, children } = node;
-  switch (type) {
-    case 'heading':
-      let titleContent;
-
-      // Prevent title theme overrides from inserted Span components
-      if (children.length === 1 && children[0].type === "text"){
-          titleContent = children[0].text
-      } else {
-          titleContent = children.map(displayContentElementFromBlocks)
-      }
-      return (
-        <Title
-          key={index}
-          order={node.level}
-          fw={node.level === 1 ? 'bolder' : node.level === 2 ? 'bold' : node.level === 3 ? 'bold' : 'normal'}
-          fz={node.level === 1 ? '1.6rem' : node.level === 2 ? '1.4rem' : node.level === 3 ? '1.2rem' : '1rem'}>
-          {titleContent}
-        </Title>
-      );
-    case 'paragraph':
-      return (
-        <Box key={index}>
-          <Text>{children.map(displayContentElementFromBlocks)}</Text>
-        </Box>
-      );
-    case 'text':
-      let props = {};
-
-      if (node.bold) {
-        props = { ...props, fw: 'bold' };
-      }
-
-      if (node.strikethrough) {
-        props = { ...props, td: 'line-through' };
-      }
-
-      if (node.underline) {
-        props = { ...props, td: 'underline' };
-      }
-
-      if (node.italic) {
-        props = { ...props, fs: 'italic' };
-      }
-
-      return (
-        <Text key={index} component="span" {...props}>
-          {node.text}
-        </Text>
-      );
-    case 'link':
-      return (
-        <Link href={`${node.url}`} target="_blank" key={index}>
-          {children.map(displayContentElementFromBlocks)}
-        </Link>
-      );
-    case 'image':
-      return (
-        <Image style={{ maxWidth: '100%' }} src={node.image.url} alt={node.image.alternativeText || ''} key={index} />
-      );
-    case 'list':
-      const listTag = node.format === 'unordered' ? 'ul' : 'ol';
-      return <List c={listTag} key={index}>{node.children.map(displayContentElementFromBlocks)}</List>;
-    case 'list-item':
-      return <ListItem key={index}>{node.children.map(displayContentElementFromBlocks)}</ListItem>;
-    case 'quote':
-      return (
-        <>
-          <Space h="md" />
-          <Blockquote>{children.map(displayContentElementFromBlocks)}</Blockquote>
-        </>
-      );
-    default:
-      return <Space h="md" />;
-  }
-};
-
-/**
- * Groups content by H2 headings and returns sections
- */
-export const groupContentBySections = (content: any[]): Array<{ title: string; content: any[] }> => {
-  const sections: Array<{ title: string; content: any[] }> = [];
-  let currentSection: { title: string; content: any[] } | null = null;
+export const groupContentBySections = (
+  content: BlockNode[]
+): Array<{ title: string; content: BlockNode[] }> => {
+  const sections: Array<{ title: string; content: BlockNode[] }> = [];
+  let currentSection: { title: string; content: BlockNode[] } | null = null;
 
   content.forEach((node) => {
     if (node.type === 'heading' && node.level === 2) {
-      // Save previous section if exists
       if (currentSection) {
         sections.push(currentSection);
       }
-      
-      // Extract title text
-      const titleText = node.children.length === 1 && node.children[0].type === "text"
-        ? node.children[0].text
-        : node.children.map((child: any) => child.text || '').join('');
-      
-      // Start new section
+      const titleText =
+        node.children && node.children.length === 1 && node.children[0].type === 'text'
+          ? node.children[0].text || ''
+          : (node.children ?? []).map((child) => child.text || '').join('');
       currentSection = {
         title: titleText,
         content: []
       };
     } else if (currentSection) {
-      // Add content to current section
       currentSection.content.push(node);
-    } else {
-      // Content before first H2 - create default section
-      if (sections.length === 0) {
-        currentSection = {
-          title: '',
-          content: [node]
-        };
-      }
+    } else if (sections.length === 0) {
+      currentSection = {
+        title: '',
+        content: [node]
+      };
     }
   });
 
-  // Add last section
   if (currentSection) {
     sections.push(currentSection);
   }
-
   return sections;
 };
 
-/**
- * Extracts preview text from content (first 2 lines or ~150 characters)
- */
-export const getContentPreview = (content: any[]): string => {
-  let preview = '';
-  let charCount = 0;
-  const maxChars = 150;
 
-  for (const node of content) {
-    if (charCount >= maxChars) break;
-
-    if (node.type === 'paragraph' && node.children) {
-      for (const child of node.children) {
-        if (child.type === 'text' && child.text) {
-          const remainingChars = maxChars - charCount;
-          const textToAdd = child.text.substring(0, remainingChars);
-          preview += textToAdd;
-          charCount += textToAdd.length;
-          
-          if (charCount >= maxChars) {
-            preview += '...';
-            break;
-          }
-        }
+const getMainTitleContent = (children: BlockNode[]): React.ReactNode[] => {
+  return children
+    .map((child: BlockNode, idx: number) => {
+      if (child.type === 'text' && child.text && child.text.trim() !== '') {
+        return child.text;
       }
-    }
-  }
-
-  return preview ;
+      if (child.type === 'link' && Array.isArray(child.children)) {
+        const linkText = child.children
+          .map((c: BlockNode) => c.text && c.text.trim() !== '' ? c.text : '')
+          .filter(Boolean)
+          .join(' ');
+        return linkText
+          ? (
+              <Link href={child.url ?? ''} target="_blank" key={`${child.url}-${idx}`}>
+                {linkText}
+              </Link>
+            )
+          : null;
+      }
+      return null;
+    })
+    .filter((el) => el != null);
 };
 
-// Note: This will be imported from ContentAccordion.tsx
+/**
+ * Transforms cms blocks to jsx
+ */
+export const displayContentElementFromBlocks = (
+  node: BlockNode,
+  index: number
+): React.ReactElement => {
+  const { type, children = [] } = node;
+  switch (type) {
+    case 'heading': {
+      let titleContent: React.ReactNode;
+      if (
+        children.length === 1 &&
+        children[0].type === "text" &&
+        children[0].text &&
+        children[0].text.trim() !== ''
+      ) {
+        titleContent = children[0].text;
+      } else {
+        titleContent = getMainTitleContent(children);
+      }
+
+      if (
+        titleContent === undefined ||
+        (typeof titleContent === 'string' && titleContent.trim() === '') ||
+        (Array.isArray(titleContent) && titleContent.length === 0)
+      ) {
+        return <></>;
+      }
+
+      const order: 1|2|3|4|5|6 = [1,2,3,4,5,6].includes(node.level as number)
+        ? (node.level as 1|2|3|4|5|6)
+        : 3;
+
+      return (
+        <Title
+          key={index}
+          order={order}
+          fw={order === 1 ? 'bolder' : order === 2 ? 'bold' : order === 3 ? 'bold' : 'normal'}
+          fz={order === 1 ? '1.6rem' : order === 2 ? '1.4rem' : order === 3 ? '1.2rem' : '1rem'}
+        >
+          {Array.isArray(titleContent)
+            ? titleContent.map((frag, i) => <React.Fragment key={i}>{frag} </React.Fragment>)
+            : titleContent}
+        </Title>
+      );
+    }
+    case 'paragraph':
+      return (
+        <Box key={index}>
+          <Text>{children.map((c, i) => displayContentElementFromBlocks(c, i))}</Text>
+        </Box>
+      );
+    case 'text': {
+      let props: Record<string, any> = {};
+      if (node.bold) props = { ...props, fw: 'bold' };
+      if (node.strikethrough) props = { ...props, td: 'line-through' };
+      if (node.underline) props = { ...props, td: 'underline' };
+      if (node.italic) props = { ...props, fs: 'italic' };
+      return (
+        <Text key={index} component="span" {...props}>
+          {node.text || ''}
+        </Text>
+      );
+    }
+    case 'link':
+      return (
+        <Link href={`${node.url ?? ''}`} target="_blank" key={index}>
+          {children.map((c, i) => displayContentElementFromBlocks(c, i))}
+        </Link>
+      );
+    case 'image':
+      return (
+        <Image style={{ maxWidth: '100%' }} src={node.image?.url || ''} alt={node.image?.alternativeText || ''} key={index} />
+      );
+    case 'list': {
+      const listTag = node.format === 'unordered' ? 'ul' : 'ol';
+      return <List c={listTag} key={index}>{children.map((c, i) => displayContentElementFromBlocks(c, i))}</List>;
+    }
+    case 'list-item':
+      return <ListItem key={index}>{children.map((c, i) => displayContentElementFromBlocks(c, i))}</ListItem>;
+    case 'quote':
+      return (
+        <>
+          <Space h="md" />
+          <Blockquote>{children.map((c, i) => displayContentElementFromBlocks(c, i))}</Blockquote>
+        </>
+      );
+    default:
+      return <Space h="md" key={index} />;
+  }
+};

@@ -185,6 +185,7 @@
     "region_973_label": "Guyane",
     "region_974_label": "La Réunion",
     "region_976_label": "Mayotte",
+    "region_Occitanie_label": "Occitanie",
     "region_National_label": "National",
     "reset-action-label": "Réinitialiser tous les filtres",
     "reset-filter-label": "Réinitialiser ce filtre",
@@ -294,8 +295,7 @@
   "metadata": {
     "description": "Trouver des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
     "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
-    "title": "OryxChange, le compagnon des initiatives écoresponsables !",
-    "search_title": "Recherche de solutions dans Oryxchange"
+    "title": "OryxChange, le compagnon des initiatives écoresponsables !"
   },
   "navigation_items": {
     "contact_label": "Nous contacter",
@@ -356,13 +356,6 @@
     "form-validation-ko-description": "Merci de réessayer un peu plus tard",
     "form-email-label": "Votre adresse email (Optionnel)",
     "form-email-placeholder": "nom@site.fr",
-    "form-structure-company-placeholder": "Veuillez entrer l'adresse exacte d'entreprise",
-    "form-shopadress-label":"Adresse complète (Optionnel)",
-    "form-shopadress-placeholder": "Veuillez entrer l'adresse exacte du magasin",
-    "form-shopcity-label":"Ville",
-    "form-shopcity-placeholder":"Veuillez entrer la ville du magasin",
-    "form-shoppostalcode-label":"Code postal",
-    "form-shoppostalcode-placeholder":"Veuillez entrer code postal",
     "form-structure-label": "Sélectionner la structure (Optionnel)",
     "form-structure-placeholder": "Choisissez la structure",
     "form-structure-company": "Entreprise",
