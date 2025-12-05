@@ -1,29 +1,22 @@
 'use client';
 
 import { landingPagesUrl, Theme, themesColors, themesIcons } from '@/config';
-import { Service } from '@/types';
+import { Service, User } from '@/types';
 import { Anchor, Button, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ServiceCard from '../../../ServiceCard';
 import style from './theme-section.module.css';
 import { useCurrentUser } from '@/app/context/CurrentUserContext';
-
-const mapServicesWithFavorite = (items: Service[]) => {
-  const currentUser = useCurrentUser();
-  return items.map((service: Service) => {
-    if (currentUser.user?.favorites.filter(favorite => favorite.serviceCode === service.code).length) {
-      service.isFavorite = true;
-    }
-    return service;
-  });
-};
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const Icon = themesIcons[theme];
   const color = themesColors[theme];
   const tTheme = useTranslations('themes');
   const tCommon = useTranslations('common');
+  let currentUser = useCurrentUser();
+  const session = useSessionContext();
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const moreLinkProps = {
     c: color,
@@ -32,7 +25,11 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     href: `/services?filters={"theme":["${theme}"]}`,
     style: { cursor: 'pointer', color: 'inherit', textDecoration: 'none' }
   };
-  items = mapServicesWithFavorite(items);
+  useEffect(()=>{
+    if(!session.loading && session.doesSessionExist && (currentUser.user===undefined)){
+      window.location.reload()
+    }
+  }, [session.loading])
   return (
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
       <Group w="100%" grow preventGrowOverflow={false}>

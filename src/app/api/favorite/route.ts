@@ -3,6 +3,11 @@ import { NextResponse, NextRequest } from 'next/server';
 import { ensureSuperTokensInit } from '../../config/backend';
 import { Favorite } from '@/db/entities/Favorite';
 import { getDBConnection } from '@/db/connection';
+import { Service } from '@/types';
+import { SearchResponses } from 'algoliasearch';
+import { search } from '@/algolia/search';
+import { transformServicesFromResults } from '@/algolia/utils';
+import { IResult } from '@/algolia/types';
 
 ensureSuperTokensInit();
 
@@ -15,19 +20,36 @@ export function GET(request: NextRequest) {
       return new NextResponse('Authentication required', { status: 401 });
     }
     const searchParams = request.nextUrl.searchParams;
-
+    const userId = parseInt(searchParams.get('userId') || '-1');
+    const favoriteId = parseInt(searchParams.get('favoriteId') || '-1');
+    const serviceCode = searchParams.get('serviceCode');
+    const whereConditions: { user?: { id: number }; id?: number; serviceCode?: string } = {};
+    if (userId > -1) {
+      whereConditions.user = { id: userId };
+    }
+    if (favoriteId > -1) {
+      whereConditions.id = favoriteId;
+    }
+    if (serviceCode) {
+      whereConditions.serviceCode = serviceCode;
+    }
     const dataSource = await getDBConnection();
     const favoriteRepository = dataSource.getRepository(Favorite);
-    const favorites = await favoriteRepository
-      .createQueryBuilder('favorite')
-      .leftJoinAndSelect('favorite.user', 'user')
-      .orderBy('user')
-      .getMany();
+    const favorites = await favoriteRepository.findAndCount({
+      where: whereConditions,
+      relations: {
+        user: !(userId > -1)
+      },
+      cache: true
+    });
     if (!favorites) {
       return new NextResponse('Not found', { status: 404 });
     }
+    const codes = favorites[0].map(favorite=>favorite.serviceCode)
+    const services = await fetchCodeServices(codes);
     return NextResponse.json({
-      favorites: favorites
+      favorites: services,
+      count: favorites[1]
     });
   });
 }
@@ -82,3 +104,13 @@ export async function DELETE(request: NextRequest) {
     return Response.json({ nothing: true });
   });
 }
+
+const fetchCodeServices = async ( codes : string[] ): Promise<Service[]> => {
+  const { results }: SearchResponses<unknown> = await search({
+    query: '',
+    page: 0,
+    filters: { id: codes }
+  });
+  /* @ts-ignore */
+  return transformServicesFromResults({ results: results[0].hits as IResult[] });
+};
