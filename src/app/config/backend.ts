@@ -8,24 +8,9 @@ import { appInfo } from './appInfo';
 import { TypeInput } from 'supertokens-node/types';
 import { getDBConnection } from '../../db/connection';
 import { User } from '../../db/entities/User';
+import { SMTPService } from 'supertokens-node/recipe/emailpassword/emaildelivery';
+import { SMTPService as EmailVerificationSMTPService } from 'supertokens-node/recipe/emailverification/emaildelivery';
 export const backendConfig = (): TypeInput => {
-  async function getUser(userId: string) {
-    const dataSource = await getDBConnection();
-    return Promise.resolve(dataSource)
-      .then(async () => {
-        const userRepository = dataSource.getRepository(User);
-        const user = await userRepository.find({
-          where: {
-            uuid: userId
-          },
-          relations: {
-            favorites: true
-          }
-        });
-        return user;
-      })
-      .catch(error => console.log('Error: ', error));
-  }
   async function addUser(dto: any) {
     const dataSource = await getDBConnection();
     return Promise.resolve(dataSource)
@@ -42,7 +27,16 @@ export const backendConfig = (): TypeInput => {
       })
       .catch(error => console.log('Error: ', error));
   }
-
+  let smtpSettings = {
+    host: process.env.SUPERTOKENS_SMTP_HOST || '',
+    password: process.env.SUPERTOKENS_SMTP_PASSWORD || '',
+    port: parseInt(process?.env?.SUPERTOKENS_SMTP_PORT!) || 1025,
+    from: {
+      name: process.env.SUPERTOKENS_SMTP_USERNAME || '',
+      email: process.env.SUPERTOKENS_SMTP_EMAIL || ''
+    },
+    secure: false
+  };
   return {
     framework: 'custom',
     supertokens: {
@@ -90,18 +84,22 @@ export const backendConfig = (): TypeInput => {
             signInPOST: async function (input) {
               let response = await original.signInPOST!(input);
               if (response.status === 'OK') {
-                const user = await getUser(response.user.id);
-                // response.currentUser = user
               }
               return response;
             }
           })
+        },
+        emailDelivery: {
+          service: new SMTPService({ smtpSettings })
         }
       }),
       SessionNode.init(),
       Dashboard.init(),
       EmailVerification.init({
-        mode: 'REQUIRED'
+        mode: 'REQUIRED',
+        emailDelivery: {
+          service: new EmailVerificationSMTPService({ smtpSettings })
+        }
       })
     ],
     isInServerlessEnv: true
