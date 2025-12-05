@@ -3,16 +3,11 @@ import { FetchService, FetchServiceContent, Service } from '@/types';
 import {
   Alert,
   Badge,
-  Blockquote,
-  Box,
   Button,
   Grid,
   GridCol,
   Group,
   Image,
-  List,
-  ListItem,
-  Space,
   Stack,
   Text,
   Title
@@ -28,6 +23,7 @@ import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
 import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { displayContentElementFromBlocks } from '../../content/utils-ui';
 import { fetchService } from '@/algolia/utils'; // ou l'import adapté
+import ActionsWrapper from '@/components/ServiceCard/components/ActionsWrapper/ActionsWrapper';
 
 type PageParams = {
   code: string
@@ -135,7 +131,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
           ))}
         </Group>
         <Grid>
-          <GridCol span={{ base: 12, sm: 7 }}>
+          <GridCol span={{ base: 12, sm: 7 }} style={{ position: 'relative', padding: '0px' }}>
             <Image
               src={getLogoImage({ service, theme })}
               alt={name}
@@ -143,6 +139,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
               objectfit="contain"
               style={{ maxHeight: '20rem' }}
             />
+            <ActionsWrapper serviceCode={service?.code || ''} isServiceFavorite={service.isFavorite || false} />
           </GridCol>
           <GridCol span={{ base: 12, sm: 5 }}>
             <Stack>

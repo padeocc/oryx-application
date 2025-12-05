@@ -459,8 +459,24 @@
   "utils": {
     "fulldate-format-day": "EEEE dd MMMM yyyy"
   },
-  
+  "modal_favorite": {
+    "title": "OryxChange, le compagnon des initiatives écoresponsables !",
+    "description": "Trouves toi aussi une action plus durable instantanément !",
+    "signin":{
+      "label": "Tu as déjà un compte ? ",
+      "link": "Se connecter"
+    },
+    "signup":{
+      "label": "Ou inscris-toi avec ",
+      "link": "ton adresse e-mail"
+    }
+  },
   "servicePage": {
     "reportMessage": "Bonjour,\nJe souhaite signaler un problème concernant l'offre intitulée \"{name}\".\n[Décrivez ici le problème : l'offre n'existe plus, le contenu est incomplet, le lien ne fonctionne pas, etc.]\nBien cordialement,"
+  },
+  "userPage": {
+    "favorites":{
+      "title": "Mes favoris"
+    }
   }
 }

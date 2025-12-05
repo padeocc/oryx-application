@@ -30,7 +30,8 @@ import Links from './components/Links';
 import Tags from './components/Tags';
 import style from './server-card.module.css';
 import ScoreBanner from '../common/ScoreBanner';
-import FavoriteButton from './components/FavoriteButton';
+import ActionsWrapper from './components/ActionsWrapper/ActionsWrapper';
+import { useCurrentUser } from '@/app/context/CurrentUserContext';
 
 const ServiceCard = ({
   service,
@@ -52,7 +53,15 @@ const ServiceCard = ({
   const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
   const router = useRouter();
-
+  const currentUser = useCurrentUser();
+  if (
+    service &&
+    currentUser.user?.favorites.filter(favorite => {
+      return favorite.serviceCode.localeCompare(service?.code) === 0;
+    }).length
+  ) {
+    service.isFavorite = true;
+  }
   if (asLoader) {
     return (
       <Card h={'100%'} bg={backgroundColor} color={color} className={style['card']}>
@@ -87,12 +96,24 @@ const ServiceCard = ({
       onMouseEnter={open}
       onMouseLeave={close}
       className={style['card']}>
-      <CardSection onClick={() => {
-        router.push(`/service/${theme}/${service.code}`);
-      }}>
-        <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
+      <CardSection>
+        <Image
+          src={getLogoImage({ service, theme })}
+          alt={service.name}
+          height={100}
+          onClick={() => {
+            router.push(`/service/${theme}/${service.code}`);
+          }}
+        />
+        <ActionsWrapper serviceCode={service?.code || ''} isServiceFavorite={service.isFavorite || false} />
       </CardSection>
-      <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
+      <Flex
+        style={{ alignContent: 'space-around', flexGrow: 1 }}
+        direction={'column'}
+        align={'stretch'}
+        onClick={() => {
+          router.push(`/service/${theme}/${service.code}`);
+        }}>
         <Stack pt={'md'} justify="space-between" h={'100%'}>
           <Stack>
             <Grid>
@@ -136,9 +157,6 @@ const ServiceCard = ({
             <Description service={service} theme={theme} />
           </Stack>
         </Stack>
-        <CardSection c={color} p={'sm'}>
-          <FavoriteButton serviceCode={service?.code||''} isServiceFavorite={service.isFavorite||false}/>
-        </CardSection>
         {asPreview ? null : (
           <CardSection c={color}>
             <Links service={service} theme={theme} hover={hover} />
