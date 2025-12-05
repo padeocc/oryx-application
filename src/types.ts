@@ -158,7 +158,7 @@ export type Filters = {
   diy?: boolean;
   comparer?: boolean;
   relocating?: boolean;
-  id?: string;
+  id?: string|string[];
 };
 
 export type DistinctFilters = {

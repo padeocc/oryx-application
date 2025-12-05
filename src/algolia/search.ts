@@ -18,7 +18,7 @@ export const search = async ({
   query: string;
   sort?: string;
   limit?: number;
-  filters?: Filters;
+  filters?: Filters|String;
   page: number;
 }): Promise<SearchResponses<unknown>> => {
   const searchParams = new URLSearchParams({
