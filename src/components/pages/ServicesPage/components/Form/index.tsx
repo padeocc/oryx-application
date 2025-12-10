@@ -1,7 +1,7 @@
 'use client';
 
 import { cleanFiltersValues } from '@/components/content/utils';
-import { getActionFilters, Theme, themes, themesColors, themesIcons } from '@/config';
+import { getActionFilters } from '@/config';
 import { ActionFilters, DistinctFilters, Filters } from '@/types';
 import {
   Alert,
@@ -18,37 +18,37 @@ import {
   Select,
   SimpleGrid,
   Stack,
-  Text,
   TextInput
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { CurrencyEur, MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
+import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import { FacetHits } from 'algoliasearch';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
-const Form = ({
-  initialValues,
-  distinctValues,
-  isLoading,
-  setIsLoading,
-  suggestions
-}: {
+const Form = forwardRef<{ toggle: () => void }, {
   initialValues: Filters;
   distinctValues: DistinctFilters;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  suggestions?: string[];
-}) => {
+}>(({
+  initialValues,
+  distinctValues,
+  isLoading,
+  setIsLoading
+}, ref) => {
   const t = useTranslations('services');
   const tThemes = useTranslations('themes');
   const tFilters = useTranslations('filters_component');
   const [openedDrawer, { toggle, close }] = useDisclosure(false);
   const [actions, setActions] = useState<ActionFilters>(getActionFilters({}));
   const typingTimeoutRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    toggle
+  }));
 
   useEffect(() => {
     const newActions = getActionFilters({ themes: initialValues?.theme || undefined });
@@ -90,14 +90,6 @@ const Form = ({
 
   const values = form.getValues();
 
-  const handleThemeClick = (theme: Theme) => {
-    const newSelectedThemes = values.theme?.includes(theme)
-      ? values.theme.filter(t => t !== theme)
-      : [...(values?.theme || []), theme];
-    form.setFieldValue('theme', newSelectedThemes);
-    handleSubmit(form.getValues());
-  };
-
   const selectedActions = Object.keys(actions).reduce((all: string[], actionKey: string) => {
     /*@ts-ignore*/
     const value = values?.[actionKey];
@@ -107,12 +99,6 @@ const Form = ({
     return all;
   }, []);
 
-  const handleEconomicClick = () => {
-    const isEconomicSelected = selectedActions.includes('economic');
-    form.setFieldValue('economic', !isEconomicSelected);
-    handleSubmit(form.getValues());
-  };
-
   const selectedFilters = ['query', 'region', 'location'].reduce((all: string[], key: string) => {
     /*@ts-ignore*/
     const value = values?.[key];
@@ -121,6 +107,31 @@ const Form = ({
     }
     return all;
   }, []);
+
+  const handleRemoveFilter = (filter: string) => {
+    const values = form.getValues();
+    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+      /*@ts-ignore*/
+      const value = values?.[valueKey];
+      return { ...all, [valueKey]: valueKey === filter ? undefined : value };
+    }, {});
+    form.setFieldValue(filter, filter === 'query' ? '' : null);
+    handleSubmit(updatedValues);
+  };
+
+  const handleRemoveAction = (action: string) => {
+    const values = form.getValues();
+    const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
+      /*@ts-ignore*/
+      const value = values?.[valueKey];
+      if (valueKey === action) {
+        return all;
+      }
+      return { ...all, [valueKey]: value };
+    }, {});
+    form.setFieldValue(action, null);
+    handleSubmit(updatedValues);
+  };
 
   return (
     <Stack pos="relative">
@@ -159,50 +170,87 @@ const Form = ({
             }}
           />
 
-          <Grid justify="space-between">
-            <GridCol span={{ base: 12, md: 7, lg: 8 }}>
-              {suggestions?.length ? (
-                <Group gap={'xs'}>
-                  <Text fz="sm">{tFilters('suggestions-title')}</Text>
-                  {suggestions.map(suggestion => {
-                    const suggestionValues: Filters = { theme: values?.theme, query: suggestion };
-                    return (
-                      <div
-                        key={`sugg-${suggestion}`}
-                        onClick={() => {
-                          setIsLoading(true);
-                        }}>
-                        <Text
-                          fz="xs"
-                          component={Link}
-                          href={`/services?filters=${cleanFiltersValues(suggestionValues)}`}
-                          styles={{ root: { textDecoration: 'underline' } }}>
-                          {suggestion}
-                        </Text>
-                      </div>
-                    );
-                  })}
-                </Group>
-              ) : null}
-            </GridCol>
-            <GridCol span={{ base: 12, md: 5, lg: 4 }}>
-              <Group align="end" justify="end">
-                <Button onClick={toggle} variant="outline" disabled={isLoading}>
-                  {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
-                </Button>
-                <Button
-                  variant="transparent"
-                  disabled={isLoading}
-                  onClick={() => {
-                    setIsLoading(true);
-                    form.reset();
-                    form.setValues(initialValues);
-                    redirect('/services');
-                  }}>
-                  {t('form-clear-filters-label')}
-                </Button>
+          <Stack gap="xs" hiddenFrom="md">
+            <Group align="center" gap="xs" justify="flex-end">
+              <Button onClick={toggle} variant="outline" disabled={isLoading}>
+                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
+              </Button>
+              <Button
+                variant="transparent"
+                disabled={isLoading}
+                onClick={() => {
+                  setIsLoading(true);
+                  form.reset();
+                  form.setValues(initialValues);
+                  redirect('/services');
+                }}>
+                {t('form-clear-filters-label')}
+              </Button>
+            </Group>
+            {selectedFilters.length > 0 && (
+              <Group gap="xs" wrap="wrap">
+                {selectedFilters.map(filter => {
+                /*@ts-ignore */
+                const value = values[filter];
+                const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
+                const label = tFilters.has(key) ? tFilters(key) : value;
+                return (
+                  <Pill
+                    key={`action-pill-${filter}`}
+                    withRemoveButton
+                    disabled={isLoading}
+                    size="lg"
+                    onRemove={() => handleRemoveFilter(filter)}
+                  >
+                    {t(`filter-selected-${filter}-label`, { value: label })}
+                  </Pill>
+                );
+              })}
               </Group>
-            </GridCol>
+            )}
+          </Stack>
+          <Group justify="space-between" align="center" wrap="wrap" visibleFrom="md">
+            {selectedFilters.length > 0 ? (
+              <Group gap="xs" wrap="wrap">
+                {selectedFilters.map(filter => {
+                /*@ts-ignore */
+                const value = values[filter];
+                const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
+                const label = tFilters.has(key) ? tFilters(key) : value;
+                return (
+                  <Pill
+                    key={`action-pill-${filter}`}
+                    withRemoveButton
+                    disabled={isLoading}
+                    size="lg"
+                    onRemove={() => handleRemoveFilter(filter)}
+                  >
+                    {t(`filter-selected-${filter}-label`, { value: label })}
+                  </Pill>
+                );
+              })}
+              </Group>
+            ) : (
+              <div></div>
+            )}
+            <Group align="center" gap="xs" justify="flex-end" style={{ marginLeft: 'auto' }}>
+              <Button onClick={toggle} variant="outline" disabled={isLoading}>
+                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
+              </Button>
+              <Button
+                variant="transparent"
+                disabled={isLoading}
+                onClick={() => {
+                  setIsLoading(true);
+                  form.reset();
+                  form.setValues(initialValues);
+                  redirect('/services');
+                }}>
+                {t('form-clear-filters-label')}
+              </Button>
+            </Group>
+          </Group>
+          <Grid>
             <GridCol span={{ base: 12 }}>
               <Collapse in={openedDrawer} transitionDuration={300} transitionTimingFunction="linear">
                 <Alert>
@@ -261,54 +309,18 @@ const Form = ({
               </Collapse>
             </GridCol>
           </Grid>
-          {selectedFilters.length || selectedActions.length ? (
+          {selectedActions.length ? (
             <>
               <Divider />
               <Group>
-                {selectedFilters.map(filter => {
-                  /*@ts-ignore */
-                  const value = values[filter];
-                  const key = `${filter}_${value.replaceAll(' ', '-')}_label`;
-                  const label = tFilters.has(key) ? tFilters(key) : value;
-                  return (
-                    <Pill
-                      key={`action-pill-${filter}`}
-                      withRemoveButton
-                      disabled={isLoading}
-                      size="lg"
-                      onRemove={() => {
-                        const values = form.getValues();
-                        const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
-                          /*@ts-ignore*/
-                          const value = values?.[valueKey];
-                          return { ...all, [valueKey]: valueKey === filter ? undefined : value };
-                        }, {});
-                        form.setFieldValue(filter, filter === 'query' ? '' : null);
-                        handleSubmit(updatedValues);
-                      }}>
-                      {t(`filter-selected-${filter}-label`, { value: label })}
-                    </Pill>
-                  );
-                })}
                 {selectedActions.map(action => {
                   return (
                     <Pill
                       key={`action-pill-${action}`}
                       withRemoveButton
                       disabled={isLoading}
-                      onRemove={() => {
-                        const values = form.getValues();
-                        const updatedValues = Object.keys(values).reduce((all: Filters, valueKey: string) => {
-                          /*@ts-ignore*/
-                          const value = values?.[valueKey];
-                          if (valueKey === action) {
-                            return all;
-                          }
-                          return { ...all, [valueKey]: value };
-                        }, {});
-                        form.setFieldValue(action, null);
-                        handleSubmit(updatedValues);
-                      }}>
+                      onRemove={() => handleRemoveAction(action)}
+                    >
                       {t(`action-${action}-label`)}
                     </Pill>
                   );
@@ -321,6 +333,8 @@ const Form = ({
       <Divider />
     </Stack>
   );
-};
+});
+
+Form.displayName = 'Form';
 
 export default Form;
