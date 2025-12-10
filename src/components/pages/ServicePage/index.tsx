@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 import { isArray } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { getLogoImage, sortAlphabetically } from '../../content/utils';
+import { getLogoImage, getCategoryFromTags, sortAlphabetically } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
 import { fr } from 'date-fns/locale';
 import ProductBreadcrumbs from '../../common/ProductBreadcrumbs';
@@ -26,6 +26,7 @@ import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 import { ContentAccordion } from '../../content/ContentAccordion';
 import { fetchService } from '@/algolia/utils';
 import ProductLandingPageBanner from '@/components/common/ProductLandingPageBanner';
+import categoriesData from '../../navigation/themes-categories.json';
 
 type PageParams = {
   code: string
@@ -74,13 +75,21 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   //TODO refacto type on CMS
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';
 
+  // Détecter la catégorie active depuis les tags pour mettre en évidence le badge
+  const activeCategoryTag = getCategoryFromTags(theme, tags, categoriesData);
+  const activeCategory = activeCategoryTag ? tags.find(tag => 
+    tag.toLowerCase() === activeCategoryTag.toLowerCase() ||
+    tag.toLowerCase().includes(activeCategoryTag.toLowerCase()) ||
+    activeCategoryTag.toLowerCase().includes(tag.toLowerCase())
+  ) : null;
+
   const sortedFields = [...fields].sort((a, b) => 
     sortAlphabetically(tFilters(`filter-${a}-label`), tFilters(`filter-${b}-label`))
   );
 
   return (
     <Stack>
-      <ProductBreadcrumbs theme={theme} name={name} />
+      <ProductBreadcrumbs theme={theme} name={name} tags={tags} />
       <Stack gap={'lg'}>
         {updatedAt ? (
           <Text fz="sm">
@@ -118,11 +127,20 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
               {labelRegion}
             </Badge>
           ) : null}
-          {tags.map(tag => (
-            <Badge key={`tag-${theme}-${service.name}-${tag}`} size="sm" variant="outline" color={'white'} bg={color}>
-              {tag}
-            </Badge>
-          ))}
+          {tags.map(tag => {
+            const isActiveCategory = activeCategory === tag;
+            return (
+              <Badge 
+                key={`tag-${theme}-${service.name}-${tag}`} 
+                size="sm" 
+                variant={isActiveCategory ? "filled" : "outline"} 
+                color={isActiveCategory ? 'blue' : 'white'} 
+                bg={isActiveCategory ? 'blue' : color}
+              >
+                {tag}
+              </Badge>
+            );
+          })}
           {sortedFields.map(field => (
             <Badge
               key={`tag-${theme}-${service.name}-${field}`}

@@ -32,6 +32,26 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
 export const sortAlphabetically = (a: string, b: string): number => 
   a.localeCompare(b, 'fr', { sensitivity: 'base' });
 
+export const getCategoryFromTags = (theme: Theme, tags: string[], categoriesData: any): string | null => {
+  const themeCategories = categoriesData[theme] || {};
+  const categoryKeys = Object.keys(themeCategories);
+  
+  for (const tag of tags || []) {
+    const matchingCategory = categoryKeys.find(category => {
+      const tagLower = tag.toLowerCase();
+      const categoryLower = category.toLowerCase();
+      return categoryLower === tagLower || 
+             tagLower.includes(categoryLower) ||
+             categoryLower.includes(tagLower);
+    });
+    if (matchingCategory) {
+      return matchingCategory;
+    }
+  }
+  
+  return null;
+};
+
 export const cleanFiltersValues = (values: Filters) => {
   const possibleActions: ActionFilters = getActionFilters({ themes: values?.theme || undefined });
   const allActionFilters = Object.keys(getActionFilters({}));

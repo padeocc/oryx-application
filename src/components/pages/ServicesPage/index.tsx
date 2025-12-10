@@ -1,10 +1,8 @@
 import { getFieldDistinctsValues, search } from '@/algolia/search';
 import { IResult } from '@/algolia/types';
-import { TAGSPLITTER } from '@/config';
 import { DistinctFilters, Filters } from '@/types';
 import { Stack } from '@mantine/core';
 import { SearchResponses } from 'algoliasearch';
-import { countBy } from 'lodash';
 import Content from './components/Content';
 import ThemesBannerWithHover from '../../navigation/ThemesBannerWithHover';
 
@@ -30,28 +28,6 @@ const ServicesPage = async ({
     region: await getFieldDistinctsValues({ name: 'region' }),
     location: await getFieldDistinctsValues({ name: 'location' })
   };
-
-  let suggestions: string[] = [];
-
-  if (filters.theme?.length) {
-    const { results: allServices }: SearchResponses<unknown> = await search({
-      query: '',
-      page: 0,
-      limit: 1000,
-      filters: { theme: filters.theme }
-    });
-
-    /*@ts-ignore*/
-    const allTags = allServices[0]?.hits?.flatMap(
-      (suggestion: IResult) => suggestion?.tags?.split?.(TAGSPLITTER) || []
-    );
-    const tagCounts = countBy(allTags);
-    const topTags = Object.entries(tagCounts)
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 10);
-    suggestions = topTags.map(({ tag, count }) => `${tag}`);
-  }
 
   const defaultValues: Filters = {
     region: null,
@@ -96,6 +72,9 @@ const ServicesPage = async ({
       return { ...all, [key]: null };
     }, {})
   };
+  
+  const originalQuery = cleanedFilters.query || '';
+  cleanedFilters.query = '';
 
   return (
     <Stack gap={0}>
@@ -110,12 +89,12 @@ const ServicesPage = async ({
       <Stack gap="xl">
         <Content
           filters={cleanedFilters}
+          originalQuery={originalQuery}
           distinctValues={distinctValues}
           hits={hits}
           pagesCount={nbPages}
           page={page}
           totalNumberOfResults={nbHits}
-          suggestions={suggestions}
         />
       </Stack>
     </Stack>
