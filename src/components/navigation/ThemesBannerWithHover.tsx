@@ -1,7 +1,7 @@
 'use client';
 
-import { Theme, themes, themesColors, themesIcons } from '@/config';
-import { Box, Group, Paper, Stack, Text, Divider } from '@mantine/core';
+import { Theme, themes, themesIcons } from '@/config';
+import { Box, Group, Stack, Text, Divider } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState, useRef } from 'react';
@@ -106,12 +106,32 @@ const ThemesBannerWithHover = ({
       ? subCats.sort(sortAlphabetically)
       : [];
   };
+
+  const hasCategoriesWithSubCategories = (theme: Theme): boolean => {
+    const categories = getCategories(theme);
+    return categories.some(category => {
+      const subCats = getSubCategories(theme, category);
+      return subCats.length > 0;
+    });
+  };
   
+  const calculateDropdownPosition = (element: HTMLDivElement) => {
+    const rect = element.getBoundingClientRect();
+    const padding = 16;
+    let left = rect.left;
+    
+    if (left < padding) {
+      left = padding;
+    }
+    
+    return { top: rect.bottom, left };
+  };
+
   const handleMouseEnter = (theme: Theme) => {
     const element = buttonRefs.current[theme];
     if (element) {
-      const rect = element.getBoundingClientRect();
-      setMenuPosition({ top: rect.bottom, left: rect.left });
+      const position = calculateDropdownPosition(element);
+      setMenuPosition(position);
     }
     setHoveredTheme(theme);
     setHoveredCategory(null);
@@ -208,7 +228,7 @@ const ThemesBannerWithHover = ({
         </Box>
       </div>
       
-      {!disableHover && hoveredTheme && (
+      {!disableHover && hoveredTheme && getCategories(hoveredTheme).length > 0 && (
         <div
           className={styles.desktopDropdown}
           style={{
@@ -222,7 +242,7 @@ const ThemesBannerWithHover = ({
           }}
         >
           <div className={styles.dropdownContent}>
-            <div className={`${styles.dropdownGrid} ${hoveredCategory ? styles.dropdownGridWithSub : styles.dropdownGridNoSub}`}>
+            <div className={`${styles.dropdownGrid} ${hoveredCategory && getSubCategories(hoveredTheme, hoveredCategory).length > 0 ? styles.dropdownGridWithSub : styles.dropdownGridNoSub}`}>
               <Stack gap={4}>
                 <Link 
                   href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme] })}`} 
@@ -249,30 +269,52 @@ const ThemesBannerWithHover = ({
                   const isHovered = hoveredCategory === category;
                   
                   return (
-                    <Link 
-                      key={category}
-                      href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme], query: category })}`} 
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <div
-                        className={styles.categoryItem}
-                        onMouseEnter={() => setHoveredCategory(category)}
+                    <div key={category}>
+                      <Link 
+                        href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme], query: category })}`} 
+                        style={{ textDecoration: 'none' }}
                       >
-                        <Text
-                          size="sm"
-                          fw={isHovered ? 600 : 500}
-                          c={isHovered ? 'green_oryx.7' : 'gray.8'}
-                          className={styles.comfortaaFont}
+                        <div
+                          className={styles.categoryItem}
+                          onMouseEnter={() => setHoveredCategory(category)}
                         >
-                          {category}
-                        </Text>
-                        {hasSubCategories && (
-                          <div className={styles.categoryArrow}>
-                            <Text c={isHovered ? 'white' : 'green_oryx.7'} size="xs" fw={700}>›</Text>
-                          </div>
-                        )}
-                      </div>
-                    </Link>
+                          <Text
+                            size="sm"
+                            fw={isHovered ? 600 : 500}
+                            c={isHovered ? 'green_oryx.7' : 'gray.8'}
+                            className={styles.comfortaaFont}
+                          >
+                            {category}
+                          </Text>
+                          {hasSubCategories && (
+                            <div className={styles.categoryArrow}>
+                              <Text c={isHovered ? 'white' : 'green_oryx.7'} size="xs" fw={700}>›</Text>
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                      {isHovered && subCategories.length > 0 && (
+                        <div className={styles.subCategoriesBelow}>
+                          {subCategories.map((subCat: string) => (
+                            <Link 
+                              key={subCat}
+                              href={`/services?filters=${cleanFiltersValues({ theme: [hoveredTheme], query: subCat })}`} 
+                              style={{ textDecoration: 'none' }}
+                            >
+                              <div className={styles.subCategoryItem}>
+                                <Text
+                                  size="xs"
+                                  c="gray.7"
+                                  className={styles.comfortaaFont}
+                                >
+                                  {subCat}
+                                </Text>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </Stack>
@@ -350,10 +392,9 @@ const ThemesBannerWithHover = ({
 
               <Stack gap={12}>
                 {mobileSelectedCategory ? (
-                  getSubCategories(mobileModalOpen, mobileSelectedCategory).map((subCat: string) => (
+                  <>
                     <Link 
-                      key={subCat}
-                      href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: subCat })}`} 
+                      href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: mobileSelectedCategory })}`} 
                       style={{ textDecoration: 'none' }}
                       onClick={() => {
                         setMobileModalOpen(null);
@@ -363,25 +404,58 @@ const ThemesBannerWithHover = ({
                       <div
                         className={styles.mobileCategoryItem}
                         onTouchStart={(e) => {
-                          e.currentTarget.style.backgroundColor = '#E1F3F3';
-                          e.currentTarget.style.borderColor = '#3498A2';
+                          e.currentTarget.style.backgroundColor = 'var(--mantine-color-green_oryx-1)';
+                          e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-7)';
                         }}
                         onTouchEnd={(e) => {
                           e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.borderColor = '#E1F3F3';
+                          e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-1)';
                         }}
                       >
                         <Text
                           size="sm"
-                          fw={600}
-                          c="gray.8"
+                          fw={700}
+                          c="green_oryx.7"
                           className={styles.comfortaaFont}
                         >
-                          {subCat}
+                          {tCommon('see_more_theme')}
                         </Text>
                       </div>
                     </Link>
-                  ))
+                    <Divider my={4} />
+                    {getSubCategories(mobileModalOpen, mobileSelectedCategory).map((subCat: string) => (
+                      <Link 
+                        key={subCat}
+                        href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: subCat })}`} 
+                        style={{ textDecoration: 'none' }}
+                        onClick={() => {
+                          setMobileModalOpen(null);
+                          setMobileSelectedCategory(null);
+                        }}
+                      >
+                        <div
+                          className={styles.mobileCategoryItem}
+                          onTouchStart={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--mantine-color-green_oryx-1)';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-7)';
+                          }}
+                          onTouchEnd={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-1)';
+                          }}
+                        >
+                          <Text
+                            size="sm"
+                            fw={600}
+                            c="gray.8"
+                            className={styles.comfortaaFont}
+                          >
+                            {subCat}
+                          </Text>
+                        </div>
+                      </Link>
+                    ))}
+                  </>
                 ) : (
                   <>
                     <Link 
@@ -395,12 +469,12 @@ const ThemesBannerWithHover = ({
                       <div
                         className={styles.mobileCategoryItem}
                         onTouchStart={(e) => {
-                          e.currentTarget.style.backgroundColor = '#E1F3F3';
-                          e.currentTarget.style.borderColor = '#3498A2';
+                          e.currentTarget.style.backgroundColor = 'var(--mantine-color-green_oryx-1)';
+                          e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-7)';
                         }}
                         onTouchEnd={(e) => {
                           e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.borderColor = '#E1F3F3';
+                          e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-1)';
                         }}
                       >
                         <Text
@@ -416,37 +490,51 @@ const ThemesBannerWithHover = ({
                     <Divider my={4} />
                     {getCategories(mobileModalOpen).map(category => {
                     const hasSubCategories = getSubCategories(mobileModalOpen, category).length > 0;
+                    const categoryUrl = `/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: category })}`;
                     
                     return hasSubCategories ? (
                       <div
                         key={category}
-                        onClick={() => setMobileSelectedCategory(category)}
                         className={styles.mobileCategoryItem}
-                        onTouchStart={(e) => {
-                          e.currentTarget.style.backgroundColor = '#E1F3F3';
-                          e.currentTarget.style.borderColor = '#3498A2';
-                        }}
-                        onTouchEnd={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.borderColor = '#E1F3F3';
-                        }}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                       >
-                        <Text
-                          size="sm"
-                          fw={600}
-                          c="gray.8"
-                          className={styles.comfortaaFont}
+                        <div
+                          style={{ flex: 1 }}
                         >
-                          {category}
-                        </Text>
-                        <div className={styles.mobileCategoryArrow}>
+                          <Text
+                            size="sm"
+                            fw={600}
+                            c="gray.8"
+                            className={styles.comfortaaFont}
+                          >
+                            {category}
+                          </Text>
+                        </div>
+                        <div
+                          className={styles.mobileCategoryArrow}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setMobileSelectedCategory(category);
+                          }}
+                          onTouchStart={(e) => {
+                            e.stopPropagation();
+                            e.currentTarget.style.backgroundColor = 'var(--mantine-color-green_oryx-1)';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-7)';
+                          }}
+                          onTouchEnd={(e) => {
+                            e.stopPropagation();
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-1)';
+                          }}
+                          style={{ cursor: 'pointer', padding: '8px', marginLeft: '8px' }}
+                        >
                           <Text c="green_oryx.7" size="lg" fw={700}>›</Text>
                         </div>
                       </div>
                     ) : (
                       <Link 
                         key={category}
-                        href={`/services?filters=${cleanFiltersValues({ theme: [mobileModalOpen], query: category })}`} 
+                        href={categoryUrl}
                         style={{ textDecoration: 'none' }}
                         onClick={() => {
                           setMobileModalOpen(null);
@@ -456,12 +544,12 @@ const ThemesBannerWithHover = ({
                         <div
                           className={styles.mobileCategoryItem}
                           onTouchStart={(e) => {
-                            e.currentTarget.style.backgroundColor = '#E1F3F3';
-                            e.currentTarget.style.borderColor = '#3498A2';
+                            e.currentTarget.style.backgroundColor = 'var(--mantine-color-green_oryx-1)';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-7)';
                           }}
                           onTouchEnd={(e) => {
                             e.currentTarget.style.backgroundColor = 'transparent';
-                            e.currentTarget.style.borderColor = '#E1F3F3';
+                            e.currentTarget.style.borderColor = 'var(--mantine-color-green_oryx-1)';
                           }}
                         >
                           <Text

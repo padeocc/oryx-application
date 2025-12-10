@@ -15,6 +15,7 @@ const ServicesPage = async ({
 }) => {
   const filters: Filters = (filtersParam && JSON.parse(filtersParam)) || {};
   const pageParameter: number = Number(pageParam) || 1;
+  const originalQuery = filters.query || '';
   const { query = '', ...others } = filters;
 
   const { results }: SearchResponses<unknown> = await search({
@@ -116,6 +117,7 @@ const ServicesPage = async ({
           page={page}
           totalNumberOfResults={nbHits}
           suggestions={suggestions}
+          originalQuery={originalQuery}
         />
       </Stack>
     </Stack>

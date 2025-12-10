@@ -69,13 +69,48 @@
   box-shadow: 0 6px 24px rgba(52, 152, 162, 0.18);
   border: 2px solid #E1F3F3;
   max-width: 720px;
-  min-width: 480px;
+  min-width: 240px;
+  width: fit-content;
   animation: slideDown 0.25s ease-out;
   overflow: hidden;
 }
 
+@media (max-width: 1200px) {
+  .desktopDropdown {
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 900px) {
+  .desktopDropdown {
+    max-width: calc(100vw - 32px);
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopDropdown {
+    max-width: calc(100vw - 32px);
+    left: 16px !important;
+    right: 16px;
+    width: auto;
+  }
+}
+
 .dropdownContent {
   padding: 20px;
+}
+
+@media (max-width: 1024px) {
+  .dropdownContent {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dropdownContent {
+    padding: 16px;
+  }
 }
 
 .dropdownGrid {
@@ -85,7 +120,32 @@
 }
 
 .dropdownGridWithSub {
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px 200px;
+}
+
+@media (max-width: 1200px) {
+  .dropdownGridWithSub {
+    grid-template-columns: minmax(160px, 180px) minmax(140px, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dropdownGridWithSub {
+    grid-template-columns: minmax(140px, 160px) minmax(120px, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .dropdownGridWithSub {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .subCategoriesGrid {
+    display: none;
+  }
 }
 
 .dropdownGridNoSub {
@@ -127,11 +187,28 @@
 
 /* Sub-categories */
 .subCategoriesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   align-content: start;
   animation: fadeInRight 0.25s ease-out;
+}
+
+.subCategoriesBelow {
+  display: none;
+  margin-top: 8px;
+  padding-top: 8px;
+  padding-left: 24px;
+  border-top: 1px solid #E1F3F3;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@media (max-width: 1000px) {
+  .subCategoriesBelow {
+    display: flex;
+  }
 }
 
 .subCategoryItem {
