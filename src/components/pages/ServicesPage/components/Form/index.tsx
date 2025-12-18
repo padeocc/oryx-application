@@ -173,7 +173,7 @@ const Form = forwardRef<{ toggle: () => void }, {
           <Stack gap="xs" hiddenFrom="md">
             <Group align="center" gap="xs" justify="flex-end">
               <Button onClick={toggle} variant="outline" disabled={isLoading}>
-                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
+                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic' && action !== 'ess').length })}
               </Button>
               <Button
                 variant="transparent"
@@ -235,7 +235,7 @@ const Form = forwardRef<{ toggle: () => void }, {
             )}
             <Group align="center" gap="xs" justify="flex-end" style={{ marginLeft: 'auto' }}>
               <Button onClick={toggle} variant="outline" disabled={isLoading}>
-                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic').length })}
+                {t('form-drawer-label', { count: selectedActions.filter(action => action !== 'economic' && action !== 'ess').length })}
               </Button>
               <Button
                 variant="transparent"
@@ -276,7 +276,7 @@ const Form = forwardRef<{ toggle: () => void }, {
                     <Group>
                       {Object.keys(actions)
                         .sort((a, b) => (a > b ? 1 : -1))
-                        .filter(action => action !== 'economic')
+                        .filter(action => action !== 'economic' && action !== 'ess')
                         .map(action => {
                           return (
                             <Checkbox

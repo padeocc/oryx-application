@@ -15,9 +15,19 @@ const ServicesPage = async ({
   const pageParameter: number = Number(pageParam) || 1;
   const { query = '', ...others } = filters;
 
+  const cleanedOthers = Object.keys(others).reduce((acc: any, key: string) => {
+    /*@ts-ignore*/
+    const value = others[key];
+    if (value === false || value === null || (Array.isArray(value) && value.length === 0)) {
+      return acc;
+    }
+    acc[key] = value;
+    return acc;
+  }, {});
+
   const { results }: SearchResponses<unknown> = await search({
     query,
-    filters: others,
+    filters: cleanedOthers,
     page: pageParameter - 1
   });
   /*@ts-ignore*/
@@ -36,6 +46,7 @@ const ServicesPage = async ({
     query: '',
     organic: false,
     economic: false,
+    ess: false,
     local: false,
     season: false,
     shortcircuit: false,
@@ -81,6 +92,7 @@ const ServicesPage = async ({
       <ThemesBannerWithHover 
         selectedThemes={cleanedFilters.theme || []}
         isEconomicSelected={cleanedFilters.economic || false}
+        isEssSelected={cleanedFilters.ess || false}
         showSelectionState={true}
         disableHover={false}
         currentFilters={cleanedFilters}

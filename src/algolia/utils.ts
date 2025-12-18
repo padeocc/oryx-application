@@ -56,14 +56,32 @@ export const calculateMeanScore = (keywords: string[]): number => {
   return validScores.length > 0 ? validScores.reduce((sum, val) => sum + val, 0) / validScores.length : 0;
 };
 
+const ESS_TYPES = ['association', 'school', 'public_service', 'cooservice perative', 'scop', 'scic', 'sasesus'];
+
+export const isEssService = (productstructure: string[] = [], type: string[] = []): boolean => {
+  const allTypes = [...productstructure, ...type].map(t => t?.toLowerCase()?.trim()).filter(Boolean);
+  return ESS_TYPES.some(essType => allTypes.includes(essType.toLowerCase()));
+};
+
+export const getEssValue = (service: { ess?: boolean; productstructure?: string[]; type?: string[] }): boolean => {
+  if (service?.ess !== undefined) {
+    return !!service.ess;
+  }
+  return !!isEssService(service?.productstructure || [], service?.type || []);
+};
+
 export const transformServicesFromResults = ({ results }: { results: IResult[] }): Service[] => {
   return results.map(result => {
+    const productstructure = result?.productstructure?.split?.(TAGSPLITTER) || [];
+    const typeArray = Array.isArray(result?.type) ? result.type : (result?.type ? [result.type] : []);
+    const isEss = result?.ess !== undefined ? result.ess : isEssService(productstructure, typeArray);
+    
     const service: Service = {
       code: result.id,
       description: result.description,
       name: result.label,
       logo: result.logo,
-      productstructure: result?.productstructure?.split?.(TAGSPLITTER) || [],
+      productstructure,
       tags: result?.tags?.split?.(TAGSPLITTER),
       url: result.url,
       region: result.region,
@@ -71,6 +89,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       theme: result.theme,
       organic: result?.organic,
       economic: result?.economic,
+      ess: isEss,
       local: result?.local,
       season: result?.season,
       shortcircuit: result?.shortcircuit,
@@ -92,7 +111,7 @@ export const transformServicesFromResults = ({ results }: { results: IResult[] }
       createdAt: new Date(),
       updatedAt: result?.updatedAt ? new Date(result.updatedAt) : new Date(),
       publishedAt: new Date(),
-      type: [],
+      type: typeArray,
       country: '',
       premium: result?.premium,
       score: result?.score || 0

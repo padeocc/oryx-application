@@ -10,9 +10,11 @@ export interface IResult {
   theme: Theme[];
   productstructure: string;
   tags: string;
+  type?: string[] | string;
   region: string;
   location: string;
   economic: boolean;
+  ess: boolean;
   local?: boolean;
   season?: boolean;
   shortcircuit?: boolean;

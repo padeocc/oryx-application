@@ -171,7 +171,7 @@ export const imagesMapping: { [key: string]: string } = {
 };
 
 export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionFilters => {
-  let actions: ActionFilters = { economic: 'boolean' };
+  let actions: ActionFilters = { economic: 'boolean', ess: 'boolean' };
   if (!themes || themes.includes('foods')) {
     actions = {
       ...actions,

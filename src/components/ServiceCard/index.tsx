@@ -22,7 +22,7 @@ import {
   TitleOrder
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
+import { CurrencyEur, Handshake } from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Description from './components/Description';
@@ -106,22 +106,43 @@ const ServiceCard = ({
                     color={color}
                     basekey={`${theme}-${service.name}`}
                     firstTag={
-                      service.economic ? (
-                        <Badge
-                          variant="gradient"
-                          gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
-                          radius="md"
-                          style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
-                          styles={{
-                            root: {
-                              textTransform: 'capitalize'
-                            }
-                          }}
-                          pl="xs"
-                          pr="xs"
-                          leftSection={<CurrencyEur weight="fill" fontSize={'1.2rem'} />}>
-                          {tFilters('economic-label')}
-                        </Badge>
+                      (service.economic || service.ess) ? (
+                        <Group gap="xs">
+                          {service.economic && (
+                            <Badge
+                              variant="gradient"
+                              gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+                              radius="md"
+                              style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
+                              styles={{
+                                root: {
+                                  textTransform: 'capitalize'
+                                }
+                              }}
+                              pl="xs"
+                              pr="xs"
+                              leftSection={<CurrencyEur weight="fill" fontSize={'1.2rem'} />}>
+                              {tFilters('economic-label')}
+                            </Badge>
+                          )}
+                          {service.ess && (
+                            <Badge
+                              variant="gradient"
+                              gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+                              radius="md"
+                              style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
+                              styles={{
+                                root: {
+                                  textTransform: 'capitalize'
+                                }
+                              }}
+                              pl="xs"
+                              pr="xs"
+                              leftSection={<Handshake weight="fill" fontSize={'1.2rem'} />}>
+                              ESS
+                            </Badge>
+                          )}
+                        </Group>
                       ) : undefined
                     }
                   />
