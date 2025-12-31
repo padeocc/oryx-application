@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState, useRef } from 'react';
 import Example from '../common/Example';
-import { CurrencyEur } from '@phosphor-icons/react/dist/ssr';
+import { CurrencyEur, Handshake } from '@phosphor-icons/react/dist/ssr';
 import data from './themes-categories.json';
 import styles from './themes-banner.module.css';
 import { Filters } from '@/types';
@@ -14,6 +14,8 @@ import { cleanFiltersValues, sortAlphabetically } from '../content/utils';
 
 const ALL_ACTION_FILTERS = {
   organic: false,
+  economic: false,
+  ess: false,
   local: false,
   season: false,
   shortcircuit: false,
@@ -36,21 +38,25 @@ const ALL_ACTION_FILTERS = {
 interface ThemesBannerProps {
   onThemeClick?: (theme: Theme) => void;
   onEconomicClick?: () => void;
+  onEssClick?: () => void;
   disableHover?: boolean;
   baseUrl?: string;
   selectedThemes?: Theme[];
   isEconomicSelected?: boolean;
+  isEssSelected?: boolean;
   showSelectionState?: boolean;
   currentFilters?: Filters;
 }
 
 const ThemesBannerWithHover = ({ 
   onThemeClick, 
-  onEconomicClick, 
+  onEconomicClick,
+  onEssClick,
   disableHover = false, 
   baseUrl = '/services',
   selectedThemes = [],
   isEconomicSelected = false,
+  isEssSelected = false,
   showSelectionState = false,
   currentFilters
 }: ThemesBannerProps = {}) => {
@@ -71,7 +77,8 @@ const ThemesBannerWithHover = ({
       ...currentFilters, 
       ...ALL_ACTION_FILTERS,
       theme: newThemes,
-      economic: false
+      economic: false,
+      ess: false
     };
     return `${baseUrl}?filters=${cleanFiltersValues(updatedFilters)}`;
   };
@@ -83,10 +90,25 @@ const ThemesBannerWithHover = ({
     const updatedFilters = { 
       ...currentFilters, 
       ...ALL_ACTION_FILTERS,
-      economic: !currentFilters.economic
+      economic: !currentFilters.economic,
+      ess: false
     };
     return `${baseUrl}?filters=${cleanFiltersValues(updatedFilters)}`;
   };
+
+  const getEssLink = () => {
+    if (!currentFilters) {
+      return `${baseUrl}?filters=${cleanFiltersValues({ ess: true })}`;
+    }
+    const updatedFilters = { 
+      ...currentFilters, 
+      ...ALL_ACTION_FILTERS,
+      ess: !currentFilters.ess,
+      economic: false
+    };
+    return `${baseUrl}?filters=${cleanFiltersValues(updatedFilters)}`;
+  };
+
   const [hoveredTheme, setHoveredTheme] = useState<Theme | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
   const [mobileModalOpen, setMobileModalOpen] = useState<Theme | null>(null);
@@ -142,14 +164,16 @@ const ThemesBannerWithHover = ({
     setMobileSelectedCategory(null);
   };
 
-  const renderButton = (type: 'theme' | 'economic', theme?: Theme, isMobile = false) => {
+  const renderButton = (type: 'theme' | 'economic' | 'ess', theme?: Theme, isMobile = false) => {
     const isTheme = type === 'theme';
-    const key = isTheme ? theme : 'economic';
-    const isSelected = showSelectionState && (isTheme ? selectedThemes.includes(theme!) : isEconomicSelected);
+    const isEconomic = type === 'economic';
+    const isEss = type === 'ess';
+    const key = isTheme ? theme : type;
+    const isSelected = showSelectionState && (isTheme ? selectedThemes.includes(theme!) : (isEconomic ? isEconomicSelected : isEssSelected));
     const color = isTheme ? 'green_oryx.7' : 'orange';
-    const Icon = isTheme ? themesIcons[theme!] : CurrencyEur;
-    const text = isTheme ? t(theme!) : tServices('action-economic-label');
-    const onClick = isTheme ? (onThemeClick ? () => onThemeClick(theme!) : undefined) : onEconomicClick;
+    const Icon = isTheme ? themesIcons[theme!] : (isEconomic ? CurrencyEur : Handshake);
+    const text = isTheme ? t(theme!) : (isEconomic ? tServices('action-economic-label') : tServices('action-ess-label'));
+    const onClick = isTheme ? (onThemeClick ? () => onThemeClick(theme!) : undefined) : (isEconomic ? onEconomicClick : onEssClick);
     
     const gradient = isSelected ? 
       { from: color, to: color, deg: 90 } : 
@@ -172,7 +196,7 @@ const ThemesBannerWithHover = ({
       ? '#' 
       : isTheme 
         ? getThemeLink(theme!) 
-        : getEconomicLink();
+        : (isEconomic ? getEconomicLink() : getEssLink());
     
     const effectiveOnClick = !isTheme ? undefined : handleClick;
 
@@ -208,6 +232,7 @@ const ThemesBannerWithHover = ({
         <Group justify="flex-start" visibleFrom="md" style={{ overflow: 'visible' }}>
           {themes.sort((a, b) => sortAlphabetically(t(a), t(b))).map(theme => renderButton('theme', theme))}
           {renderButton('economic')}
+          {renderButton('ess')}
         </Group>
 
         <Box 
@@ -224,6 +249,7 @@ const ThemesBannerWithHover = ({
           <Group gap="xs" wrap="nowrap" style={{ flexWrap: 'nowrap', minWidth: 'min-content' }}>
             {themes.sort((a, b) => sortAlphabetically(t(a), t(b))).map(theme => renderButton('theme', theme, true))}
             {renderButton('economic', undefined, true)}
+            {renderButton('ess', undefined, true)}
           </Group>
         </Box>
       </div>

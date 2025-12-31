@@ -4,6 +4,7 @@ import { fetchServices } from '@/cms/utils';
 import { TAGSPLITTER } from '@/config';
 import { algoliasearch, SaveObjectsOptions } from 'algoliasearch';
 import { difference } from 'lodash';
+import { getEssValue } from './utils';
 
 export const runIndexation = async () => {
   const transports = (
@@ -113,6 +114,7 @@ export const runIndexation = async () => {
       updatedAt: service.updatedAt.toString(),
       organic: service?.organic,
       economic: service?.economic,
+      ess: getEssValue(service),
       local: service?.local,
       season: service?.season,
       shortcircuit: service?.shortcircuit,

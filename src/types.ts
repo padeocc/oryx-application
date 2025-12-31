@@ -65,6 +65,7 @@ export type Service = {
   logo?: { data: ImageData } | string;
   organic?: boolean;
   economic?: boolean;
+  ess?: boolean;
   local?: boolean;
   season?: boolean;
   shortcircuit?: boolean;
@@ -106,6 +107,7 @@ export type ActionFilters = {
     | 'local'
     | 'organic'
     | 'economic'
+    | 'ess'
     | 'lowtech'
     | 'recycled'
     | 'reused'
@@ -127,6 +129,7 @@ export type Filters = {
   location?: string | null;
   organic?: boolean;
   economic?: boolean;
+  ess?: boolean;
   local?: boolean;
   season?: boolean;
   shortcircuit?: boolean;
