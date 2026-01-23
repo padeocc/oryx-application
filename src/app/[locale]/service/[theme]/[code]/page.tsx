@@ -13,7 +13,7 @@ export const generateMetadata = async (props: { params: Promise<{ code: string; 
   const metadataTags: Metadata = {
     title: `${service?.name} - OryxChange`,
     description: service?.description,
-    keywords: [service?.name, ...(service?.tags || [])].join(', '),
+    keywords: [service?.name, ...(service?.productstructure || [])].join(', '),
     openGraph: {
       type: 'website',
       title: service?.name,

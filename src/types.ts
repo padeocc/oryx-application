@@ -47,42 +47,20 @@ interface ImageData {
 }
 
 export type Service = {
-  score: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
   description: string;
   url: string;
-  tags: string[];
   productstructure: string[];
   type: string[];
   code: string;
   region: Region;
   location: string;
-  country: string;
   theme: Theme[];
-  logo?: { data: ImageData } | string;
-  organic?: boolean;
   economic?: boolean;
   ess?: boolean;
-  local?: boolean;
-  season?: boolean;
-  shortcircuit?: boolean;
-  wastereducer?: boolean;
-  foodwastereducer?: boolean;
-  cookmore?: boolean;
-  used?: boolean;
-  rent?: boolean;
-  mutualise?: boolean;
-  repair?: boolean;
-  ecobuilt?: boolean;
-  lowtech?: boolean;
-  recycled?: boolean;
-  reused?: boolean;
-  diy?: boolean;
-  comparer?: boolean;
-  relocating?: boolean;
   sender?: string;
   form_tags?: string[];
   form_options?: string[];
