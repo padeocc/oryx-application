@@ -71,15 +71,13 @@ const ServiceCard = ({
     return <NotFound />;
   }
 
-  const score = service?.score;
-
   const fields = Object.keys(getActionFilters({ themes: [theme] }))
     //@ts-ignore
     .filter(f => !!service[f])
     .map(field => tFilters(`filter-${field}-label`))
     .sort(sortAlphabetically);
 
-  const allTags = [...(service?.tags || []), ...fields];
+  const productstructure = [...(service?.productstructure || []), ...fields];
 
   return (
     <Card
@@ -102,7 +100,7 @@ const ServiceCard = ({
               <GridCol span={{ base: 12 }} ta={'right'} pt={'sm'}>
                 <Group gap={'xs'}>
                   <Tags
-                    tags={allTags}
+                    tags={productstructure}
                     color={color}
                     basekey={`${theme}-${service.name}`}
                     firstTag={
@@ -153,7 +151,6 @@ const ServiceCard = ({
                   <Title order={titleOrder} c={color}>
                     {service.name}
                   </Title>
-                  {score ? <ScoreBanner score={service.score} /> : null}
                 </Group>
               </GridCol>
             </Grid>

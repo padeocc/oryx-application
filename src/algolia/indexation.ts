@@ -93,7 +93,6 @@ export const runIndexation = async () => {
       description: service.description,
       label: service.name,
       url: service.url,
-      logo: service?.logo,
       id: service.code,
       theme: service.theme,
       productstructure:
@@ -101,40 +100,14 @@ export const runIndexation = async () => {
           ?.map(ps => ps.trim())
           ?.filter(ps => !!ps)
           ?.join(TAGSPLITTER) || [],
-      // deprecated use productStructure instead
-      tags:
-        (service?.tags || [])
-          ?.map(t => t.trim())
-          ?.filter(t => !!t)
-          ?.join(TAGSPLITTER) || [],
       objectID: service.code,
       region: service.region,
       type: service.type,
       location: service.location,
       updatedAt: service.updatedAt.toString(),
-      organic: service?.organic,
       economic: service?.economic,
       ess: getEssValue(service),
-      local: service?.local,
-      season: service?.season,
-      shortcircuit: service?.shortcircuit,
-      wastereducer: service?.wastereducer,
-      foodwastereducer: service?.foodwastereducer,
-      cookmore: service?.cookmore,
-      used: service?.used,
-      rent: service?.rent,
-      mutualise: service?.mutualise,
-      repair: service?.repair,
-      ecobuilt: service?.ecobuilt,
-      lowtech: service?.lowtech,
-      recycled: service?.recycled,
-      reused: service?.reused,
-      diy: service?.diy,
-      comparer: service?.comparer,
-      relocating: service?.relocating,
       premium: !!service?.premium
-      //score
-      // content: service?.content,
     };
   });
 

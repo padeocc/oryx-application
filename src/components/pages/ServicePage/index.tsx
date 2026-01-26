@@ -66,7 +66,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
 
   // @ts-ignore
   const fields = Object.keys(getActionFilters({ themes: [theme] })).filter((f: string) => !!service?.[f]);
-  const { name, tags = [], description, updatedAt, url, type } = service;
+  const { name, productstructure = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
   let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
@@ -76,8 +76,8 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';
 
   // Détecter la catégorie active depuis les tags pour mettre en évidence le badge
-  const activeCategoryTag = getCategoryFromTags(theme, tags, categoriesData);
-  const activeCategory = activeCategoryTag ? tags.find(tag => 
+  const activeCategoryTag = getCategoryFromTags(theme, productstructure, categoriesData);
+  const activeCategory = activeCategoryTag ? productstructure.find(tag => 
     tag.toLowerCase() === activeCategoryTag.toLowerCase() ||
     tag.toLowerCase().includes(activeCategoryTag.toLowerCase()) ||
     activeCategoryTag.toLowerCase().includes(tag.toLowerCase())
@@ -89,7 +89,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
 
   return (
     <Stack>
-      <ProductBreadcrumbs theme={theme} name={name} tags={tags} />
+      <ProductBreadcrumbs theme={theme} name={name} tags={productstructure} />
       <Stack gap={'lg'}>
         {updatedAt ? (
           <Text fz="sm">
@@ -127,7 +127,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
               {labelRegion}
             </Badge>
           ) : null}
-          {tags.map(tag => {
+          {productstructure.map(tag => {
             const isActiveCategory = activeCategory === tag;
             return (
               <Badge 

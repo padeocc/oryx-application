@@ -3,7 +3,7 @@ import { ActionFilters, Filters, Service } from '@/types';
 
 export const getLogoImage = ({ service, theme }: { service: Service; theme: Theme }) => {
   const tagKey = Object.keys(imagesMapping)?.find(tag =>
-    (service?.tags || [])?.map?.(t => t.toLowerCase()).includes(tag)
+    (service?.productstructure || [])?.map?.(t => t.toLowerCase()).includes(tag)
   );
   const tag = tagKey ? imagesMapping?.[tagKey] : undefined;
   const folderByTheme: Record<Theme, string> = {
@@ -20,13 +20,7 @@ export const getLogoImage = ({ service, theme }: { service: Service; theme: Them
     ? `/images/${folder}/default-${tag}-tag-image.svg`
     : `/images/${folder}/default-${theme}-image.svg`;
 
-  /*@ts-ignore*/
-  const imageFromCMS = service?.logo?.data?.attributes?.url;
-  const imageFromSearch = typeof service?.logo === 'string' ? service.logo : null;
-
-  return (
-    (imageFromCMS && `${process.env.NEXT_PUBLIC_STRAPI_ENDPOINT}${imageFromCMS}`) || imageFromSearch || defaultImage
-  );
+  return defaultImage;
 };
 
 export const sortAlphabetically = (a: string, b: string): number => 
