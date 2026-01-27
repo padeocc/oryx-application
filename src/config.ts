@@ -172,41 +172,6 @@ export const imagesMapping: { [key: string]: string } = {
 
 export const getActionFilters = ({ themes = [] }: { themes?: Theme[] }): ActionFilters => {
   let actions: ActionFilters = { economic: 'boolean', ess: 'boolean' };
-  if (!themes || themes.includes('foods')) {
-    actions = {
-      ...actions,
-      ...{
-        organic: 'boolean',
-        local: 'boolean',
-        season: 'boolean',
-        shortcircuit: 'boolean',
-        wastereducer: 'boolean',
-        foodwastereducer: 'boolean',
-        cookmore: 'boolean'
-      }
-    };
-  }
-  if (!themes || themes.includes('goods')) {
-    actions = {
-      ...actions,
-      ...{
-        used: 'boolean',
-        rent: 'boolean',
-        mutualise: 'boolean',
-        repair: 'boolean',
-        ecobuilt: 'boolean',
-        local: 'boolean',
-        organic: 'boolean',
-        lowtech: 'boolean',
-        recycled: 'boolean',
-        reused: 'boolean',
-        diy: 'boolean',
-        wastereducer: 'boolean',
-        comparer: 'boolean',
-        relocating: 'boolean'
-      }
-    };
-  }
 
   return actions;
 };
