@@ -138,7 +138,8 @@ export const addService: PostService = async data => {
     email: sender,
     shopadress,
     shopcity,
-    shoppostalcode
+    shoppostalcode,
+    structure
   } = data;
   const code = generateUniqueCode(name);
 
@@ -156,9 +157,11 @@ export const addService: PostService = async data => {
       sender,
       shopaddress: shopadress,
       shopcity,
-      shoppostalcode
+      shoppostalcode,
+      structure,
     }
   });
+
 
   const cmsUrl = process?.env?.STRAPI_API_ENDPOINT || '';
   const response = await fetch(`${cmsUrl}/${theme?.[0]}`, {

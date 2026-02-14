@@ -67,7 +67,7 @@ const Form = ({
       location: '',
       options: [],
       email: '',
-      structure:'',
+      structure: '',
       shopadress: '',
       shopcity: '',
       shoppostalcode: ''
@@ -141,30 +141,32 @@ const Form = ({
         <Stack gap={'xl'}>
           <Stack gap={'lg'}>
             <Stack gap="0">
-              <InputLabel>{t('form-themes-label')}</InputLabel>
-              <Group justify="flex-start">
-                {themes.map(theme => {
-                  const Icon = themesIcons[theme];
-                  const selected = !!(values.theme as Theme[])?.includes(theme);
-                  return (
-                    <BadgeSelector
-                      isLoading={isSending}
-                      key={`badge-selector-${theme}`}
-                      label={tThemes(theme)}
-                      selected={selected}
-                      Icon={Icon}
-                      handleClick={_isSelected => {
-                        form.setFieldValue('theme', [theme as never]);
-                        form.setFieldValue('tags', []);
-                        form.setFieldValue('options', []);
-                      }}
-                      bg={selected ? themesColors[theme] : 'white'}
-                      c={selected ? 'white' : themesColors[theme]}
-                      bd={`1px solid ${themesColors[theme]}`}
-                    />
-                  );
-                })}
-              </Group>
+              <InputLabel>
+                {t('form-themes-label')}
+                <Group justify="flex-start">
+                  {themes.map(theme => {
+                    const Icon = themesIcons[theme];
+                    const selected = !!(values.theme as Theme[])?.includes(theme);
+                    return (
+                      <BadgeSelector
+                        isLoading={isSending}
+                        key={`badge-selector-${theme}`}
+                        label={tThemes(theme)}
+                        selected={selected}
+                        Icon={Icon}
+                        handleClick={_isSelected => {
+                          form.setFieldValue('theme', [theme as never]);
+                          form.setFieldValue('tags', []);
+                          form.setFieldValue('options', []);
+                        }}
+                        bg={selected ? themesColors[theme] : 'white'}
+                        c={selected ? 'white' : themesColors[theme]}
+                        bd={`1px solid ${themesColors[theme]}`}
+                      />
+                    );
+                  })}
+                </Group>
+              </InputLabel>
             </Stack>
 
             <MultiSelect
@@ -247,6 +249,7 @@ const Form = ({
             />
           </Stack>
           <TextInput
+            autoComplete="on"
             label={t('form-email-label')}
             placeholder={t('form-email-placeholder')}
             name="email"
