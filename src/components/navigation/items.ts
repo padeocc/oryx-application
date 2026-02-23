@@ -77,11 +77,6 @@ export const getFooterLinks = async () => {
         href: '/fr/contact'
       },
       {
-        name: t('poll_label'),
-        href: 'https://framaforms.org/venez-tester-wwworyxchangecom-1732871595',
-        isExternal: true
-      },
-      {
         name: 'LinkedIn',
         href: 'https://www.linkedin.com/company/oryxchange/posts/',
         isExternal: true
