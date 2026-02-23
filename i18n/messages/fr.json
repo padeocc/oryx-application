@@ -293,10 +293,16 @@
     "login": "Se connecter"
   },
   "metadata": {
-    "description": "Trouver des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
-    "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
-    "title": "OryxChange, le compagnon des initiatives écoresponsables !",
-    "search_title": "Recherche de solutions dans Oryxchange"
+    "homepage": {
+      "description": "Trouver des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
+      "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
+      "title": "OryxChange, le compagnon des initiatives écoresponsables !"
+    },
+    "services": {
+      "description": "Chercher des services pour que l'éco-responsabilité devienne un réflexe qui s'installe dans nos habitudes. ",
+      "keywords": "initiatives écoresponsables, projets verts, protection de l'environnement, développement durable, écologie, participation citoyenne, actions écologiques, services, décarbonation",
+      "title": "Recherche de solutions dans Oryxchange"
+    }
   },
   "navigation_items": {
     "contact_label": "Nous contacter",
