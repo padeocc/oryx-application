@@ -1,6 +1,39 @@
+import { metaAuthors } from '@/config';
+import { Metadata } from 'next';
+import { getMessages } from 'next-intl/server';
+
 import ServicesPage from '@/components/pages/ServicesPage';
 import { Theme } from '@/config';
 import { set } from 'lodash';
+
+export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
+  const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+  const params = await props.params;
+  const { locale = 'fr' } = params;
+
+  const messages = await getMessages({ locale });
+  const metadata: any = messages.metadata || {};
+  const metadataTags: Metadata = {
+    title: metadata.services.title,
+    description: metadata.services.description,
+    keywords: metadata.services.keywords,
+    openGraph: {
+      type: 'website',
+      title: metadata.title,
+      description: metadata.description,
+      url
+    },
+    twitter: { card: 'summary_large_image', title: metadata.title, description: metadata.description },
+    metadataBase: new URL(url),
+    alternates: {
+      canonical: '/'
+    },
+    authors: metaAuthors,
+    publisher: 'OryxChange',
+    robots: 'index, follow'
+  };
+  return metadataTags;
+};
 
 const transformParams = (params: { [key: string]: string | string[] | undefined } | undefined = {}) => {
   const result = {
