@@ -25,7 +25,7 @@ export default async function Partners() {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-          <Image src="/images/partners/la_mélée.jpg" alt="Logo 3" w={180} h={100} />
+          <Image src="/images/partners/logo_la_melee.jpg" alt="Logo la melée numérique" w={180} h={100} />
         </Box>
         <Box
           style={{
@@ -33,7 +33,7 @@ export default async function Partners() {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-          <Image src="/images/partners/Logo_ADRESS_CMJN_300dpi.jpg" alt="Logo 4" w={180} h={100} />
+          <Image src="/images/partners/logo_parcours_adress.jpg" alt="Logo Parcours adress" w={180} h={100} />
         </Box>
         <Box
           style={{
@@ -41,7 +41,7 @@ export default async function Partners() {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-          <Image src="/images/partners/ENEDIS_Logo.png" w={180} h={100} />
+          <Image src="/images/partners/logo_enedis.png" alt="Logo ENEDIS" w={180} h={100} />
         </Box>
       </Box>
     </Container>

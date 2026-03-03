@@ -30,6 +30,64 @@ import Links from './components/Links';
 import Tags from './components/Tags';
 import style from './server-card.module.css';
 import ScoreBanner from '../common/ScoreBanner';
+import { boolean } from 'yup';
+
+type HighlightedBadgesProps = {
+  isEconomic: boolean
+  isEss: boolean
+};
+const HighligtedBadges = ({ isEconomic, isEss }: HighlightedBadgesProps) => {
+  const tFilters = useTranslations('filters_component');
+  if (!isEconomic && !isEss) {
+    return null;
+  }
+
+  return (
+    <Group
+      gap="xs"
+      style={{
+        position: 'absolute',
+        right: 5,
+        top: 5,
+      }}
+    >
+      {isEconomic ? (
+        <Badge
+          variant="gradient"
+          gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+          radius="md"
+          style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
+          styles={{
+            root: {
+              textTransform: 'capitalize'
+            }
+          }}
+          pl="xs"
+          pr="xs"
+          leftSection={<CurrencyEur weight="fill" fontSize={'1.2rem'} />}>
+          {tFilters('economic-label')}
+        </Badge>
+      ) : null}
+      {isEss && (
+          <Badge
+            variant="gradient"
+            gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
+            radius="md"
+            style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
+            styles={{
+              root: {
+                textTransform: 'capitalize'
+              }
+            }}
+            pl="xs"
+            pr="xs"
+            leftSection={<Handshake weight="fill" fontSize={'1.2rem'} />}>
+            ESS
+          </Badge>
+        )}
+    </Group>
+  );
+}
 
 const ServiceCard = ({
   service,
@@ -94,6 +152,10 @@ const ServiceCard = ({
         <Image src={getLogoImage({ service, theme })} alt={service.name} height={100} />
       </CardSection>
       <Flex style={{ alignContent: 'space-around' }} direction={'column'} align={'stretch'}>
+        <HighligtedBadges
+          isEconomic={service.economic ?? false}
+          isEss={service.ess ?? false}
+        />
         <Stack pt={'md'} justify="space-between" h={'100%'}>
           <Stack>
             <Grid>
@@ -103,46 +165,6 @@ const ServiceCard = ({
                     tags={productstructure}
                     color={color}
                     basekey={`${theme}-${service.name}`}
-                    firstTag={
-                      (service.economic || service.ess) ? (
-                        <Group gap="xs">
-                          {service.economic && (
-                            <Badge
-                              variant="gradient"
-                              gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
-                              radius="md"
-                              style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
-                              styles={{
-                                root: {
-                                  textTransform: 'capitalize'
-                                }
-                              }}
-                              pl="xs"
-                              pr="xs"
-                              leftSection={<CurrencyEur weight="fill" fontSize={'1.2rem'} />}>
-                              {tFilters('economic-label')}
-                            </Badge>
-                          )}
-                          {service.ess && (
-                            <Badge
-                              variant="gradient"
-                              gradient={{ from: 'orange', to: 'yellow', deg: 90 }}
-                              radius="md"
-                              style={{ textTransform: 'capitalize', border: '0px', padding: '0px' }}
-                              styles={{
-                                root: {
-                                  textTransform: 'capitalize'
-                                }
-                              }}
-                              pl="xs"
-                              pr="xs"
-                              leftSection={<Handshake weight="fill" fontSize={'1.2rem'} />}>
-                              ESS
-                            </Badge>
-                          )}
-                        </Group>
-                      ) : undefined
-                    }
                   />
                 </Group>
               </GridCol>
