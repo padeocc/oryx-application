@@ -220,6 +220,7 @@
     "features_to_come_label": "Fonctionnalités à venir"
   },
   "header": {
+    "homepage": "Page d'accueil",
     "tagline": "Trouver une action plus responsable instantanément, pour accélérer son mouvement"
   },
   "home_page": {
@@ -308,6 +309,7 @@
     "contact_label": "Nous contacter",
     "donate_label": "Faire un don",
     "query-placeholder": "Faites une recherche !",
+    "search": "Rechercher",
     "service_addition_label": "Une offre à proposer ?"
   },
   "password_reminder_page": {

@@ -31,6 +31,7 @@ const SearchBar = () => {
         {...form.getInputProps('query')}
         rightSection={
           <Button
+            title={t('search')}
             variant="filled"
             size="sm"
             color="green_oryx.7"
