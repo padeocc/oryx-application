@@ -27,7 +27,7 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
     <Stack onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
       <Group w="100%" grow preventGrowOverflow={false}>
         <Group gap={'xs'}>
-          <Title order={3}>
+          <Title order={2}>
             <Group justify="center" align="center" c={color} gap={'xs'}>
               <Icon size="1.4rem" />
               <Text fz={'xl'} c={'inherit'} fw="bold">
@@ -46,11 +46,11 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
         </Group>
         <Group justify="end" align="right">
           {landingPagesUrl.get(theme) ? (
-            <Button variant="filled">
-                <Anchor c="white" href={landingPagesUrl.get(theme)}>
-                    {tCommon('read_more')}
-                </Anchor>
-            </Button>
+            <Anchor c="white" href={landingPagesUrl.get(theme)}>
+              <Button variant="filled">
+                {tCommon('read_more')}
+              </Button>
+            </Anchor>
           ) : null}
         </Group>
       </Group>
