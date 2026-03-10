@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,17 +23,43 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/app/*": ["./src/app/*"],
-      "@/locale/*": ["./src/[locale]/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/pages/*": ["./src/app/components/pages/*"],
-      "@/server/*": ["./src/server/*"],
-      "@/types/*": ["./types/*"],
-      "@/config/*": ["./src/app/config/*"],
-      "@/data/*": ["./src/tmp-data/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/app/*": [
+        "./src/app/*"
+      ],
+      "@/locale/*": [
+        "./src/[locale]/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/pages/*": [
+        "./src/app/components/pages/*"
+      ],
+      "@/server/*": [
+        "./src/server/*"
+      ],
+      "@/types/*": [
+        "./types/*"
+      ],
+      "@/config/*": [
+        "./src/app/config/*"
+      ],
+      "@/data/*": [
+        "./src/tmp-data/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

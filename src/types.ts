@@ -126,6 +126,7 @@ export type Filters = {
   comparer?: boolean;
   relocating?: boolean;
   id?: string;
+  productstructure?: string | string[];
 };
 
 export type DistinctFilters = {

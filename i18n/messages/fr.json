@@ -45,6 +45,15 @@
     "no_results": "Pas de résultat pour cette recherche !",
     "total-results-label": "{count} {count, plural, =0 {résultat trouvé !} =1 {résultat trouvé !} other {résultats trouvés !}}"
   },
+  "tag-page": {
+    "noServicesFound": "Aucun service trouvé pour la catégorie {productStructure}.",
+    "results": "Résultats: {count}",
+    "sub-items" : "Sous-tags",
+    "filter-ess": "ESS",
+    "filter-economic": "Économique",
+    "filter-title": "Titre",
+    "filter-clear": "Effacer les filters"
+  },
   "filters_component": {
     "actions-label": "{count, plural, =0 {Actions (toutes)} =1 {Actions} other {Actions}}",
     "economic-label": "Economique",
