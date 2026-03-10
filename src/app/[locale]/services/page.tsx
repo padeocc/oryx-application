@@ -30,7 +30,7 @@ export const generateMetadata = async (props: { params: Promise<{ locale: string
     },
     authors: metaAuthors,
     publisher: 'OryxChange',
-    robots: 'index, follow'
+    robots: 'noindex, follow'
   };
   return metadataTags;
 };
