@@ -94,7 +94,7 @@ const FilterableGrid = ({
       </div>
       <Grid>
         {filteredServices.map((service) => (
-          <Grid.Col span={4} key={service.code}>
+          <Grid.Col span={{ base: 12, md: 4, lg: 4 }} key={service.code}>
             <ServiceCard
               service={service}
               productstructure={productstructure}

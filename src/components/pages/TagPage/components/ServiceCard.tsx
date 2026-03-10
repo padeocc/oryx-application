@@ -64,7 +64,6 @@ export const ServiceCard = ({
         <Text
           fz="sm"
           size="sm"
-          c="dimmed"
           style={{
             display: '-webkit-box',
             WebkitLineClamp: 3,
@@ -80,7 +79,7 @@ export const ServiceCard = ({
           href={`/service/${service.theme[0]}/${service.code}`}
           target="_blank"
         >
-          <Button variant="filled" mt="md" fullWidth>
+          <Button variant="filled" mt="md" fullWidth bg="green_oryx.8">
             Découvrir {service.name}
           </Button>
         </Link>

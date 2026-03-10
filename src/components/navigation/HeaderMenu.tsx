@@ -18,7 +18,7 @@ const HeaderMenu = async () => {
       <Flex justify={'space-between'} align={'center'} w="100%" h="100%">
         <Link href="/" style={{ textDecoration: 'none' }} aria-label={t('homepage')}>
           <Stack gap={4}>
-            <Image src="/images/logo.png" maw={{ base: '9rem', md: '11rem' }} alt="Oryxchange logo" />
+            <Image src="/images/logo.png" maw={{ base: '9rem', md: '11rem' }} alt="Oryxchange logo" width="143" />
             <Text 
               c="dark" 
               fz="sm" 
