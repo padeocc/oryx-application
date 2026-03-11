@@ -48,7 +48,7 @@ const themePages: Array<ThemePage> = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+  const url = process?.env?.NEXT_PUBLIC_APP_URL || '';
 
   const pages: MetadataRoute.Sitemap = [
     {

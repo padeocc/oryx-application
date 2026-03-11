@@ -6,7 +6,7 @@ import { Author } from 'next/dist/lib/metadata/types/metadata-types';
 
 export const metaAuthors: Author[] = [
   { name: 'Padeo', url: 'https://www.padeo.fr' },
-  { name: 'OryxChange', url: process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '' }
+  { name: 'OryxChange', url: process?.env?.NEXT_PUBLIC_APP_URL || '' }
 ];
 export const SEARCH_RESULT_LIFETIME = 2_592_000; // 30 days
 export const PAGINATION_LIMIT = 48;

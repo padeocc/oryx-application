@@ -19,7 +19,7 @@ export const generateMetadata = async (props: {
     return notFound();
   }
 
-  const canonical = `${process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN}/${params.locale}/tag/${slug}`;
+  const canonical = `${process?.env?.NEXT_PUBLIC_APP_URL}/${params.locale}/tag/${slug}`;
   
   return {
     title: `${productStructure.title} - OryxChange`,

@@ -9,7 +9,7 @@ export const generateMetadata = async (props: { params: Promise<{ code: string; 
   const params = await props.params;
   const { code, theme } = params;
   const service: ServiceType | undefined = await fetchService({ code, theme });
-  const canonical = `${process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN}/fr/${theme}/${code}`;
+  const canonical = `${process?.env?.NEXT_PUBLIC_APP_URL}/fr/${theme}/${code}`;
   const metadataTags: Metadata = {
     title: `${service?.name} - OryxChange`,
     description: service?.description,
