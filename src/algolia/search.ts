@@ -30,7 +30,7 @@ export const search = async ({
     search: 'true',
   });
 
-  const baseURL = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+  const baseURL = process?.env?.NEXT_PUBLIC_APP_URL || '';
   const url = `${baseURL}/api/search?${searchParams}`;
   const res = await fetch(url, {
     next: {

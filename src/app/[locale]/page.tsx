@@ -4,7 +4,7 @@ import { getMessages } from 'next-intl/server';
 
 import HomePage from '@/components/pages/HomePage';
 
-const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+const url = process?.env?.NEXT_PUBLIC_APP_URL || '';
 
 export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
   const params = await props.params;

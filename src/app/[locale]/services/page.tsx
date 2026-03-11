@@ -7,7 +7,7 @@ import { Theme } from '@/config';
 import { set } from 'lodash';
 
 export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
-  const url = process?.env?.NEXT_PUBLIC_AUTH_APPINFO_WEBSITEDOMAIN || '';
+  const url = process?.env?.NEXT_PUBLIC_APP_URL || '';
   const params = await props.params;
   const { locale = 'fr' } = params;
 
