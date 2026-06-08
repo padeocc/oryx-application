@@ -2,14 +2,15 @@ import { addService } from '@/cms/utils';
 import { sendServiceAdditionEmail } from '@/mailer';
 import { Service } from '@/types';
 import { Alert, Stack } from '@mantine/core';
-import { getTranslations } from 'next-intl/server';
 import Form from './components/Form';
+import messages from '../../../../i18n/messages/fr.json';
+
+const sa = messages['service-add'];
 
 const ServiceAdditionPage = async () => {
-  const t = await getTranslations('service-add');
   return (
     <Stack>
-      <Alert title={t('form-title')}>{t('form-description')}</Alert>
+      <Alert title={sa['form-title']}>{sa['form-description']}</Alert>
       <Alert>
         <Form
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}

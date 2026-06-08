@@ -29,9 +29,6 @@
       "@/app/*": [
         "./src/app/*"
       ],
-      "@/locale/*": [
-        "./src/[locale]/*"
-      ],
       "@/components/*": [
         "./src/components/*"
       ],
@@ -48,7 +45,7 @@
         "./src/app/config/*"
       ],
       "@/data/*": [
-        "./src/tmp-data/*"
+        "./src/data/*"
       ]
     }
   },

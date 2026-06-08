@@ -1,38 +1,36 @@
 import { Modal, Text } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 
 const TermsConditionsButton = ({ label }: { label?: string }) => {
   const [opened, setOpened] = useState<boolean>(false);
-  const t = useTranslations('terms_conditions');
 
   return (
     <>
       <Link onClick={() => setOpened(true)} href={'#'} color="gray">
-        {label || t('read_conditions')}
+        {label || 'Lire les conditions d\'utilisation'}
       </Link>
       <Modal size="xl" opened={opened} onClose={() => setOpened(false)}>
-        <h1>{t('cookie_usage')}</h1>
-        <Text>{t('cookie_usage_description')}</Text>
+        <h1>Conditions d'Acceptation pour l'Utilisation de Cookies et le Stockage des Sessions Utilisateurs</h1>
+        <Text>En utilisant notre application web, vous acceptez les conditions suivantes concernant l'utilisation de cookies et le stockage des sessions utilisateurs :</Text>
         <ol>
           <li>
-            <strong>{t('explicit_consent')}</strong> {t('explicit_consent_description')}
+            <strong>Consentement explicite :</strong> En accédant à notre application web, vous consentez explicitement à l'utilisation de cookies et au stockage des sessions utilisateurs conformément à la présente politique.
           </li>
           <li>
-            <strong>{t('privacy_policy')}</strong> {t('privacy_policy_description')}
+            <strong>Politique de confidentialité :</strong> Vous reconnaissez avoir lu, compris et accepté notre politique de confidentialité, qui décrit en détail quelles données sont collectées, comment elles sont utilisées, partagées et stockées.
           </li>
           <li>
-            <strong>{t('opt_in_cookies')}</strong> {t('opt_in_cookies_description')}
+            <strong>Opt-in pour les cookies tiers :</strong> Vous avez la possibilité de consentir spécifiquement à l'utilisation de cookies tiers pour l'analyse d'activités ou d'autres fins. Ce consentement peut être donné ou retiré à tout moment dans les paramètres de votre compte.
           </li>
           <li>
-            <strong>{t('withdraw_consent')}</strong> {t('withdraw_consent_description')}
+            <strong>Droit de retrait du consentement :</strong> Vous avez le droit de retirer votre consentement à tout moment. Le retrait du consentement peut être effectué en modifiant les paramètres de votre compte ou en suivant les instructions fournies dans notre politique de confidentialité.
           </li>
           <li>
-            <strong>{t('session_expiration')}</strong> {t('session_expiration_description')}
+            <strong>Expiration des sessions :</strong> Veuillez noter que les sessions utilisateur peuvent expirer après une période définie d'inactivité ou conformément à nos politiques internes de gestion des sessions.
           </li>
         </ol>
-        <Text>{t('contact_support')}</Text>
+        <Text>Si vous avez des questions ou des préoccupations concernant notre utilisation des cookies ou le stockage des sessions utilisateur, veuillez nous contacter sur</Text>
         <a href="mailto:support@oryxchange.com">support@oryxchange.com</a>.
       </Modal>
     </>

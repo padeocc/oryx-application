@@ -21,13 +21,15 @@ import {
   TitleOrder
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Description from './components/Description';
 import Links from './components/Links';
 import Tags from './components/Tags';
 import style from './server-card.module.css';
 import HighligtedBadges from './components/HightlightedTags';
+import messages from '../../../i18n/messages/fr.json';
+
+const filtersLabels = messages.filters_component as Record<string, string>;
 
 const ServiceCard = ({
   service,
@@ -46,7 +48,6 @@ const ServiceCard = ({
   asLoader?: boolean;
   asPreview?: boolean;
 }) => {
-  const tFilters = useTranslations('filters_component');
   const [hover, { close, open }] = useDisclosure(false);
   const router = useRouter();
 
@@ -72,7 +73,7 @@ const ServiceCard = ({
   const fields = Object.keys(getActionFilters({ themes: [theme] }))
     //@ts-ignore
     .filter(f => !!service[f])
-    .map(field => tFilters(`filter-${field}-label`))
+    .map(field => filtersLabels[`filter-${field}-label`] || field)
     .sort(sortAlphabetically);
 
   const productstructure = [...(service?.productstructure || []), ...fields];

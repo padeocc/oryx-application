@@ -1,7 +1,6 @@
 'use client';
 
 import { Badge, Collapse, Group, Stack } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 const Tags = ({
@@ -40,7 +39,11 @@ const Tags = ({
     );
   }
 
-  const t = useTranslations('services');
+  const othersClosedLabel = (count: number) =>
+    count > 1 ? `Voir les ${count} mots-clés` : '';
+  const othersOpenedLabel = (count: number) =>
+    count > 1 ? 'Cacher' : '';
+
   return tags?.length > 1 ? (
     <Group
       onClick={e => {
@@ -53,9 +56,7 @@ const Tags = ({
         <Group justify="space-between">
           {firstTag}
           <Badge color={color} size="xs" style={{ cursor: 'pointer' }}>
-            {opened
-              ? t('tags-others-opened-label', { count: tags.length })
-              : t('tags-others-closed-label', { count: tags.length })}
+            {opened ? othersOpenedLabel(tags.length) : othersClosedLabel(tags.length)}
           </Badge>
         </Group>
         <Collapse in={opened}>

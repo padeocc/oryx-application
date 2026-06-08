@@ -1,0 +1,59 @@
+import HeaderMenu from '@/components/navigation/HeaderMenu';
+import { theme } from '@/theme';
+import { ColorSchemeScript, Container, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
+import { Inter } from 'next/font/google';
+import GDPRConsent from '@/components/navigation/GDPRConsent';
+import './globals.css';
+import Footer from '@/components/navigation/Footer';
+import ScrollToTop from '@/components/common/ScrollToTop';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Padeo',
+    url: 'https://www.padeo.fr',
+    sameAs: ['https://www.linkedin.com/company/pour-un-avenir-durable-en-occitanie/']
+  };
+
+  const umamiComponent = process?.env?.UMAMI_TRACKER_ID ? (
+    <script defer src="https://cloud.umami.is/script.js" data-website-id={process.env.UMAMI_TRACKER_ID}></script>
+  ) : null;
+
+  return (
+    <html lang="fr" data-mantine-color-scheme="light">
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {umamiComponent}
+      </head>
+      <body className={inter.className}>
+        <ColorSchemeScript defaultColorScheme="light" />
+        <MantineProvider defaultColorScheme="light" theme={theme}>
+          <div style={{ backgroundColor: 'var(--mantine-primary-color-1)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <header>
+              <HeaderMenu />
+            </header>
+            <main style={{ flex: 1 }}>
+              <Container maw={'1280px'} p={{ base: 'xs', sm: 'sm' }}>
+                {children}
+              </Container>
+              <GDPRConsent />
+            </main>
+            <footer style={{ backgroundColor: 'var(--mantine-primary-color-2)' }}>
+              <Container maw={'1280px'} p="md">
+                <Footer />
+              </Container>
+            </footer>
+          </div>
+          <ScrollToTop />
+          <Notifications />
+        </MantineProvider>
+      </body>
+    </html>
+  );
+}

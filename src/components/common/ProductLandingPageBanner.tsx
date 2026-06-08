@@ -1,14 +1,15 @@
 import { landingPagesUrl, Theme } from '@/config';
 import { Anchor, Button, Group, Space, Stack } from '@mantine/core';
-import { useTranslations } from 'next-intl';
+import messages from '../../../i18n/messages/fr.json';
+
+const themesLabels = messages.themes as Record<string, string>;
+const servicesLabels = messages.services as Record<string, string>;
 
 type Props = {
   theme: Theme;
 };
 
 const ProductLandingPageBanner = ({ theme }: Props) => {
-  const t = useTranslations('themes');
-  const tService = useTranslations('services');
   const pageURL = landingPagesUrl.get(theme);
 
   if (pageURL) {
@@ -18,7 +19,7 @@ const ProductLandingPageBanner = ({ theme }: Props) => {
         <Group justify="center">
           <Button>
             <Anchor c="white" href={pageURL}>
-              {tService('landing-page-cta-label', { value: t(theme) })}
+              {servicesLabels['landing-page-cta-label']?.replace('{value}', themesLabels[theme] || theme)}
             </Anchor>
           </Button>
         </Group>

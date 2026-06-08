@@ -1,18 +1,19 @@
 import { sendContactEmail } from '@/mailer';
 import { Alert, Stack, Text, Title } from '@mantine/core';
-import { getTranslations } from 'next-intl/server';
 import Form from './components/Form';
-import {generateReportMessage} from "../ServicePage"
+import { generateReportMessage } from '../ServicePage';
+import messages from '../../../../i18n/messages/fr.json';
+
+const contact = messages.contact;
 
 const ContactPage = async ({ searchParams }: { searchParams: Promise<{ report?: string }> }) => {
-  const t = await getTranslations('contact');
   const params = await searchParams;
   const code = params?.report;
 
   return (
     <Stack>
-      <Title order={2}>{t('title')}</Title>
-      <Text>{code ? t('description-report') : t('description')}</Text>
+      <Title order={2}>{contact.title}</Title>
+      <Text>{code ? contact['description-report'] : contact.description}</Text>
       <Alert c="green_oryx">
         <Form
           sendContactEmail={sendContactEmail}

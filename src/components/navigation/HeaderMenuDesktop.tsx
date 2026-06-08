@@ -1,13 +1,13 @@
 import { Button, Container, Group, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget } from '@mantine/core';
 import { DotsThreeOutlineVertical } from '@phosphor-icons/react/dist/ssr';
-import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getBurgerMenuLinks, getNavigationItems } from './items';
 import SearchBar from './SearchBar';
+import { t } from '@/i18n';
 
 const HeaderMenuDesktop = async () => {
-  const t = await getTranslations('navigation_items');
-  const elements = getNavigationItems({ t }).map((itemsGroup, itemgroupindex) => (
+  const tr = t('navigation_items');
+  const elements = getNavigationItems({ tr }).map((itemsGroup, itemgroupindex) => (
     <Group key={`group-desktop-${itemgroupindex}`} justify="space-between">
       {itemsGroup.map(({ href, name, isExternal, priority }, itemindex) => {
         const others = isExternal ? { target: '_blank' } : {};
@@ -35,7 +35,7 @@ const HeaderMenuDesktop = async () => {
         </Container>
       </MenuTarget>
       <MenuDropdown>
-        {(await getBurgerMenuLinks()).map((itemsGroup, itemgroupindex) => (
+        {getBurgerMenuLinks().map((itemsGroup, itemgroupindex) => (
           <div key={`group-more-${itemgroupindex}`}>
             {itemsGroup.map(({ href, name, isExternal }, itemindex) => {
               const others = isExternal ? { target: '_blank' } : {};

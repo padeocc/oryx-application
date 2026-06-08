@@ -1,29 +1,22 @@
 import React from 'react';
 import { Service } from '@/types';
-import { useTranslations } from 'next-intl';
-
 import { ProductStructureItem } from '@/domain/productstructure/types';
 import TagsBreadcrumbs from './components/TagsBreadcrumbs';
 import FilterableGrid from './components/FilterableGrid';
 import Link from 'next/link';
 import SubTagsItems from './components/SubTagsItems';
+import messages from '../../../../i18n/messages/fr.json';
+
+const tagPage = messages['tag-page'];
 
 interface ProductStructurePageProps {
   productStructure: ProductStructureItem;
   services: Service[];
   breadcrumbPath: ProductStructureItem[];
-  subProductStucture: ProductStructureItem[]
+  subProductStucture: ProductStructureItem[];
 }
 
-export default function TagPage
-({ 
-  productStructure,
-  services,
-  breadcrumbPath,
-  subProductStucture,
-}: ProductStructurePageProps) {
-  const t = useTranslations('tag-page');
-
+export default function TagPage({ productStructure, services, breadcrumbPath, subProductStucture }: ProductStructurePageProps) {
   return (
     <div>
       <TagsBreadcrumbs path={breadcrumbPath} />
@@ -33,7 +26,7 @@ export default function TagPage
       {services.length > 0 ? (
         <FilterableGrid items={services} productstructure={productStructure.productstructure} />
       ) : (
-        <div>{t('noServicesFound', { productStructure: productStructure.title })}</div>
+        <div>{tagPage['noServicesFound'].replace('{productStructure}', productStructure.title)}</div>
       )}
     </div>
   );

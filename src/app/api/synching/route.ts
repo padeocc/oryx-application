@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     revalidateTag('landing-page-bien');
     revalidateTag('landing-page-transport');
     revalidateTag('search');
-    revalidatePath('/[locale]/tag/[slug]', 'page');
+    revalidatePath('/tag/[slug]', 'page');
     /* Reindexing Algolia */
     const data = await runIndexation();
     return Response.json({ data });

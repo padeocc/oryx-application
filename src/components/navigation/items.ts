@@ -1,28 +1,21 @@
-import { getTranslations } from 'next-intl/server';
+import { t } from '@/i18n';
 
 export const getNavigationItems = ({
-  t
+  tr
 }: {
-  t: any;
+  tr: (key: string) => string;
 }): { href: string; name: string; isExternal: boolean; priority?: number }[][] => {
   const menu = [
-    // [
-    //   {
-    //     name: t('contact_label'),
-    //     href: '/contact',
-    //     isExternal: false
-    //   }
-    // ],
     [
       {
-        name: t('service_addition_label'),
-        href: '/fr/service/add',
+        name: tr('service_addition_label'),
+        href: '/service/add',
         isExternal: false
       }
     ],
     [
       {
-        name: t('donate_label'),
+        name: tr('donate_label'),
         href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/2',
         isExternal: true
       }
@@ -32,49 +25,50 @@ export const getNavigationItems = ({
   return menu;
 };
 
-export const getBurgerMenuLinks = async () => {
-  const t = await getTranslations('footer');
+export const getBurgerMenuLinks = () => {
+  const tr = t('footer');
   return [
     [
       {
-        name: t('whoarewe_label'),
+        name: tr('whoarewe_label'),
         href: 'https://www.padeo.fr/association/',
         isExternal: true
       },
       {
-        name: t('oryx_history_label'),
+        name: tr('oryx_history_label'),
         href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
         isExternal: true
       },
       {
-        name: t('chart_label'),
+        name: tr('chart_label'),
         href: 'https://1drv.ms/b/c/2b525df775df0f5d/EQd8-MszE69BvTBTJvNUgDcBtA1TxFbPRZ6wWSvORAfeLQ?e=zHccWn',
         isExternal: true
       }
     ]
   ];
 };
-export const getFooterLinks = async () => {
-  const t = await getTranslations('footer');
+
+export const getFooterLinks = () => {
+  const tr = t('footer');
   return [
     [
       {
-        name: t('donate_label'),
+        name: tr('donate_label'),
         href: 'https://www.helloasso.com/associations/pour-un-avenir-durable-en-occitanie/formulaires/2',
         isExternal: true
       },
       {
-        name: t('service_addition_label'),
-        href: '/fr/service/add'
+        name: tr('service_addition_label'),
+        href: '/service/add'
       },
       {
-        name: t('features_to_come_label'),
+        name: tr('features_to_come_label'),
         isExternal: true,
         href: 'https://docs.google.com/presentation/d/1INNPnHduNqaov9PWFr3UDLfFYp8ve5e7/edit?usp=drive_link&ouid=115775379044450692924&rtpof=true&sd=true'
       },
       {
-        name: t('contact_label'),
-        href: '/fr/contact'
+        name: tr('contact_label'),
+        href: '/contact'
       },
       {
         name: 'LinkedIn',
@@ -84,32 +78,32 @@ export const getFooterLinks = async () => {
     ],
     [
       {
-        name: t('whoarewe_label'),
+        name: tr('whoarewe_label'),
         href: 'https://www.padeo.fr/association/',
         isExternal: true
       },
       {
-        name: t('team_label'),
-        href: '/fr/team',
+        name: tr('team_label'),
+        href: '/team',
         isExternal: false
       },
       {
-        name: t('oryx_history_label'),
+        name: tr('oryx_history_label'),
         href: 'https://docs.google.com/document/d/15wl0Lv5phrtH0dxNgTxj2Fx6PkPcaRvF/edit?usp=sharing&ouid=115775379044450692924',
         isExternal: true
       },
       {
-        name: t('chart_label'),
+        name: tr('chart_label'),
         href: 'https://1drv.ms/b/c/2b525df775df0f5d/EQd8-MszE69BvTBTJvNUgDcBtA1TxFbPRZ6wWSvORAfeLQ?e=zHccWn',
         isExternal: true
       },
       {
-        name: t('legal_label'),
-        href: '/fr/legal',
+        name: tr('legal_label'),
+        href: '/legal',
         isExternal: false
       },
       {
-        name: t('sourcecode_label'),
+        name: tr('sourcecode_label'),
         href: 'https://github.com/padeocc/oryx-application',
         isExternal: true
       }

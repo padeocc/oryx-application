@@ -3,17 +3,19 @@
 import { landingPagesUrl, Theme, themesColors, themesIcons } from '@/config';
 import { Service } from '@/types';
 import { Anchor, Box, Button, Grid, GridCol, Group, Stack, Text, Title } from '@mantine/core';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import ServiceCard from '../../../ServiceCard';
 import style from './theme-section.module.css';
+import messages from '../../../../../i18n/messages/fr.json';
+
+const themesLabels = messages.themes as Record<string, string>;
+const commonLabels = messages.common;
 
 const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
   const Icon = themesIcons[theme];
   const color = themesColors[theme];
-  const tTheme = useTranslations('themes');
-  const tCommon = useTranslations('common');
+  const themeLabel = themesLabels[theme] || theme;
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const moreLinkProps = {
     c: color,
@@ -30,26 +32,22 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
           <Title order={2}>
             <Group justify="center" align="center" c={color} gap={'xs'}>
               <Icon size="1.4rem" />
-              <Text fz={'xl'} c={'inherit'} fw="bold">
-                {tTheme(theme)}
-              </Text>
+              <Text fz={'xl'} c={'inherit'} fw="bold">{themeLabel}</Text>
             </Group>
           </Title>
           {mouseOver ? (
             <Text visibleFrom="sm" {...moreLinkProps} className={style['more-text-container']}>
-              {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
+              {commonLabels.see_more_theme} {'>'}
             </Text>
           ) : null}
           <Text hiddenFrom="sm" {...moreLinkProps}>
-            {tCommon('see_more_theme', { theme: tTheme(theme) })} {'>'}
+            {commonLabels.see_more_theme} {'>'}
           </Text>
         </Group>
         <Group justify="end" align="right">
           {landingPagesUrl.get(theme) ? (
             <Anchor c="white" href={landingPagesUrl.get(theme)}>
-              <Button variant="filled">
-                {tCommon('read_more')}
-              </Button>
+              <Button variant="filled">{commonLabels.read_more}</Button>
             </Anchor>
           ) : null}
         </Group>
@@ -69,35 +67,18 @@ const ThemeSection = ({ items, theme }: { items: Service[]; theme: Theme }) => {
         className="mobile-scroll"
       >
         {items.map((service, index) => (
-          <ServiceCard
-            key={`action-${service.theme}-${service.name}-${index}`}
-            service={service}
-            backgroundColor={'var(--mantine-primary-color-2)'}
-            theme={theme}
-            color={color}
-            titleOrder={4}
-          />
+          <ServiceCard key={`action-${service.theme}-${service.name}-${index}`} service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={theme} color={color} titleOrder={4} />
         ))}
       </Box>
-
       <Grid visibleFrom="sm" justify="stretch" align="stretch" c={color} gutter="lg">
         {items.map((service, index) => (
           <GridCol span={{ sm: 6, md: 4, xl: 3 }} key={`action-desktop-${service.theme}-${service.name}-${index}`}>
-            <ServiceCard
-              service={service}
-              backgroundColor={'var(--mantine-primary-color-2)'}
-              theme={theme}
-              color={color}
-              titleOrder={4}
-            />
+            <ServiceCard service={service} backgroundColor={'var(--mantine-primary-color-2)'} theme={theme} color={color} titleOrder={4} />
           </GridCol>
         ))}
       </Grid>
-      
       <style jsx global>{`
-        .mobile-scroll::-webkit-scrollbar {
-          display: none;
-        }
+        .mobile-scroll::-webkit-scrollbar { display: none; }
       `}</style>
     </Stack>
   );
