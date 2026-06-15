@@ -1,51 +1,35 @@
 import { metaAuthors } from '@/config';
 import { Metadata } from 'next';
-import { getMessages } from 'next-intl/server';
-
 import ServicesPage from '@/components/pages/ServicesPage';
 import { Theme } from '@/config';
 import { set } from 'lodash';
+import messages from '../../../i18n/messages/fr.json';
 
-export const generateMetadata = async (props: { params: Promise<{ locale: string }> }) => {
+const meta = messages.metadata.services;
+
+export const generateMetadata = async (): Promise<Metadata> => {
   const url = process?.env?.NEXT_PUBLIC_APP_URL || '';
-  const params = await props.params;
-  const { locale = 'fr' } = params;
-
-  const messages = await getMessages({ locale });
-  const metadata: any = messages.metadata || {};
-  const metadataTags: Metadata = {
-    title: metadata.services.title,
-    description: metadata.services.description,
-    keywords: metadata.services.keywords,
-    openGraph: {
-      type: 'website',
-      title: metadata.title,
-      description: metadata.description,
-      url
-    },
-    twitter: { card: 'summary_large_image', title: metadata.title, description: metadata.description },
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: meta.keywords,
+    openGraph: { type: 'website', title: meta.title, description: meta.description, url },
+    twitter: { card: 'summary_large_image', title: meta.title, description: meta.description },
     metadataBase: new URL(url),
-    alternates: {
-      canonical: '/'
-    },
+    alternates: { canonical: '/services' },
     authors: metaAuthors,
     publisher: 'OryxChange',
     robots: 'noindex, follow'
   };
-  return metadataTags;
 };
 
 const transformParams = (params: { [key: string]: string | string[] | undefined } | undefined = {}) => {
-  const result = {
-    page: '0',
-    filters: '{}'
-  };
+  const result = { page: '0', filters: '{}' };
   Object.keys(params).forEach(key => {
     const value = params[key];
     const transformedKey = key.replace(/\[(\w+)\]/g, '.$1');
     set(result, transformedKey, value);
   });
-
   return result;
 };
 

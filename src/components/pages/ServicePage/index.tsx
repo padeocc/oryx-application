@@ -16,7 +16,6 @@ import {
 } from '@mantine/core';
 import { format } from 'date-fns';
 import { isArray } from 'lodash';
-import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { getLogoImage, getCategoryFromTags, sortAlphabetically } from '../../content/utils';
 import NotFound from '../../navigation/NotFound';
@@ -27,28 +26,27 @@ import { ContentAccordion } from '../../content/ContentAccordion';
 import { fetchService } from '@/algolia/utils';
 import ProductLandingPageBanner from '@/components/common/ProductLandingPageBanner';
 import categoriesData from '../../navigation/themes-categories.json';
+import messages from '../../../../i18n/messages/fr.json';
+
+const servicesLabels = messages.services as Record<string, string>;
+const filtersLabels = messages.filters_component as Record<string, string>;
+const dateFormat = messages.utils['fulldate-format-day'];
+const servicePageMessages = messages.servicePage;
 
 type PageParams = {
-  code: string
-  theme: Theme
-  fetchService: FetchService
-  fetchServiceContent: FetchServiceContent
+  code: string;
+  theme: Theme;
+  fetchService: FetchService;
+  fetchServiceContent: FetchServiceContent;
 };
 
 const displayUrl = (url: string): string => {
   let newUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
-
-  if (newUrl.endsWith('/')) {
-    newUrl = newUrl.slice(0, -1);
-  }
-
+  if (newUrl.endsWith('/')) newUrl = newUrl.slice(0, -1);
   return newUrl;
 };
 
 const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: PageParams) => {
-  const t = await getTranslations('services');
-  const tFilters = await getTranslations('filters_component');
-  const tUtils = await getTranslations('utils');
   const service: Service | undefined = await fetchService({ code, theme });
 
   if (!service?.name) {
@@ -58,33 +56,29 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
   let premiumContent: Array<any> = [];
   let premiumContentError = false;
 
-  await fetchServiceContent({code, theme})
-    .then(res => {
-      premiumContent = res
-    })
-    .catch(() => premiumContentError = true);
+  await fetchServiceContent({ code, theme })
+    .then(res => { premiumContent = res; })
+    .catch(() => { premiumContentError = true; });
 
   // @ts-ignore
   const fields = Object.keys(getActionFilters({ themes: [theme] })).filter((f: string) => !!service?.[f]);
   const { name, productstructure = [], description, updatedAt, url, type } = service;
   const color = themesColors[theme];
 
-  let labelRegion = service?.region ? tFilters(`region_${service.region}_label`) : '';
+  let labelRegion = service?.region ? filtersLabels[`region_${service.region}_label`] || '' : '';
   labelRegion = labelRegion.includes(`region_${service.region}_label`) ? service.region : labelRegion;
 
-  //TODO refacto type on CMS
   const typeLabel = (isArray(type) ? type[0] : type) || 'company';
 
-  // Détecter la catégorie active depuis les tags pour mettre en évidence le badge
   const activeCategoryTag = getCategoryFromTags(theme, productstructure, categoriesData);
-  const activeCategory = activeCategoryTag ? productstructure.find(tag => 
+  const activeCategory = activeCategoryTag ? productstructure.find(tag =>
     tag.toLowerCase() === activeCategoryTag.toLowerCase() ||
     tag.toLowerCase().includes(activeCategoryTag.toLowerCase()) ||
     activeCategoryTag.toLowerCase().includes(tag.toLowerCase())
   ) : null;
 
-  const sortedFields = [...fields].sort((a, b) => 
-    sortAlphabetically(tFilters(`filter-${a}-label`), tFilters(`filter-${b}-label`))
+  const sortedFields = [...fields].sort((a, b) =>
+    sortAlphabetically(filtersLabels[`filter-${a}-label`] || a, filtersLabels[`filter-${b}-label`] || b)
   );
 
   return (
@@ -93,74 +87,42 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
       <Stack gap={'lg'}>
         {updatedAt ? (
           <Text fz="sm">
-            {t('updatedat_label', { date: format(new Date(updatedAt), tUtils('fulldate-format-day'), { locale: fr }) })}
+            {servicesLabels['updatedat_label']?.replace('{date}', format(new Date(updatedAt), dateFormat, { locale: fr }))}
           </Text>
         ) : null}
         <Group gap={'xs'}>
           {type && (
-            <Badge
-              key={`tag-${theme}-${code}-${type}`}
-              size="sm"
-              variant="outline"
-              color="var(--mantine-color-dark-outline)"
-              bg="white">
-              {t(`type-${typeLabel}-label`)}
+            <Badge key={`tag-${theme}-${code}-${type}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {servicesLabels[`type-${typeLabel}-label`] || typeLabel}
             </Badge>
           )}
           {service.location ? (
-            <Badge
-              key={`tag-${theme}-${service.name}-${service.location}`}
-              size="sm"
-              variant="outline"
-              color="var(--mantine-color-dark-outline)"
-              bg="white">
-              {tFilters(`location-${service.location}-label`)}
+            <Badge key={`tag-${theme}-${service.name}-${service.location}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {filtersLabels[`location-${service.location}-label`] || service.location}
             </Badge>
           ) : null}
           {labelRegion ? (
-            <Badge
-              key={`tag-${theme}-${service.name}-${service.region}`}
-              size="sm"
-              variant="outline"
-              color="var(--mantine-color-dark-outline)"
-              bg="white">
+            <Badge key={`tag-${theme}-${service.name}-${service.region}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
               {labelRegion}
             </Badge>
           ) : null}
           {productstructure.map(tag => {
             const isActiveCategory = activeCategory === tag;
             return (
-              <Badge 
-                key={`tag-${theme}-${service.name}-${tag}`} 
-                size="sm" 
-                variant={isActiveCategory ? "filled" : "outline"} 
-                color={isActiveCategory ? 'blue' : 'white'} 
-                bg={isActiveCategory ? 'blue' : color}
-              >
+              <Badge key={`tag-${theme}-${service.name}-${tag}`} size="sm" variant={isActiveCategory ? 'filled' : 'outline'} color={isActiveCategory ? 'blue' : 'white'} bg={isActiveCategory ? 'blue' : color}>
                 {tag}
               </Badge>
             );
           })}
           {sortedFields.map(field => (
-            <Badge
-              key={`tag-${theme}-${service.name}-${field}`}
-              size="sm"
-              variant="outline"
-              color="var(--mantine-color-dark-outline)"
-              bg="white">
-              {tFilters(`filter-${field}-label`)}
+            <Badge key={`tag-${theme}-${service.name}-${field}`} size="sm" variant="outline" color="var(--mantine-color-dark-outline)" bg="white">
+              {filtersLabels[`filter-${field}-label`] || field}
             </Badge>
           ))}
         </Group>
         <Grid>
           <GridCol span={{ base: 12, sm: 7 }}>
-            <Image
-              src={getLogoImage({ service, theme })}
-              alt={name}
-              layout="intrinsic"
-              objectfit="contain"
-              style={{ maxHeight: '20rem' }}
-            />
+            <Image src={getLogoImage({ service, theme })} alt={name} layout="intrinsic" objectfit="contain" style={{ maxHeight: '20rem' }} />
           </GridCol>
           <GridCol span={{ base: 12, sm: 5 }}>
             <Stack>
@@ -171,30 +133,26 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
                 </Stack>
               </Button>
               <Alert>
-                <Title order={2} c={color}>
-                  {description}
-                </Title>
+                <Title order={2} c={color}>{description}</Title>
               </Alert>
             </Stack>
           </GridCol>
         </Grid>
         {premiumContentError ? (
-          <Alert variant="light" color="blue">
-            {t('error-fetch-premium')}
-          </Alert>
+          <Alert variant="light" color="blue">{servicesLabels['error-fetch-premium']}</Alert>
         ) : null}
         {service.premium && Array.isArray(premiumContent) && premiumContent.length > 0 ? (
-            <>
-              <ContentAccordion content={premiumContent} />
-              <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
-                {t('report-offer-label')}
-                <Link href={`/contact?report=${code}`}>{t('report-offer-cta-label')}</Link>
-              </Group>
-            </>
+          <>
+            <ContentAccordion content={premiumContent} />
+            <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+              {servicesLabels['report-offer-label']}
+              <Link href={`/contact?report=${code}`}>{servicesLabels['report-offer-cta-label']}</Link>
+            </Group>
+          </>
         ) : (
           <Group gap={'xs'} style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
-            {t('go-premium-label')}
-            <Link href={'/contact'}>{t('go-premium-cta-label')}</Link>
+            {servicesLabels['go-premium-label']}
+            <Link href={'/contact'}>{servicesLabels['go-premium-cta-label']}</Link>
           </Group>
         )}
         <ProductLandingPageBanner theme={theme} />
@@ -206,9 +164,7 @@ const ServicePage = async ({ code, theme, fetchService, fetchServiceContent }: P
 export async function generateReportMessage(code: string) {
   const service = await fetchService({ code, theme: 'default' as Theme });
   const name = service?.name || code;
-
-  const t = await getTranslations('servicePage');
-  return t('reportMessage', { name });
+  return servicePageMessages.reportMessage.replace('{name}', name);
 }
 
 export default ServicePage;

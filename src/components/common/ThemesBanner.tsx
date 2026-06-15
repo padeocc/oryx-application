@@ -1,10 +1,11 @@
 import { Theme, themes, themesColors, themesIcons } from '@/config';
 import { Group } from '@mantine/core';
-import { getTranslations } from 'next-intl/server';
 import Example from './Example';
+import messages from '../../../i18n/messages/fr.json';
+
+const themesLabels = messages.themes as Record<string, string>;
 
 const ThemesBanner = async ({ theme }: { theme?: Theme }) => {
-  const t = await getTranslations('themes');
   return (
     <Group justify="flex-start">
       {themes.map(theme => {
@@ -13,7 +14,7 @@ const ThemesBanner = async ({ theme }: { theme?: Theme }) => {
             <Example
               link={`/services?filters={"theme":["${theme}"]}`}
               Icon={themesIcons[theme]}
-              text={t(theme)}
+              text={themesLabels[theme] || theme}
               gradient={{ from: themesColors[theme], to: themesColors[theme], deg: 90 }}
             />
           </div>

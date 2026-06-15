@@ -3,12 +3,10 @@
 import { ActionIcon, Button, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { cleanFiltersValues } from '../content/utils';
 
 const SearchBar = () => {
-  const t = useTranslations('navigation_items');
   const form = useForm({ initialValues: { query: '' } });
   const router = useRouter();
 
@@ -26,12 +24,12 @@ const SearchBar = () => {
         size="sm"
         label={''}
         w={{ base: 'auto', md: '12rem', lg: '20rem', xl: '25rem' }}
-        placeholder={t('query-placeholder')}
+        placeholder="Faites une recherche !"
         name="query"
         {...form.getInputProps('query')}
         rightSection={
           <Button
-            title={t('search')}
+            title="Rechercher"
             variant="filled"
             size="sm"
             color="green_oryx.7"

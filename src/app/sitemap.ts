@@ -12,38 +12,38 @@ type ThemePage = {
 
 type LandingPageData = { path: string; apiId: string };
 
-const regularPages: string[] = ['/fr/contact', '/fr/legal'];
+const regularPages: string[] = ['/contact', '/legal'];
 
 const themePages: Array<ThemePage> = [
   {
     theme: 'foods',
-    actionPage: '/fr/actions/foods',
-    landingPage: { path: '/fr/alimentation', apiId: 'landing-page-alimentation' }
+    actionPage: '/actions/foods',
+    landingPage: { path: '/foods', apiId: 'landing-page-alimentation' }
   },
   {
     theme: 'goods',
-    actionPage: '/fr/actions/goods',
-    landingPage: { path: '/fr/mes-achats', apiId: 'landing-page-bien' }
+    actionPage: '/actions/goods',
+    landingPage: { path: '/goods', apiId: 'landing-page-bien' }
   },
   {
     theme: 'transports',
-    actionPage: '/fr/actions/transports',
-    landingPage: { path: '/fr/transport-responsable', apiId: 'landing-page-transport' }
+    actionPage: '/actions/transports',
+    landingPage: { path: '/transports', apiId: 'landing-page-transport' }
   },
   {
     theme: 'events',
-    actionPage: '/fr/actions/events',
+    actionPage: '/actions/events',
     landingPage: null
   },
   {
     theme: 'services',
-    actionPage: '/fr/actions/services',
+    actionPage: '/actions/services',
     landingPage: null
   },
   {
     theme: 'accommodations',
-    actionPage: '/fr/actions/accomodations',
-    landingPage: { path: '/fr/logement', apiId: 'landing-page-batiment' }
+    actionPage: '/actions/accommodations',
+    landingPage: { path: '/accommodations', apiId: 'landing-page-batiment' }
   }
 ];
 
@@ -102,7 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const hit of hits) {
       pages.push({
-        url: url + '/fr/service/' + theme.theme + '/' + hit.id, 
+        url: url + '/service/' + theme.theme + '/' + hit.id, 
         changeFrequency: 'yearly',
         priority: 1,
         lastModified: hit.updatedAt
